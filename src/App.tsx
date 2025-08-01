@@ -131,6 +131,95 @@ function App() {
           where luxury meets tradition in perfect harmony.
         </p>
       </div>
+
+      {/* Experience the Luxury - ACCOMMODATION Section */}
+      <div style={{ maxWidth: '1024px', margin: '0 auto', marginTop: '64px', textAlign: 'center' }}>
+        <p style={{ fontSize: '14px', color: '#9ca3af', marginBottom: '8px', textTransform: 'uppercase' }}>Experience the Luxury</p>
+        <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#374151', marginBottom: '32px', textTransform: 'uppercase' }}>ACCOMMODATION</h2>
+      </div>
+
+      {/* The Spirit of Odisha - HIGHLIGHTS & HAPPENINGS Section */}
+      <div style={{ maxWidth: '1024px', margin: '0 auto', marginTop: '64px', textAlign: 'center' }}>
+        <p style={{ fontSize: '14px', color: '#9ca3af', marginBottom: '8px', textTransform: 'uppercase' }}>The Spirit of Odisha</p>
+        <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#374151', marginBottom: '32px', textTransform: 'uppercase' }}>HIGHLIGHTS & HAPPENINGS</h2>
+      </div>
+
+      {/* LATEST OFFERS Section */}
+      <div style={{ maxWidth: '1024px', margin: '0 auto', marginTop: '64px', textAlign: 'center' }}>
+        <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#374151', marginBottom: '32px', textTransform: 'uppercase' }}>LATEST OFFERS</h2>
+      </div>
+
+      {/* EAT. PRAY. LOVE. Section */}
+      <div style={{ maxWidth: '1024px', margin: '0 auto', marginTop: '64px' }}>
+        <div style={{ 
+          backgroundColor: 'white', 
+          borderRadius: '12px', 
+          overflow: 'hidden', 
+          boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+          border: '1px solid #e5e7eb'
+        }}>
+          {/* Image */}
+          <div style={{ width: '100%' }}>
+            <img 
+              decoding="async" 
+              src="https://hiddenindia.com/rambhapalace/wp-content/uploads/elementor/thumbs/image4-qyb3qbsq2gynshsmaoql1nfnfeok3y05csvu0l3xww.png" 
+              title="image4.png" 
+              alt="image4.png" 
+              loading="lazy"
+              style={{ 
+                width: '100%', 
+                height: 'auto', 
+                maxWidth: '100%',
+                display: 'block'
+              }}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                const nextSibling = target.nextSibling as HTMLElement;
+                if (nextSibling) {
+                  nextSibling.style.display = 'block';
+                }
+              }}
+            />
+            {/* Fallback design if image fails to load */}
+            <div style={{ 
+              display: 'none', 
+              width: '100%', 
+              height: '400px', 
+              backgroundColor: '#f3f4f6',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#6b7280',
+              fontSize: '18px'
+            }}>
+              Ancient Temple Image
+            </div>
+          </div>
+
+          {/* Content */}
+          <div style={{ padding: '32px' }}>
+            {/* Title */}
+            <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+              <h2 style={{ 
+                fontSize: '28px', 
+                fontWeight: 'bold', 
+                color: '#374151', 
+                marginBottom: '16px',
+                textTransform: 'uppercase'
+              }}>
+                EAT. PRAY. LOVE.
+              </h2>
+            </div>
+
+            {/* Description */}
+            <div style={{ color: '#374151', lineHeight: '1.8', fontSize: '16px', textAlign: 'center' }}>
+              <p>
+                Where will your spiritual journey take you? Embark on a journey toward achieving mental peace and harmony while connecting with your spiritual self. Attune to your inner being, enhance your intuition, and forge connections with your inner self. Personalised itineraries offer you the opportunity to explore any ancient temple that captivates your spirit or sparks your spiritual curiosity.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 
