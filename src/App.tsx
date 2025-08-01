@@ -231,6 +231,191 @@ function App() {
             </p>
           </div>
         </div>
+
+        {/* Two Cards Section */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', marginBottom: '48px' }}>
+          {/* First Card - Palace Suite */}
+          <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+            <img 
+              src="https://hiddenindia.com/rambhapalace/wp-content/uploads/elementor/thumbs/Gallery7-1-qyb3q81db4tii1y2wn42rodt1v7395l80a9w3h9ils.webp" 
+              alt="Palace Suite" 
+              style={{ width: '100%', height: '300px', objectFit: 'cover' }}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                const nextSibling = target.nextSibling as HTMLElement;
+                if (nextSibling) {
+                  nextSibling.style.display = 'flex';
+                }
+              }}
+            />
+            {/* Fallback design for first card */}
+            <div style={{ 
+              display: 'none', 
+              width: '100%', 
+              height: '300px', 
+              backgroundColor: '#8b0000',
+              position: 'relative',
+              overflow: 'hidden'
+            }}>
+              {/* Four-poster bed */}
+              <div style={{ 
+                position: 'absolute', 
+                top: '50%', 
+                left: '50%', 
+                transform: 'translate(-50%, -50%)',
+                width: '60%',
+                height: '40%',
+                backgroundColor: '#ffffff',
+                border: '2px solid #d1d5db',
+                borderRadius: '8px',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+              }}>
+                {/* Bed posts */}
+                <div style={{ position: 'absolute', top: '-20px', left: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                <div style={{ position: 'absolute', top: '-20px', right: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                <div style={{ position: 'absolute', bottom: '-20px', left: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                <div style={{ position: 'absolute', bottom: '-20px', right: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+              </div>
+              
+              {/* Sofa */}
+              <div style={{ 
+                position: 'absolute', 
+                bottom: '20%', 
+                left: '10%',
+                width: '25%',
+                height: '15%',
+                backgroundColor: '#4169e1',
+                borderRadius: '8px 8px 0 0'
+              }}></div>
+              
+              {/* Window */}
+              <div style={{ 
+                position: 'absolute', 
+                top: '10%', 
+                right: '5%',
+                width: '20%',
+                height: '30%',
+                backgroundColor: '#87ceeb',
+                border: '2px solid #d1d5db'
+              }}></div>
+            </div>
+            
+            {/* Card Content */}
+            <div style={{ padding: '24px', backgroundColor: 'white' }}>
+              <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>PALACE SUITES</h3>
+              <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                Experience the luxury and grandeur of the original palace block. Once the residence of the royal family in a bygone era—unparalleled sophistication at Rambha.
+              </p>
+            </div>
+            
+            {/* Invisible Link Overlay */}
+            <a 
+              href="/rambhapalace/palace-suite/" 
+              style={{ 
+                background: 'transparent', 
+                border: 'none', 
+                position: 'absolute', 
+                height: '100%', 
+                width: '100%', 
+                zIndex: 9999, 
+                top: 0, 
+                left: 0 
+              }}
+            ></a>
+          </div>
+
+          {/* Second Card - Family Palace Suite */}
+          <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+            <img 
+              src="https://hiddenindia.com/rambhapalace/wp-content/uploads/elementor/thumbs/Gallery7-1-qyb3q81db4tii1y2wn42rodt1v7395l80a9w3h9ils.webp" 
+              alt="Family Palace Suite" 
+              style={{ width: '100%', height: '300px', objectFit: 'cover' }}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                const nextSibling = target.nextSibling as HTMLElement;
+                if (nextSibling) {
+                  nextSibling.style.display = 'flex';
+                }
+              }}
+            />
+            {/* Fallback design for second card */}
+            <div style={{ 
+              display: 'none', 
+              width: '100%', 
+              height: '300px', 
+              backgroundColor: '#ffa07a',
+              position: 'relative',
+              overflow: 'hidden'
+            }}>
+              {/* Four-poster bed */}
+              <div style={{ 
+                position: 'absolute', 
+                top: '50%', 
+                left: '50%', 
+                transform: 'translate(-50%, -50%)',
+                width: '60%',
+                height: '40%',
+                backgroundColor: '#ffffff',
+                border: '2px solid #d1d5db',
+                borderRadius: '8px',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+              }}>
+                {/* Bed posts */}
+                <div style={{ position: 'absolute', top: '-20px', left: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                <div style={{ position: 'absolute', top: '-20px', right: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                <div style={{ position: 'absolute', bottom: '-20px', left: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                <div style={{ position: 'absolute', bottom: '-20px', right: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+              </div>
+              
+              {/* Green sofa */}
+              <div style={{ 
+                position: 'absolute', 
+                bottom: '20%', 
+                left: '10%',
+                width: '25%',
+                height: '15%',
+                backgroundColor: '#228b22',
+                borderRadius: '8px 8px 0 0'
+              }}></div>
+              
+              {/* Window */}
+              <div style={{ 
+                position: 'absolute', 
+                top: '10%', 
+                left: '5%',
+                width: '20%',
+                height: '30%',
+                backgroundColor: '#87ceeb',
+                border: '2px solid #d1d5db'
+              }}></div>
+            </div>
+            
+            {/* Card Content */}
+            <div style={{ padding: '24px', backgroundColor: 'white' }}>
+              <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>FAMILY PALACE SUITE</h3>
+              <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                A fusion of two palace suites, featuring a spacious lounge—an expansive, lush private retreat perfect for families and added privacy.
+              </p>
+            </div>
+            
+            {/* Invisible Link Overlay */}
+            <a 
+              href="/rambhapalace/palace-family-suite/" 
+              style={{ 
+                background: 'transparent', 
+                border: 'none', 
+                position: 'absolute', 
+                height: '100%', 
+                width: '100%', 
+                zIndex: 9999, 
+                top: 0, 
+                left: 0 
+              }}
+            ></a>
+          </div>
+        </div>
       </div>
     </>
   );
