@@ -416,6 +416,381 @@ function App() {
             ></a>
           </div>
         </div>
+
+        {/* Four Additional Cards Section */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', marginBottom: '48px' }}>
+          {/* Third Card - Generator Suite */}
+          <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+            <img 
+              src="https://hiddenindia.com/rambhapalace/wp-content/uploads/elementor/thumbs/Gallery7-1-qyb3q81db4tii1y2wn42rodt1v7395l80a9w3h9ils.webp" 
+              alt="Generator Suite" 
+              style={{ width: '100%', height: '300px', objectFit: 'cover' }}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                const nextSibling = target.nextSibling as HTMLElement;
+                if (nextSibling) {
+                  nextSibling.style.display = 'flex';
+                }
+              }}
+            />
+            {/* Fallback design for third card */}
+            <div style={{ 
+              display: 'none', 
+              width: '100%', 
+              height: '300px', 
+              backgroundColor: '#9370db',
+              position: 'relative',
+              overflow: 'hidden'
+            }}>
+              {/* Four-poster bed */}
+              <div style={{ 
+                position: 'absolute', 
+                top: '50%', 
+                left: '50%', 
+                transform: 'translate(-50%, -50%)',
+                width: '60%',
+                height: '40%',
+                backgroundColor: '#ffffff',
+                border: '2px solid #d1d5db',
+                borderRadius: '8px',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+              }}>
+                {/* Bed posts */}
+                <div style={{ position: 'absolute', top: '-20px', left: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                <div style={{ position: 'absolute', top: '-20px', right: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                <div style={{ position: 'absolute', bottom: '-20px', left: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                <div style={{ position: 'absolute', bottom: '-20px', right: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+              </div>
+              
+              {/* Purple sofa */}
+              <div style={{ 
+                position: 'absolute', 
+                bottom: '20%', 
+                left: '10%',
+                width: '25%',
+                height: '15%',
+                backgroundColor: '#800080',
+                borderRadius: '8px 8px 0 0'
+              }}></div>
+              
+              {/* Window */}
+              <div style={{ 
+                position: 'absolute', 
+                top: '10%', 
+                right: '5%',
+                width: '20%',
+                height: '30%',
+                backgroundColor: '#87ceeb',
+                border: '2px solid #d1d5db'
+              }}></div>
+            </div>
+            
+            {/* Card Content */}
+            <div style={{ padding: '24px', backgroundColor: 'white' }}>
+              <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>GENERATOR SUITES</h3>
+              <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                Once the heart of the royal palace's power generation, these suites have now been transformed into a luxurious retreat, offering orchard views and outdoor bathtubs.
+              </p>
+            </div>
+            
+            {/* Invisible Link Overlay */}
+            <a 
+              href="/rambhapalace/generator-suite/" 
+              style={{ 
+                background: 'transparent', 
+                border: 'none', 
+                position: 'absolute', 
+                height: '100%', 
+                width: '100%', 
+                zIndex: 9999, 
+                top: 0, 
+                left: 0 
+              }}
+            ></a>
+          </div>
+
+          {/* Fourth Card - Ice Mill Suite */}
+          <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+            <img 
+              src="https://hiddenindia.com/rambhapalace/wp-content/uploads/elementor/thumbs/Gallery7-1-qyb3q81db4tii1y2wn42rodt1v7395l80a9w3h9ils.webp" 
+              alt="Ice Mill Suite" 
+              style={{ width: '100%', height: '300px', objectFit: 'cover' }}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                const nextSibling = target.nextSibling as HTMLElement;
+                if (nextSibling) {
+                  nextSibling.style.display = 'flex';
+                }
+              }}
+            />
+            {/* Fallback design for fourth card */}
+            <div style={{ 
+              display: 'none', 
+              width: '100%', 
+              height: '300px', 
+              backgroundColor: '#40e0d0',
+              position: 'relative',
+              overflow: 'hidden'
+            }}>
+              {/* Two single beds */}
+              <div style={{ 
+                position: 'absolute', 
+                top: '50%', 
+                left: '30%', 
+                transform: 'translate(-50%, -50%)',
+                width: '25%',
+                height: '35%',
+                backgroundColor: '#ffffff',
+                border: '2px solid #d1d5db',
+                borderRadius: '8px',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+              }}></div>
+              <div style={{ 
+                position: 'absolute', 
+                top: '50%', 
+                left: '70%', 
+                transform: 'translate(-50%, -50%)',
+                width: '25%',
+                height: '35%',
+                backgroundColor: '#ffffff',
+                border: '2px solid #d1d5db',
+                borderRadius: '8px',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+              }}></div>
+              
+              {/* Teal sofa */}
+              <div style={{ 
+                position: 'absolute', 
+                bottom: '20%', 
+                left: '10%',
+                width: '25%',
+                height: '15%',
+                backgroundColor: '#008080',
+                borderRadius: '8px 8px 0 0'
+              }}></div>
+              
+              {/* Window */}
+              <div style={{ 
+                position: 'absolute', 
+                top: '10%', 
+                left: '5%',
+                width: '20%',
+                height: '30%',
+                backgroundColor: '#87ceeb',
+                border: '2px solid #d1d5db'
+              }}></div>
+            </div>
+            
+            {/* Card Content */}
+            <div style={{ padding: '24px', backgroundColor: 'white' }}>
+              <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>ICE MILL SUITES</h3>
+              <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                Once used to store ice blocks for preserving the palace's fresh catches, these suites have been reimagined into a lavish retreat with an outdoor seating verandah.
+              </p>
+            </div>
+            
+            {/* Invisible Link Overlay */}
+            <a 
+              href="/rambhapalace/rambhapalace/ice-mill-suite/" 
+              style={{ 
+                background: 'transparent', 
+                border: 'none', 
+                position: 'absolute', 
+                height: '100%', 
+                width: '100%', 
+                zIndex: 9999, 
+                top: 0, 
+                left: 0 
+              }}
+            ></a>
+          </div>
+
+          {/* Fifth Card - Printing Press Suite */}
+          <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+            <img 
+              src="https://hiddenindia.com/rambhapalace/wp-content/uploads/elementor/thumbs/Gallery7-1-qyb3q81db4tii1y2wn42rodt1v7395l80a9w3h9ils.webp" 
+              alt="Printing Press Suite" 
+              style={{ width: '100%', height: '300px', objectFit: 'cover' }}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                const nextSibling = target.nextSibling as HTMLElement;
+                if (nextSibling) {
+                  nextSibling.style.display = 'flex';
+                }
+              }}
+            />
+            {/* Fallback design for fifth card */}
+            <div style={{ 
+              display: 'none', 
+              width: '100%', 
+              height: '300px', 
+              backgroundColor: '#dda0dd',
+              position: 'relative',
+              overflow: 'hidden'
+            }}>
+              {/* Four-poster bed */}
+              <div style={{ 
+                position: 'absolute', 
+                top: '50%', 
+                left: '50%', 
+                transform: 'translate(-50%, -50%)',
+                width: '60%',
+                height: '40%',
+                backgroundColor: '#ffffff',
+                border: '2px solid #d1d5db',
+                borderRadius: '8px',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+              }}>
+                {/* Bed posts */}
+                <div style={{ position: 'absolute', top: '-20px', left: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                <div style={{ position: 'absolute', top: '-20px', right: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                <div style={{ position: 'absolute', bottom: '-20px', left: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                <div style={{ position: 'absolute', bottom: '-20px', right: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+              </div>
+              
+              {/* Blue sofa with orange cushions */}
+              <div style={{ 
+                position: 'absolute', 
+                bottom: '20%', 
+                left: '10%',
+                width: '25%',
+                height: '15%',
+                backgroundColor: '#4169e1',
+                borderRadius: '8px 8px 0 0'
+              }}></div>
+              
+              {/* Window */}
+              <div style={{ 
+                position: 'absolute', 
+                top: '10%', 
+                right: '5%',
+                width: '20%',
+                height: '30%',
+                backgroundColor: '#87ceeb',
+                border: '2px solid #d1d5db'
+              }}></div>
+            </div>
+            
+            {/* Card Content */}
+            <div style={{ padding: '24px', backgroundColor: 'white' }}>
+              <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>PRINTING PRESS SUITES</h3>
+              <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                Once the palace's printing press, they now offer views of the orchard and palace verandah, retaining a name that reflects their storied past.
+              </p>
+            </div>
+            
+            {/* Invisible Link Overlay */}
+            <a 
+              href="/rambhapalace/printing-press-suite/" 
+              style={{ 
+                background: 'transparent', 
+                border: 'none', 
+                position: 'absolute', 
+                height: '100%', 
+                width: '100%', 
+                zIndex: 9999, 
+                top: 0, 
+                left: 0 
+              }}
+            ></a>
+          </div>
+
+          {/* Sixth Card - Rambha Villa */}
+          <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+            <img 
+              src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/RambhaVilla-1-1-1024x683.png" 
+              alt="Rambha Villa" 
+              style={{ width: '100%', height: '300px', objectFit: 'cover' }}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                const nextSibling = target.nextSibling as HTMLElement;
+                if (nextSibling) {
+                  nextSibling.style.display = 'flex';
+                }
+              }}
+            />
+            {/* Fallback design for sixth card */}
+            <div style={{ 
+              display: 'none', 
+              width: '100%', 
+              height: '300px', 
+              backgroundColor: '#228b22',
+              position: 'relative',
+              overflow: 'hidden'
+            }}>
+              {/* Villa exterior */}
+              <div style={{ 
+                position: 'absolute', 
+                top: '20%', 
+                left: '50%', 
+                transform: 'translateX(-50%)',
+                width: '60%',
+                height: '40%',
+                backgroundColor: '#8b4513',
+                borderRadius: '8px 8px 0 0',
+                border: '2px solid #654321'
+              }}>
+                {/* Roof */}
+                <div style={{ 
+                  position: 'absolute', 
+                  top: '-15px', 
+                  left: '-10px', 
+                  right: '-10px',
+                  height: '15px',
+                  backgroundColor: '#8b0000',
+                  borderRadius: '8px 8px 0 0'
+                }}></div>
+              </div>
+              
+              {/* Trees */}
+              <div style={{ 
+                position: 'absolute', 
+                bottom: '10%', 
+                left: '10%',
+                width: '20px',
+                height: '40px',
+                backgroundColor: '#228b22',
+                borderRadius: '50% 50% 0 0'
+              }}></div>
+              <div style={{ 
+                position: 'absolute', 
+                bottom: '10%', 
+                right: '10%',
+                width: '20px',
+                height: '40px',
+                backgroundColor: '#228b22',
+                borderRadius: '50% 50% 0 0'
+              }}></div>
+            </div>
+            
+            {/* Card Content */}
+            <div style={{ padding: '24px', backgroundColor: 'white' }}>
+              <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>RAMBHA VILLA</h3>
+              <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                A luxurious, standalone two-bedroom presidential suite featuring a spacious private garden, swimming pool, butler service and pantry with a comfortable lounge area.
+              </p>
+            </div>
+            
+            {/* Invisible Link Overlay */}
+            <a 
+              href="/rambhapalace/rambhapalace/ice-mill-suite/" 
+              style={{ 
+                background: 'transparent', 
+                border: 'none', 
+                position: 'absolute', 
+                height: '100%', 
+                width: '100%', 
+                zIndex: 9999, 
+                top: 0, 
+                left: 0 
+              }}
+            ></a>
+          </div>
+        </div>
       </div>
     </>
   );
