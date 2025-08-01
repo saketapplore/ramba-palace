@@ -220,6 +220,75 @@ function App() {
           </div>
         </div>
       </div>
+
+      {/* Hidden India Playlist Section */}
+      <div style={{ 
+        backgroundColor: '#fdf2f8', 
+        marginTop: '64px', 
+        padding: '64px 0',
+        width: '100%'
+      }}>
+        <div style={{ maxWidth: '1024px', margin: '0 auto', padding: '0 16px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', alignItems: 'center' }}>
+            {/* Left Section - Text Content */}
+            <div>
+              {/* Subtitle */}
+              <p style={{ 
+                fontSize: '16px', 
+                color: '#92400e', 
+                fontStyle: 'italic', 
+                marginBottom: '8px',
+                fontWeight: '400'
+              }}>
+                Experience Rambha with a
+              </p>
+              
+              {/* Main Title */}
+              <h2 style={{ 
+                fontSize: '36px', 
+                fontWeight: 'bold', 
+                color: '#374151', 
+                marginBottom: '24px',
+                textTransform: 'uppercase'
+              }}>
+                HIDDEN INDIA PLAYLIST
+              </h2>
+              
+              {/* Description */}
+              <p style={{ 
+                fontSize: '18px', 
+                color: '#6b7280', 
+                lineHeight: '1.8',
+                textAlign: 'left'
+              }}>
+                Enhance your journey to Rambha Palace with soundscapes to accompany you through sunrise walks, scenic drives, serene boat cruises, and quiet afternoons immersed in nature. Whether you're arriving, exploring, or simply unwinding, let these musical journeys set the tone for an unforgettable stay.
+              </p>
+            </div>
+
+            {/* Right Section - Spotify Player */}
+            <div style={{ 
+              backgroundColor: '#8b4513', 
+              borderRadius: '12px', 
+              padding: '24px',
+              boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+              border: '1px solid #e5e7eb'
+            }}>
+              <iframe 
+                style={{ 
+                  borderRadius: '12px',
+                  width: '100%',
+                  height: '352px',
+                  border: 'none'
+                }} 
+                src="https://open.spotify.com/embed/playlist/4yWhijO9aWorPBlQxGL75R?utm_source=generator" 
+                allowFullScreen 
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 
