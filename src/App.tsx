@@ -6,17 +6,21 @@ function App() {
 
   const renderHomePage = () => (
     <>
-      {/* Large Forest Image */}
+      {/* Large Video */}
       <div style={{ marginBottom: '48px' }}>
         <div style={{ position: 'relative', width: '100%', maxWidth: '1024px', margin: '0 auto' }}>
-          <div style={{ aspectRatio: '16/9', backgroundColor: '#1f2937', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}>
-            <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #1f2937 0%, #374151 50%, #4b5563 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-              {/* Forest effect with light rays */}
-              <div style={{ position: 'absolute', top: '0', left: '0', right: '0', bottom: '0', background: 'radial-gradient(ellipse at top right, rgba(255, 255, 255, 0.3) 0%, transparent 50%)' }}></div>
-              <div style={{ position: 'absolute', top: '20%', left: '10%', width: '200px', height: '300px', background: 'linear-gradient(45deg, #374151 0%, #4b5563 100%)', borderRadius: '50% 50% 0 0', opacity: '0.7' }}></div>
-              <div style={{ position: 'absolute', top: '30%', right: '15%', width: '150px', height: '250px', background: 'linear-gradient(45deg, #4b5563 0%, #6b7280 100%)', borderRadius: '50% 50% 0 0', opacity: '0.6' }}></div>
-              <div style={{ position: 'absolute', bottom: '20%', left: '20%', width: '180px', height: '200px', background: 'linear-gradient(45deg, #1f2937 0%, #374151 100%)', borderRadius: '50% 50% 0 0', opacity: '0.8' }}></div>
-            </div>
+          <div style={{ aspectRatio: '16/9', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}>
+            <video 
+              className="elementor-video" 
+              src="https://rambhapalace.growwithwhats.app/wp-content/uploads/2024/11/Hidden_India.mp4" 
+              autoPlay 
+              loop 
+              controls 
+              muted 
+              playsInline 
+              controlsList="nodownload"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
           </div>
         </div>
       </div>
