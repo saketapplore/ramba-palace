@@ -222,12 +222,12 @@ function App() {
 
       {/* Hidden India Playlist Section */}
       <div style={{ 
-        backgroundColor: '#fdf2f8', 
+        background: 'linear-gradient(to bottom, #f0d1cc 0%, #f7beb5 100%)', 
         marginTop: '64px', 
         padding: '64px 0',
         width: '100%'
       }}>
-        <div style={{ maxWidth: '1024px', margin: '0 auto', padding: '0 16px' }}>
+        <div style={{ width: '100%', padding: '0 32px' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', alignItems: 'center' }}>
             {/* Left Section - Text Content */}
             <div>
@@ -255,9 +255,11 @@ function App() {
               
               {/* Description */}
               <p style={{ 
-                fontSize: '18px', 
-                color: '#6b7280', 
-                lineHeight: '1.8',
+                fontFamily: '"Lato", sans-serif',
+                fontSize: '14px',
+                fontWeight: '500',
+                lineHeight: '24px',
+                color: '#3A3A3A',
                 textAlign: 'left'
               }}>
                 Enhance your journey to Rambha Palace with soundscapes to accompany you through sunrise walks, scenic drives, serene boat cruises, and quiet afternoons immersed in nature. Whether you're arriving, exploring, or simply unwinding, let these musical journeys set the tone for an unforgettable stay.
