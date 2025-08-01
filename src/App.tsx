@@ -27,52 +27,85 @@ function App() {
 
       {/* Rambha Palace Emblem and Content */}
       <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-        {/* Shield-like Emblem with Crown */}
+        {/* Rambha Palace Logo */}
         <div style={{ marginBottom: '32px' }}>
           <div style={{ display: 'inline-block', position: 'relative' }}>
-            {/* Crown */}
+            <img 
+              loading="lazy" 
+              decoding="async" 
+              width="864" 
+              height="846" 
+              src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/RambhaPalaceLogo-1.svg" 
+              className="attachment-large size-large wp-image-79" 
+              alt="Rambha Palace Logo"
+              style={{ 
+                width: '200px', 
+                height: 'auto', 
+                maxWidth: '100%',
+                display: 'block',
+                margin: '0 auto'
+              }}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                const nextSibling = target.nextSibling as HTMLElement;
+                if (nextSibling) {
+                  nextSibling.style.display = 'block';
+                }
+              }}
+            />
+            {/* Fallback logo if image fails to load */}
             <div style={{ 
-              width: '80px', 
-              height: '40px', 
-              backgroundColor: '#d97706', 
-              borderRadius: '40px 40px 0 0',
-              margin: '0 auto 8px auto',
+              display: 'none', 
+              width: '200px', 
+              height: '200px', 
+              margin: '0 auto',
               position: 'relative'
             }}>
+              {/* Crown */}
               <div style={{ 
-                position: 'absolute', 
-                top: '-8px', 
-                left: '50%', 
-                transform: 'translateX(-50%)',
-                width: '0',
-                height: '0',
-                borderLeft: '8px solid transparent',
-                borderRight: '8px solid transparent',
-                borderBottom: '16px solid #92400e'
-              }}></div>
-            </div>
-            
-            {/* Shield */}
-            <div style={{ 
-              width: '120px', 
-              height: '140px', 
-              backgroundColor: '#1e40af', 
-              borderRadius: '60px 60px 20px 20px',
-              margin: '0 auto',
-              position: 'relative',
-              border: '3px solid #d97706'
-            }}>
-              {/* RP Monogram */}
-              <div style={{ 
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                color: 'white',
-                fontSize: '24px',
-                fontWeight: 'bold'
+                width: '80px', 
+                height: '40px', 
+                backgroundColor: '#d97706', 
+                borderRadius: '40px 40px 0 0',
+                margin: '0 auto 8px auto',
+                position: 'relative'
               }}>
-                RP
+                <div style={{ 
+                  position: 'absolute', 
+                  top: '-8px', 
+                  left: '50%', 
+                  transform: 'translateX(-50%)',
+                  width: '0',
+                  height: '0',
+                  borderLeft: '8px solid transparent',
+                  borderRight: '8px solid transparent',
+                  borderBottom: '16px solid #92400e'
+                }}></div>
+              </div>
+              
+              {/* Shield */}
+              <div style={{ 
+                width: '120px', 
+                height: '140px', 
+                backgroundColor: '#1e40af', 
+                borderRadius: '60px 60px 20px 20px',
+                margin: '0 auto',
+                position: 'relative',
+                border: '3px solid #d97706'
+              }}>
+                {/* RP Monogram */}
+                <div style={{ 
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  color: 'white',
+                  fontSize: '24px',
+                  fontWeight: 'bold'
+                }}>
+                  RP
+                </div>
               </div>
             </div>
           </div>
@@ -81,22 +114,6 @@ function App() {
         {/* Title */}
         <h1 style={{ fontSize: '36px', fontWeight: 'bold', color: '#374151', marginBottom: '8px' }}>RAMBHA PALACE</h1>
         <p style={{ fontSize: '18px', color: '#6b7280', marginBottom: '4px' }}>CHILIKA LAKE, ODISHA</p>
-        
-        {/* HIDDEN INDIA Logo */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginTop: '16px' }}>
-          <span style={{ color: '#9ca3af', fontSize: '16px', fontWeight: '300' }}>HIDDEN</span>
-          <div style={{ width: '24px', height: '18px' }}>
-            <svg style={{ width: '24px', height: '18px' }} viewBox="0 0 32 24" fill="none">
-              <path d="M8 12c0-2.2 1.8-4 4-4s4 1.8 4 4-1.8 4-4 4-4-1.8-4-4z" fill="#d97706"/>
-              <path d="M6 8c0-1.1 0.9-2 2-2s2 0.9 2 2-0.9 2-2 2-2-0.9-2-2z" fill="#92400E"/>
-              <path d="M18 8c0-1.1 0.9-2 2-2s2 0.9 2 2-0.9 2-2 2-2-0.9-2-2z" fill="#92400E"/>
-              <path d="M12 16c-1.1 0-2-0.9-2-2s0.9-2 2-2 2 0.9 2 2-0.9 2-2 2z" fill="#92400E"/>
-              <path d="M4 6c0-1.1 0.9-2 2-2s2 0.9 2 2-0.9 2-2 2-2-0.9-2-2z" fill="#D97706"/>
-              <path d="M20 6c0-1.1 0.9-2 2-2s2 0.9 2 2-0.9 2-2 2-2-0.9-2-2z" fill="#D97706"/>
-            </svg>
-          </div>
-          <span style={{ color: '#6b7280', fontSize: '16px', fontWeight: '300' }}>INDIA</span>
-        </div>
       </div>
 
       {/* Description */}
