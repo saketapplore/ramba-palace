@@ -4659,6 +4659,205 @@ function App() {
           </div>
         </div>
       </div>
+
+      {/* Featured Experiences Section */}
+      <div style={{ marginTop: '80px' }}>
+        {/* Section Title */}
+        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <h2 style={{
+            fontSize: '32px',
+            fontWeight: 'bold',
+            color: '#374151',
+            marginBottom: '16px',
+            textTransform: 'uppercase'
+          }}>
+            FEATURED EXPERIENCES
+          </h2>
+        </div>
+
+        {/* Large Featured Card */}
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '0 24px'
+        }}>
+          <div style={{
+            backgroundColor: 'white',
+            borderRadius: '12px',
+            overflow: 'hidden',
+            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+          }}>
+            {/* Image */}
+            <div style={{ height: '400px', backgroundColor: '#f3f4f6', overflow: 'hidden' }}>
+              <img
+                src="./image-29.png"
+                alt="Yoga in the Lap of Nature"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback design if image fails to load */}
+              <div style={{
+                display: 'none',
+                width: '100%',
+                height: '100%',
+                backgroundColor: '#f3f4f6',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#6b7280',
+                fontSize: '16px',
+                flexDirection: 'column',
+                gap: '8px'
+              }}>
+                <svg width="48" height="48" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>Yoga in the Lap of Nature</span>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div style={{ padding: '32px' }}>
+              <h3 style={{
+                fontSize: '24px',
+                fontWeight: 'bold',
+                color: '#111827',
+                marginBottom: '16px',
+                textAlign: 'center',
+                textTransform: 'uppercase'
+              }}>
+                YOGA IN THE LAP OF NATURE
+              </h3>
+              <p style={{
+                fontSize: '16px',
+                color: '#374151',
+                lineHeight: '1.6',
+                textAlign: 'center',
+                maxWidth: '800px',
+                margin: '0 auto'
+              }}>
+                Experience the ultimate connection between mind, body, and nature with our signature yoga sessions. Set against the breathtaking backdrop of Rambha Palace's lush gardens and serene landscapes, each session is designed to harmonize your inner self with the natural world around you. Our expert instructors guide you through ancient practices while the gentle breeze and natural sounds create a truly immersive wellness experience.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* MANTNAM Section */}
+      <div style={{ 
+        marginTop: '80px',
+        backgroundColor: '#f7beb5',
+        padding: '80px 24px'
+      }}>
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '64px'
+        }}>
+          {/* Left Content */}
+          <div style={{ flex: '1' }}>
+            <h3 style={{
+              fontSize: '18px',
+              fontWeight: '500',
+              color: '#6b7280',
+              marginBottom: '16px',
+              textTransform: 'uppercase'
+            }}>
+              Ancient wisdom and modern techniques
+            </h3>
+            <h2 style={{
+              fontSize: '48px',
+              fontWeight: 'bold',
+              color: '#111827',
+              marginBottom: '24px',
+              textTransform: 'uppercase'
+            }}>
+              MANTNAM
+            </h2>
+            <p style={{
+              fontSize: '16px',
+              color: '#374151',
+              lineHeight: '1.6',
+              maxWidth: '600px'
+            }}>
+              Mantnam conceptualises wellness as a holistic endeavour. Its attainment requires an equilibrium of mind, body and soul through recalibration and training. Combining ancient techniques and modern equipment, it provides a space which can be used to accomplish various goals for guests-anti-aging, detoxing, muscle strengthening, flexibility, de-stressing, and beautifying your body from the inside out.
+            </p>
+          </div>
+
+          {/* Right Card */}
+          <div style={{
+            flex: '1',
+            display: 'flex',
+            justifyContent: 'center'
+          }}>
+            <div style={{
+              width: '300px',
+              height: '300px',
+              backgroundColor: '#f5f5f0',
+              borderRadius: '12px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+            }}>
+              <img
+                src="./image-30.png"
+                alt="Mantnam Logo"
+                style={{
+                  width: '200px',
+                  height: 'auto',
+                  maxWidth: '100%'
+                }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback design if image fails to load */}
+              <div style={{
+                display: 'none',
+                width: '200px',
+                height: '100px',
+                backgroundColor: '#f5f5f0',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#1e40af',
+                fontSize: '32px',
+                fontWeight: 'bold',
+                fontStyle: 'italic',
+                flexDirection: 'column',
+                gap: '8px'
+              }}>
+                <span style={{ fontSize: '48px', fontWeight: 'bold', color: '#1e40af' }}>mantnam</span>
+                <div style={{ 
+                  width: '4px', 
+                  height: '4px', 
+                  backgroundColor: '#1e40af', 
+                  borderRadius: '50%',
+                  marginTop: '-20px',
+                  marginLeft: '60px'
+                }}></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 
