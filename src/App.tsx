@@ -63,49 +63,49 @@ function App() {
               margin: '0 auto',
               position: 'relative'
             }}>
-              {/* Crown */}
+            {/* Crown */}
+            <div style={{ 
+              width: '80px', 
+              height: '40px', 
+              backgroundColor: '#d97706', 
+              borderRadius: '40px 40px 0 0',
+              margin: '0 auto 8px auto',
+              position: 'relative'
+            }}>
               <div style={{ 
-                width: '80px', 
-                height: '40px', 
-                backgroundColor: '#d97706', 
-                borderRadius: '40px 40px 0 0',
-                margin: '0 auto 8px auto',
-                position: 'relative'
-              }}>
-                <div style={{ 
-                  position: 'absolute', 
-                  top: '-8px', 
-                  left: '50%', 
-                  transform: 'translateX(-50%)',
-                  width: '0',
-                  height: '0',
-                  borderLeft: '8px solid transparent',
-                  borderRight: '8px solid transparent',
-                  borderBottom: '16px solid #92400e'
-                }}></div>
-              </div>
-              
-              {/* Shield */}
+                position: 'absolute', 
+                top: '-8px', 
+                left: '50%', 
+                transform: 'translateX(-50%)',
+                width: '0',
+                height: '0',
+                borderLeft: '8px solid transparent',
+                borderRight: '8px solid transparent',
+                borderBottom: '16px solid #92400e'
+              }}></div>
+            </div>
+            
+            {/* Shield */}
+            <div style={{ 
+              width: '120px', 
+              height: '140px', 
+              backgroundColor: '#1e40af', 
+              borderRadius: '60px 60px 20px 20px',
+              margin: '0 auto',
+              position: 'relative',
+              border: '3px solid #d97706'
+            }}>
+              {/* RP Monogram */}
               <div style={{ 
-                width: '120px', 
-                height: '140px', 
-                backgroundColor: '#1e40af', 
-                borderRadius: '60px 60px 20px 20px',
-                margin: '0 auto',
-                position: 'relative',
-                border: '3px solid #d97706'
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                color: 'white',
+                fontSize: '24px',
+                fontWeight: 'bold'
               }}>
-                {/* RP Monogram */}
-                <div style={{ 
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  color: 'white',
-                  fontSize: '24px',
-                  fontWeight: 'bold'
-                }}>
-                  RP
+                RP
                 </div>
               </div>
             </div>
@@ -3168,6 +3168,472 @@ function App() {
     </>
   );
 
+  const renderContactPage = () => (
+    <>
+      {/* Main Title */}
+      <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+        <h1 style={{ fontSize: '32px', fontWeight: 'bold', color: '#374151', marginBottom: '16px' }}>Contact Us</h1>
+        <p style={{ 
+          color: '#6b7280', 
+          fontSize: '16px', 
+          lineHeight: '1.6',
+          maxWidth: '800px',
+          margin: '0 auto'
+        }}>
+          From the moment you dream of your stay to the time you arrive, we're here to make every detail seamless and unforgettable. You envision and we're ready to bring it to life and guide you along every step of your journey.
+        </p>
+      </div>
+
+      {/* Hidden India Central Reservations */}
+      <div style={{ 
+        textAlign: 'center', 
+        marginBottom: '64px',
+        padding: '48px 24px'
+      }}>
+        <h2 style={{ 
+          fontSize: '24px', 
+          fontWeight: 'bold', 
+          color: '#374151', 
+          marginBottom: '24px',
+          textTransform: 'uppercase'
+        }}>
+          Hidden India Central Reservations
+        </h2>
+        <p style={{ 
+          color: '#6b7280', 
+          fontSize: '16px', 
+          lineHeight: '1.6',
+          maxWidth: '600px',
+          margin: '0 auto 24px auto'
+        }}>
+          Our central reservations team is available 24 hours a day, 7 days a week, to assist with travel planning, multi-destination itineraries, restaurants, or wellness sessions.
+        </p>
+        <div style={{ 
+          display: 'flex', 
+          flexDirection: 'column',
+          gap: '12px',
+          alignItems: 'center'
+        }}>
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center',
+            gap: '8px',
+            color: '#374151',
+            fontSize: '16px'
+          }}>
+            <span style={{ fontWeight: 'bold' }}>Email:</span>
+            <a href="mailto:reservations@hiddenindia.com" style={{ color: '#d97706', textDecoration: 'none' }}>
+              reservations@hiddenindia.com
+            </a>
+          </div>
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center',
+            gap: '8px',
+            color: '#374151',
+            fontSize: '16px'
+          }}>
+            <span style={{ fontWeight: 'bold' }}>Tel:</span>
+            <a href="tel:+917800208002" style={{ color: '#d97706', textDecoration: 'none' }}>
+              +91 7800 208 002
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Contact Form */}
+      <div style={{ 
+        maxWidth: '800px', 
+        margin: '0 auto',
+        padding: '48px'
+      }}>
+        <form style={{ display: 'grid', gap: '24px' }}>
+          {/* First Row - Title and Name */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
+            {/* Title */}
+            <div>
+              <label style={{ 
+                display: 'block', 
+                marginBottom: '8px', 
+                fontWeight: '500', 
+                color: '#374151',
+                fontSize: '14px'
+              }}>
+                Title
+              </label>
+              <select style={{ 
+                width: '100%', 
+                padding: '12px', 
+                border: '1px solid #d1d5db', 
+                borderRadius: '6px',
+                fontSize: '14px',
+                backgroundColor: 'white'
+              }}>
+                <option value="">Select Title</option>
+                <option value="mr">Mr.</option>
+                <option value="mrs">Mrs.</option>
+                <option value="ms">Ms.</option>
+                <option value="dr">Dr.</option>
+              </select>
+            </div>
+
+            {/* First Name */}
+            <div>
+              <label style={{ 
+                display: 'block', 
+                marginBottom: '8px', 
+                fontWeight: '500', 
+                color: '#374151',
+                fontSize: '14px'
+              }}>
+                First Name
+              </label>
+              <input 
+                type="text" 
+                style={{ 
+                  width: '100%', 
+                  padding: '12px', 
+                  border: '1px solid #d1d5db', 
+                  borderRadius: '6px',
+                  fontSize: '14px'
+                }}
+                placeholder="Enter your first name"
+              />
+            </div>
+
+            {/* Last Name */}
+            <div>
+              <label style={{ 
+                display: 'block', 
+                marginBottom: '8px', 
+                fontWeight: '500', 
+                color: '#374151',
+                fontSize: '14px'
+              }}>
+                Last Name
+              </label>
+              <input 
+                type="text" 
+                style={{ 
+                  width: '100%', 
+                  padding: '12px', 
+                  border: '1px solid #d1d5db', 
+                  borderRadius: '6px',
+                  fontSize: '14px'
+                }}
+                placeholder="Enter your last name"
+              />
+            </div>
+          </div>
+
+          {/* Second Row - Email and Phone */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+            {/* Email */}
+            <div>
+              <label style={{ 
+                display: 'block', 
+                marginBottom: '8px', 
+                fontWeight: '500', 
+                color: '#374151',
+                fontSize: '14px'
+              }}>
+                Email
+              </label>
+              <input 
+                type="email" 
+                style={{ 
+                  width: '100%', 
+                  padding: '12px', 
+                  border: '1px solid #d1d5db', 
+                  borderRadius: '6px',
+                  fontSize: '14px'
+                }}
+                placeholder="Enter your email address"
+              />
+            </div>
+
+            {/* Phone */}
+            <div>
+              <label style={{ 
+                display: 'block', 
+                marginBottom: '8px', 
+                fontWeight: '500', 
+                color: '#374151',
+                fontSize: '14px'
+              }}>
+                Phone
+              </label>
+              <input 
+                type="tel" 
+                style={{ 
+                  width: '100%', 
+                  padding: '12px', 
+                  border: '1px solid #d1d5db', 
+                  borderRadius: '6px',
+                  fontSize: '14px'
+                }}
+                placeholder="Enter your phone number"
+              />
+            </div>
+          </div>
+
+          {/* Third Row - Country/Region and Enquiry Type */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+            {/* Country/Region */}
+            <div>
+              <label style={{ 
+                display: 'block', 
+                marginBottom: '8px', 
+                fontWeight: '500', 
+                color: '#374151',
+                fontSize: '14px'
+              }}>
+                Country/Region
+              </label>
+              <input 
+                type="text" 
+                style={{ 
+                  width: '100%', 
+                  padding: '12px', 
+                  border: '1px solid #d1d5db', 
+                  borderRadius: '6px',
+                  fontSize: '14px'
+                }}
+                placeholder="Enter your country or region"
+              />
+            </div>
+
+            {/* Enquiry Type */}
+            <div>
+              <label style={{ 
+                display: 'block', 
+                marginBottom: '8px', 
+                fontWeight: '500', 
+                color: '#374151',
+                fontSize: '14px'
+              }}>
+                Enquiry Type
+              </label>
+              <select style={{ 
+                width: '100%', 
+                padding: '12px', 
+                border: '1px solid #d1d5db', 
+                borderRadius: '6px',
+                fontSize: '14px',
+                backgroundColor: 'white'
+              }}>
+                <option value="">Select Enquiry Type</option>
+                <option value="reservation">Reservation</option>
+                <option value="dining">Dining</option>
+                <option value="wellness">Wellness</option>
+                <option value="events">Events</option>
+                <option value="corporate">Corporate</option>
+                <option value="media">Media</option>
+                <option value="partnership">Partnership</option>
+                <option value="feedback">Feedback</option>
+                <option value="general">General Inquiry</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Message */}
+          <div>
+            <label style={{ 
+              display: 'block', 
+              marginBottom: '8px', 
+              fontWeight: '500', 
+              color: '#374151',
+              fontSize: '14px'
+            }}>
+              Message
+            </label>
+            <textarea 
+              rows={6}
+              style={{ 
+                width: '100%', 
+                padding: '12px', 
+                border: '1px solid #d1d5db', 
+                borderRadius: '6px',
+                fontSize: '14px',
+                resize: 'vertical',
+                fontFamily: 'inherit'
+              }}
+              placeholder="Enter your message here..."
+            />
+          </div>
+
+          {/* Submit Button */}
+          <div style={{ textAlign: 'center', marginTop: '16px' }}>
+            <button 
+              type="submit"
+              style={{ 
+                backgroundColor: '#6b7280', 
+                color: 'white', 
+                padding: '12px 32px', 
+                border: 'none', 
+                borderRadius: '6px',
+                fontSize: '16px',
+                fontWeight: '500',
+                cursor: 'pointer',
+                transition: 'background-color 0.2s'
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.backgroundColor = '#4b5563';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.backgroundColor = '#6b7280';
+              }}
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+
+      {/* Footer Section */}
+      <div style={{ 
+        marginTop: '64px',
+        padding: '48px 24px',
+        borderTop: '1px solid #e5e7eb'
+      }}>
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+          gap: '32px',
+          maxWidth: '1200px',
+          margin: '0 auto'
+        }}>
+          {/* Left Column - Contact Info */}
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ 
+              color: '#374151',
+              fontSize: '16px',
+              fontWeight: '500',
+              marginBottom: '8px'
+            }}>
+              Hidden India Rambha Palace
+            </div>
+            <div style={{ 
+              color: '#6b7280',
+              fontSize: '14px'
+            }}>
+              rambhapalace@hiddenindia.com
+            </div>
+          </div>
+
+          {/* Middle Column - Address */}
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ 
+              color: '#374151',
+              fontSize: '14px',
+              lineHeight: '1.6',
+              marginBottom: '8px'
+            }}>
+              Tehsil, PS, Rambha, Khallikot, Odisha, India, 761030.
+            </div>
+            <div style={{ 
+              color: '#d97706',
+              fontSize: '14px',
+              fontWeight: '500',
+              cursor: 'pointer'
+            }}>
+              Get Directions
+            </div>
+          </div>
+
+          {/* Right Column - Social Media */}
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '24px'
+          }}>
+            {/* Facebook */}
+            <div style={{ 
+              width: '40px',
+              height: '40px',
+              backgroundColor: '#374151',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              transition: 'background-color 0.2s'
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.backgroundColor = '#1f2937';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.backgroundColor = '#374151';
+            }}>
+              <span style={{ 
+                color: 'white',
+                fontSize: '16px',
+                fontWeight: 'bold'
+              }}>
+                f
+              </span>
+            </div>
+
+            {/* Instagram */}
+            <div style={{ 
+              width: '40px',
+              height: '40px',
+              backgroundColor: '#374151',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              transition: 'background-color 0.2s'
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.backgroundColor = '#1f2937';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.backgroundColor = '#374151';
+            }}>
+              <span style={{ 
+                color: 'white',
+                fontSize: '16px',
+                fontWeight: 'bold'
+              }}>
+                📷
+              </span>
+            </div>
+
+            {/* LinkedIn */}
+            <div style={{ 
+              width: '40px',
+              height: '40px',
+              backgroundColor: '#374151',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              transition: 'background-color 0.2s'
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.backgroundColor = '#1f2937';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.backgroundColor = '#374151';
+            }}>
+              <span style={{ 
+                color: 'white',
+                fontSize: '16px',
+                fontWeight: 'bold'
+              }}>
+                in
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+
   const renderWellnessPage = () => (
     <>
       {/* Main Wellness Image */}
@@ -4331,7 +4797,13 @@ function App() {
               Wellness
             </a>
             <span style={{ color: 'black' }}>•</span>
-            <a href="/contact" style={{ color: '#374151', fontWeight: '500' }}>Contact Us</a>
+            <a 
+              href="#" 
+              onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); }}
+              style={{ color: currentPage === 'contact' ? '#d97706' : '#374151', fontWeight: '500' }}
+            >
+              Contact Us
+            </a>
           </div>
         </div>
       </nav>
@@ -4343,6 +4815,7 @@ function App() {
         {currentPage === 'experiences' && renderExperiencesPage()}
         {currentPage === 'dining' && renderDiningPage()}
         {currentPage === 'wellness' && renderWellnessPage()}
+        {currentPage === 'contact' && renderContactPage()}
       </main>
 
       {/* Footer */}
