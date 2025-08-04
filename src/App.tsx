@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [activeTab, setActiveTab] = useState('overview');
+  const [experiencesTab, setExperiencesTab] = useState('overview');
 
   const renderHomePage = () => (
     <>
@@ -1075,6 +1076,3126 @@ function App() {
     </>
   );
 
+  const renderExperiencesPage = () => (
+    <>
+      {/* Main Title */}
+      <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+        <h1 style={{ fontSize: '32px', fontWeight: 'bold', color: '#374151', marginBottom: '16px' }}>Experiences</h1>
+      </div>
+
+      {/* Sub-navigation */}
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px', borderBottom: '1px solid #e5e7eb' }}>
+        <div style={{ display: 'flex', gap: '0' }}>
+          {['Overview', 'Wildlife', 'Spiritual', 'Cultural'].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setExperiencesTab(tab.toLowerCase())}
+              style={{
+                padding: '12px 24px',
+                border: 'none',
+                backgroundColor: 'transparent',
+                color: experiencesTab === tab.toLowerCase() ? '#d97706' : '#6b7280',
+                fontWeight: experiencesTab === tab.toLowerCase() ? '600' : '500',
+                borderBottom: experiencesTab === tab.toLowerCase() ? '2px solid #d97706' : 'none',
+                cursor: 'pointer',
+                fontSize: '14px'
+              }}
+            >
+              {tab}
+              {experiencesTab === tab.toLowerCase() && <span style={{ marginLeft: '8px' }}>{'>'}</span>}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Main Content Area */}
+      <div style={{ maxWidth: '1024px', margin: '0 auto' }}>
+        {experiencesTab === 'overview' && (
+          <>
+            {/* OVERVIEW Section */}
+            <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+              <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '24px', textTransform: 'uppercase' }}>OVERVIEW</h2>
+              <div style={{ maxWidth: '800px', margin: '0 auto', color: '#374151', lineHeight: '1.8', fontSize: '16px' }}>
+                <p>
+                  Rambha Palace provides unscripted and authentic experiences that cater to travelers seeking memorable and meaningful activities beyond the ordinary. Time spent here fosters a mindful atmosphere, enriched by interactions with local communities, encounters with the region's flora and fauna, and visits to ancient temples. Guests receive an unfiltered glimpse of Odisha's natural beauty and unique charm.
+                </p>
+              </div>
+            </div>
+
+            {/* WILDLIFE Section */}
+            <div style={{ marginBottom: '48px' }}>
+              <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '32px', textAlign: 'center', textTransform: 'uppercase' }}>WILDLIFE</h2>
+              
+              {/* Three Cards */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '32px' }}>
+                {/* Card 1: Diving Dolphins */}
+                <div style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+                  <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img 
+                      src="./image-6.png" 
+                      alt="Irrawaddy Dolphin in Chilika Lake" 
+                      style={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover'
+                      }}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const nextSibling = target.nextSibling as HTMLElement;
+                        if (nextSibling) {
+                          nextSibling.style.display = 'flex';
+                        }
+                      }}
+                    />
+                    {/* Fallback design if image fails to load */}
+                    <div style={{ 
+                      display: 'none', 
+                      width: '100%', 
+                      height: '100%', 
+                      backgroundColor: '#87ceeb',
+                      position: 'relative',
+                      overflow: 'hidden'
+                    }}>
+                      {/* Dolphin */}
+                      <div style={{ 
+                        position: 'absolute', 
+                        top: '30%', 
+                        left: '20%',
+                        width: '60%',
+                        height: '20%',
+                        backgroundColor: '#e5e7eb',
+                        borderRadius: '50% 50% 0 0'
+                      }}></div>
+                      {/* Splash */}
+                      <div style={{ 
+                        position: 'absolute', 
+                        bottom: '20%', 
+                        left: '50%',
+                        width: '20px',
+                        height: '20px',
+                        backgroundColor: '#ffffff',
+                        borderRadius: '50%',
+                        transform: 'translateX(-50%)'
+                      }}></div>
+                    </div>
+                  </div>
+                  <div style={{ padding: '24px' }}>
+                    <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>DIVING DOLPHINS</h3>
+                    <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                      The endangered species of Irrawaddy dolphins can be spotted frolicking in Chilika Lake. Spot them happy in their habitat while you drift slowly in a private boat.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Card 2: Tracking Fishing Cat */}
+                <div style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+                  <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img 
+                      src="./image-7.png" 
+                      alt="Fishing Cat in Natural Habitat" 
+                      style={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover'
+                      }}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const nextSibling = target.nextSibling as HTMLElement;
+                        if (nextSibling) {
+                          nextSibling.style.display = 'flex';
+                        }
+                      }}
+                    />
+                    {/* Fallback design if image fails to load */}
+                    <div style={{ 
+                      display: 'none', 
+                      width: '100%', 
+                      height: '100%', 
+                      backgroundColor: '#228b22',
+                      position: 'relative',
+                      overflow: 'hidden'
+                    }}>
+                      {/* Fishing Cat */}
+                      <div style={{ 
+                        position: 'absolute', 
+                        top: '20%', 
+                        left: '30%',
+                        width: '40%',
+                        height: '30%',
+                        backgroundColor: '#8b4513',
+                        borderRadius: '50% 50% 0 0'
+                      }}>
+                        {/* Cat ears */}
+                        <div style={{ 
+                          position: 'absolute', 
+                          top: '-10px', 
+                          left: '20%',
+                          width: '8px',
+                          height: '12px',
+                          backgroundColor: '#8b4513',
+                          borderRadius: '50% 50% 0 0'
+                        }}></div>
+                        <div style={{ 
+                          position: 'absolute', 
+                          top: '-10px', 
+                          right: '20%',
+                          width: '8px',
+                          height: '12px',
+                          backgroundColor: '#8b4513',
+                          borderRadius: '50% 50% 0 0'
+                        }}></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div style={{ padding: '24px' }}>
+                    <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>TRACKING FISHING CAT</h3>
+                    <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                      Embark on a boat safari in the wetlands to track elusive apex predators as they roam the banks on lookout for a hunt, or if you're lucky, even catch them on the prowl.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Card 3: Finding Flamingos */}
+                <div style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+                  <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img 
+                      src="./image-8.png" 
+                      alt="Flamingos in Chilika Lake" 
+                      style={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover'
+                      }}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const nextSibling = target.nextSibling as HTMLElement;
+                        if (nextSibling) {
+                          nextSibling.style.display = 'flex';
+                        }
+                      }}
+                    />
+                    {/* Fallback design if image fails to load */}
+                    <div style={{ 
+                      display: 'none', 
+                      width: '100%', 
+                      height: '100%', 
+                      backgroundColor: '#87ceeb',
+                      position: 'relative',
+                      overflow: 'hidden'
+                    }}>
+                      {/* Flamingos */}
+                      <div style={{ 
+                        position: 'absolute', 
+                        top: '30%', 
+                        left: '20%',
+                        width: '8px',
+                        height: '40%',
+                        backgroundColor: '#ff69b4',
+                        borderRadius: '4px'
+                      }}></div>
+                      <div style={{ 
+                        position: 'absolute', 
+                        top: '25%', 
+                        left: '20%',
+                        width: '20px',
+                        height: '15px',
+                        backgroundColor: '#ff69b4',
+                        borderRadius: '50%'
+                      }}></div>
+                      
+                      <div style={{ 
+                        position: 'absolute', 
+                        top: '35%', 
+                        right: '30%',
+                        width: '8px',
+                        height: '35%',
+                        backgroundColor: '#ff69b4',
+                        borderRadius: '4px'
+                      }}></div>
+                      <div style={{ 
+                        position: 'absolute', 
+                        top: '30%', 
+                        right: '30%',
+                        width: '20px',
+                        height: '15px',
+                        backgroundColor: '#ff69b4',
+                        borderRadius: '50%'
+                      }}></div>
+                    </div>
+                  </div>
+                  <div style={{ padding: '24px' }}>
+                    <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>FINDING FLAMINGOS</h3>
+                    <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                      Set sail on Chilika Lake and get a chance to spot nature's fabulous divas, with their striking pink feathers and long, spindly legs.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* SPIRITUAL Section */}
+            <div style={{ marginBottom: '48px' }}>
+              <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '32px', textAlign: 'center', textTransform: 'uppercase' }}>SPIRITUAL</h2>
+              
+              {/* Main Image */}
+              <div style={{ marginBottom: '32px' }}>
+                <img 
+                  src="./image-9.png" 
+                  alt="Ancient Temples of Odisha" 
+                  style={{ 
+                    width: '100%', 
+                    height: 'auto', 
+                    maxWidth: '100%',
+                    borderRadius: '8px',
+                    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+                  }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'block';
+                    }
+                  }}
+                />
+                {/* Fallback design if image fails to load */}
+                <div style={{
+                  display: 'none',
+                  width: '100%',
+                  height: '400px',
+                  backgroundColor: '#f3f4f6',
+                  borderRadius: '8px',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#6b7280',
+                  fontSize: '18px'
+                }}>
+                  Ancient Temples Image
+                </div>
+              </div>
+
+              {/* Text Content */}
+              <div style={{ 
+                backgroundColor: 'white', 
+                borderRadius: '8px', 
+                padding: '32px', 
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                maxWidth: '800px',
+                margin: '0 auto'
+              }}>
+                <h3 style={{ 
+                  fontSize: '20px', 
+                  fontWeight: 'bold', 
+                  color: '#374151', 
+                  marginBottom: '16px', 
+                  textAlign: 'center',
+                  textTransform: 'uppercase'
+                }}>
+                  AN ODISHA OF THE GODS
+                </h3>
+                <p style={{ 
+                  color: '#374151', 
+                  lineHeight: '1.8', 
+                  fontSize: '16px',
+                  textAlign: 'center'
+                }}>
+                  Jagannath Puri, Konark Sun Temple and Tara Tarini are among the architectural and spiritual sanctuaries located a short drive from Rambha Palace. Experience guided tours that are both enlightening and transformative. Immerse yourself in the beauty of these enduring structures, which have stood for centuries, and discover a place of solace, inner serenity and peace.
+                </p>
+              </div>
+            </div>
+
+            {/* FEATURED EXPERIENCES Section */}
+            <div style={{ marginBottom: '48px' }}>
+              <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '32px', textAlign: 'center', textTransform: 'uppercase' }}>FEATURED EXPERIENCES</h2>
+              
+              {/* First Row - Three Cards */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '24px', marginBottom: '32px' }}>
+                {/* Card 1: Art Village */}
+                <div style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+                  <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img 
+                      src="./image-10.png" 
+                      alt="Art Village Raghurajpur" 
+                      style={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover'
+                      }}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const nextSibling = target.nextSibling as HTMLElement;
+                        if (nextSibling) {
+                          nextSibling.style.display = 'flex';
+                        }
+                      }}
+                    />
+                    {/* Fallback design if image fails to load */}
+                    <div style={{ 
+                      display: 'none', 
+                      width: '100%', 
+                      height: '100%', 
+                      backgroundColor: '#fbbf24',
+                      position: 'relative',
+                      overflow: 'hidden'
+                    }}>
+                      {/* Colorful masks */}
+                      <div style={{ 
+                        position: 'absolute', 
+                        top: '20%', 
+                        left: '20%',
+                        width: '20px',
+                        height: '25px',
+                        backgroundColor: '#ef4444',
+                        borderRadius: '50%'
+                      }}></div>
+                      <div style={{ 
+                        position: 'absolute', 
+                        top: '30%', 
+                        left: '40%',
+                        width: '20px',
+                        height: '25px',
+                        backgroundColor: '#3b82f6',
+                        borderRadius: '50%'
+                      }}></div>
+                      <div style={{ 
+                        position: 'absolute', 
+                        top: '40%', 
+                        left: '60%',
+                        width: '20px',
+                        height: '25px',
+                        backgroundColor: '#10b981',
+                        borderRadius: '50%'
+                      }}></div>
+                    </div>
+                  </div>
+                  <div style={{ padding: '20px' }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#374151', marginBottom: '8px', textTransform: 'uppercase' }}>ART VILLAGE: RAGHURAJPUR</h3>
+                    <p style={{ color: '#6b7280', lineHeight: '1.5', fontSize: '13px' }}>
+                      Discover the ancient art of Pattachitra paintings and Chadhiapalli mask making in Odisha's heritage village.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Card 2: Udaygiri Caves */}
+                <div style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+                  <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img 
+                      src="./image-11.png" 
+                      alt="Udaygiri Caves" 
+                      style={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover'
+                      }}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const nextSibling = target.nextSibling as HTMLElement;
+                        if (nextSibling) {
+                          nextSibling.style.display = 'flex';
+                        }
+                      }}
+                    />
+                    {/* Fallback design if image fails to load */}
+                    <div style={{ 
+                      display: 'none', 
+                      width: '100%', 
+                      height: '100%', 
+                      backgroundColor: '#8b4513',
+                      position: 'relative',
+                      overflow: 'hidden'
+                    }}>
+                      {/* Cave structure */}
+                      <div style={{ 
+                        position: 'absolute', 
+                        top: '30%', 
+                        left: '20%',
+                        width: '60%',
+                        height: '40%',
+                        backgroundColor: '#a0522d',
+                        borderRadius: '8px'
+                      }}></div>
+                    </div>
+                  </div>
+                  <div style={{ padding: '20px' }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#374151', marginBottom: '8px', textTransform: 'uppercase' }}>UDAYGIRI CAVES</h3>
+                    <p style={{ color: '#6b7280', lineHeight: '1.5', fontSize: '13px' }}>
+                      Explore intricate carvings and ancient architecture from 2nd Century BC in these historic cave complexes.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Card 3: Metal Craft */}
+                <div style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+                  <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img 
+                      src="./image-12.png" 
+                      alt="Metal Craft" 
+                      style={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover'
+                      }}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const nextSibling = target.nextSibling as HTMLElement;
+                        if (nextSibling) {
+                          nextSibling.style.display = 'flex';
+                        }
+                      }}
+                    />
+                    {/* Fallback design if image fails to load */}
+                    <div style={{ 
+                      display: 'none', 
+                      width: '100%', 
+                      height: '100%', 
+                      backgroundColor: '#c0c0c0',
+                      position: 'relative',
+                      overflow: 'hidden'
+                    }}>
+                      {/* Metal sculptures */}
+                      <div style={{ 
+                        position: 'absolute', 
+                        top: '40%', 
+                        left: '30%',
+                        width: '40%',
+                        height: '20%',
+                        backgroundColor: '#d4af37',
+                        borderRadius: '50%'
+                      }}></div>
+                    </div>
+                  </div>
+                  <div style={{ padding: '20px' }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#374151', marginBottom: '8px', textTransform: 'uppercase' }}>METAL CRAFT</h3>
+                    <p style={{ color: '#6b7280', lineHeight: '1.5', fontSize: '13px' }}>
+                      Witness the skilled craftsmanship in replicating aquatic creatures and traditional metalwork artistry.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Second Row - Two Larger Cards */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
+                {/* Card 4: Breakfast on Island */}
+                <div style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+                  <div style={{ height: '250px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img 
+                      src="./image-13.png" 
+                      alt="Breakfast on Island" 
+                      style={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover'
+                      }}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const nextSibling = target.nextSibling as HTMLElement;
+                        if (nextSibling) {
+                          nextSibling.style.display = 'flex';
+                        }
+                      }}
+                    />
+                    {/* Fallback design if image fails to load */}
+                    <div style={{ 
+                      display: 'none', 
+                      width: '100%', 
+                      height: '100%', 
+                      backgroundColor: '#87ceeb',
+                      position: 'relative',
+                      overflow: 'hidden'
+                    }}>
+                      {/* Islands */}
+                      <div style={{ 
+                        position: 'absolute', 
+                        bottom: '20%', 
+                        left: '20%',
+                        width: '15%',
+                        height: '25%',
+                        backgroundColor: '#228b22',
+                        borderRadius: '50% 50% 0 0'
+                      }}></div>
+                      <div style={{ 
+                        position: 'absolute', 
+                        bottom: '20%', 
+                        right: '30%',
+                        width: '12%',
+                        height: '20%',
+                        backgroundColor: '#228b22',
+                        borderRadius: '50% 50% 0 0'
+                      }}></div>
+                    </div>
+                  </div>
+                  <div style={{ padding: '24px' }}>
+                    <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>BREAKFAST ON ISLAND</h3>
+                    <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                      Experience a serene breakfast on the tranquil waters of Chilika Lake, surrounded by lush green islands and the gentle morning breeze.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Card 5: Romantic Beach Getaway */}
+                <div style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+                  <div style={{ height: '250px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img 
+                      src="./image-14.png" 
+                      alt="Romantic Beach Getaway" 
+                      style={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover'
+                      }}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const nextSibling = target.nextSibling as HTMLElement;
+                        if (nextSibling) {
+                          nextSibling.style.display = 'flex';
+                        }
+                      }}
+                    />
+                    {/* Fallback design if image fails to load */}
+                    <div style={{ 
+                      display: 'none', 
+                      width: '100%', 
+                      height: '100%', 
+                      backgroundColor: '#fbbf24',
+                      position: 'relative',
+                      overflow: 'hidden'
+                    }}>
+                      {/* Beach scene */}
+                      <div style={{ 
+                        position: 'absolute', 
+                        bottom: '10%', 
+                        left: '20%',
+                        width: '60%',
+                        height: '15%',
+                        backgroundColor: '#f4a460',
+                        borderRadius: '8px'
+                      }}></div>
+                      <div style={{ 
+                        position: 'absolute', 
+                        bottom: '30%', 
+                        left: '30%',
+                        width: '40%',
+                        height: '20%',
+                        backgroundColor: '#ffffff',
+                        borderRadius: '8px',
+                        border: '2px solid #d1d5db'
+                      }}></div>
+                    </div>
+                  </div>
+                  <div style={{ padding: '24px' }}>
+                    <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>ROMANTIC BEACH GETAWAY</h3>
+                    <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                      Enjoy a candlelit feast by the lake, creating unforgettable moments in a romantic beach setting with ocean waves as your backdrop.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+
+        {experiencesTab === 'wildlife' && (
+          <div style={{ textAlign: 'center', padding: '48px 0' }}>
+            <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '24px' }}>Wildlife Experiences</h2>
+            <p style={{ color: '#6b7280', fontSize: '16px' }}>Detailed wildlife experiences coming soon...</p>
+          </div>
+        )}
+
+        {experiencesTab === 'spiritual' && (
+          <div style={{ textAlign: 'center', padding: '48px 0' }}>
+            <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '24px' }}>Spiritual Experiences</h2>
+            <p style={{ color: '#6b7280', fontSize: '16px' }}>Detailed spiritual experiences coming soon...</p>
+          </div>
+        )}
+
+        {experiencesTab === 'cultural' && (
+          <div style={{ textAlign: 'center', padding: '48px 0' }}>
+            <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '24px' }}>Cultural Experiences</h2>
+            <p style={{ color: '#6b7280', fontSize: '16px' }}>Detailed cultural experiences coming soon...</p>
+          </div>
+        )}
+      </div>
+    </>
+  );
+
+  const renderDiningPage = () => (
+    <>
+      {/* Main Content Area */}
+      <div style={{ maxWidth: '1024px', margin: '0 auto' }}>
+        {/* Dining Room Image */}
+        <div style={{ marginBottom: '48px' }}>
+          <img 
+            src="./image-15.png" 
+            alt="Luxurious Dining Room at Rambha Palace" 
+            style={{ 
+              width: '100%', 
+              height: 'auto', 
+              maxWidth: '100%',
+              borderRadius: '8px',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+            }}
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.style.display = 'none';
+              const nextSibling = target.nextSibling as HTMLElement;
+              if (nextSibling) {
+                nextSibling.style.display = 'block';
+              }
+            }}
+          />
+          {/* Fallback design if image fails to load */}
+          <div style={{
+            display: 'none',
+            width: '100%',
+            height: '500px',
+            backgroundColor: '#f3f4f6',
+            borderRadius: '8px',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#6b7280',
+            fontSize: '18px'
+          }}>
+            Dining Room Image
+          </div>
+        </div>
+
+        {/* Text Content */}
+        <div style={{ 
+          maxWidth: '800px',
+          margin: '0 auto'
+        }}>
+          <h2 style={{ 
+            fontSize: '24px', 
+            fontWeight: 'bold', 
+            color: '#374151', 
+            marginBottom: '16px', 
+            textAlign: 'left',
+            textTransform: 'uppercase'
+          }}>
+            CULINARY JOURNEY FROM WEST TO EAST
+          </h2>
+          <p style={{ 
+            color: '#374151', 
+            lineHeight: '1.8', 
+            fontSize: '16px',
+            textAlign: 'left'
+          }}>
+            Experience the finest meals on the Eastern coast of India, where inventive and delectable delicacies await your palate. Our orchard and sea-to-table philosophy brings you the freshest ingredients, prepared by exceptionally talented chefs who create Seven cuisines from the East to the West. Enjoy impeccably laid out food in the same dining room that has hosted centuries of royalty.
+          </p>
+        </div>
+
+        {/* Dining Establishments Section */}
+        <div style={{ marginTop: '64px' }}>
+          {/* Cards Container with Scroll */}
+          <div style={{ 
+            position: 'relative',
+            maxWidth: '100%',
+            overflow: 'hidden'
+          }}>
+            {/* Cards */}
+            <div 
+              className="dining-cards-container"
+              style={{ 
+                display: 'flex', 
+                gap: '24px',
+                padding: '0 80px', // More space for arrows
+                overflowX: 'auto',
+                scrollBehavior: 'smooth',
+                scrollbarWidth: 'none', // Hide scrollbar for Firefox
+                msOverflowStyle: 'none' // Hide scrollbar for IE/Edge
+              }}
+            >
+              {/* Card 1: Pool Cafe */}
+              <div style={{ 
+                backgroundColor: 'white', 
+                borderRadius: '8px', 
+                overflow: 'hidden', 
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                minWidth: '300px',
+                flex: '1'
+              }}>
+                <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <img 
+                    src="./image-16.png" 
+                    alt="Pool Cafe at Rambha Palace" 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover'
+                    }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  {/* Fallback design if image fails to load */}
+                  <div style={{ 
+                    display: 'none', 
+                    width: '100%', 
+                    height: '100%', 
+                    backgroundColor: '#87ceeb',
+                    position: 'relative',
+                    overflow: 'hidden'
+                  }}>
+                    {/* Pool */}
+                    <div style={{ 
+                      position: 'absolute', 
+                      top: '30%', 
+                      left: '20%',
+                      width: '60%',
+                      height: '40%',
+                      backgroundColor: '#1e90ff',
+                      borderRadius: '8px'
+                    }}></div>
+                    {/* Lounge chairs */}
+                    <div style={{ 
+                      position: 'absolute', 
+                      bottom: '20%', 
+                      right: '20%',
+                      width: '20%',
+                      height: '15%',
+                      backgroundColor: '#ffffff',
+                      borderRadius: '4px'
+                    }}></div>
+                  </div>
+                </div>
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>POOL CAFE</h3>
+                  <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                    Enjoy a post-swim mocktail or light bite by the pool. With lounge chairs you sink into, tall column windows, and a wood-fired pizza oven, the pool café is ideal to delight in fresh food and drinks.
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 2: The Dining Room */}
+              <div style={{ 
+                backgroundColor: 'white', 
+                borderRadius: '8px', 
+                overflow: 'hidden', 
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                minWidth: '300px',
+                flex: '1'
+              }}>
+                <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <img 
+                    src="./image-17.png" 
+                    alt="The Dining Room at Rambha Palace" 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover'
+                    }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  {/* Fallback design if image fails to load */}
+                  <div style={{ 
+                    display: 'none', 
+                    width: '100%', 
+                    height: '100%', 
+                    backgroundColor: '#f5f5dc',
+                    position: 'relative',
+                    overflow: 'hidden'
+                  }}>
+                    {/* Dining table */}
+                    <div style={{ 
+                      position: 'absolute', 
+                      top: '40%', 
+                      left: '20%',
+                      width: '60%',
+                      height: '20%',
+                      backgroundColor: '#8b4513',
+                      borderRadius: '4px'
+                    }}></div>
+                    {/* Chandelier */}
+                    <div style={{ 
+                      position: 'absolute', 
+                      top: '20%', 
+                      left: '50%',
+                      width: '20px',
+                      height: '30px',
+                      backgroundColor: '#ffd700',
+                      borderRadius: '50%',
+                      transform: 'translateX(-50%)'
+                    }}></div>
+                  </div>
+                </div>
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>THE DINING ROOM</h3>
+                  <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                    Feast like royalty and relish each morsel like discerning connoisseurs in the same room where lavish spreads have been laid out for over 200 years. A regal space with high ceilings adorned with chandeliers.
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 3: The Bar */}
+              <div style={{ 
+                backgroundColor: 'white', 
+                borderRadius: '8px', 
+                overflow: 'hidden', 
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                minWidth: '300px',
+                flex: '1'
+              }}>
+                <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <img 
+                    src="./image-18.png" 
+                    alt="The Bar at Rambha Palace" 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover'
+                    }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  {/* Fallback design if image fails to load */}
+                  <div style={{ 
+                    display: 'none', 
+                    width: '100%', 
+                    height: '100%', 
+                    backgroundColor: '#1e3a8a',
+                    position: 'relative',
+                    overflow: 'hidden'
+                  }}>
+                    {/* Bar counter */}
+                    <div style={{ 
+                      position: 'absolute', 
+                      bottom: '30%', 
+                      left: '20%',
+                      width: '60%',
+                      height: '15%',
+                      backgroundColor: '#8b4513',
+                      borderRadius: '4px'
+                    }}></div>
+                    {/* Bar stools */}
+                    <div style={{ 
+                      position: 'absolute', 
+                      bottom: '20%', 
+                      left: '30%',
+                      width: '8px',
+                      height: '20%',
+                      backgroundColor: '#d4af37',
+                      borderRadius: '50%'
+                    }}></div>
+                  </div>
+                </div>
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>THE BAR</h3>
+                  <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                    An art deco inspired chic bar perfect for midnight conversations, or a morning mimosa. Sommeliers guide guests through exclusive wine tastings and bartenders craft exclusive cocktails to suit your flavour palette.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Left Arrow */}
+            <button 
+              onClick={() => {
+                const container = document.querySelector('.dining-cards-container') as HTMLElement;
+                if (container) {
+                  container.scrollBy({ left: -400, behavior: 'smooth' });
+                }
+              }}
+              style={{
+                position: 'absolute',
+                left: '20px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                backgroundColor: 'white',
+                border: '1px solid #e5e7eb',
+                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 10
+              }}
+            >
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            {/* Right Arrow */}
+            <button 
+              onClick={() => {
+                const container = document.querySelector('.dining-cards-container') as HTMLElement;
+                if (container) {
+                  container.scrollBy({ left: 400, behavior: 'smooth' });
+                }
+              }}
+              style={{
+                position: 'absolute',
+                right: '20px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                backgroundColor: 'white',
+                border: '1px solid #e5e7eb',
+                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 10
+              }}
+            >
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Food Carousel Section */}
+        <div style={{ marginTop: '256px' }}>
+          {/* Carousel Container */}
+          <div style={{ 
+            position: 'relative',
+            maxWidth: '100%',
+            overflow: 'hidden'
+          }}>
+            {/* Food Images Container */}
+            <div 
+              className="food-carousel-container"
+              style={{ 
+                display: 'flex', 
+                gap: '24px',
+                padding: '0 80px',
+                overflowX: 'auto',
+                scrollBehavior: 'smooth',
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+                alignItems: 'center'
+              }}
+            >
+              {/* Food Image 1 */}
+              <div style={{ 
+                minWidth: '250px',
+                width: '250px',
+                height: '180px',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                flex: '0 0 auto'
+              }}>
+                <img 
+                  src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/image-3.png" 
+                  alt="Sushi Dish" 
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover'
+                  }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'block';
+                    }
+                  }}
+                />
+                {/* Fallback design if image fails to load */}
+                <div style={{
+                  display: 'none',
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: '#f3f4f6',
+                  borderRadius: '8px',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#6b7280',
+                  fontSize: '14px'
+                }}>
+                  Sushi Dish
+                </div>
+              </div>
+
+              {/* Food Image 2 - Center (Larger) */}
+              <div style={{ 
+                minWidth: '350px',
+                width: '250px',
+                height: '180px',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                flex: '0 0 auto'
+              }}>
+                <img 
+                  src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/12-2-768x462.png" 
+                  alt="Roasted Chicken" 
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover'
+                  }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'block';
+                    }
+                  }}
+                />
+                {/* Fallback design if image fails to load */}
+                <div style={{
+                  display: 'none',
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: '#f3f4f6',
+                  borderRadius: '8px',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#6b7280',
+                  fontSize: '14px'
+                }}>
+                  Roasted Chicken
+                </div>
+              </div>
+
+              {/* Food Image 3 */}
+              <div style={{ 
+                minWidth: '250px',
+                width: '250px',
+                height: '180px',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                flex: '0 0 auto'
+              }}>
+                <img 
+                  src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/7-1-768x462.png" 
+                  alt="Grilled Food" 
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover'
+                  }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'block';
+                    }
+                  }}
+                />
+                {/* Fallback design if image fails to load */}
+                <div style={{
+                  display: 'none',
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: '#f3f4f6',
+                  borderRadius: '8px',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#6b7280',
+                  fontSize: '14px'
+                }}>
+                  Grilled Food
+                </div>
+              </div>
+
+              {/* Additional Food Images */}
+              <div style={{ 
+                minWidth: '250px',
+                width: '250px',
+                height: '180px',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                flex: '0 0 auto'
+              }}>
+                <img 
+                  src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/10-1-768x462.png" 
+                  alt="Culinary Delight" 
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover'
+                  }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'block';
+                    }
+                  }}
+                />
+                {/* Fallback design if image fails to load */}
+                <div style={{
+                  display: 'none',
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: '#f3f4f6',
+                  borderRadius: '8px',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#6b7280',
+                  fontSize: '14px'
+                }}>
+                  Culinary Delight
+                </div>
+              </div>
+
+              <div style={{ 
+                minWidth: '250px',
+                width: '250px',
+                height: '180px',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                flex: '0 0 auto'
+              }}>
+                <img 
+                  src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/9-1-768x462.png" 
+                  alt="Gourmet Dish" 
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover'
+                  }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'block';
+                    }
+                  }}
+                />
+                {/* Fallback design if image fails to load */}
+                <div style={{
+                  display: 'none',
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: '#f3f4f6',
+                  borderRadius: '8px',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#6b7280',
+                  fontSize: '14px'
+                }}>
+                  Gourmet Dish
+                </div>
+              </div>
+            </div>
+
+            {/* Left Arrow */}
+            <button 
+              onClick={() => {
+                const container = document.querySelector('.food-carousel-container') as HTMLElement;
+                if (container) {
+                  container.scrollBy({ left: -400, behavior: 'smooth' });
+                }
+              }}
+              style={{
+                position: 'absolute',
+                left: '20px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                backgroundColor: '#374151',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 10
+              }}
+            >
+              <svg width="16" height="16" fill="none" stroke="white" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            {/* Right Arrow */}
+            <button 
+              onClick={() => {
+                const container = document.querySelector('.food-carousel-container') as HTMLElement;
+                if (container) {
+                  container.scrollBy({ left: 400, behavior: 'smooth' });
+                }
+              }}
+              style={{
+                position: 'absolute',
+                right: '20px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                backgroundColor: '#374151',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 10
+              }}
+            >
+              <svg width="16" height="16" fill="none" stroke="white" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Dining Experiences Section */}
+        <div style={{ marginTop: '192px' }}>
+          {/* Section Title */}
+          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <h2 style={{ 
+              fontSize: '32px', 
+              fontWeight: 'bold', 
+              color: '#374151', 
+              marginBottom: '16px',
+              textTransform: 'uppercase'
+            }}>
+              DINING EXPERIENCES
+            </h2>
+          </div>
+
+          {/* Dining Experiences Carousel */}
+          <div style={{ 
+            position: 'relative',
+            maxWidth: '100%',
+            overflow: 'hidden'
+          }}>
+            {/* Cards Container */}
+            <div 
+              className="dining-experiences-container"
+              style={{ 
+                display: 'flex', 
+                gap: '24px',
+                padding: '0 80px',
+                overflowX: 'auto',
+                scrollBehavior: 'smooth',
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none'
+              }}
+            >
+              {/* Card 1: Orchard Feast */}
+              <div style={{ 
+                minWidth: '331px',
+                width: '331px',
+                backgroundColor: 'white',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                flex: '0 0 auto'
+              }}>
+                <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <img 
+                    src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/OrchardFeast.png" 
+                    alt="Orchard Feast" 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover'
+                    }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'block';
+                      }
+                    }}
+                  />
+                  {/* Fallback design if image fails to load */}
+                  <div style={{
+                    display: 'none',
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: '#f3f4f6',
+                    borderRadius: '8px',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#6b7280',
+                    fontSize: '14px'
+                  }}>
+                    Orchard Feast
+                  </div>
+                </div>
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{ fontSize: '21px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>Orchard Feast</h3>
+                  <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                    An outdoor celebration of flavour & food - feast in the palace gardens with an elegant tablescape. Candle lit starry nights or bright Sunday brunches; the orchard offers it all.
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 2: Palace Garden High Tea */}
+              <div style={{ 
+                minWidth: '331px',
+                width: '331px',
+                backgroundColor: 'white',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                flex: '0 0 auto'
+              }}>
+                <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <img 
+                    src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/image-45.png" 
+                    alt="Palace Garden High Tea" 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover'
+                    }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'block';
+                      }
+                    }}
+                  />
+                  {/* Fallback design if image fails to load */}
+                  <div style={{
+                    display: 'none',
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: '#f3f4f6',
+                    borderRadius: '8px',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#6b7280',
+                    fontSize: '14px'
+                  }}>
+                    Palace Garden High Tea
+                  </div>
+                </div>
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{ fontSize: '21px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>Palace Garden High Tea</h3>
+                  <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                    Delight in high tea while gazing at lush greenery and serene palace fountains, an enchanting experience that transports you to the grandeur and timeless splendor of a magnificent bygone era.
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 3: Breakfast on Island */}
+              <div style={{ 
+                minWidth: '331px',
+                width: '331px',
+                backgroundColor: 'white',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                flex: '0 0 auto'
+              }}>
+                <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <img 
+                    src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/image-46.png" 
+                    alt="Breakfast on Island" 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover'
+                    }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'block';
+                      }
+                    }}
+                  />
+                  {/* Fallback design if image fails to load */}
+                  <div style={{
+                    display: 'none',
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: '#f3f4f6',
+                    borderRadius: '8px',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#6b7280',
+                    fontSize: '14px'
+                  }}>
+                    Breakfast on Island
+                  </div>
+                </div>
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{ fontSize: '21px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>Breakfast on Island</h3>
+                  <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                    Set sail from the banks of Chilika Lake and cruise through calming waters. Enjoy breakfast aboard the boat, or step onto the island for a refreshing morning trail.
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 4: Romantic Beach Getaway */}
+              <div style={{ 
+                minWidth: '331px',
+                width: '331px',
+                backgroundColor: 'white',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                flex: '0 0 auto'
+              }}>
+                <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <img 
+                    src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/pixelcut-export.png" 
+                    alt="Romantic Beach Getaway" 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover'
+                    }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'block';
+                      }
+                    }}
+                  />
+                  {/* Fallback design if image fails to load */}
+                  <div style={{
+                    display: 'none',
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: '#f3f4f6',
+                    borderRadius: '8px',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#6b7280',
+                    fontSize: '14px'
+                  }}>
+                    Romantic Beach Getaway
+                  </div>
+                </div>
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{ fontSize: '21px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>Romantic Beach Getaway</h3>
+                  <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                    Allow the palace butlers to orchestrate a candlelit feast by the lake. Relish a sumptuous banquet of your preferred cuisine, while the gentle whispers of waves caress the shore.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Left Arrow */}
+            <button 
+              onClick={() => {
+                const container = document.querySelector('.dining-experiences-container') as HTMLElement;
+                if (container) {
+                  container.scrollBy({ left: -400, behavior: 'smooth' });
+                }
+              }}
+              style={{
+                position: 'absolute',
+                left: '20px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                backgroundColor: '#374151',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 10
+              }}
+            >
+              <svg width="16" height="16" fill="none" stroke="white" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            {/* Right Arrow */}
+            <button 
+              onClick={() => {
+                const container = document.querySelector('.dining-experiences-container') as HTMLElement;
+                if (container) {
+                  container.scrollBy({ left: 400, behavior: 'smooth' });
+                }
+              }}
+              style={{
+                position: 'absolute',
+                right: '20px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                backgroundColor: '#374151',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 10
+              }}
+            >
+              <svg width="16" height="16" fill="none" stroke="white" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Featured Experiences Section */}
+        <div style={{ marginTop: '128px' }}>
+          {/* Section Title */}
+          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <h2 style={{ 
+              fontSize: '32px', 
+              fontWeight: 'bold', 
+              color: '#374151', 
+              marginBottom: '16px',
+              textTransform: 'uppercase'
+            }}>
+              FEATURED EXPERIENCES
+            </h2>
+          </div>
+
+          {/* Featured Experience Carousel */}
+          <div style={{ 
+            position: 'relative',
+            maxWidth: '100%',
+            overflow: 'hidden'
+          }}>
+            {/* Carousel Container */}
+            <div 
+              className="featured-experiences-container"
+              style={{ 
+                display: 'flex', 
+                gap: '0',
+                padding: '0 80px',
+                overflowX: 'auto',
+                scrollBehavior: 'smooth',
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none'
+              }}
+            >
+              {/* Featured Experience Card */}
+              <div style={{ 
+                minWidth: '100%',
+                width: '100%',
+                backgroundColor: 'white',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                flex: '0 0 auto'
+              }}>
+                {/* Large Image */}
+                <div style={{ height: '400px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <img 
+                    src="https://hiddenindia.com/rambhapalace/wp-content/uploads/elementor/thumbs/RoyalOdiaCuisine-1-qyb3qauvvmxdgvtzg6byh5o6u0t6w8wf0o8cjb5c34.png" 
+                    alt="Royal Odia Cuisine" 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover'
+                    }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'block';
+                      }
+                    }}
+                  />
+                  {/* Fallback design if image fails to load */}
+                  <div style={{
+                    display: 'none',
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: '#f3f4f6',
+                    borderRadius: '8px',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#6b7280',
+                    fontSize: '18px'
+                  }}>
+                    Royal Odia Cuisine
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div style={{ padding: '32px' }}>
+                  <h3 style={{ 
+                    fontSize: '24px', 
+                    fontWeight: 'bold', 
+                    color: '#374151', 
+                    marginBottom: '16px',
+                    textAlign: 'center'
+                  }}>
+                    Royal Odia Cuisine
+                  </h3>
+                  <p style={{ 
+                    color: '#374151', 
+                    lineHeight: '1.8', 
+                    fontSize: '16px',
+                    textAlign: 'center',
+                    maxWidth: '800px',
+                    margin: '0 auto'
+                  }}>
+                    Royal Odia Cuisine is known for balancing deep flavours with astounding simplicity. Relish rice as the staple grain, and a prominent blend of five key spices – mustard, cumin, fenugreek, nigella, and fennel. Seafood, lentils, and vegetables cooked in classic Odia style are prepared with recipes which were lost for decades and then found in the palace kitchens. We celebrate Odisha's fragrant, colourful cuisines and culinary heritage in its most authentic form.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Left Arrow */}
+            <button 
+              onClick={() => {
+                const container = document.querySelector('.featured-experiences-container') as HTMLElement;
+                if (container) {
+                  container.scrollBy({ left: -400, behavior: 'smooth' });
+                }
+              }}
+              style={{
+                position: 'absolute',
+                left: '20px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                backgroundColor: '#374151',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 10
+              }}
+            >
+              <svg width="16" height="16" fill="none" stroke="white" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            {/* Right Arrow */}
+            <button 
+              onClick={() => {
+                const container = document.querySelector('.featured-experiences-container') as HTMLElement;
+                if (container) {
+                  container.scrollBy({ left: 400, behavior: 'smooth' });
+                }
+              }}
+              style={{
+                position: 'absolute',
+                right: '20px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                backgroundColor: '#374151',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 10
+              }}
+            >
+              <svg width="16" height="16" fill="none" stroke="white" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Culinary Community Section */}
+        <div style={{ 
+          marginTop: '128px',
+          backgroundColor: '#ebc9c4', // Light beige background as per first image
+          padding: '80px 0',
+          position: 'relative'
+        }}>
+          {/* Container */}
+          <div style={{ 
+            maxWidth: '1200px', 
+            margin: '0 auto', 
+            padding: '0 24px',
+            position: 'relative'
+          }}>
+            {/* Pink Content Block */}
+            <div style={{ 
+              backgroundColor: '#fdf2f8', // Light pink background
+              borderRadius: '12px',
+              padding: '60px',
+              maxWidth: '900px',
+              marginLeft: '0',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '40px',
+              overflow: 'hidden'
+            }}>
+              {/* Left Content */}
+              <div style={{ flex: '1', maxWidth: '400px' }}>
+                {/* Small heading */}
+                <p style={{ 
+                  fontSize: '16px', 
+                  color: '#9ca3af', 
+                  marginBottom: '16px',
+                  fontWeight: '500'
+                }}>
+                  Seasonal and Local ingredients from
+                </p>
+                
+                {/* Main heading */}
+                <h2 style={{ 
+                  fontSize: '32px', 
+                  fontWeight: 'bold', 
+                  color: '#111827', 
+                  marginBottom: '24px',
+                  textTransform: 'uppercase',
+                  lineHeight: '1.2'
+                }}>
+                  THE CULINARY COMMUNITY
+                </h2>
+                
+                {/* Description text */}
+                <div style={{ 
+                  width: '100%', 
+                  maxWidth: '369px',
+                  opacity: 1
+                }}>
+                  <p style={{ 
+                    fontFamily: 'Lato, sans-serif',
+                    fontSize: '14px', 
+                    fontWeight: '500', 
+                    lineHeight: '24px', 
+                    textAlign: 'justify',
+                    color: '#374151'
+                  }}>
+                    Expertly weaving a tapestry of rich flavors, our skilled chefs present an array of cuisines infused with their unique flair. With a deep understanding of the nuances of textures, spices, and seasonal produce, each dish is crafted and presented to deliver an elevated culinary experience.
+                  </p>
+                </div>
+              </div>
+
+              {/* Right Image */}
+              <div style={{ flex: '1', display: 'flex', justifyContent: 'center' }}>
+                <div style={{ 
+                  width: '400px', 
+                  height: '300px',
+                  backgroundColor: '#f3f4f6',
+                  borderRadius: '8px',
+                  overflow: 'hidden',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <img 
+                    src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/DiningConcept.png" 
+                    alt="Culinary Community" 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover'
+                    }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  {/* Fallback design if image fails to load */}
+                  <div style={{
+                    display: 'none',
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: '#f3f4f6',
+                    borderRadius: '8px',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#6b7280',
+                    fontSize: '18px',
+                    flexDirection: 'column',
+                    gap: '8px'
+                  }}>
+                    <svg width="48" height="48" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span>Culinary Community</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* People behind Hidden India Section */}
+        <div style={{ 
+          marginTop: '128px',
+          backgroundColor: '#ebc9c4', // Light beige background
+          padding: '80px 0',
+          position: 'relative'
+        }}>
+          {/* Container */}
+          <div style={{ 
+            maxWidth: '1200px', 
+            margin: '0 auto', 
+            padding: '0 24px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '64px'
+          }}>
+            {/* Left Content */}
+            <div style={{ flex: '1', maxWidth: '500px' }}>
+              {/* Main heading */}
+              <h2 style={{ 
+                fontSize: '36px', 
+                fontWeight: 'bold', 
+                color: '#111827', 
+                marginBottom: '24px',
+                lineHeight: '1.2',
+                textTransform: 'uppercase'
+              }}>
+                DISCOVER THE CULINARY MASTERY OF OUR TALENTED CHEFS
+              </h2>
+              
+              {/* Description text */}
+              <p style={{ 
+                fontSize: '16px', 
+                color: '#374151', 
+                lineHeight: '1.6',
+                marginBottom: '32px'
+              }}>
+                Local chefs proudly showcase Odissi cuisine, which is born from decades of appreciation for homegrown produce and culinary traditions.
+              </p>
+            </div>
+
+            {/* Right Images - Three Chef Cards */}
+            <div style={{ 
+              flex: '1', 
+              display: 'flex', 
+              gap: '24px',
+              justifyContent: 'center'
+            }}>
+              {/* First Chef Card */}
+              <div style={{ 
+                width: '200px', 
+                height: '300px',
+                backgroundColor: '#ffffff',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <img 
+                  src="https://hiddenindia.com/rambhapalace/wp-content/uploads/elementor/thumbs/Component-52-3-qyb3q49qn987hs17lhg2g6gydqmskiiq4aw37fwh8e.png" 
+                  alt="Chef 1" 
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover'
+                  }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'flex';
+                    }
+                  }}
+                />
+                {/* Fallback design if image fails to load */}
+                <div style={{
+                  display: 'none',
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: '#f3f4f6',
+                  borderRadius: '12px',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#6b7280',
+                  fontSize: '16px',
+                  flexDirection: 'column',
+                  gap: '8px'
+                }}>
+                  <svg width="48" height="48" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  <span>Chef 1</span>
+                </div>
+              </div>
+
+              {/* Second Chef Card */}
+              <div style={{ 
+                width: '200px', 
+                height: '300px',
+                backgroundColor: '#ffffff',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <img 
+                  src="https://hiddenindia.com/rambhapalace/wp-content/uploads/elementor/thumbs/Component-53-qxgwn1eairccagcym62wgd76ggrhewjz52r3dcuqgu-1-qyb3q65cjwdz3qeaxjmc7r34g0og7ebdpzu5zusxa6.png" 
+                  alt="Chef 2" 
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover'
+                  }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'flex';
+                    }
+                  }}
+                />
+                {/* Fallback design if image fails to load */}
+                <div style={{
+                  display: 'none',
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: '#f3f4f6',
+                  borderRadius: '12px',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#6b7280',
+                  fontSize: '16px',
+                  flexDirection: 'column',
+                  gap: '8px'
+                }}>
+                  <svg width="48" height="48" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  <span>Chef 2</span>
+                </div>
+              </div>
+
+              {/* Third Chef Card */}
+              <div style={{ 
+                width: '200px', 
+                height: '300px',
+                backgroundColor: '#ffffff',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <img 
+                  src="https://hiddenindia.com/rambhapalace/wp-content/uploads/elementor/thumbs/chef-qyb3qbsdowlp1e640m23mpnw0bwnhkxrqrr2vikk8u.png" 
+                  alt="Chef 3" 
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover'
+                  }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'flex';
+                    }
+                  }}
+                />
+                {/* Fallback design if image fails to load */}
+                <div style={{
+                  display: 'none',
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: '#f3f4f6',
+                  borderRadius: '12px',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#6b7280',
+                  fontSize: '16px',
+                  flexDirection: 'column',
+                  gap: '8px'
+                }}>
+                  <svg width="48" height="48" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  <span>Chef 3</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+
+  const renderWellnessPage = () => (
+    <>
+      {/* Main Wellness Image */}
+      <div style={{ marginBottom: '64px' }}>
+        <div style={{ 
+          position: 'relative',
+          width: '100%',
+          height: '600px',
+          borderRadius: '8px',
+          overflow: 'hidden',
+          boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
+        }}>
+          <img 
+            src="./image-19.png" 
+            alt="Wellness Meditation" 
+            style={{ 
+              width: '100%', 
+              height: '100%', 
+              objectFit: 'cover'
+            }}
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.style.display = 'none';
+              const nextSibling = target.nextSibling as HTMLElement;
+              if (nextSibling) {
+                nextSibling.style.display = 'flex';
+              }
+            }}
+          />
+          {/* Fallback design if image fails to load */}
+          <div style={{ 
+            display: 'none', 
+            width: '100%', 
+            height: '100%', 
+            backgroundColor: '#f8f8f5',
+            position: 'relative',
+            overflow: 'hidden'
+          }}>
+            {/* Meditation person */}
+            <div style={{ 
+              position: 'absolute', 
+              top: '50%', 
+              left: '50%', 
+              transform: 'translate(-50%, -50%)',
+              width: '20%',
+              height: '40%',
+              backgroundColor: '#e5e7eb',
+              borderRadius: '50% 50% 0 0',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <div style={{ 
+                width: '60%', 
+                height: '60%', 
+                backgroundColor: '#9ca3af',
+                borderRadius: '50%'
+              }}></div>
+            </div>
+            
+            {/* Tree branches */}
+            <div style={{ 
+              position: 'absolute', 
+              top: '20%', 
+              left: '10%',
+              width: '80%',
+              height: '30%',
+              backgroundColor: '#22c55e',
+              borderRadius: '50% 50% 0 0'
+            }}></div>
+            
+            {/* Pink building in background */}
+            <div style={{ 
+              position: 'absolute', 
+              bottom: '20%', 
+              right: '10%',
+              width: '30%',
+              height: '40%',
+              backgroundColor: '#fdf2f8',
+              borderRadius: '8px'
+            }}></div>
+          </div>
+        </div>
+      </div>
+
+      {/* Wellness Content */}
+      <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
+        <h1 style={{ 
+          fontSize: '36px', 
+          fontWeight: 'bold', 
+          color: '#374151', 
+          marginBottom: '32px',
+          textTransform: 'uppercase'
+        }}>
+          WELL BEYOND WELLNESS WITH MANTNAM
+        </h1>
+        
+        <p style={{ 
+          fontSize: '18px', 
+          color: '#374151', 
+          lineHeight: '1.8',
+          textAlign: 'center'
+        }}>
+          MANTNAM draws upon the timeless wisdom of the Vedas and Ayurveda to revitalize your "mann, tann and atma," signifying mind, body, and soul. Embracing the use of nutrition, fitness & relaxation through the practices of Yoga, Meditation, Ayurvedic massages, Naadi Shastra (neuropathy), and a multitude of other transformative experiences, a new era of wellness awaits, to enchant your spirit and nourish your soul.
+        </p>
+      </div>
+
+      {/* Wellness Carousel Section */}
+      <div style={{ marginTop: '80px' }}>
+        {/* Carousel Container */}
+        <div style={{ 
+          position: 'relative',
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '0 60px'
+        }}>
+          {/* Carousel Items */}
+          <div 
+            className="wellness-carousel-container"
+            style={{ 
+              display: 'flex', 
+              gap: '20px',
+              overflowX: 'auto',
+              scrollBehavior: 'smooth',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+              padding: '20px 0'
+            }}
+          >
+            {/* GYM Card */}
+            <div style={{ 
+              minWidth: '280px',
+              backgroundColor: 'white',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              boxShadow: '0 2px 4px -1px rgba(0, 0, 0, 0.1)',
+              flex: '0 0 auto'
+            }}>
+              <div style={{ height: '200px', backgroundColor: '#f3f4f6', overflow: 'hidden' }}>
+                <img 
+                  src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/Gymnasium.png" 
+                  alt="GYM" 
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover'
+                  }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'flex';
+                    }
+                  }}
+                />
+                {/* Fallback design if image fails to load */}
+                <div style={{
+                  display: 'none',
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: '#f3f4f6',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#6b7280',
+                  fontSize: '16px',
+                  flexDirection: 'column',
+                  gap: '8px'
+                }}>
+                  <svg width="32" height="32" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <span>GYM</span>
+                </div>
+              </div>
+              <div style={{ padding: '16px' }}>
+                <h3 style={{ 
+                  fontSize: '18px', 
+                  fontWeight: 'bold', 
+                  color: '#111827', 
+                  marginBottom: '12px',
+                  textAlign: 'left'
+                }}>
+                  GYM
+                </h3>
+                <p style={{ 
+                  fontSize: '13px', 
+                  color: '#374151', 
+                  lineHeight: '1.5',
+                  textAlign: 'left'
+                }}>
+                  A state-of-the-art gym overlooking the pool—an inviting space where guests can work on strength and endurance in a modern space designed for movement. It's right around the corner from the Mantnam spa, where guests can reward themselves after a workout.
+                </p>
+              </div>
+            </div>
+
+            {/* SPA Card */}
+            <div style={{ 
+              minWidth: '280px',
+              backgroundColor: 'white',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              boxShadow: '0 2px 4px -1px rgba(0, 0, 0, 0.1)',
+              flex: '0 0 auto'
+            }}>
+              <div style={{ height: '200px', backgroundColor: '#f3f4f6', overflow: 'hidden' }}>
+                <img 
+                  src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/WellnessGallery1.png" 
+                  alt="SPA" 
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover'
+                  }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'flex';
+                    }
+                  }}
+                />
+                {/* Fallback design if image fails to load */}
+                <div style={{
+                  display: 'none',
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: '#f3f4f6',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#6b7280',
+                  fontSize: '16px',
+                  flexDirection: 'column',
+                  gap: '8px'
+                }}>
+                  <svg width="32" height="32" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <span>SPA</span>
+                </div>
+              </div>
+              <div style={{ padding: '16px' }}>
+                <h3 style={{ 
+                  fontSize: '18px', 
+                  fontWeight: 'bold', 
+                  color: '#111827', 
+                  marginBottom: '12px',
+                  textAlign: 'left'
+                }}>
+                  SPA
+                </h3>
+                <p style={{ 
+                  fontSize: '13px', 
+                  color: '#374151', 
+                  lineHeight: '1.5',
+                  textAlign: 'left'
+                }}>
+                  The spa at Rambha is the heart of holistic renewal, blending Ayurvedic treatments with restorative techniques in architecture inspired by ancient Indian design with a water body as a central element to cleanse, relax, and invigorate the senses.
+                </p>
+              </div>
+            </div>
+
+            {/* Yoga and Meditation Card */}
+            <div style={{ 
+              minWidth: '280px',
+              backgroundColor: 'white',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              boxShadow: '0 2px 4px -1px rgba(0, 0, 0, 0.1)',
+              flex: '0 0 auto'
+            }}>
+              <div style={{ height: '200px', backgroundColor: '#f3f4f6', overflow: 'hidden' }}>
+                <img 
+                  src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/YogaMeditation-e1730189981250.png" 
+                  alt="Yoga and Meditation" 
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'cover'
+                  }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'flex';
+                    }
+                  }}
+                />
+                {/* Fallback design if image fails to load */}
+                <div style={{
+                  display: 'none',
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: '#f3f4f6',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#6b7280',
+                  fontSize: '16px',
+                  flexDirection: 'column',
+                  gap: '8px'
+                }}>
+                  <svg width="32" height="32" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <span>Yoga and Meditation</span>
+                </div>
+              </div>
+              <div style={{ padding: '16px' }}>
+                <h3 style={{ 
+                  fontSize: '18px', 
+                  fontWeight: 'bold', 
+                  color: '#111827', 
+                  marginBottom: '12px',
+                  textAlign: 'left'
+                }}>
+                  YOGA AND MEDITATION
+                </h3>
+                <p style={{ 
+                  fontSize: '13px', 
+                  color: '#374151', 
+                  lineHeight: '1.5',
+                  textAlign: 'left'
+                }}>
+                  Guided private sessions of yoga & meditation strengthen neural pathways, promote mindfulness, enhancing cognitive function, reducing stress, and fostering a clearer, focused mind. Sprawling gardens and secluded palace spots offer ideal settings for these practices.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Left Arrow */}
+          <button 
+            onClick={() => {
+              const container = document.querySelector('.wellness-carousel-container') as HTMLElement;
+              if (container) {
+                container.scrollBy({ left: -400, behavior: 'smooth' });
+              }
+            }}
+            style={{
+              position: 'absolute',
+              left: '0',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: '40px',
+              height: '40px',
+              borderRadius: '50%',
+              backgroundColor: 'white',
+              border: '2px solid #d1d5db',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 10
+            }}
+          >
+            <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          {/* Right Arrow */}
+          <button 
+            onClick={() => {
+              const container = document.querySelector('.wellness-carousel-container') as HTMLElement;
+              if (container) {
+                container.scrollBy({ left: 400, behavior: 'smooth' });
+              }
+            }}
+            style={{
+              position: 'absolute',
+              right: '0',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: '40px',
+              height: '40px',
+              borderRadius: '50%',
+              backgroundColor: 'white',
+              border: '2px solid #d1d5db',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 10
+            }}
+          >
+            <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          {/* Pagination Dots */}
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            gap: '8px', 
+            marginTop: '24px' 
+          }}>
+            <button style={{
+              width: '8px',
+              height: '8px',
+              borderRadius: '50%',
+              backgroundColor: '#d97706',
+              border: 'none',
+              cursor: 'pointer'
+            }}></button>
+            <button style={{
+              width: '8px',
+              height: '8px',
+              borderRadius: '50%',
+              backgroundColor: '#d1d5db',
+              border: 'none',
+              cursor: 'pointer'
+            }}></button>
+            <button style={{
+              width: '8px',
+              height: '8px',
+              borderRadius: '50%',
+              backgroundColor: '#d1d5db',
+              border: 'none',
+              cursor: 'pointer'
+            }}></button>
+          </div>
+        </div>
+      </div>
+
+      {/* Wellness Gallery Carousel Section */}
+      <div style={{ marginTop: '80px' }}>
+        {/* Carousel Container */}
+        <div style={{ 
+          position: 'relative',
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '0 60px'
+        }}>
+          {/* Carousel Items */}
+          <div 
+            className="wellness-gallery-carousel-container"
+            style={{ 
+              display: 'flex', 
+              gap: '20px',
+              overflowX: 'auto',
+              scrollBehavior: 'smooth',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+              padding: '20px 0'
+            }}
+          >
+            {/* Image 1 */}
+            <div style={{ 
+              minWidth: '350px',
+              height: '250px',
+              backgroundColor: '#f3f4f6',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              flex: '0 0 auto'
+            }}>
+              <img 
+                src="./image-20.png" 
+                alt="Wellness Gallery 1" 
+                style={{ 
+                  width: '100%', 
+                  height: '100%', 
+                  objectFit: 'cover'
+                }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback design if image fails to load */}
+              <div style={{
+                display: 'none',
+                width: '100%',
+                height: '100%',
+                backgroundColor: '#f3f4f6',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#6b7280',
+                fontSize: '16px',
+                flexDirection: 'column',
+                gap: '8px'
+              }}>
+                <svg width="32" height="32" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>Gallery 1</span>
+              </div>
+            </div>
+
+            {/* Image 2 */}
+            <div style={{ 
+              minWidth: '350px',
+              height: '250px',
+              backgroundColor: '#f3f4f6',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              flex: '0 0 auto'
+            }}>
+              <img 
+                src="./image-21.png" 
+                alt="Wellness Gallery 2" 
+                style={{ 
+                  width: '100%', 
+                  height: '100%', 
+                  objectFit: 'cover'
+                }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback design if image fails to load */}
+              <div style={{
+                display: 'none',
+                width: '100%',
+                height: '100%',
+                backgroundColor: '#f3f4f6',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#6b7280',
+                fontSize: '16px',
+                flexDirection: 'column',
+                gap: '8px'
+              }}>
+                <svg width="32" height="32" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>Gallery 2</span>
+              </div>
+            </div>
+
+            {/* Image 3 */}
+            <div style={{ 
+              minWidth: '350px',
+              height: '250px',
+              backgroundColor: '#f3f4f6',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              flex: '0 0 auto'
+            }}>
+              <img 
+                src="./image-22.png" 
+                alt="Wellness Gallery 3" 
+                style={{ 
+                  width: '100%', 
+                  height: '100%', 
+                  objectFit: 'cover'
+                }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback design if image fails to load */}
+              <div style={{
+                display: 'none',
+                width: '100%',
+                height: '100%',
+                backgroundColor: '#f3f4f6',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#6b7280',
+                fontSize: '16px',
+                flexDirection: 'column',
+                gap: '8px'
+              }}>
+                <svg width="32" height="32" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>Gallery 3</span>
+              </div>
+            </div>
+
+            {/* Image 4 */}
+            <div style={{ 
+              minWidth: '350px',
+              height: '250px',
+              backgroundColor: '#f3f4f6',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              flex: '0 0 auto'
+            }}>
+              <img 
+                src="./image-23.png" 
+                alt="Wellness Gallery 4" 
+                style={{ 
+                  width: '100%', 
+                  height: '100%', 
+                  objectFit: 'cover'
+                }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback design if image fails to load */}
+              <div style={{
+                display: 'none',
+                width: '100%',
+                height: '100%',
+                backgroundColor: '#f3f4f6',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#6b7280',
+                fontSize: '16px',
+                flexDirection: 'column',
+                gap: '8px'
+              }}>
+                <svg width="32" height="32" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>Gallery 4</span>
+              </div>
+            </div>
+
+            {/* Image 5 */}
+            <div style={{ 
+              minWidth: '350px',
+              height: '250px',
+              backgroundColor: '#f3f4f6',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              flex: '0 0 auto'
+            }}>
+              <img 
+                src="./image-24.png" 
+                alt="Wellness Gallery 5" 
+                style={{ 
+                  width: '100%', 
+                  height: '100%', 
+                  objectFit: 'cover'
+                }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback design if image fails to load */}
+              <div style={{
+                display: 'none',
+                width: '100%',
+                height: '100%',
+                backgroundColor: '#f3f4f6',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#6b7280',
+                fontSize: '16px',
+                flexDirection: 'column',
+                gap: '8px'
+              }}>
+                <svg width="32" height="32" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>Gallery 5</span>
+              </div>
+            </div>
+
+            {/* Image 6 */}
+            <div style={{ 
+              minWidth: '350px',
+              height: '250px',
+              backgroundColor: '#f3f4f6',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              flex: '0 0 auto'
+            }}>
+              <img 
+                src="./image-25.png" 
+                alt="Wellness Gallery 6" 
+                style={{ 
+                  width: '100%', 
+                  height: '100%', 
+                  objectFit: 'cover'
+                }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback design if image fails to load */}
+              <div style={{
+                display: 'none',
+                width: '100%',
+                height: '100%',
+                backgroundColor: '#f3f4f6',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#6b7280',
+                fontSize: '16px',
+                flexDirection: 'column',
+                gap: '8px'
+              }}>
+                <svg width="32" height="32" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>Gallery 6</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Left Arrow */}
+          <button 
+            onClick={() => {
+              const container = document.querySelector('.wellness-gallery-carousel-container') as HTMLElement;
+              if (container) {
+                container.scrollBy({ left: -370, behavior: 'smooth' });
+              }
+            }}
+            style={{
+              position: 'absolute',
+              left: '0',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: '40px',
+              height: '40px',
+              borderRadius: '50%',
+              backgroundColor: 'white',
+              border: '2px solid #d1d5db',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 10
+            }}
+          >
+            <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          {/* Right Arrow */}
+          <button 
+            onClick={() => {
+              const container = document.querySelector('.wellness-gallery-carousel-container') as HTMLElement;
+              if (container) {
+                container.scrollBy({ left: 370, behavior: 'smooth' });
+              }
+            }}
+            style={{
+              position: 'absolute',
+              right: '0',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: '40px',
+              height: '40px',
+              borderRadius: '50%',
+              backgroundColor: 'white',
+              border: '2px solid #d1d5db',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 10
+            }}
+          >
+            <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Treatments and Therapies Section */}
+      <div style={{ marginTop: '80px' }}>
+        {/* Section Title */}
+        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <h2 style={{
+            fontSize: '32px',
+            fontWeight: 'bold',
+            color: '#374151',
+            marginBottom: '16px',
+            textTransform: 'uppercase'
+          }}>
+            TREATMENTS AND THERAPIES
+          </h2>
+        </div>
+
+        {/* Three Column Layout */}
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '0 24px',
+          display: 'flex',
+          gap: '32px',
+          justifyContent: 'center'
+        }}>
+          {/* Potli Massage Card */}
+          <div style={{
+            flex: '1',
+            maxWidth: '350px',
+            backgroundColor: 'white',
+            borderRadius: '12px',
+            overflow: 'hidden',
+            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+          }}>
+            {/* Image */}
+            <div style={{ height: '250px', backgroundColor: '#f3f4f6', overflow: 'hidden' }}>
+              <img
+                src="./image-26.png"
+                alt="Potli Massage"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback design if image fails to load */}
+              <div style={{
+                display: 'none',
+                width: '100%',
+                height: '100%',
+                backgroundColor: '#f3f4f6',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#6b7280',
+                fontSize: '16px',
+                flexDirection: 'column',
+                gap: '8px'
+              }}>
+                <svg width="48" height="48" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>Potli Massage</span>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div style={{ padding: '24px' }}>
+              <h3 style={{
+                fontSize: '20px',
+                fontWeight: 'bold',
+                color: '#111827',
+                marginBottom: '16px',
+                textAlign: 'center',
+                textTransform: 'uppercase'
+              }}>
+                POTLI MASSAGE
+              </h3>
+              <p style={{
+                fontSize: '14px',
+                color: '#374151',
+                lineHeight: '1.6',
+                textAlign: 'center'
+              }}>
+                Filled with an elixir created from a custom blend of herbs, oils and spices, heated potlis (muslin bags) are placed on specific points in the body to reap their therapeutic benefits.
+              </p>
+            </div>
+          </div>
+
+          {/* Ancient Therapies Card */}
+          <div style={{
+            flex: '1',
+            maxWidth: '350px',
+            backgroundColor: 'white',
+            borderRadius: '12px',
+            overflow: 'hidden',
+            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+          }}>
+            {/* Image */}
+            <div style={{ height: '250px', backgroundColor: '#f3f4f6', overflow: 'hidden' }}>
+              <img
+                src="./image-27.png"
+                alt="Ancient Therapies"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback design if image fails to load */}
+              <div style={{
+                display: 'none',
+                width: '100%',
+                height: '100%',
+                backgroundColor: '#f3f4f6',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#6b7280',
+                fontSize: '16px',
+                flexDirection: 'column',
+                gap: '8px'
+              }}>
+                <svg width="48" height="48" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>Ancient Therapies</span>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div style={{ padding: '24px' }}>
+              <h3 style={{
+                fontSize: '20px',
+                fontWeight: 'bold',
+                color: '#111827',
+                marginBottom: '16px',
+                textAlign: 'center',
+                textTransform: 'uppercase'
+              }}>
+                ANCIENT THERAPIES
+              </h3>
+              <p style={{
+                fontSize: '14px',
+                color: '#374151',
+                lineHeight: '1.6',
+                textAlign: 'center'
+              }}>
+                A symphony of nature's gentle elixirs- the pinnacle of rejuvenation. From the ancient art of Thai massage to Ayurvedic treatments, our massage menu is a transcendent journey across the world of wellness.
+              </p>
+            </div>
+          </div>
+
+          {/* Foot Recovery Card */}
+          <div style={{
+            flex: '1',
+            maxWidth: '350px',
+            backgroundColor: 'white',
+            borderRadius: '12px',
+            overflow: 'hidden',
+            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+          }}>
+            {/* Image */}
+            <div style={{ height: '250px', backgroundColor: '#f3f4f6', overflow: 'hidden' }}>
+              <img
+                src="./image-28.png"
+                alt="Foot Recovery"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
+                }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback design if image fails to load */}
+              <div style={{
+                display: 'none',
+                width: '100%',
+                height: '100%',
+                backgroundColor: '#f3f4f6',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#6b7280',
+                fontSize: '16px',
+                flexDirection: 'column',
+                gap: '8px'
+              }}>
+                <svg width="48" height="48" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span>Foot Recovery</span>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div style={{ padding: '24px' }}>
+              <h3 style={{
+                fontSize: '20px',
+                fontWeight: 'bold',
+                color: '#111827',
+                marginBottom: '16px',
+                textAlign: 'center',
+                textTransform: 'uppercase'
+              }}>
+                FOOT RECOVERY
+              </h3>
+              <p style={{
+                fontSize: '14px',
+                color: '#374151',
+                lineHeight: '1.6',
+                textAlign: 'center'
+              }}>
+                With all the exploration Odisha has to offer, your feet are bound to need an invigorating recovery treatment. Reward yourself with a pampering foot massage, designed to boost circulation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+
   return (
     <div style={{ minHeight: '100vh', backgroundColor: 'rgb(241,236,229)' }}>
       {/* Browser Interface */}
@@ -1098,7 +4219,9 @@ function App() {
         </div>
         <div style={{ flex: 1, margin: '0 16px' }}>
           <div style={{ backgroundColor: '#f3f4f6', borderRadius: '8px', padding: '4px 12px', fontSize: '14px', color: '#4b5563' }}>
-            {currentPage === 'home' ? 'hiddenindia.com/rambhapalace/' : 'hiddenindia.com/rambhapalace/accommodation/'}
+            {currentPage === 'home' ? 'hiddenindia.com/rambhapalace/' : 
+             currentPage === 'wellness' ? 'hiddenindia.com/rambhapalace/wellness/' :
+             'hiddenindia.com/rambhapalace/accommodation/'}
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -1184,11 +4307,29 @@ function App() {
               Accommodation
             </a>
             <span style={{ color: 'black' }}>•</span>
-            <a href="/experiences" style={{ color: '#374151', fontWeight: '500' }}>Experiences</a>
+            <a 
+              href="#" 
+              onClick={(e) => { e.preventDefault(); setCurrentPage('experiences'); }}
+              style={{ color: currentPage === 'experiences' ? '#d97706' : '#374151', fontWeight: '500' }}
+            >
+              Experiences
+            </a>
             <span style={{ color: 'black' }}>•</span>
-            <a href="/dining" style={{ color: '#374151', fontWeight: '500' }}>Dining</a>
+            <a 
+              href="#" 
+              onClick={(e) => { e.preventDefault(); setCurrentPage('dining'); }}
+              style={{ color: currentPage === 'dining' ? '#d97706' : '#374151', fontWeight: '500' }}
+            >
+              Dining
+            </a>
             <span style={{ color: 'black' }}>•</span>
-            <a href="/wellness" style={{ color: '#374151', fontWeight: '500' }}>Wellness</a>
+            <a 
+              href="/wellness" 
+              onClick={(e) => { e.preventDefault(); setCurrentPage('wellness'); }}
+              style={{ color: currentPage === 'wellness' ? '#d97706' : '#374151', fontWeight: '500' }}
+            >
+              Wellness
+            </a>
             <span style={{ color: 'black' }}>•</span>
             <a href="/contact" style={{ color: '#374151', fontWeight: '500' }}>Contact Us</a>
           </div>
@@ -1197,7 +4338,11 @@ function App() {
 
       {/* Main Content */}
       <main style={{ maxWidth: '1280px', margin: '0 auto', padding: '32px 16px' }}>
-        {currentPage === 'home' ? renderHomePage() : renderAccommodationPage()}
+        {currentPage === 'home' && renderHomePage()}
+        {currentPage === 'accommodation' && renderAccommodationPage()}
+        {currentPage === 'experiences' && renderExperiencesPage()}
+        {currentPage === 'dining' && renderDiningPage()}
+        {currentPage === 'wellness' && renderWellnessPage()}
       </main>
 
       {/* Footer */}
