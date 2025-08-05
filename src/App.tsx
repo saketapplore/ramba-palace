@@ -1412,7 +1412,7 @@ function App() {
 
             {/* FEATURED EXPERIENCES Section */}
             <div style={{ marginBottom: '48px' }}>
-              <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '32px', textAlign: 'center', textTransform: 'uppercase' }}>FEATURED EXPERIENCES</h2>
+              <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '32px', textAlign: 'center', textTransform: 'uppercase' }}>CULTURAL</h2>
               
               {/* First Row - Three Cards */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '24px', marginBottom: '32px' }}>
@@ -2680,7 +2680,7 @@ function App() {
           </div>
         </div>
 
-        {/* Featured Experiences Section */}
+        {/*  Section */}
         <div style={{ marginTop: '128px' }}>
           {/* Section Title */}
           <div style={{ textAlign: 'center', marginBottom: '48px' }}>
