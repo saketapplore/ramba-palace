@@ -1582,6 +1582,11 @@ function App() {
                 </div>
               </div>
 
+              {/* FEATURED EXPERIENCES Section */}
+              <div style={{ textAlign: 'center', marginBottom: '32px', marginTop: '48px' }}>
+                <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '24px', textTransform: 'uppercase' }}>FEATURED EXPERIENCES</h2>
+              </div>
+              
               {/* Second Row - Two Larger Cards */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
                 {/* Card 4: Breakfast on Island */}
