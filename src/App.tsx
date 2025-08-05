@@ -118,14 +118,11 @@ function App() {
 
       {/* Description */}
       <div style={{ maxWidth: '1024px', margin: '0 auto', color: '#374151', lineHeight: '1.6' }}>
-        <p style={{ fontSize: '18px', marginBottom: '24px', textAlign: 'center' }}>
-          A hidden gem on the east coast of India, Rambha Palace is a 200-year-old residence of the King of Khallikote 
-          that underwent a meticulous six-year restoration. Nestled on the banks of the Chilika Lake, this majestic palace 
-          offers serene views of calm waters and lush wetlands. With its stately courtyards and grand hallways, opulent suites, 
-          and palace gardens teeming with vibrant birdlife, Rambha Palace stands as a testament to royal heritage and natural beauty.
+        <p style={{ fontSize: '18px', textAlign: 'center', color: '#3A3A3A', font:"18px Lato, sans-serif"}}>
+        A hidden gem on the east coast of India, Rambha Palace—the 200-year-old residence of the King of Khallikote—has undergone a meticulous six-year restoration to offer guests a glimpse into its regal past. Nestled on the banks of the Chilika Lake, the palace gates open to serene views of calm waters and lush wetlands. Stately courtyards and grand hallways lead to opulent suites, each adorned with echoes of royal heritage, while the lake breeze fills the palace gardens, bringing the vibrant birdlife into gentle focus.
         </p>
         
-        <p style={{ fontSize: '18px', textAlign: 'center' }}>
+        <p style={{ fontSize: '18px', textAlign: 'center', color: '#3A3A3A', font:"18px Lato, sans-serif", marginTop: '24px'}}>
           This peaceful retreat, with its proximity to sacred temples and a wellness center that seamlessly blends the elegance 
           of a bygone era with an intimate experience of ancient healing practices, offers guests a truly transformative experience 
           where luxury meets tradition in perfect harmony.
@@ -134,23 +131,23 @@ function App() {
 
       {/* Experience the Luxury - ACCOMMODATION Section */}
       <div style={{ maxWidth: '1024px', margin: '0 auto', marginTop: '64px', textAlign: 'center' }}>
-        <p style={{ fontSize: '14px', color: '#9ca3af', marginBottom: '8px', textTransform: 'uppercase' }}>Experience the Luxury</p>
-        <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#374151', marginBottom: '32px', textTransform: 'uppercase' }}>ACCOMMODATION</h2>
+        <p style={{ fontSize: '16px', color: '#3A3A3A', fontWeight: '400',marginBottom: '8px', fontFamily: '"Montserrat", sans-serif' }}>Experience the Luxury</p>
+        <h2 style={{ fontSize: '24px',  color: '#3A3A3A',fontWeight: '600', marginBottom: '32px', textTransform: 'uppercase' }}>ACCOMMODATION</h2>
       </div>
 
       {/* The Spirit of Odisha - HIGHLIGHTS & HAPPENINGS Section */}
-      <div style={{ maxWidth: '1024px', margin: '0 auto', marginTop: '64px', textAlign: 'center' }}>
-        <p style={{ fontSize: '14px', color: '#9ca3af', marginBottom: '8px', textTransform: 'uppercase' }}>The Spirit of Odisha</p>
-        <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#374151', marginBottom: '32px', textTransform: 'uppercase' }}>HIGHLIGHTS & HAPPENINGS</h2>
+      <div style={{ maxWidth: '1024px', margin: '0 auto', marginTop: '94px', textAlign: 'center' }}>
+        <p style={{ fontSize: '16px', color: '#3A3A3A', fontWeight: '400',marginBottom: '8px', fontFamily: '"Montserrat", sans-serif' ,lineHeight: '19.5px'}}>The Spirit of Odisha</p>
+        <h2 style={{ fontSize: '24px', color: '#3A3A3A', fontWeight: '600',marginBottom: '8px', fontFamily: '"Montserrat", sans-serif' ,lineHeight: '19.5px' }}>HIGHLIGHTS & HAPPENINGS</h2>
       </div>
 
       {/* LATEST OFFERS Section */}
-      <div style={{ maxWidth: '1024px', margin: '0 auto', marginTop: '64px', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#374151', marginBottom: '32px', textTransform: 'uppercase' }}>LATEST OFFERS</h2>
+      <div style={{ maxWidth: '1024px', margin: '0 auto', marginTop: '94px', textAlign: 'center' }}>
+        <h2 style={{ fontSize: '24px', color: '#3A3A3A', fontWeight: '600',marginBottom: '8px', fontFamily: '"Montserrat", sans-serif' ,lineHeight: '19.5px' }}>LATEST OFFERS</h2>
       </div>
 
       {/* EAT. PRAY. LOVE. Section */}
-      <div style={{ maxWidth: '1024px', margin: '0 auto', marginTop: '64px' }}>
+      <div style={{ maxWidth: '866px', margin: '0 auto', marginTop: '64px' }}>
         <div style={{ 
           backgroundColor: 'white', 
           borderRadius: '12px', 
@@ -201,9 +198,9 @@ function App() {
             {/* Title */}
             <div style={{ textAlign: 'center', marginBottom: '24px' }}>
               <h2 style={{ 
-                fontSize: '28px', 
+                fontSize: '20px', 
                 fontWeight: 'bold', 
-                color: '#374151', 
+                color: '#000000', 
                 marginBottom: '16px',
                 textTransform: 'uppercase'
               }}>
@@ -212,7 +209,7 @@ function App() {
             </div>
 
             {/* Description */}
-            <div style={{ color: '#374151', lineHeight: '1.8', fontSize: '16px', textAlign: 'center' }}>
+            <div style={{ color: '#3A3A3A', lineHeight: '1.8', fontSize: '14px', fontFamily: '"Lato", sans-serif',textAlign: 'center' }}>
               <p>
                 Where will your spiritual journey take you? Embark on a journey toward achieving mental peace and harmony while connecting with your spiritual self. Attune to your inner being, enhance your intuition, and forge connections with your inner self. Personalised itineraries offer you the opportunity to explore any ancient temple that captivates your spirit or sparks your spiritual curiosity.
               </p>
@@ -235,7 +232,8 @@ function App() {
               {/* Subtitle */}
               <p style={{ 
                 fontSize: '16px', 
-                color: '#92400e', 
+                color: '#6C6C6C', 
+                fontFamily: '"Montserrat", sans-serif',
                 fontStyle: 'italic', 
                 marginBottom: '8px',
                 fontWeight: '400'
@@ -245,11 +243,12 @@ function App() {
               
               {/* Main Title */}
               <h2 style={{ 
-                fontSize: '36px', 
-                fontWeight: 'bold', 
-                color: '#374151', 
+                fontSize: '24px', 
+                fontWeight: '600', 
+                color: '#000000', 
                 marginBottom: '24px',
-                textTransform: 'uppercase'
+                textTransform: 'uppercase',
+                fontFamily: '"Montserrat", sans-serif'
               }}>
                 HIDDEN INDIA PLAYLIST
               </h2>
@@ -261,7 +260,8 @@ function App() {
                 fontWeight: '500',
                 lineHeight: '24px',
                 color: '#3A3A3A',
-                textAlign: 'left'
+                textAlign: 'left',
+                marginTop: '36px'
               }}>
                 Enhance your journey to Rambha Palace with soundscapes to accompany you through sunrise walks, scenic drives, serene boat cruises, and quiet afternoons immersed in nature. Whether you're arriving, exploring, or simply unwinding, let these musical journeys set the tone for an unforgettable stay.
               </p>
@@ -304,16 +304,17 @@ function App() {
           <div style={{ textAlign: 'center', marginBottom: '48px' }}>
             <p style={{ 
               fontSize: '14px', 
-              color: '#9ca3af', 
+              color: '#3A3A3A',
+              fontFamily: '"Montserrat", sans-serif',
               marginBottom: '8px', 
               textTransform: 'uppercase'
             }}>
               Discover Hidden India
             </p>
             <h2 style={{ 
-              fontSize: '36px', 
-              fontWeight: 'bold', 
-              color: '#374151', 
+              fontSize: '24px', 
+              fontWeight: '600', 
+              color: '#3A3A3A', 
               marginBottom: '32px',
               textTransform: 'uppercase'
             }}>
@@ -327,25 +328,25 @@ function App() {
             margin: '0 auto', 
             textAlign: 'center', 
             marginBottom: '48px' 
-          }}>
+          }} >
             <p style={{ 
-              fontSize: '18px', 
-              color: '#374151', 
+              fontSize: '16px', 
+              color: '#7A7A7A', 
               lineHeight: '1.8',
               marginBottom: '24px'
             }}>
               From Bhubaneswar Airport, guests can embark on a scenic two-and-a-half-hour drive through Odisha's lush landscapes arriving directly at the palace gates.
             </p>
             <p style={{ 
-              fontSize: '18px', 
-              color: '#374151', 
+              fontSize: '16px', 
+              color: '#7A7A7A', 
               lineHeight: '1.8',
               marginBottom: '32px'
             }}>
               Please contact our reservations team at{' '}
-              <span style={{ color: '#d97706', fontWeight: '600' }}>reservations@hiddenindia.com</span>
+              <span style={{ color: '#7A7A7A', fontWeight: '600' }}>reservations@hiddenindia.com</span>
               {' '}or{' '}
-              <span style={{ color: '#d97706', fontWeight: '600' }}>+91 7800 208 002</span>
+              <span style={{ color: '#7A7A7A', fontWeight: '600' }}>+91 7800 208 002</span>
               {' '}to arrange your preferred transfer.
             </p>
             <a 
@@ -353,12 +354,14 @@ function App() {
               target="_blank" 
               rel="noopener noreferrer"
               style={{ 
-                color: '#d97706', 
+                color: '#3A3A3A', 
                 textDecoration: 'underline',
-                fontSize: '18px',
+                fontSize: '16px',
                 fontWeight: '500',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                marginBottom: '24px'
               }}
+              
             >
               Get Directions
             </a>
@@ -398,7 +401,7 @@ function App() {
     <>
       {/* Main Title */}
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-        <h1 style={{ fontSize: '32px', fontWeight: 'bold', color: '#374151', marginBottom: '16px' }}>Accommodation</h1>
+        <h1 style={{ fontSize: '32px', fontWeight: '200', fontFamily: '"Montserrat", sans-serif',color: '#000000', marginBottom: '16px' }}>Accommodation</h1>
       </div>
 
       {/* Tab Navigation */}
@@ -502,8 +505,8 @@ function App() {
 
         {/* STAY AT RAMBHA Section */}
         <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-          <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '24px' }}>STAY AT RAMBHA</h2>
-          <div style={{ maxWidth: '800px', margin: '0 auto', color: '#374151', lineHeight: '1.8', fontSize: '16px' }}>
+          <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#000000', marginBottom: '24px', fontFamily: '"Montserrat", sans-serif' }}>STAY AT RAMBHA</h2>
+          <div style={{ maxWidth: '800px', margin: '0 auto', color: '#3A3A3A', lineHeight: '1.8', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
             <p>
               The palace accommodations have been designed to provide solitude, a distinctive sense of individuality, and unparalleled comfort. 
               The suites overlook expansive gardens reminiscent of the Palace of Versailles, while the rooms are adorned with restored furniture, 
@@ -584,8 +587,8 @@ function App() {
             
             {/* Card Content */}
             <div style={{ padding: '24px', backgroundColor: 'white' }}>
-              <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>PALACE SUITES</h3>
-              <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+              <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', fontFamily: '"Montserrat", sans-serif' }}>PALACE SUITES</h3>
+              <p style={{ color: '#3A3A3A', lineHeight: '1.6', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
                 Experience the luxury and grandeur of the original palace block. Once the residence of the royal family in a bygone era—unparalleled sophistication at Rambha.
               </p>
             </div>
@@ -676,7 +679,7 @@ function App() {
             {/* Card Content */}
             <div style={{ padding: '24px', backgroundColor: 'white' }}>
               <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>FAMILY PALACE SUITE</h3>
-              <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+              <p style={{ color: '#3A3A3A', lineHeight: '1.6', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
                 A fusion of two palace suites, featuring a spacious lounge—an expansive, lush private retreat perfect for families and added privacy.
               </p>
             </div>
@@ -770,7 +773,7 @@ function App() {
             {/* Card Content */}
             <div style={{ padding: '24px', backgroundColor: 'white' }}>
               <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>GENERATOR SUITES</h3>
-              <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+              <p style={{ color: '#3A3A3A', lineHeight: '1.6', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
                 Once the heart of the royal palace's power generation, these suites have now been transformed into a luxurious retreat, offering orchard views and outdoor bathtubs.
               </p>
             </div>
@@ -867,7 +870,7 @@ function App() {
             {/* Card Content */}
             <div style={{ padding: '24px', backgroundColor: 'white' }}>
               <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>ICE MILL SUITES</h3>
-              <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+              <p style={{ color: '#3A3A3A', lineHeight: '1.6', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
                 Once used to store ice blocks for preserving the palace's fresh catches, these suites have been reimagined into a lavish retreat with an outdoor seating verandah.
               </p>
             </div>
@@ -958,7 +961,7 @@ function App() {
             {/* Card Content */}
             <div style={{ padding: '24px', backgroundColor: 'white' }}>
               <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>PRINTING PRESS SUITES</h3>
-              <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+              <p style={{ color: '#3A3A3A', lineHeight: '1.6', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
                 Once the palace's printing press, they now offer views of the orchard and palace verandah, retaining a name that reflects their storied past.
               </p>
             </div>
@@ -1051,7 +1054,7 @@ function App() {
             {/* Card Content */}
             <div style={{ padding: '24px', backgroundColor: 'white' }}>
               <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>RAMBHA VILLA</h3>
-              <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+              <p style={{ color: '#3A3A3A', lineHeight: '1.6', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
                 A luxurious, standalone two-bedroom presidential suite featuring a spacious private garden, swimming pool, butler service and pantry with a comfortable lounge area.
               </p>
             </div>
@@ -1080,7 +1083,7 @@ function App() {
     <>
       {/* Main Title */}
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-        <h1 style={{ fontSize: '32px', fontWeight: 'bold', color: '#374151', marginBottom: '16px' }}>Experiences</h1>
+        <h1 style={{ fontSize: '32px', color: '#374151', marginBottom: '16px', fontFamily: '"Montserrat", sans-serif' }}>Experiences</h1>
       </div>
 
       {/* Sub-navigation */}
@@ -4922,7 +4925,15 @@ function App() {
               <svg style={{ width: '20px', height: '20px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
-              <span style={{ fontSize: '14px', fontWeight: '500' }}>Menu</span>
+              <span style={{ 
+                fontFamily: '"Lato", Sans-serif',
+                fontSize: '17px',
+                fontWeight: '400',
+                lineHeight: '40px',
+                WebkitTextStrokeColor: '#000',
+                stroke: '#000',
+                color: '#000000'
+              }}>Menu</span>
             </button>
             
             {/* Logo - Hidden India */}
@@ -4959,7 +4970,16 @@ function App() {
             <a 
               href="#" 
               onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }}
-              style={{ color: currentPage === 'home' ? '#d97706' : '#374151', fontWeight: '500' }}
+              style={{ 
+                color: '#050505', 
+                fill: '#050505', 
+                paddingLeft: '15px', 
+                paddingRight: '15px', 
+                fontFamily: '"Lato", Sans-serif', 
+                fontSize: '14px', 
+                fontWeight: '500', 
+                wordSpacing: '2px' 
+              }}
             >
               Rambha Palace
             </a>
@@ -4967,7 +4987,16 @@ function App() {
             <a 
               href="#" 
               onClick={(e) => { e.preventDefault(); setCurrentPage('accommodation'); }}
-              style={{ color: currentPage === 'accommodation' ? '#d97706' : '#374151', fontWeight: '500' }}
+              style={{ 
+                color: '#000000', 
+                fill: '#000000', 
+                paddingLeft: '13px', 
+                paddingRight: '25px', 
+                fontFamily: '"Lato", Sans-serif', 
+                fontSize: '14px', 
+                fontWeight: '500', 
+                wordSpacing: '2px' 
+              }}
             >
               Accommodation
             </a>
@@ -4975,7 +5004,16 @@ function App() {
             <a 
               href="#" 
               onClick={(e) => { e.preventDefault(); setCurrentPage('experiences'); }}
-              style={{ color: currentPage === 'experiences' ? '#d97706' : '#374151', fontWeight: '500' }}
+              style={{ 
+                color: '#000000', 
+                fill: '#000000', 
+                paddingLeft: '13px', 
+                paddingRight: '25px', 
+                fontFamily: '"Lato", Sans-serif', 
+                fontSize: '14px', 
+                fontWeight: '500', 
+                wordSpacing: '2px' 
+              }}
             >
               Experiences
             </a>
@@ -4983,7 +5021,16 @@ function App() {
             <a 
               href="#" 
               onClick={(e) => { e.preventDefault(); setCurrentPage('dining'); }}
-              style={{ color: currentPage === 'dining' ? '#d97706' : '#374151', fontWeight: '500' }}
+              style={{ 
+                color: '#000000', 
+                fill: '#000000', 
+               paddingLeft: '13px', 
+                paddingRight: '25px',
+                fontFamily: '"Lato", Sans-serif', 
+                fontSize: '14px', 
+                fontWeight: '500', 
+                wordSpacing: '2px' 
+              }}
             >
               Dining
             </a>
@@ -4991,7 +5038,16 @@ function App() {
             <a 
               href="/wellness" 
               onClick={(e) => { e.preventDefault(); setCurrentPage('wellness'); }}
-              style={{ color: currentPage === 'wellness' ? '#d97706' : '#374151', fontWeight: '500' }}
+              style={{ 
+                color: '#000000', 
+                fill: '#000000', 
+                paddingLeft: '13px', 
+                paddingRight: '25px',
+                fontFamily: '"Lato", Sans-serif', 
+                fontSize: '14px', 
+                fontWeight: '500', 
+                wordSpacing: '2px' 
+              }}
             >
               Wellness
             </a>
@@ -4999,7 +5055,16 @@ function App() {
             <a 
               href="#" 
               onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); }}
-              style={{ color: currentPage === 'contact' ? '#d97706' : '#374151', fontWeight: '500' }}
+              style={{ 
+                color: '#000000', 
+                fill: '#000000', 
+                paddingLeft: '13px', 
+                paddingRight: '25px',
+                fontFamily: '"Lato", Sans-serif', 
+                fontSize: '14px', 
+                fontWeight: '500', 
+                wordSpacing: '2px' 
+              }}
             >
               Contact Us
             </a>
