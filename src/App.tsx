@@ -1135,7 +1135,7 @@ function App() {
                 <div style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
                   <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <img 
-                      src="./image-6.png" 
+                      src="./image-7.png" 
                       alt="Irrawaddy Dolphin in Chilika Lake" 
                       style={{ 
                         width: '100%', 
@@ -1195,7 +1195,7 @@ function App() {
                 <div style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
                   <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <img 
-                      src="./image-7.png" 
+                      src="./image-8.png" 
                       alt="Fishing Cat in Natural Habitat" 
                       style={{ 
                         width: '100%', 
@@ -1264,7 +1264,7 @@ function App() {
                 <div style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
                   <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <img 
-                      src="./image-8.png" 
+                      src="./image-6.png" 
                       alt="Flamingos in Chilika Lake" 
                       style={{ 
                         width: '100%', 
@@ -4887,9 +4887,13 @@ function App() {
         </div>
         <div style={{ flex: 1, margin: '0 16px' }}>
           <div style={{ backgroundColor: '#f3f4f6', borderRadius: '8px', padding: '4px 12px', fontSize: '14px', color: '#4b5563' }}>
-            {currentPage === 'home' ? 'hiddenindia.com/rambhapalace/' : 
-             currentPage === 'wellness' ? 'hiddenindia.com/rambhapalace/wellness/' :
-             'hiddenindia.com/rambhapalace/accommodation/'}
+            {currentPage === 'home' ? 'localhost:3000/' : 
+             currentPage === 'accommodation' ? 'localhost:3000/accommodation/' :
+             currentPage === 'experiences' ? 'localhost:3000/experiences/' :
+             currentPage === 'dining' ? 'localhost:3000/dining/' :
+             currentPage === 'wellness' ? 'localhost:3000/wellness/' :
+             currentPage === 'contact' ? 'localhost:3000/contact/' :
+             'localhost:3000/'}
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
