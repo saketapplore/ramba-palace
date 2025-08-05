@@ -137,7 +137,7 @@ function App() {
 
       {/* Description */}
       <div style={{ maxWidth: '1024px', margin: '0 auto', color: '#374151', lineHeight: '1.6' }}>
-        <p style={{ fontSize: '18px', textAlign: 'center', color: '#3A3A3A', fontFamily: '"Lato", sans-serif'}}>
+        <p style={{ fontSize: '16px', textAlign: 'center', color: '#3A3A3A', fontFamily: '"Lato", sans-serif'}}>
         A hidden gem on the east coast of India, Rambha Palace—the 200-year-old residence of the King of Khallikote—has undergone a meticulous six-year restoration to offer guests a glimpse into its regal past. Nestled on the banks of the Chilika Lake, the palace gates open to serene views of calm waters and lush wetlands. Stately courtyards and grand hallways lead to opulent suites, each adorned with echoes of royal heritage, while the lake breeze fills the palace gardens, bringing the vibrant birdlife into gentle focus.
         </p>
         
