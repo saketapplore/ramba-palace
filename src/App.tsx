@@ -9,6 +9,7 @@ function App() {
   // Client-side routing: Update browser URL when currentPage changes
   useEffect(() => {
     const path = currentPage === 'home' ? '/' : `/${currentPage}`;
+    console.log('currentPage changed to:', currentPage, 'updating URL to:', path);
     window.history.pushState({ page: currentPage }, '', path);
   }, [currentPage]);
 
@@ -23,6 +24,63 @@ function App() {
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
+
+  // Debug currentPage changes
+  useEffect(() => {
+    console.log('🔍 currentPage changed to:', currentPage);
+    console.log('🔍 URL should be:', currentPage === 'home' ? '/' : `/${currentPage}`);
+  }, [currentPage]);
+
+  // Set correct tab when navigating to Palace Suite page
+  useEffect(() => {
+    if (currentPage === 'palace-suite') {
+      setPalaceSuiteTab('palace-suite');
+    }
+  }, [currentPage]);
+
+  // Set correct tab when navigating to Palace Family Suite page
+  useEffect(() => {
+    if (currentPage === 'palace-family-suite') {
+      setPalaceSuiteTab('palace-family-suite');
+    }
+  }, [currentPage]);
+
+  // Set correct tab when navigating to Generator Suite page
+  useEffect(() => {
+    if (currentPage === 'generator-suite') {
+      setPalaceSuiteTab('generator-suite');
+    }
+  }, [currentPage]);
+
+  // Set correct tab when navigating to Ice Mill Suite page
+  useEffect(() => {
+    if (currentPage === 'ice-mill-suite') {
+      setPalaceSuiteTab('ice-mill-suite');
+    }
+  }, [currentPage]);
+
+  // Set correct tab when navigating to Printing Press Suite page
+  useEffect(() => {
+    if (currentPage === 'printing-press-suite') {
+      setPalaceSuiteTab('printing-press-suite');
+    }
+  }, [currentPage]);
+
+  // Set correct tab when navigating to Wildlife page
+  useEffect(() => {
+    if (currentPage === 'wildlife') {
+      setExperiencesTab('wildlife');
+    }
+  }, [currentPage]);
+
+  // Set correct tab when navigating to Accommodation sub-pages
+  useEffect(() => {
+    if (currentPage === 'overview') {
+      setActiveTab('overview');
+    } else if (currentPage === 'rambha-villa') {
+      setActiveTab('rambha-villa');
+    }
+  }, [currentPage]);
 
   const renderHomePage = () => (
     <>
@@ -987,6 +1045,8 @@ function App() {
 
   const renderAccommodationPage = () => (
     <>
+      
+      
       {/* Main Title */}
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>
         <h1 style={{ fontSize: '32px', fontWeight: '200', fontFamily: '"Montserrat", sans-serif',color: '#000000', marginBottom: '16px' }}>Accommodation</h1>
@@ -998,7 +1058,17 @@ function App() {
           {['Overview', 'Rambha Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite', 'Ice Mill Suite', 'Printing Press Suite'].map((tab) => (
             <button
               key={tab}
-              onClick={() => setActiveTab(tab.toLowerCase().replace(' ', '-'))}
+              onClick={() => {
+                if (tab === 'Palace Suite') {
+                  setCurrentPage('palace-suite');
+                } else if (tab === 'Palace Family Suite') {
+                  setCurrentPage('palace-family-suite');
+                } else if (tab === 'Generator Suite') {
+                  setCurrentPage('generator-suite');
+                } else {
+                  setActiveTab(tab.toLowerCase().replace(' ', '-'));
+                }
+              }}
               style={{
                 padding: '12px 24px',
                 border: 'none',
@@ -1108,14 +1178,35 @@ function App() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', marginBottom: '48px' }}>
           {/* First Card - Palace Suite */}
           <div 
-            onClick={() => setCurrentPage('palace-suite')}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log('🖱️ Palace Suite clicked, setting currentPage to palace-suite');
+              console.log('🖱️ Previous currentPage was:', currentPage);
+              setCurrentPage('palace-suite');
+              console.log('🖱️ setCurrentPage called');
+              // Add visual feedback
+              const target = e.currentTarget as HTMLElement;
+              target.style.backgroundColor = '#f0f0f0';
+              setTimeout(() => {
+                target.style.backgroundColor = 'transparent';
+              }, 200);
+            }}
+            onMouseDown={(e) => {
+              console.log('🖱️ Mouse down on Palace Suite card');
+            }}
+            onMouseUp={(e) => {
+              console.log('🖱️ Mouse up on Palace Suite card');
+            }}
             style={{ 
               position: 'relative', 
               borderRadius: '8px', 
               overflow: 'hidden', 
               boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
               cursor: 'pointer',
-              transition: 'transform 0.2s ease-in-out'
+              transition: 'all 0.2s ease-in-out',
+              backgroundColor: 'transparent',
+              zIndex: 1
             }}
             onMouseEnter={(e) => {
               const target = e.currentTarget as HTMLElement;
@@ -1129,7 +1220,7 @@ function App() {
             <img 
               src="./image-1.png"
               alt="Palace Suite" 
-              style={{ width: '100%', height: '300px', objectFit: 'cover' }}
+              style={{ width: '100%', height: '300px', objectFit: 'cover', pointerEvents: 'none' }}
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.style.display = 'none';
@@ -1139,6 +1230,47 @@ function App() {
                 }
               }}
             />
+            
+            {/* Hidden button for better click handling - moved outside fallback div */}
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('🔘 Button click detected');
+                setCurrentPage('palace-suite');
+              }}
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                opacity: 0,
+                cursor: 'pointer',
+                border: 'none',
+                background: 'transparent',
+                zIndex: 10
+              }}
+            />
+            
+            {/* Debug overlay - visible indicator for testing */}
+            <div
+              style={{
+                position: 'absolute',
+                top: '10px',
+                right: '10px',
+                backgroundColor: 'rgba(255, 0, 0, 0.8)',
+                color: 'white',
+                padding: '4px 8px',
+                borderRadius: '4px',
+                fontSize: '12px',
+                zIndex: 20,
+                pointerEvents: 'none'
+              }}
+            >
+              CLICK HERE
+            </div>
+            
             {/* Fallback design for first card */}
             <div style={{ 
               display: 'none', 
@@ -1146,7 +1278,8 @@ function App() {
               height: '300px', 
               backgroundColor: '#8b0000',
               position: 'relative',
-              overflow: 'hidden'
+              overflow: 'hidden',
+              pointerEvents: 'none'
             }}>
               {/* Four-poster bed */}
               <div style={{ 
@@ -1683,7 +1816,21 @@ function App() {
           {['Overview', 'Wildlife', 'Spiritual', 'Cultural'].map((tab) => (
             <button
               key={tab}
-              onClick={() => setExperiencesTab(tab.toLowerCase())}
+              onClick={() => {
+                if (tab === 'Wildlife') {
+                  setCurrentPage('wildlife');
+                  setExperiencesTab('wildlife');
+                } else if (tab === 'Spiritual') {
+                  setCurrentPage('experiences');
+                  setExperiencesTab('spiritual');
+                } else if (tab === 'Cultural') {
+                  setCurrentPage('experiences');
+                  setExperiencesTab('cultural');
+                } else {
+                  setCurrentPage('experiences');
+                  setExperiencesTab(tab.toLowerCase());
+                }
+              }}
               style={{
                 padding: '12px 24px',
                 border: 'none',
@@ -2309,10 +2456,113 @@ function App() {
         )}
 
         {experiencesTab === 'spiritual' && (
-          <div style={{ textAlign: 'center', padding: '48px 0' }}>
-            <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '24px' }}>Spiritual Experiences</h2>
-            <p style={{ color: '#6b7280', fontSize: '16px' }}>Detailed spiritual experiences coming soon...</p>
-          </div>
+          <>
+            {/* Spiritual Image */}
+            <div style={{ marginBottom: '48px' }}>
+              <div style={{ position: 'relative', width: '100%', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}>
+                <img 
+                  src="/img-7.png" 
+                  alt="Ancient Temple Complex - Spiritual Experience" 
+                  style={{ 
+                    width: '100%', 
+                    height: 'auto', 
+                    maxWidth: '100%',
+                    borderRadius: '8px'
+                  }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'flex';
+                    }
+                  }}
+                />
+                {/* Fallback design if image fails to load */}
+                <div style={{
+                  display: 'none',
+                  width: '100%',
+                  height: '500px',
+                  backgroundColor: '#f3f4f6',
+                  borderRadius: '8px',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#6b7280',
+                  fontSize: '18px',
+                  position: 'relative',
+                  overflow: 'hidden'
+                }}>
+                  {/* Temple Structure 1 */}
+                  <div style={{ 
+                    position: 'absolute', 
+                    bottom: '20%', 
+                    left: '15%',
+                    width: '20%',
+                    height: '40%',
+                    backgroundColor: '#8b4513',
+                    borderRadius: '8px 8px 0 0'
+                  }}></div>
+                  {/* Temple Structure 2 - Main Tower */}
+                  <div style={{ 
+                    position: 'absolute', 
+                    bottom: '20%', 
+                    left: '40%',
+                    width: '20%',
+                    height: '60%',
+                    backgroundColor: '#a0522d',
+                    borderRadius: '8px 8px 0 0'
+                  }}>
+                    {/* Tower top */}
+                    <div style={{ 
+                      position: 'absolute',
+                      top: '-10%',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      width: '60%',
+                      height: '20%',
+                      backgroundColor: '#cd853f',
+                      borderRadius: '50%'
+                    }}></div>
+                  </div>
+                  {/* Temple Structure 3 */}
+                  <div style={{ 
+                    position: 'absolute', 
+                    bottom: '20%', 
+                    right: '15%',
+                    width: '20%',
+                    height: '35%',
+                    backgroundColor: '#8b4513',
+                    borderRadius: '8px 8px 0 0'
+                  }}></div>
+                  {/* Palm Trees */}
+                  <div style={{ 
+                    position: 'absolute', 
+                    bottom: '0',
+                    left: '0',
+                    width: '100%',
+                    height: '20%',
+                    backgroundColor: '#228b22'
+                  }}></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Spiritual Content */}
+            <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+              <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '24px', textTransform: 'uppercase' }}>SPIRITUAL EXPERIENCES</h2>
+              <div style={{ maxWidth: '800px', margin: '0 auto', color: '#374151', lineHeight: '1.8', fontSize: '16px' }}>
+                <p style={{ marginBottom: '16px' }}>
+                  Where will your spiritual journey take you? Embark on a journey toward achieving mental peace and harmony while connecting with your spiritual self. Attune to your inner being, enhance your intuition, and forge connections with your inner self.
+                </p>
+                <p style={{ marginBottom: '16px' }}>
+                  Personalised itineraries offer you the opportunity to explore any ancient temple that captivates your spirit or sparks your spiritual curiosity. Jagannath Puri, Konark Sun Temple and Tara Tarini are among the architectural and spiritual sanctuaries located a short drive from Rambha Palace.
+                </p>
+                <p>
+                  Experience guided tours that are both enlightening and transformative. Immerse yourself in the beauty of these enduring structures, which have stood as testaments to faith and devotion for centuries, offering a profound connection to the spiritual heritage of Odisha.
+                </p>
+              </div>
+            </div>
+          </>
         )}
 
         {experiencesTab === 'cultural' && (
@@ -2321,6 +2571,1225 @@ function App() {
             <p style={{ color: '#6b7280', fontSize: '16px' }}>Detailed cultural experiences coming soon...</p>
           </div>
         )}
+      </div>
+    </>
+  );
+
+  const renderWildlifePage = () => (
+    <>
+      {/* Main Title */}
+      <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+        <h1 style={{ fontSize: '32px', color: '#374151', marginBottom: '16px', fontFamily: '"Montserrat", sans-serif' }}>Wildlife</h1>
+      </div>
+
+      {/* Sub-navigation */}
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px', borderBottom: '1px solid #e5e7eb' }}>
+        <div style={{ display: 'flex', gap: '0' }}>
+          {['Overview', 'Wildlife', 'Spiritual', 'Cultural'].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => {
+                if (tab === 'Overview') {
+                  setCurrentPage('experiences');
+                  setExperiencesTab('overview');
+                } else if (tab === 'Wildlife') {
+                  setCurrentPage('wildlife');
+                  setExperiencesTab('wildlife');
+                } else if (tab === 'Spiritual') {
+                  setCurrentPage('experiences');
+                  setExperiencesTab('spiritual');
+                } else if (tab === 'Cultural') {
+                  setCurrentPage('experiences');
+                  setExperiencesTab('cultural');
+                } else {
+                  setCurrentPage('experiences');
+                  setExperiencesTab(tab.toLowerCase());
+                }
+              }}
+              style={{
+                padding: '12px 24px',
+                border: 'none',
+                backgroundColor: 'transparent',
+                color: experiencesTab === tab.toLowerCase() ? '#d97706' : '#6b7280',
+                fontWeight: experiencesTab === tab.toLowerCase() ? '600' : '500',
+                borderBottom: experiencesTab === tab.toLowerCase() ? '2px solid #d97706' : 'none',
+                cursor: 'pointer',
+                fontSize: '14px'
+              }}
+            >
+              {tab}
+              {experiencesTab === tab.toLowerCase() && <span style={{ marginLeft: '8px' }}>{'>'}</span>}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Main Content Area */}
+      <div style={{ maxWidth: '1024px', margin: '0 auto' }}>
+        {/* Wildlife Image */}
+        <div style={{ marginBottom: '48px' }}>
+          <div style={{ position: 'relative', width: '100%', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}>
+            <img 
+              src="/image-90.png" 
+              alt="Wildlife - Three Antelopes in Natural Setting" 
+              style={{ 
+                width: '100%', 
+                height: 'auto', 
+                maxWidth: '100%',
+                borderRadius: '8px'
+              }}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                const nextSibling = target.nextSibling as HTMLElement;
+                if (nextSibling) {
+                  nextSibling.style.display = 'flex';
+                }
+              }}
+            />
+            {/* Fallback design if image fails to load */}
+            <div style={{
+              display: 'none',
+              width: '100%',
+              height: '500px',
+              backgroundColor: '#f3f4f6',
+              borderRadius: '8px',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#6b7280',
+              fontSize: '18px',
+              position: 'relative',
+              overflow: 'hidden'
+            }}>
+              {/* Antelope 1 */}
+              <div style={{ 
+                position: 'absolute', 
+                top: '40%', 
+                left: '20%',
+                width: '15%',
+                height: '25%',
+                backgroundColor: '#8b4513',
+                borderRadius: '50% 50% 0 0'
+              }}></div>
+              {/* Antelope 2 */}
+              <div style={{ 
+                position: 'absolute', 
+                top: '35%', 
+                left: '45%',
+                width: '20%',
+                height: '30%',
+                backgroundColor: '#2d1810',
+                borderRadius: '50% 50% 0 0'
+              }}></div>
+              {/* Antelope 3 */}
+              <div style={{ 
+                position: 'absolute', 
+                top: '42%', 
+                left: '70%',
+                width: '15%',
+                height: '25%',
+                backgroundColor: '#8b4513',
+                borderRadius: '50% 50% 0 0'
+              }}></div>
+              {/* Grass */}
+              <div style={{ 
+                position: 'absolute', 
+                bottom: '0',
+                left: '0',
+                width: '100%',
+                height: '20%',
+                backgroundColor: '#22c55e'
+              }}></div>
+            </div>
+          </div>
+        </div>
+
+        {/* Wildlife Content */}
+        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '24px', textTransform: 'uppercase' }}>WILDLIFE EXPERIENCES</h2>
+          <div style={{ maxWidth: '800px', margin: '0 auto', color: '#374151', lineHeight: '1.8', fontSize: '16px' }}>
+            <p style={{ marginBottom: '16px' }}>
+              Discover the rich biodiversity of Odisha through our carefully curated wildlife experiences. From the majestic antelopes roaming the grasslands to the diverse birdlife and marine creatures, every encounter offers a unique glimpse into the natural wonders of this region.
+            </p>
+            <p style={{ marginBottom: '16px' }}>
+              Our expert guides will take you on unforgettable journeys through pristine habitats, where you can observe wildlife in their natural environment. Whether it's tracking antelopes in the grasslands, birdwatching in the wetlands, or exploring the marine life of Chilika Lake, each experience is designed to create lasting memories.
+            </p>
+            <p>
+              Experience the thrill of wildlife photography, learn about conservation efforts, and connect with nature in ways that will stay with you long after your visit.
+            </p>
+          </div>
+        </div>
+
+        {/* Wildlife Carousel */}
+        <div style={{ marginBottom: '48px' }}>
+          {/* Carousel Container */}
+          <div style={{ 
+            position: 'relative',
+            maxWidth: '100%',
+            overflow: 'hidden'
+          }}>
+            {/* Carousel Cards */}
+            <div 
+              id="wildlife-carousel"
+              style={{ 
+                display: 'flex', 
+                gap: '20px',
+                padding: '0 80px', // Space for arrows
+                overflowX: 'auto',
+                scrollBehavior: 'smooth',
+                scrollbarWidth: 'none', // Hide scrollbar for Firefox
+                msOverflowStyle: 'none', // Hide scrollbar for IE/Edge
+                WebkitOverflowScrolling: 'touch', // Smooth scrolling on iOS
+                scrollSnapType: 'x mandatory' // Snap to cards
+              }}
+            >
+              {/* Card 1: Diving Dolphins */}
+              <div style={{ 
+                minWidth: '331px',
+                backgroundColor: '#ffffff',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                flexShrink: 0,
+                scrollSnapAlign: 'start'
+              }}>
+                {/* Image */}
+                <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                  <img 
+                    src="/Dolphin.png" 
+                    alt="Diving Dolphins" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  {/* Fallback for Dolphin image */}
+                  <div style={{ 
+                    display: 'none', 
+                    width: '100%', 
+                    height: '100%', 
+                    backgroundColor: '#87ceeb',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    <div style={{ 
+                      width: '60%',
+                      height: '40%',
+                      backgroundColor: '#e5e7eb',
+                      borderRadius: '50% 50% 0 0',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#9ca3af',
+                      fontSize: '24px'
+                    }}>
+                      🐬
+                    </div>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{ 
+                    fontSize: '20px', 
+                    fontWeight: 'bold', 
+                    color: '#000000', 
+                    marginBottom: '16px',
+                    textTransform: 'uppercase',
+                    fontFamily: '"Montserrat", sans-serif'
+                  }}>
+                    DIVING DOLPHINS
+                  </h3>
+                  <p style={{ 
+                    fontSize: '16px', 
+                    color: '#6b7280', 
+                    lineHeight: '1.6',
+                    fontFamily: '"Lato", sans-serif'
+                  }}>
+                    Endangered species of Irrawaddy dolphins can be spotted frolicking in Chilika Lake. Spot them happy in their habitat while you drift slowly in a boat.
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 2: Turtle Treasure */}
+              <div style={{ 
+                minWidth: '331px',
+                backgroundColor: '#ffffff',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                flexShrink: 0,
+                scrollSnapAlign: 'start'
+              }}>
+                {/* Image */}
+                <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                  <img 
+                    src="/Turtle.png" 
+                    alt="Turtle Treasure" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  {/* Fallback for Turtle image */}
+                  <div style={{ 
+                    display: 'none', 
+                    width: '100%', 
+                    height: '100%', 
+                    backgroundColor: '#f4a460',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    <div style={{ 
+                      width: '60%',
+                      height: '40%',
+                      backgroundColor: '#e5e7eb',
+                      borderRadius: '50% 50% 0 0',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#9ca3af',
+                      fontSize: '24px'
+                    }}>
+                      🐢
+                    </div>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{ 
+                    fontSize: '20px', 
+                    fontWeight: 'bold', 
+                    color: '#000000', 
+                    marginBottom: '16px',
+                    textTransform: 'uppercase',
+                    fontFamily: '"Montserrat", sans-serif'
+                  }}>
+                    TURTLE TREASURE
+                  </h3>
+                  <p style={{ 
+                    fontSize: '16px', 
+                    color: '#6b7280', 
+                    lineHeight: '1.6',
+                    fontFamily: '"Lato", sans-serif'
+                  }}>
+                    Experience the magic of Odisha's coastline witness the endangered Olive sea turtles nesting along the serene shores, a rare spectacle.
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 3: Tracking Fishing Cats */}
+              <div style={{ 
+                minWidth: '331px',
+                backgroundColor: '#ffffff',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                flexShrink: 0,
+                scrollSnapAlign: 'start'
+              }}>
+                {/* Image */}
+                <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                  <img 
+                    src="/FishingCats.png" 
+                    alt="Tracking Fishing Cats" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  {/* Fallback for Fishing Cats image */}
+                  <div style={{ 
+                    display: 'none', 
+                    width: '100%', 
+                    height: '100%', 
+                    backgroundColor: '#228b22',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    <div style={{ 
+                      width: '60%',
+                      height: '40%',
+                      backgroundColor: '#e5e7eb',
+                      borderRadius: '50% 50% 0 0',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#9ca3af',
+                      fontSize: '24px'
+                    }}>
+                      🐱
+                    </div>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{ 
+                    fontSize: '20px', 
+                    fontWeight: 'bold', 
+                    color: '#000000', 
+                    marginBottom: '16px',
+                    textTransform: 'uppercase',
+                    fontFamily: '"Montserrat", sans-serif'
+                  }}>
+                    TRACKING FISHING CATS
+                  </h3>
+                  <p style={{ 
+                    fontSize: '16px', 
+                    color: '#6b7280', 
+                    lineHeight: '1.6',
+                    fontFamily: '"Lato", sans-serif'
+                  }}>
+                    Join a boat safari through wetlands to spot elusive predators patrolling the banks or, with luck, hunting in action.
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 4: Bouncing Blackbucks */}
+              <div style={{ 
+                minWidth: '331px',
+                backgroundColor: '#ffffff',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                flexShrink: 0,
+                scrollSnapAlign: 'start'
+              }}>
+                {/* Image */}
+                <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                  <img 
+                    src="/Blackbuck.png" 
+                    alt="Bouncing Blackbucks" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  {/* Fallback for Blackbuck image */}
+                  <div style={{ 
+                    display: 'none', 
+                    width: '100%', 
+                    height: '100%', 
+                    backgroundColor: '#8b4513',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    <div style={{ 
+                      width: '60%',
+                      height: '40%',
+                      backgroundColor: '#e5e7eb',
+                      borderRadius: '50% 50% 0 0',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#9ca3af',
+                      fontSize: '24px'
+                    }}>
+                      🦌
+                    </div>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{ 
+                    fontSize: '20px', 
+                    fontWeight: 'bold', 
+                    color: '#000000', 
+                    marginBottom: '16px',
+                    textTransform: 'uppercase',
+                    fontFamily: '"Montserrat", sans-serif'
+                  }}>
+                    BOUNCING BLACKBUCKS
+                  </h3>
+                  <p style={{ 
+                    fontSize: '16px', 
+                    color: '#6b7280', 
+                    lineHeight: '1.6',
+                    fontFamily: '"Lato", sans-serif'
+                  }}>
+                    Ride out in in jeeps and spot these graceful and critically endangered creatures which have found refuge in the surrounding paddy fields.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Carousel Navigation Arrows */}
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'center', 
+              gap: '16px',
+              marginTop: '24px'
+            }}>
+              <button 
+                style={{ 
+                  width: '40px', 
+                  height: '40px', 
+                  borderRadius: '50%', 
+                  backgroundColor: '#f3f4f6', 
+                  border: '1px solid #d1d5db',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '18px',
+                  color: '#6b7280'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#e5e7eb';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#f3f4f6';
+                }}
+                onClick={() => {
+                  const carousel = document.getElementById('wildlife-carousel');
+                  if (carousel) {
+                    carousel.scrollBy({ left: -351, behavior: 'smooth' });
+                  }
+                }}
+              >
+                ‹
+              </button>
+              <button 
+                style={{ 
+                  width: '40px', 
+                  height: '40px', 
+                  borderRadius: '50%', 
+                  backgroundColor: '#f3f4f6', 
+                  border: '1px solid #d1d5db',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '18px',
+                  color: '#6b7280'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#e5e7eb';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#f3f4f6';
+                }}
+                onClick={() => {
+                  const carousel = document.getElementById('wildlife-carousel');
+                  if (carousel) {
+                    carousel.scrollBy({ left: 351, behavior: 'smooth' });
+                  }
+                }}
+              >
+                ›
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Featured Experiences Section */}
+        <div style={{ marginBottom: '48px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <h2 style={{ 
+              fontSize: '24px', 
+              fontWeight: 'bold', 
+              color: '#374151', 
+              marginBottom: '24px', 
+              textTransform: 'uppercase',
+              fontFamily: '"Montserrat", sans-serif'
+            }}>
+              FEATURED EXPERIENCES
+            </h2>
+          </div>
+
+          {/* Chilika Lake Cruise */}
+          <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+            {/* Image */}
+            <div style={{ marginBottom: '24px' }}>
+              <img 
+                src="/chilika.png" 
+                alt="Chilika Lake Cruise" 
+                style={{ 
+                  width: '100%', 
+                  height: 'auto', 
+                  maxWidth: '100%',
+                  borderRadius: '8px',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+                }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'block';
+                  }
+                }}
+              />
+              {/* Fallback for Chilika image */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '400px',
+                backgroundColor: '#f4a460',
+                borderRadius: '8px',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#6b7280',
+                fontSize: '18px',
+                position: 'relative',
+                overflow: 'hidden'
+              }}>
+                {/* Sunset gradient */}
+                <div style={{ 
+                  position: 'absolute',
+                  top: '0',
+                  left: '0',
+                  width: '100%',
+                  height: '100%',
+                  background: 'linear-gradient(to bottom, #ff7f50, #ff6347, #ff4500)'
+                }}></div>
+                {/* Boat silhouette */}
+                <div style={{ 
+                  position: 'absolute',
+                  bottom: '30%',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  width: '120px',
+                  height: '60px',
+                  backgroundColor: '#2d1810',
+                  borderRadius: '60px 60px 0 0'
+                }}></div>
+                {/* Sun */}
+                <div style={{ 
+                  position: 'absolute',
+                  top: '20%',
+                  right: '20%',
+                  width: '60px',
+                  height: '60px',
+                  backgroundColor: '#ffd700',
+                  borderRadius: '50%',
+                  boxShadow: '0 0 20px #ffd700'
+                }}></div>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div style={{ textAlign: 'center' }}>
+              <h3 style={{ 
+                fontSize: '20px', 
+                fontWeight: 'bold', 
+                color: '#374151', 
+                marginBottom: '16px',
+                textTransform: 'uppercase',
+                fontFamily: '"Montserrat", sans-serif'
+              }}>
+                CHILIKA LAKE CRUISE
+              </h3>
+              <p style={{ 
+                fontSize: '16px', 
+                color: '#6b7280', 
+                lineHeight: '1.8',
+                fontFamily: '"Lato", sans-serif',
+                maxWidth: '700px',
+                margin: '0 auto'
+              }}>
+                Asia's largest brackish water lagoon – travellers can visit the Chilika Lake for an introspective breakfast at sunrise, or an immersive and educative experience with wildlife. With over 150 species of birds, fishing cats prowling the coast and Irrawaddy dolphins bobbing in the shallow waters, the lake has plenty more to offer than mesmerising sunsets in the horizon.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Landscape Images Carousel */}
+        <div style={{ marginBottom: '48px' }}>
+          {/* Carousel Container */}
+          <div style={{ 
+            position: 'relative',
+            maxWidth: '100%',
+            overflow: 'hidden'
+          }}>
+            {/* Carousel Cards */}
+            <div 
+              id="landscape-carousel"
+              style={{ 
+                display: 'flex', 
+                gap: '0px',
+                padding: '0 80px', // Space for arrows
+                overflowX: 'auto',
+                scrollBehavior: 'smooth',
+                scrollbarWidth: 'none', // Hide scrollbar for Firefox
+                msOverflowStyle: 'none', // Hide scrollbar for IE/Edge
+                WebkitOverflowScrolling: 'touch', // Smooth scrolling on iOS
+                scrollSnapType: 'x mandatory' // Snap to cards
+              }}
+            >
+              {/* Card 1: Landscape Image 1 */}
+              <div style={{ 
+                minWidth: '844px',
+                backgroundColor: '#ffffff',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                flexShrink: 0,
+                scrollSnapAlign: 'center',
+                marginRight: '-50px',
+                opacity: 0.8,
+                transform: 'scale(0.8)',
+                transition: 'all 0.3s ease-in-out'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.opacity = '1';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.opacity = '0.8';
+                e.currentTarget.style.transform = 'scale(0.8)';
+              }}
+              >
+                {/* Image */}
+                <div style={{ position: 'relative', width: '100%', height: '462px' }}>
+                  <img 
+                    src="/img-1.png" 
+                    alt="Landscape View 1" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  {/* Fallback for landscape image 1 */}
+                  <div style={{ 
+                    display: 'none', 
+                    width: '100%', 
+                    height: '100%', 
+                    backgroundColor: '#22c55e',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    <div style={{ 
+                      width: '100%',
+                      height: '100%',
+                      background: 'linear-gradient(to bottom, #22c55e, #16a34a)',
+                      position: 'relative'
+                    }}>
+                      {/* Grass blades */}
+                      <div style={{ 
+                        position: 'absolute',
+                        bottom: '0',
+                        left: '0',
+                        width: '100%',
+                        height: '30%',
+                        background: 'repeating-linear-gradient(90deg, transparent, transparent 2px, #15803d 2px, #15803d 4px)'
+                      }}></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 2: Landscape Image 2 */}
+              <div style={{ 
+                minWidth: '844px',
+                backgroundColor: '#ffffff',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                flexShrink: 0,
+                scrollSnapAlign: 'center',
+                marginRight: '-50px',
+                opacity: 0.8,
+                transform: 'scale(0.8)',
+                transition: 'all 0.3s ease-in-out'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.opacity = '1';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.opacity = '0.8';
+                e.currentTarget.style.transform = 'scale(0.8)';
+              }}
+              >
+                {/* Image */}
+                <div style={{ position: 'relative', width: '100%', height: '462px' }}>
+                  <img 
+                    src="/img-2.png" 
+                    alt="Landscape View 2" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  {/* Fallback for landscape image 2 */}
+                  <div style={{ 
+                    display: 'none', 
+                    width: '100%', 
+                    height: '100%', 
+                    backgroundColor: '#0ea5e9',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    <div style={{ 
+                      width: '100%',
+                      height: '100%',
+                      background: 'linear-gradient(to bottom, #0ea5e9, #0284c7)',
+                      position: 'relative'
+                    }}>
+                      {/* Water */}
+                      <div style={{ 
+                        position: 'absolute',
+                        bottom: '0',
+                        left: '0',
+                        width: '100%',
+                        height: '40%',
+                        background: 'linear-gradient(to bottom, #0ea5e9, #0284c7)'
+                      }}></div>
+                      {/* Hills */}
+                      <div style={{ 
+                        position: 'absolute',
+                        bottom: '40%',
+                        left: '20%',
+                        width: '60%',
+                        height: '30%',
+                        backgroundColor: '#16a34a',
+                        borderRadius: '50% 50% 0 0'
+                      }}></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 3: Landscape Image 3 */}
+              <div style={{ 
+                minWidth: '844px',
+                backgroundColor: '#ffffff',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                flexShrink: 0,
+                scrollSnapAlign: 'center',
+                marginRight: '-50px',
+                opacity: 0.8,
+                transform: 'scale(0.8)',
+                transition: 'all 0.3s ease-in-out'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.opacity = '1';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.opacity = '0.8';
+                e.currentTarget.style.transform = 'scale(0.8)';
+              }}
+              >
+                {/* Image */}
+                <div style={{ position: 'relative', width: '100%', height: '462px' }}>
+                  <img 
+                    src="/img-3.png" 
+                    alt="Landscape View 3" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  {/* Fallback for landscape image 3 */}
+                  <div style={{ 
+                    display: 'none', 
+                    width: '100%', 
+                    height: '100%', 
+                    backgroundColor: '#1e293b',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    <div style={{ 
+                      width: '100%',
+                      height: '100%',
+                      background: 'linear-gradient(to bottom, #1e293b, #0f172a)',
+                      position: 'relative'
+                    }}>
+                      {/* Dark foliage */}
+                      <div style={{ 
+                        position: 'absolute',
+                        bottom: '0',
+                        left: '0',
+                        width: '100%',
+                        height: '50%',
+                        background: 'radial-gradient(ellipse at center, #334155 0%, #1e293b 70%)'
+                      }}></div>
+                      {/* Animal silhouette */}
+                      <div style={{ 
+                        position: 'absolute',
+                        bottom: '20%',
+                        right: '20%',
+                        width: '80px',
+                        height: '40px',
+                        backgroundColor: '#475569',
+                        borderRadius: '40px 40px 0 0'
+                      }}></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 4: Landscape Image 4 */}
+              <div style={{ 
+                minWidth: '844px',
+                backgroundColor: '#ffffff',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                flexShrink: 0,
+                scrollSnapAlign: 'center',
+                marginRight: '-50px',
+                opacity: 0.8,
+                transform: 'scale(0.8)',
+                transition: 'all 0.3s ease-in-out'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.opacity = '1';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.opacity = '0.8';
+                e.currentTarget.style.transform = 'scale(0.8)';
+              }}
+              >
+                {/* Image */}
+                <div style={{ position: 'relative', width: '100%', height: '462px' }}>
+                  <img 
+                    src="/img-4.png" 
+                    alt="Landscape View 4" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  {/* Fallback for landscape image 4 */}
+                  <div style={{ 
+                    display: 'none', 
+                    width: '100%', 
+                    height: '100%', 
+                    backgroundColor: '#059669',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    <div style={{ 
+                      width: '100%',
+                      height: '100%',
+                      background: 'linear-gradient(to bottom, #059669, #047857)',
+                      position: 'relative'
+                    }}>
+                      {/* Forest */}
+                      <div style={{ 
+                        position: 'absolute',
+                        bottom: '0',
+                        left: '0',
+                        width: '100%',
+                        height: '60%',
+                        background: 'radial-gradient(ellipse at center, #10b981 0%, #059669 70%)'
+                      }}></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 5: Landscape Image 5 */}
+              <div style={{ 
+                minWidth: '844px',
+                backgroundColor: '#ffffff',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                flexShrink: 0,
+                scrollSnapAlign: 'center',
+                marginRight: '-50px',
+                opacity: 0.8,
+                transform: 'scale(0.8)',
+                transition: 'all 0.3s ease-in-out'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.opacity = '1';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.opacity = '0.8';
+                e.currentTarget.style.transform = 'scale(0.8)';
+              }}
+              >
+                {/* Image */}
+                <div style={{ position: 'relative', width: '100%', height: '462px' }}>
+                  <img 
+                    src="/img-5.png" 
+                    alt="Landscape View 5" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  {/* Fallback for landscape image 5 */}
+                  <div style={{ 
+                    display: 'none', 
+                    width: '100%', 
+                    height: '100%', 
+                    backgroundColor: '#7c3aed',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    <div style={{ 
+                      width: '100%',
+                      height: '100%',
+                      background: 'linear-gradient(to bottom, #7c3aed, #6d28d9)',
+                      position: 'relative'
+                    }}>
+                      {/* Mountain peaks */}
+                      <div style={{ 
+                        position: 'absolute',
+                        bottom: '0',
+                        left: '0',
+                        width: '100%',
+                        height: '50%',
+                        background: 'radial-gradient(ellipse at center, #8b5cf6 0%, #7c3aed 70%)'
+                      }}></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 6: Landscape Image 6 */}
+              <div style={{ 
+                minWidth: '844px',
+                backgroundColor: '#ffffff',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                flexShrink: 0,
+                scrollSnapAlign: 'center',
+                marginRight: '-50px',
+                opacity: 0.8,
+                transform: 'scale(0.8)',
+                transition: 'all 0.3s ease-in-out'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.opacity = '1';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.opacity = '0.8';
+                e.currentTarget.style.transform = 'scale(0.8)';
+              }}
+              >
+                {/* Image */}
+                <div style={{ position: 'relative', width: '100%', height: '462px' }}>
+                  <img 
+                    src="/img-6.png" 
+                    alt="Landscape View 6" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  {/* Fallback for landscape image 6 */}
+                  <div style={{ 
+                    display: 'none', 
+                    width: '100%', 
+                    height: '100%', 
+                    backgroundColor: '#dc2626',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    <div style={{ 
+                      width: '100%',
+                      height: '100%',
+                      background: 'linear-gradient(to bottom, #dc2626, #b91c1c)',
+                      position: 'relative'
+                    }}>
+                      {/* Sunset */}
+                      <div style={{ 
+                        position: 'absolute',
+                        bottom: '0',
+                        left: '0',
+                        width: '100%',
+                        height: '40%',
+                        background: 'radial-gradient(ellipse at center, #ef4444 0%, #dc2626 70%)'
+                      }}></div>
+                      {/* Sun */}
+                      <div style={{ 
+                        position: 'absolute',
+                        top: '20%',
+                        right: '20%',
+                        width: '60px',
+                        height: '60px',
+                        backgroundColor: '#fbbf24',
+                        borderRadius: '50%',
+                        boxShadow: '0 0 20px #fbbf24'
+                      }}></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Carousel Navigation Arrows */}
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'center', 
+              gap: '16px',
+              marginTop: '24px'
+            }}>
+              <button 
+                style={{ 
+                  width: '40px', 
+                  height: '40px', 
+                  borderRadius: '50%', 
+                  backgroundColor: '#f3f4f6', 
+                  border: '1px solid #d1d5db',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '18px',
+                  color: '#6b7280'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#e5e7eb';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#f3f4f6';
+                }}
+                onClick={() => {
+                  const carousel = document.getElementById('landscape-carousel');
+                  if (carousel) {
+                    carousel.scrollBy({ left: -894, behavior: 'smooth' });
+                  }
+                }}
+              >
+                ‹
+              </button>
+              <button 
+                style={{ 
+                  width: '40px', 
+                  height: '40px', 
+                  borderRadius: '50%', 
+                  backgroundColor: '#f3f4f6', 
+                  border: '1px solid #d1d5db',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '18px',
+                  color: '#6b7280'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#e5e7eb';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#f3f4f6';
+                }}
+                onClick={() => {
+                  const carousel = document.getElementById('landscape-carousel');
+                  if (carousel) {
+                    carousel.scrollBy({ left: 894, behavior: 'smooth' });
+                  }
+                }}
+              >
+                ›
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Back to Experiences Button */}
+        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <button 
+            onClick={() => setCurrentPage('experiences')}
+            style={{
+              padding: '12px 24px',
+              backgroundColor: 'transparent',
+              color: '#000000',
+              border: '1px solid #000000',
+              borderRadius: '4px',
+              fontSize: '16px',
+              fontWeight: '500',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#000000';
+              e.currentTarget.style.color = '#ffffff';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent';
+              e.currentTarget.style.color = '#000000';
+            }}
+          >
+            Back to Experiences
+          </button>
+        </div>
       </div>
     </>
   );
@@ -4235,6 +5704,7 @@ function App() {
 
   const renderPalaceSuitePage = () => (
     <>
+
       {/* Main Title */}
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>
         <h1 style={{ fontSize: '32px', fontWeight: '200', fontFamily: '"Montserrat", sans-serif', color: '#000000', marginBottom: '16px' }}>Palace Suite</h1>
@@ -4246,7 +5716,31 @@ function App() {
           {['Overview', 'Rambha Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite', 'Ice Mill Suite', 'Printing Press Suite'].map((tab) => (
             <button
               key={tab}
-              onClick={() => setPalaceSuiteTab(tab.toLowerCase().replace(' ', '-'))}
+              onClick={() => {
+                if (tab === 'Overview') {
+                  setCurrentPage('accommodation');
+                  setActiveTab('overview');
+                } else if (tab === 'Rambha Villa') {
+                  setCurrentPage('accommodation');
+                  setActiveTab('rambha-villa');
+                } else if (tab === 'Palace Suite') {
+                  setPalaceSuiteTab('palace-suite');
+                } else if (tab === 'Palace Family Suite') {
+                  setCurrentPage('palace-family-suite');
+                  setPalaceSuiteTab('palace-family-suite');
+                } else if (tab === 'Generator Suite') {
+                  setCurrentPage('generator-suite');
+                  setPalaceSuiteTab('generator-suite');
+                } else if (tab === 'Ice Mill Suite') {
+                  setCurrentPage('ice-mill-suite');
+                  setPalaceSuiteTab('ice-mill-suite');
+                } else if (tab === 'Printing Press Suite') {
+                  setCurrentPage('printing-press-suite');
+                  setPalaceSuiteTab('printing-press-suite');
+                } else {
+                  setPalaceSuiteTab(tab.toLowerCase().replace(' ', '-'));
+                }
+              }}
               style={{
                 padding: '12px 24px',
                 border: 'none',
@@ -4271,7 +5765,7 @@ function App() {
           <div style={{ position: 'relative', width: '100%', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}>
             <div style={{ aspectRatio: '16/10', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <img 
-                src="./image-1.png" 
+                src="/image-60.webp" 
                 alt="Palace Suite" 
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 onError={(e) => {
@@ -4354,25 +5848,3370 @@ function App() {
           </div>
         </div>
 
-        {/* Back to Accommodation Button */}
-        <div style={{ textAlign: 'center', marginTop: '48px' }}>
-          <button
-            onClick={() => setCurrentPage('accommodation')}
-            style={{
-              padding: '12px 24px',
-              backgroundColor: '#d97706',
-              color: 'white',
-              border: 'none',
-              borderRadius: '6px',
-              fontSize: '16px',
-              fontWeight: '500',
-              cursor: 'pointer',
-              fontFamily: '"Montserrat", sans-serif'
-            }}
-          >
-            Back to Accommodation
+        {/* Buttons Section */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginBottom: '48px' }}>
+          <button style={{ 
+            padding: '16px 32px', 
+            backgroundColor: 'transparent', 
+            color: '#000000', 
+            border: '1px solid #000000', 
+            borderRadius: '4px',
+            fontSize: '16px',
+            fontWeight: '500',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#000000';
+            e.currentTarget.style.color = '#ffffff';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'transparent';
+            e.currentTarget.style.color = '#000000';
+          }}>
+            Floor Plan
+          </button>
+          <button style={{ 
+            padding: '16px 32px', 
+            backgroundColor: '#000000', 
+            color: '#ffffff', 
+            border: '1px solid #000000', 
+            borderRadius: '4px',
+            fontSize: '16px',
+            fontWeight: '500',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#333333';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = '#000000';
+          }}>
+            Check Rates
           </button>
         </div>
+
+        {/* Image Carousel */}
+        <div style={{ marginBottom: '48px' }}>
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(4, 1fr)', 
+            gap: '16px',
+            marginBottom: '24px'
+          }}>
+            {/* Image 1 - image-70 */}
+            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+              <img 
+                src="/image-70.png" 
+                alt="Palace Suite Bedroom" 
+                style={{ width: '100%', height: '250px', objectFit: 'cover' }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback for image-70 */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '250px', 
+                backgroundColor: '#f8f9fa',
+                position: 'relative',
+                overflow: 'hidden',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <div style={{ 
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#e5e7eb',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#9ca3af',
+                  fontSize: '24px'
+                }}>
+                  🛏️
+                </div>
+              </div>
+            </div>
+
+            {/* Image 2 - image-71 */}
+            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+              <img 
+                src="/image-71.png" 
+                alt="Palace Suite Bathroom" 
+                style={{ width: '100%', height: '250px', objectFit: 'cover' }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback for image-71 */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '250px', 
+                backgroundColor: '#f8f9fa',
+                position: 'relative',
+                overflow: 'hidden',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <div style={{ 
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#e5e7eb',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#9ca3af',
+                  fontSize: '24px'
+                }}>
+                  🛁
+                </div>
+              </div>
+            </div>
+
+            {/* Image 3 - image-73 */}
+            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+              <img 
+                src="/image-73.png" 
+                alt="Palace Suite Bathroom Detail" 
+                style={{ width: '100%', height: '250px', objectFit: 'cover' }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback for image-73 */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '250px', 
+                backgroundColor: '#f8f9fa',
+                position: 'relative',
+                overflow: 'hidden',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <div style={{ 
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#e5e7eb',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#9ca3af',
+                  fontSize: '24px'
+                }}>
+                  🧴
+                </div>
+              </div>
+            </div>
+
+            {/* Image 4 - image-74 */}
+            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+              <img 
+                src="/image-74.png" 
+                alt="Palace Suite Additional View" 
+                style={{ width: '100%', height: '250px', objectFit: 'cover' }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback for image-74 */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '250px', 
+                backgroundColor: '#f8f9fa',
+                position: 'relative',
+                overflow: 'hidden',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <div style={{ 
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#e5e7eb',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#9ca3af',
+                  fontSize: '24px'
+                }}>
+                  🏰
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Carousel Navigation Arrows */}
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '16px' }}>
+            <button style={{ 
+              width: '40px', 
+              height: '40px', 
+              borderRadius: '50%', 
+              backgroundColor: '#f3f4f6', 
+              border: '1px solid #d1d5db',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '18px',
+              color: '#6b7280'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#e5e7eb';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#f3f4f6';
+            }}>
+              ‹
+            </button>
+            <button style={{ 
+              width: '40px', 
+              height: '40px', 
+              borderRadius: '50%', 
+              backgroundColor: '#f3f4f6', 
+              border: '1px solid #d1d5db',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '18px',
+              color: '#6b7280'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#e5e7eb';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#f3f4f6';
+            }}>
+              ›
+            </button>
+                    </div>
+        </div>
+
+        {/* AMENITIES Section */}
+        <div style={{ marginBottom: '48px' }}>
+          {/* Main Title */}
+          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>AMENITIES</h2>
+          </div>
+
+          {/* Key Amenities Grid */}
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(3, 1fr)', 
+            gap: '24px',
+            marginBottom: '32px'
+          }}>
+            {/* 1 ANTE ROOM */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🛏️
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>1 ANTE ROOM</span>
+            </div>
+
+            {/* 2 EN SUITE BATHROOM */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🛁
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>2 EN SUITE BATHROOM</span>
+            </div>
+
+            {/* PALACE GARDEN VIEW */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🏔️
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>PALACE GARDEN VIEW</span>
+            </div>
+
+            {/* 1 KING BED */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🛏️
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>1 KING BED</span>
+            </div>
+
+            {/* 591 Sq. Ft. */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                ⬜
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>591 Sq. Ft.</span>
+            </div>
+
+            {/* DESIGNED BY CHANNA DASWATTE */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🏰
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>DESIGNED BY CHANNA DASWATTE</span>
+            </div>
+          </div>
+
+          {/* Divider Line */}
+          <div style={{ 
+            height: '1px', 
+            backgroundColor: '#e5e7eb', 
+            marginBottom: '24px' 
+          }}></div>
+
+          {/* ROOM FEATURES Section */}
+          <div>
+            <h3 style={{ 
+              fontSize: '24px', 
+              fontWeight: 'bold', 
+              color: '#000000', 
+              marginBottom: '24px',
+              fontFamily: '"Montserrat", sans-serif'
+            }}>
+              ROOM FEATURES
+            </h3>
+
+            {/* Expandable Categories */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+              {/* BATH Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>BATH</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+              </div>
+
+              {/* TECHNOLOGY Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>TECHNOLOGY</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+              </div>
+
+              {/* SERVICES Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>SERVICES</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+              </div>
+
+              {/* Fourth Category (placeholder) */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>AMENITIES</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* OTHER SUITES Section */}
+        <div style={{ marginBottom: '48px' }}>
+          {/* Main Title */}
+          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>OTHER SUITES</h2>
+          </div>
+
+          {/* Suites Grid */}
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(2, 1fr)', 
+            gap: '32px'
+          }}>
+            {/* GENERATOR SUITES */}
+            <div style={{ 
+              backgroundColor: '#ffffff',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+            }}>
+              {/* Image */}
+              <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                <img 
+                  src="/image-75.png" 
+                  alt="Generator Suites" 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'flex';
+                    }
+                  }}
+                />
+                {/* Fallback for Generator Suites image */}
+                <div style={{ 
+                  display: 'none', 
+                  width: '100%', 
+                  height: '100%', 
+                  backgroundColor: '#f8f9fa',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <div style={{ 
+                    width: '60%',
+                    height: '40%',
+                    backgroundColor: '#e5e7eb',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#9ca3af',
+                    fontSize: '24px'
+                  }}>
+                    🏭
+                  </div>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div style={{ padding: '24px' }}>
+                <h3 style={{ 
+                  fontSize: '20px', 
+                  fontWeight: 'bold', 
+                  color: '#000000', 
+                  marginBottom: '16px',
+                  textTransform: 'uppercase',
+                  fontFamily: '"Montserrat", sans-serif'
+                }}>
+                  GENERATOR SUITES
+                </h3>
+                <p style={{ 
+                  fontSize: '16px', 
+                  color: '#6b7280', 
+                  lineHeight: '1.6',
+                  fontFamily: '"Lato", sans-serif'
+                }}>
+                  Once the heart of the royal palace's power generation, these suites have now been transformed into a luxurious retreat, offering orchard views and outdoor bathtubs.
+                </p>
+              </div>
+            </div>
+
+            {/* FAMILY PALACE SUITE */}
+            <div style={{ 
+              backgroundColor: '#ffffff',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+            }}>
+              {/* Image */}
+              <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                <img 
+                  src="/image-76.png" 
+                  alt="Family Palace Suite" 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'flex';
+                    }
+                  }}
+                />
+                {/* Fallback for Family Palace Suite image */}
+                <div style={{ 
+                  display: 'none', 
+                  width: '100%', 
+                  height: '100%', 
+                  backgroundColor: '#f8f9fa',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <div style={{ 
+                    width: '60%',
+                    height: '40%',
+                    backgroundColor: '#e5e7eb',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#9ca3af',
+                    fontSize: '24px'
+                  }}>
+                    👨‍👩‍👧‍👦
+                  </div>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div style={{ padding: '24px' }}>
+                <h3 style={{ 
+                  fontSize: '20px', 
+                  fontWeight: 'bold', 
+                  color: '#000000', 
+                  marginBottom: '16px',
+                  textTransform: 'uppercase',
+                  fontFamily: '"Montserrat", sans-serif'
+                }}>
+                  FAMILY PALACE SUITE
+                </h3>
+                <p style={{ 
+                  fontSize: '16px', 
+                  color: '#6b7280', 
+                  lineHeight: '1.6',
+                  fontFamily: '"Lato", sans-serif'
+                }}>
+                  A fusion of two palace suites, featuring a spacious lounge- an expansive, lush private retreat perfect for families and added privacy.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Back to Accommodation Button */}
+        
+        </div>
+    </>
+  );
+
+  const renderPalaceFamilySuitePage = () => (
+    <>
+      {/* Main Title */}
+      <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+        <h1 style={{ fontSize: '32px', fontWeight: '200', fontFamily: '"Montserrat", sans-serif', color: '#000000', marginBottom: '16px' }}>Palace Family Suite</h1>
+      </div>
+
+      {/* Tab Navigation */}
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px', borderBottom: '1px solid #e5e7eb' }}>
+        <div style={{ display: 'flex', gap: '0' }}>
+          {['Overview', 'Rambha Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite', 'Ice Mill Suite', 'Printing Press Suite'].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => {
+                if (tab === 'Overview') {
+                  setCurrentPage('accommodation');
+                  setActiveTab('overview');
+                } else if (tab === 'Rambha Villa') {
+                  setCurrentPage('accommodation');
+                  setActiveTab('rambha-villa');
+                } else if (tab === 'Palace Suite') {
+                  setCurrentPage('palace-suite');
+                  setPalaceSuiteTab('palace-suite');
+                } else if (tab === 'Palace Family Suite') {
+                  setCurrentPage('palace-family-suite');
+                  setPalaceSuiteTab('palace-family-suite');
+                } else if (tab === 'Generator Suite') {
+                  setCurrentPage('generator-suite');
+                  setPalaceSuiteTab('generator-suite');
+                } else if (tab === 'Ice Mill Suite') {
+                  setCurrentPage('ice-mill-suite');
+                  setPalaceSuiteTab('ice-mill-suite');
+                } else if (tab === 'Printing Press Suite') {
+                  setCurrentPage('printing-press-suite');
+                  setPalaceSuiteTab('printing-press-suite');
+                } else {
+                  setPalaceSuiteTab(tab.toLowerCase().replace(' ', '-'));
+                }
+              }}
+              style={{
+                padding: '12px 24px',
+                border: 'none',
+                backgroundColor: 'transparent',
+                color: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '#d97706' : '#6b7280',
+                fontWeight: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '600' : '500',
+                borderBottom: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '2px solid #d97706' : 'none',
+                cursor: 'pointer',
+                fontSize: '14px'
+              }}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Main Content Area */}
+      <div style={{ maxWidth: '1024px', margin: '0 auto' }}>
+        {/* Large Room Image */}
+        <div style={{ marginBottom: '48px' }}>
+          <div style={{ position: 'relative', width: '100%', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}>
+            <div style={{ aspectRatio: '16/10', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <img 
+                src="/image-60.webp" 
+                alt="Palace Family Suite" 
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback room design if image doesn't load */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '100%', 
+                backgroundColor: '#f8f9fa',
+                position: 'relative',
+                overflow: 'hidden'
+              }}>
+                {/* Four-poster bed */}
+                <div style={{ 
+                  position: 'absolute', 
+                  top: '50%', 
+                  left: '50%', 
+                  transform: 'translate(-50%, -50%)',
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#ffffff',
+                  border: '2px solid #d1d5db',
+                  borderRadius: '8px',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+                }}>
+                  {/* Bed posts */}
+                  <div style={{ position: 'absolute', top: '-20px', left: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                  <div style={{ position: 'absolute', top: '-20px', right: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                  <div style={{ position: 'absolute', bottom: '-20px', left: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                  <div style={{ position: 'absolute', bottom: '-20px', right: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                </div>
+                
+                {/* Green sofa */}
+                <div style={{ 
+                  position: 'absolute', 
+                  bottom: '20%', 
+                  left: '10%',
+                  width: '25%',
+                  height: '15%',
+                  backgroundColor: '#228b22',
+                  borderRadius: '8px 8px 0 0'
+                }}></div>
+                
+                {/* Window */}
+                <div style={{ 
+                  position: 'absolute', 
+                  top: '10%', 
+                  left: '5%',
+                  width: '20%',
+                  height: '30%',
+                  backgroundColor: '#87ceeb',
+                  border: '2px solid #d1d5db'
+                }}></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* PALACE FAMILY SUITE Section */}
+        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#000000', marginBottom: '24px', fontFamily: '"Montserrat", sans-serif' }}>PALACE FAMILY SUITE</h2>
+          <div style={{ maxWidth: '800px', margin: '0 auto', color: '#3A3A3A', lineHeight: '1.8', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
+            <p style={{ marginBottom: '16px' }}>
+              The Palace Suites are individually designed within the original palace block, reflecting the regal charm of the era with authentic vintage Odia handicrafts. Each suite boasts a king-size four-poster bed with sumptuous crested linen, offering the perfect blend of luxury and comfort.
+            </p>
+            <p style={{ marginBottom: '16px' }}>
+              The suites feature an ante room with picture windows that overlook the serene palace gardens, while the marble-clad bathrooms come with a spacious bathtub. Additionally, a dedicated palace butler service ensures that every guest's needs are met with the highest level of care.
+            </p>
+            <p>
+              Experience the luxury and grandeur of the palace block, once home to the royal family in a bygone era.
+            </p>
+          </div>
+        </div>
+
+        {/* Buttons Section */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginBottom: '48px' }}>
+          <button style={{ 
+            padding: '16px 32px', 
+            backgroundColor: 'transparent', 
+            color: '#000000', 
+            border: '1px solid #000000', 
+            borderRadius: '4px',
+            fontSize: '16px',
+            fontWeight: '500',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#000000';
+            e.currentTarget.style.color = '#ffffff';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'transparent';
+            e.currentTarget.style.color = '#000000';
+          }}>
+            Floor Plan
+          </button>
+          <button style={{ 
+            padding: '16px 32px', 
+            backgroundColor: '#000000', 
+            color: '#ffffff', 
+            border: '1px solid #000000', 
+            borderRadius: '4px',
+            fontSize: '16px',
+            fontWeight: '500',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#333333';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = '#000000';
+          }}>
+            Check Rates
+          </button>
+        </div>
+
+        {/* Image Carousel */}
+        <div style={{ marginBottom: '48px' }}>
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(3, 1fr)', 
+            gap: '24px',
+            marginBottom: '24px'
+          }}>
+            {/* Left Image - Bedroom */}
+            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+              <img 
+                src="/image-70.png" 
+                alt="Palace Family Suite Bedroom" 
+                style={{ width: '100%', height: '300px', objectFit: 'cover' }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback for bedroom image */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '300px', 
+                backgroundColor: '#f8f9fa',
+                position: 'relative',
+                overflow: 'hidden',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <div style={{ 
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#e5e7eb',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#9ca3af',
+                  fontSize: '24px'
+                }}>
+                  🛏️
+                </div>
+              </div>
+            </div>
+
+            {/* Middle Image - Bathroom */}
+            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+              <img 
+                src="/image-71.png" 
+                alt="Palace Family Suite Bathroom" 
+                style={{ width: '100%', height: '300px', objectFit: 'cover' }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback for bathroom image */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '300px', 
+                backgroundColor: '#f8f9fa',
+                position: 'relative',
+                overflow: 'hidden',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <div style={{ 
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#e5e7eb',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#9ca3af',
+                  fontSize: '24px'
+                }}>
+                  🛁
+                </div>
+              </div>
+            </div>
+
+            {/* Right Image - Bathroom Detail */}
+            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+              <img 
+                src="/image-73.png" 
+                alt="Palace Family Suite Bathroom Detail" 
+                style={{ width: '100%', height: '300px', objectFit: 'cover' }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback for bathroom detail image */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '300px', 
+                backgroundColor: '#f8f9fa',
+                position: 'relative',
+                overflow: 'hidden',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <div style={{ 
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#e5e7eb',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#9ca3af',
+                  fontSize: '24px'
+                }}>
+                  🧴
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Carousel Navigation Arrows */}
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '16px' }}>
+            <button style={{ 
+              width: '40px', 
+              height: '40px', 
+              borderRadius: '50%', 
+              backgroundColor: '#f3f4f6', 
+              border: '1px solid #d1d5db',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '18px',
+              color: '#6b7280'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#e5e7eb';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#f3f4f6';
+            }}>
+              ‹
+            </button>
+            <button style={{ 
+              width: '40px', 
+              height: '40px', 
+              borderRadius: '50%', 
+              backgroundColor: '#f3f4f6', 
+              border: '1px solid #d1d5db',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '18px',
+              color: '#6b7280'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#e5e7eb';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#f3f4f6';
+            }}>
+              ›
+            </button>
+          </div>
+        </div>
+
+        {/* AMENITIES Section */}
+        <div style={{ marginBottom: '48px' }}>
+          {/* Main Title */}
+          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>AMENITIES</h2>
+          </div>
+
+          {/* Key Amenities Grid */}
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(3, 1fr)', 
+            gap: '24px',
+            marginBottom: '32px'
+          }}>
+            {/* 1 ANTE ROOM */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🛏️
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>1 ANTE ROOM</span>
+            </div>
+
+            {/* 2 EN SUITE BATHROOM */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🛁
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>2 EN SUITE BATHROOM</span>
+            </div>
+
+            {/* PALACE GARDEN VIEW */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🏔️
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>PALACE GARDEN VIEW</span>
+            </div>
+
+            {/* 1 KING BED */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🛏️
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>1 KING BED</span>
+            </div>
+
+            {/* 591 Sq. Ft. */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                ⬜
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>591 Sq. Ft.</span>
+            </div>
+
+            {/* DESIGNED BY CHANNA DASWATTE */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🏰
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>DESIGNED BY CHANNA DASWATTE</span>
+            </div>
+          </div>
+
+          {/* Divider Line */}
+          <div style={{ 
+            height: '1px', 
+            backgroundColor: '#e5e7eb', 
+            marginBottom: '24px' 
+          }}></div>
+
+          {/* ROOM FEATURES Section */}
+          <div>
+            <h3 style={{ 
+              fontSize: '24px', 
+              fontWeight: 'bold', 
+              color: '#000000', 
+              marginBottom: '24px',
+              fontFamily: '"Montserrat", sans-serif'
+            }}>
+              ROOM FEATURES
+            </h3>
+
+            {/* Expandable Categories */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+              {/* BATH Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>BATH</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+              </div>
+
+              {/* TECHNOLOGY Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>TECHNOLOGY</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+              </div>
+
+              {/* SERVICES Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>SERVICES</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+              </div>
+
+              {/* Fourth Category (placeholder) */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>AMENITIES</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+
+  const renderGeneratorSuitePage = () => (
+    <>
+      {/* Main Title */}
+      <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+        <h1 style={{ fontSize: '32px', fontWeight: '200', fontFamily: '"Montserrat", sans-serif', color: '#000000', marginBottom: '16px' }}>Generator Suite</h1>
+      </div>
+
+      {/* Tab Navigation */}
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px', borderBottom: '1px solid #e5e7eb' }}>
+        <div style={{ display: 'flex', gap: '0' }}>
+          {['Overview', 'Rambha Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite', 'Ice Mill Suite', 'Printing Press Suite'].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => {
+                if (tab === 'Overview') {
+                  setCurrentPage('accommodation');
+                  setActiveTab('overview');
+                } else if (tab === 'Rambha Villa') {
+                  setCurrentPage('accommodation');
+                  setActiveTab('rambha-villa');
+                } else if (tab === 'Palace Suite') {
+                  setCurrentPage('palace-suite');
+                  setPalaceSuiteTab('palace-suite');
+                } else if (tab === 'Palace Family Suite') {
+                  setCurrentPage('palace-family-suite');
+                  setPalaceSuiteTab('palace-family-suite');
+                } else if (tab === 'Generator Suite') {
+                  setCurrentPage('generator-suite');
+                  setPalaceSuiteTab('generator-suite');
+                } else if (tab === 'Ice Mill Suite') {
+                  setCurrentPage('ice-mill-suite');
+                  setPalaceSuiteTab('ice-mill-suite');
+                } else if (tab === 'Printing Press Suite') {
+                  setCurrentPage('printing-press-suite');
+                  setPalaceSuiteTab('printing-press-suite');
+                } else {
+                  setPalaceSuiteTab(tab.toLowerCase().replace(' ', '-'));
+                }
+              }}
+              style={{
+                padding: '12px 24px',
+                border: 'none',
+                backgroundColor: 'transparent',
+                color: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '#d97706' : '#6b7280',
+                fontWeight: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '600' : '500',
+                borderBottom: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '2px solid #d97706' : 'none',
+                cursor: 'pointer',
+                fontSize: '14px'
+              }}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Main Content Area */}
+      <div style={{ maxWidth: '1024px', margin: '0 auto' }}>
+        {/* Large Room Image */}
+        <div style={{ marginBottom: '48px' }}>
+          <div style={{ position: 'relative', width: '100%', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}>
+            <div style={{ aspectRatio: '16/10', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <img 
+                src="/image-77.png" 
+                alt="Generator Suite" 
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback room design if image doesn't load */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '100%', 
+                backgroundColor: '#f8f9fa',
+                position: 'relative',
+                overflow: 'hidden'
+              }}>
+                {/* Four-poster bed */}
+                <div style={{ 
+                  position: 'absolute', 
+                  top: '50%', 
+                  left: '50%', 
+                  transform: 'translate(-50%, -50%)',
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#ffffff',
+                  border: '2px solid #d1d5db',
+                  borderRadius: '8px',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+                }}>
+                  {/* Bed posts */}
+                  <div style={{ position: 'absolute', top: '-20px', left: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                  <div style={{ position: 'absolute', top: '-20px', right: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                  <div style={{ position: 'absolute', bottom: '-20px', left: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                  <div style={{ position: 'absolute', bottom: '-20px', right: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                </div>
+                
+                {/* Green sofa */}
+                <div style={{ 
+                  position: 'absolute', 
+                  bottom: '20%', 
+                  left: '10%',
+                  width: '25%',
+                  height: '15%',
+                  backgroundColor: '#228b22',
+                  borderRadius: '8px 8px 0 0'
+                }}></div>
+                
+                {/* Window */}
+                <div style={{ 
+                  position: 'absolute', 
+                  top: '10%', 
+                  left: '5%',
+                  width: '20%',
+                  height: '30%',
+                  backgroundColor: '#87ceeb',
+                  border: '2px solid #d1d5db'
+                }}></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* GENERATOR SUITE Section */}
+        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#000000', marginBottom: '24px', fontFamily: '"Montserrat", sans-serif' }}>GENERATOR SUITE</h2>
+          <div style={{ maxWidth: '800px', margin: '0 auto', color: '#3A3A3A', lineHeight: '1.8', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
+            <p style={{ marginBottom: '16px' }}>
+              The Palace Suites are individually designed within the original palace block, reflecting the regal charm of the era with authentic vintage Odia handicrafts. Each suite boasts a king-size four-poster bed with sumptuous crested linen, offering the perfect blend of luxury and comfort.
+            </p>
+            <p style={{ marginBottom: '16px' }}>
+              The suites feature an ante room with picture windows that overlook the serene palace gardens, while the marble-clad bathrooms come with a spacious bathtub. Additionally, a dedicated palace butler service ensures that every guest's needs are met with the highest level of care.
+            </p>
+            <p>
+              Experience the luxury and grandeur of the palace block, once home to the royal family in a bygone era.
+            </p>
+          </div>
+        </div>
+
+        {/* Buttons Section */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginBottom: '48px' }}>
+          <button style={{ 
+            padding: '16px 32px', 
+            backgroundColor: 'transparent', 
+            color: '#000000', 
+            border: '1px solid #000000', 
+            borderRadius: '4px',
+            fontSize: '16px',
+            fontWeight: '500',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#000000';
+            e.currentTarget.style.color = '#ffffff';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'transparent';
+            e.currentTarget.style.color = '#000000';
+          }}>
+            Floor Plan
+          </button>
+          <button style={{ 
+            padding: '16px 32px', 
+            backgroundColor: '#000000', 
+            color: '#ffffff', 
+            border: '1px solid #000000', 
+            borderRadius: '4px',
+            fontSize: '16px',
+            fontWeight: '500',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#333333';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = '#000000';
+          }}>
+            Check Rates
+          </button>
+        </div>
+
+        {/* Image Carousel */}
+        <div style={{ marginBottom: '48px' }}>
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(3, 1fr)', 
+            gap: '24px',
+            marginBottom: '24px'
+          }}>
+            {/* Left Image - Bedroom */}
+            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+              <img 
+                src="/image-70.png" 
+                alt="Generator Suite Bedroom" 
+                style={{ width: '100%', height: '300px', objectFit: 'cover' }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback for bedroom image */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '300px', 
+                backgroundColor: '#f8f9fa',
+                position: 'relative',
+                overflow: 'hidden',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <div style={{ 
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#e5e7eb',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#9ca3af',
+                  fontSize: '24px'
+                }}>
+                  🛏️
+                </div>
+              </div>
+            </div>
+
+            {/* Middle Image - Bathroom */}
+            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+              <img 
+                src="/image-71.png" 
+                alt="Generator Suite Bathroom" 
+                style={{ width: '100%', height: '300px', objectFit: 'cover' }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback for bathroom image */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '300px', 
+                backgroundColor: '#f8f9fa',
+                position: 'relative',
+                overflow: 'hidden',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <div style={{ 
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#e5e7eb',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#9ca3af',
+                  fontSize: '24px'
+                }}>
+                  🛁
+                </div>
+              </div>
+            </div>
+
+            {/* Right Image - Bathroom Detail */}
+            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+              <img 
+                src="/image-73.png" 
+                alt="Generator Suite Bathroom Detail" 
+                style={{ width: '100%', height: '300px', objectFit: 'cover' }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback for bathroom detail image */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '300px', 
+                backgroundColor: '#f8f9fa',
+                position: 'relative',
+                overflow: 'hidden',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <div style={{ 
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#e5e7eb',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#9ca3af',
+                  fontSize: '24px'
+                }}>
+                  🧴
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Carousel Navigation Arrows */}
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '16px' }}>
+            <button style={{ 
+              width: '40px', 
+              height: '40px', 
+              borderRadius: '50%', 
+              backgroundColor: '#f3f4f6', 
+              border: '1px solid #d1d5db',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '18px',
+              color: '#6b7280'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#e5e7eb';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#f3f4f6';
+            }}>
+              ‹
+            </button>
+            <button style={{ 
+              width: '40px', 
+              height: '40px', 
+              borderRadius: '50%', 
+              backgroundColor: '#f3f4f6', 
+              border: '1px solid #d1d5db',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '18px',
+              color: '#6b7280'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#e5e7eb';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#f3f4f6';
+            }}>
+              ›
+            </button>
+          </div>
+        </div>
+
+        {/* AMENITIES Section */}
+        <div style={{ marginBottom: '48px' }}>
+          {/* Main Title */}
+          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>AMENITIES</h2>
+          </div>
+
+          {/* Key Amenities Grid */}
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(3, 1fr)', 
+            gap: '24px',
+            marginBottom: '32px'
+          }}>
+            {/* 1 ANTE ROOM */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🛏️
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>1 ANTE ROOM</span>
+            </div>
+
+            {/* 2 EN SUITE BATHROOM */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🛁
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>2 EN SUITE BATHROOM</span>
+            </div>
+
+            {/* PALACE GARDEN VIEW */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🏔️
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>PALACE GARDEN VIEW</span>
+            </div>
+
+            {/* 1 KING BED */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🛏️
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>1 KING BED</span>
+            </div>
+
+            {/* 591 Sq. Ft. */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                ⬜
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>591 Sq. Ft.</span>
+            </div>
+
+            {/* DESIGNED BY CHANNA DASWATTE */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🏰
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>DESIGNED BY CHANNA DASWATTE</span>
+            </div>
+          </div>
+
+          {/* Divider Line */}
+          <div style={{ 
+            height: '1px', 
+            backgroundColor: '#e5e7eb', 
+            marginBottom: '24px' 
+          }}></div>
+
+          {/* ROOM FEATURES Section */}
+          <div>
+            <h3 style={{ 
+              fontSize: '24px', 
+              fontWeight: 'bold', 
+              color: '#000000', 
+              marginBottom: '24px',
+              fontFamily: '"Montserrat", sans-serif'
+            }}>
+              ROOM FEATURES
+            </h3>
+
+            {/* Expandable Categories */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+              {/* BATH Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>BATH</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+              </div>
+
+              {/* TECHNOLOGY Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>TECHNOLOGY</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+              </div>
+
+              {/* SERVICES Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>SERVICES</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+              </div>
+
+              {/* Fourth Category (placeholder) */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>AMENITIES</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+
+  const renderIceMillSuitePage = () => (
+    <>
+
+      {/* Main Title */}
+      <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+        <h1 style={{ fontSize: '32px', fontWeight: '200', fontFamily: '"Montserrat", sans-serif', color: '#000000', marginBottom: '16px' }}>Ice Mill Suite</h1>
+      </div>
+
+      {/* Tab Navigation */}
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px', borderBottom: '1px solid #e5e7eb' }}>
+        <div style={{ display: 'flex', gap: '0' }}>
+          {['Overview', 'Rambha Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite', 'Ice Mill Suite', 'Printing Press Suite'].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => {
+                if (tab === 'Overview') {
+                  setCurrentPage('accommodation');
+                  setActiveTab('overview');
+                } else if (tab === 'Rambha Villa') {
+                  setCurrentPage('accommodation');
+                  setActiveTab('rambha-villa');
+                } else if (tab === 'Palace Suite') {
+                  setCurrentPage('palace-suite');
+                  setPalaceSuiteTab('palace-suite');
+                } else if (tab === 'Palace Family Suite') {
+                  setCurrentPage('palace-family-suite');
+                  setPalaceSuiteTab('palace-family-suite');
+                } else if (tab === 'Generator Suite') {
+                  setCurrentPage('generator-suite');
+                  setPalaceSuiteTab('generator-suite');
+                } else if (tab === 'Ice Mill Suite') {
+                  setCurrentPage('ice-mill-suite');
+                  setPalaceSuiteTab('ice-mill-suite');
+                } else if (tab === 'Printing Press Suite') {
+                  setCurrentPage('printing-press-suite');
+                  setPalaceSuiteTab('printing-press-suite');
+                } else {
+                  setPalaceSuiteTab(tab.toLowerCase().replace(' ', '-'));
+                }
+              }}
+              style={{
+                padding: '12px 24px',
+                border: 'none',
+                backgroundColor: 'transparent',
+                color: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '#d97706' : '#6b7280',
+                fontWeight: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '600' : '500',
+                borderBottom: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '2px solid #d97706' : 'none',
+                cursor: 'pointer',
+                fontSize: '14px'
+              }}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Main Content Area */}
+      <div style={{ maxWidth: '1024px', margin: '0 auto' }}>
+        {/* Large Room Image */}
+        <div style={{ marginBottom: '48px' }}>
+          <div style={{ position: 'relative', width: '100%', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}>
+            <div style={{ aspectRatio: '16/10', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <img 
+                src="/image-78.png" 
+                alt="Ice Mill Suite" 
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback room design if image doesn't load */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '100%', 
+                backgroundColor: '#f8f9fa',
+                position: 'relative',
+                overflow: 'hidden'
+              }}>
+                {/* Four-poster bed */}
+                <div style={{ 
+                  position: 'absolute', 
+                  top: '50%', 
+                  left: '50%', 
+                  transform: 'translate(-50%, -50%)',
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#ffffff',
+                  border: '2px solid #d1d5db',
+                  borderRadius: '8px',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+                }}>
+                  {/* Bed posts */}
+                  <div style={{ position: 'absolute', top: '-20px', left: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                  <div style={{ position: 'absolute', top: '-20px', right: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                  <div style={{ position: 'absolute', bottom: '-20px', left: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                  <div style={{ position: 'absolute', bottom: '-20px', right: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                </div>
+                
+                {/* Green sofa */}
+                <div style={{ 
+                  position: 'absolute', 
+                  bottom: '20%', 
+                  left: '10%',
+                  width: '25%',
+                  height: '15%',
+                  backgroundColor: '#228b22',
+                  borderRadius: '8px 8px 0 0'
+                }}></div>
+                
+                {/* Window */}
+                <div style={{ 
+                  position: 'absolute', 
+                  top: '10%', 
+                  left: '5%',
+                  width: '20%',
+                  height: '30%',
+                  backgroundColor: '#87ceeb',
+                  border: '2px solid #d1d5db'
+                }}></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ICE MILL SUITE Section */}
+        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#000000', marginBottom: '24px', fontFamily: '"Montserrat", sans-serif' }}>ICE MILL SUITE</h2>
+          <div style={{ maxWidth: '800px', margin: '0 auto', color: '#3A3A3A', lineHeight: '1.8', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
+            <p style={{ marginBottom: '16px' }}>
+              The Ice Mill Suites are individually designed within the original palace block, reflecting the regal charm of the era with authentic vintage Odia handicrafts. Each suite boasts a king-size four-poster bed with sumptuous crested linen, offering the perfect blend of luxury and comfort.
+            </p>
+            <p style={{ marginBottom: '16px' }}>
+              The suites feature an ante room with picture windows that overlook the serene palace gardens, while the marble-clad bathrooms come with a spacious bathtub. Additionally, a dedicated palace butler service ensures that every guest's needs are met with the highest level of care.
+            </p>
+            <p>
+              Experience the luxury and grandeur of the palace block, once home to the royal family in a bygone era.
+            </p>
+          </div>
+        </div>
+
+        {/* Buttons Section */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginBottom: '48px' }}>
+          <button style={{ 
+            padding: '16px 32px', 
+            backgroundColor: 'transparent', 
+            color: '#000000', 
+            border: '1px solid #000000', 
+            borderRadius: '4px',
+            fontSize: '16px',
+            fontWeight: '500',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#000000';
+            e.currentTarget.style.color = '#ffffff';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'transparent';
+            e.currentTarget.style.color = '#000000';
+          }}>
+            Floor Plan
+          </button>
+          <button style={{ 
+            padding: '16px 32px', 
+            backgroundColor: '#000000', 
+            color: '#ffffff', 
+            border: '1px solid #000000', 
+            borderRadius: '4px',
+            fontSize: '16px',
+            fontWeight: '500',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#333333';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = '#000000';
+          }}>
+            Check Rates
+          </button>
+        </div>
+
+        {/* Image Carousel */}
+        <div style={{ marginBottom: '48px' }}>
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(4, 1fr)', 
+            gap: '16px',
+            marginBottom: '24px'
+          }}>
+            {/* Image 1 - image-70 */}
+            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+              <img 
+                src="/image-70.png" 
+                alt="Ice Mill Suite Bedroom" 
+                style={{ width: '100%', height: '250px', objectFit: 'cover' }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback for image-70 */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '250px', 
+                backgroundColor: '#f8f9fa',
+                position: 'relative',
+                overflow: 'hidden',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <div style={{ 
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#e5e7eb',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#9ca3af',
+                  fontSize: '24px'
+                }}>
+                  🛏️
+                </div>
+              </div>
+            </div>
+
+            {/* Image 2 - image-71 */}
+            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+              <img 
+                src="/image-71.png" 
+                alt="Ice Mill Suite Bathroom" 
+                style={{ width: '100%', height: '250px', objectFit: 'cover' }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback for image-71 */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '250px', 
+                backgroundColor: '#f8f9fa',
+                position: 'relative',
+                overflow: 'hidden',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <div style={{ 
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#e5e7eb',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#9ca3af',
+                  fontSize: '24px'
+                }}>
+                  🛁
+                </div>
+              </div>
+            </div>
+
+            {/* Image 3 - image-73 */}
+            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+              <img 
+                src="/image-73.png" 
+                alt="Ice Mill Suite Bathroom Detail" 
+                style={{ width: '100%', height: '250px', objectFit: 'cover' }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback for image-73 */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '250px', 
+                backgroundColor: '#f8f9fa',
+                position: 'relative',
+                overflow: 'hidden',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <div style={{ 
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#e5e7eb',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#9ca3af',
+                  fontSize: '24px'
+                }}>
+                  🧴
+                </div>
+              </div>
+            </div>
+
+            {/* Image 4 - image-74 */}
+            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+              <img 
+                src="/image-74.png" 
+                alt="Ice Mill Suite Additional View" 
+                style={{ width: '100%', height: '250px', objectFit: 'cover' }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback for image-74 */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '250px', 
+                backgroundColor: '#f8f9fa',
+                position: 'relative',
+                overflow: 'hidden',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <div style={{ 
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#e5e7eb',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#9ca3af',
+                  fontSize: '24px'
+                }}>
+                  🏰
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Carousel Navigation Arrows */}
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '16px' }}>
+            <button style={{ 
+              width: '40px', 
+              height: '40px', 
+              borderRadius: '50%', 
+              backgroundColor: '#f3f4f6', 
+              border: '1px solid #d1d5db',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '18px',
+              color: '#6b7280'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#e5e7eb';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#f3f4f6';
+            }}>
+              ‹
+            </button>
+            <button style={{ 
+              width: '40px', 
+              height: '40px', 
+              borderRadius: '50%', 
+              backgroundColor: '#f3f4f6', 
+              border: '1px solid #d1d5db',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '18px',
+              color: '#6b7280'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#e5e7eb';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#f3f4f6';
+            }}>
+              ›
+            </button>
+          </div>
+        </div>
+
+        {/* AMENITIES Section */}
+        <div style={{ marginBottom: '48px' }}>
+          {/* Main Title */}
+          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>AMENITIES</h2>
+          </div>
+
+          {/* Key Amenities Grid */}
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(3, 1fr)', 
+            gap: '24px',
+            marginBottom: '32px'
+          }}>
+            {/* 1 ANTE ROOM */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🛏️
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>1 ANTE ROOM</span>
+            </div>
+
+            {/* 2 EN SUITE BATHROOM */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🛁
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>2 EN SUITE BATHROOM</span>
+            </div>
+
+            {/* PALACE GARDEN VIEW */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🏔️
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>PALACE GARDEN VIEW</span>
+            </div>
+
+            {/* 1 KING BED */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🛏️
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>1 KING BED</span>
+            </div>
+
+            {/* 591 Sq. Ft. */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                ⬜
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>591 Sq. Ft.</span>
+            </div>
+
+            {/* DESIGNED BY CHANNA DASWATTE */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🏰
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>DESIGNED BY CHANNA DASWATTE</span>
+            </div>
+          </div>
+
+          {/* Divider Line */}
+          <div style={{ 
+            height: '1px', 
+            backgroundColor: '#e5e7eb', 
+            marginBottom: '24px' 
+          }}></div>
+
+          {/* ROOM FEATURES Section */}
+          <div>
+            <h3 style={{ 
+              fontSize: '24px', 
+              fontWeight: 'bold', 
+              color: '#000000', 
+              marginBottom: '24px',
+              fontFamily: '"Montserrat", sans-serif'
+            }}>
+              ROOM FEATURES
+            </h3>
+
+            {/* Expandable Categories */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+              {/* BATH Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>BATH</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+              </div>
+
+              {/* TECHNOLOGY Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>TECHNOLOGY</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+              </div>
+
+              {/* SERVICES Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>SERVICES</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+              </div>
+
+              {/* Fourth Category (placeholder) */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>AMENITIES</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* OTHER SUITES Section */}
+        <div style={{ marginBottom: '48px' }}>
+          {/* Main Title */}
+          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>OTHER SUITES</h2>
+          </div>
+
+          {/* Suites Grid */}
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(2, 1fr)', 
+            gap: '32px'
+          }}>
+            {/* GENERATOR SUITES */}
+            <div style={{ 
+              backgroundColor: '#ffffff',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+            }}>
+              {/* Image */}
+              <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                <img 
+                  src="/image-75.png" 
+                  alt="Generator Suites" 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'flex';
+                    }
+                  }}
+                />
+                {/* Fallback for Generator Suites image */}
+                <div style={{ 
+                  display: 'none', 
+                  width: '100%', 
+                  height: '100%', 
+                  backgroundColor: '#f8f9fa',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <div style={{ 
+                    width: '60%',
+                    height: '40%',
+                    backgroundColor: '#e5e7eb',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#9ca3af',
+                    fontSize: '24px'
+                  }}>
+                    🏭
+                  </div>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div style={{ padding: '24px' }}>
+                <h3 style={{ 
+                  fontSize: '20px', 
+                  fontWeight: 'bold', 
+                  color: '#000000', 
+                  marginBottom: '16px',
+                  textTransform: 'uppercase',
+                  fontFamily: '"Montserrat", sans-serif'
+                }}>
+                  GENERATOR SUITES
+                </h3>
+                <p style={{ 
+                  fontSize: '16px', 
+                  color: '#6b7280', 
+                  lineHeight: '1.6',
+                  fontFamily: '"Lato", sans-serif'
+                }}>
+                  Once the heart of the royal palace's power generation, these suites have now been transformed into a luxurious retreat, offering orchard views and outdoor bathtubs.
+                </p>
+              </div>
+            </div>
+
+            {/* FAMILY PALACE SUITE */}
+            <div style={{ 
+              backgroundColor: '#ffffff',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+            }}>
+              {/* Image */}
+              <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                <img 
+                  src="/image-76.png" 
+                  alt="Family Palace Suite" 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'flex';
+                    }
+                  }}
+                />
+                {/* Fallback for Family Palace Suite image */}
+                <div style={{ 
+                  display: 'none', 
+                  width: '100%', 
+                  height: '100%', 
+                  backgroundColor: '#f8f9fa',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <div style={{ 
+                    width: '60%',
+                    height: '40%',
+                    backgroundColor: '#e5e7eb',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#9ca3af',
+                    fontSize: '24px'
+                  }}>
+                    👨‍👩‍👧‍👦
+                  </div>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div style={{ padding: '24px' }}>
+                <h3 style={{ 
+                  fontSize: '20px', 
+                  fontWeight: 'bold', 
+                  color: '#000000', 
+                  marginBottom: '16px',
+                  textTransform: 'uppercase',
+                  fontFamily: '"Montserrat", sans-serif'
+                }}>
+                  FAMILY PALACE SUITE
+                </h3>
+                <p style={{ 
+                  fontSize: '16px', 
+                  color: '#6b7280', 
+                  lineHeight: '1.6',
+                  fontFamily: '"Lato", sans-serif'
+                }}>
+                  A fusion of two palace suites, featuring a spacious lounge- an expansive, lush private retreat perfect for families and added privacy.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Back to Accommodation Button */}
+       
+      </div>
+    </>
+  );
+
+  const renderPrintingPressSuitePage = () => (
+    <>
+
+      {/* Main Title */}
+      <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+        <h1 style={{ fontSize: '32px', fontWeight: '200', fontFamily: '"Montserrat", sans-serif', color: '#000000', marginBottom: '16px' }}>Printing Press Suite</h1>
+      </div>
+
+      {/* Tab Navigation */}
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px', borderBottom: '1px solid #e5e7eb' }}>
+        <div style={{ display: 'flex', gap: '0' }}>
+          {['Overview', 'Rambha Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite', 'Ice Mill Suite', 'Printing Press Suite'].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => {
+                if (tab === 'Overview') {
+                  setCurrentPage('accommodation');
+                  setActiveTab('overview');
+                } else if (tab === 'Rambha Villa') {
+                  setCurrentPage('accommodation');
+                  setActiveTab('rambha-villa');
+                } else if (tab === 'Palace Suite') {
+                  setCurrentPage('palace-suite');
+                  setPalaceSuiteTab('palace-suite');
+                } else if (tab === 'Palace Family Suite') {
+                  setCurrentPage('palace-family-suite');
+                  setPalaceSuiteTab('palace-family-suite');
+                } else if (tab === 'Generator Suite') {
+                  setCurrentPage('generator-suite');
+                  setPalaceSuiteTab('generator-suite');
+                } else if (tab === 'Ice Mill Suite') {
+                  setCurrentPage('ice-mill-suite');
+                  setPalaceSuiteTab('ice-mill-suite');
+                } else if (tab === 'Printing Press Suite') {
+                  setCurrentPage('printing-press-suite');
+                  setPalaceSuiteTab('printing-press-suite');
+                } else {
+                  setPalaceSuiteTab(tab.toLowerCase().replace(' ', '-'));
+                }
+              }}
+              style={{
+                padding: '12px 24px',
+                border: 'none',
+                backgroundColor: 'transparent',
+                color: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '#d97706' : '#6b7280',
+                fontWeight: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '600' : '500',
+                borderBottom: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '2px solid #d97706' : 'none',
+                cursor: 'pointer',
+                fontSize: '14px'
+              }}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Main Content Area */}
+      <div style={{ maxWidth: '1024px', margin: '0 auto' }}>
+        {/* Large Room Image */}
+        <div style={{ marginBottom: '48px' }}>
+          <div style={{ position: 'relative', width: '100%', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}>
+            <div style={{ aspectRatio: '16/10', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <img 
+                src="/image-80.webp" 
+                alt="Printing Press Suite" 
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback room design if image doesn't load */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '100%', 
+                backgroundColor: '#f8f9fa',
+                position: 'relative',
+                overflow: 'hidden'
+              }}>
+                {/* Four-poster bed */}
+                <div style={{ 
+                  position: 'absolute', 
+                  top: '50%', 
+                  left: '50%', 
+                  transform: 'translate(-50%, -50%)',
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#ffffff',
+                  border: '2px solid #d1d5db',
+                  borderRadius: '8px',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+                }}>
+                  {/* Bed posts */}
+                  <div style={{ position: 'absolute', top: '-20px', left: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                  <div style={{ position: 'absolute', top: '-20px', right: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                  <div style={{ position: 'absolute', bottom: '-20px', left: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                  <div style={{ position: 'absolute', bottom: '-20px', right: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                </div>
+                
+                {/* Green sofa */}
+                <div style={{ 
+                  position: 'absolute', 
+                  bottom: '20%', 
+                  left: '10%',
+                  width: '25%',
+                  height: '15%',
+                  backgroundColor: '#228b22',
+                  borderRadius: '8px 8px 0 0'
+                }}></div>
+                
+                {/* Window */}
+                <div style={{ 
+                  position: 'absolute', 
+                  top: '10%', 
+                  left: '5%',
+                  width: '20%',
+                  height: '30%',
+                  backgroundColor: '#87ceeb',
+                  border: '2px solid #d1d5db'
+                }}></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* PRINTING PRESS SUITE Section */}
+        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#000000', marginBottom: '24px', fontFamily: '"Montserrat", sans-serif' }}>PRINTING PRESS SUITE</h2>
+          <div style={{ maxWidth: '800px', margin: '0 auto', color: '#3A3A3A', lineHeight: '1.8', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
+            <p style={{ marginBottom: '16px' }}>
+              The Printing Press Suites are individually designed within the original palace block, reflecting the regal charm of the era with authentic vintage Odia handicrafts. Each suite boasts a king-size four-poster bed with sumptuous crested linen, offering the perfect blend of luxury and comfort.
+            </p>
+            <p style={{ marginBottom: '16px' }}>
+              The suites feature an ante room with picture windows that overlook the serene palace gardens, while the marble-clad bathrooms come with a spacious bathtub. Additionally, a dedicated palace butler service ensures that every guest's needs are met with the highest level of care.
+            </p>
+            <p>
+              Experience the luxury and grandeur of the palace block, once home to the royal family in a bygone era.
+            </p>
+          </div>
+        </div>
+
+        {/* Buttons Section */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginBottom: '48px' }}>
+          <button style={{ 
+            padding: '16px 32px', 
+            backgroundColor: 'transparent', 
+            color: '#000000', 
+            border: '1px solid #000000', 
+            borderRadius: '4px',
+            fontSize: '16px',
+            fontWeight: '500',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#000000';
+            e.currentTarget.style.color = '#ffffff';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'transparent';
+            e.currentTarget.style.color = '#000000';
+          }}>
+            Floor Plan
+          </button>
+          <button style={{ 
+            padding: '16px 32px', 
+            backgroundColor: '#000000', 
+            color: '#ffffff', 
+            border: '1px solid #000000', 
+            borderRadius: '4px',
+            fontSize: '16px',
+            fontWeight: '500',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#333333';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = '#000000';
+          }}>
+            Check Rates
+          </button>
+        </div>
+
+        {/* Image Carousel */}
+        <div style={{ marginBottom: '48px' }}>
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(4, 1fr)', 
+            gap: '16px',
+            marginBottom: '24px'
+          }}>
+            {/* Image 1 - image-70 */}
+            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+              <img 
+                src="/image-70.png" 
+                alt="Printing Press Suite Bedroom" 
+                style={{ width: '100%', height: '250px', objectFit: 'cover' }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback for image-70 */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '250px', 
+                backgroundColor: '#f8f9fa',
+                position: 'relative',
+                overflow: 'hidden',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <div style={{ 
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#e5e7eb',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#9ca3af',
+                  fontSize: '24px'
+                }}>
+                  🛏️
+                </div>
+              </div>
+            </div>
+
+            {/* Image 2 - image-71 */}
+            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+              <img 
+                src="/image-71.png" 
+                alt="Printing Press Suite Bathroom" 
+                style={{ width: '100%', height: '250px', objectFit: 'cover' }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback for image-71 */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '250px', 
+                backgroundColor: '#f8f9fa',
+                position: 'relative',
+                overflow: 'hidden',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <div style={{ 
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#e5e7eb',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#9ca3af',
+                  fontSize: '24px'
+                }}>
+                  🛁
+                </div>
+              </div>
+            </div>
+
+            {/* Image 3 - image-73 */}
+            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+              <img 
+                src="/image-73.png" 
+                alt="Printing Press Suite Bathroom Detail" 
+                style={{ width: '100%', height: '250px', objectFit: 'cover' }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback for image-73 */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '250px', 
+                backgroundColor: '#f8f9fa',
+                position: 'relative',
+                overflow: 'hidden',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <div style={{ 
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#e5e7eb',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#9ca3af',
+                  fontSize: '24px'
+                }}>
+                  🧴
+                </div>
+              </div>
+            </div>
+
+            {/* Image 4 - image-74 */}
+            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+              <img 
+                src="/image-74.png" 
+                alt="Printing Press Suite Additional View" 
+                style={{ width: '100%', height: '250px', objectFit: 'cover' }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback for image-74 */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '250px', 
+                backgroundColor: '#f8f9fa',
+                position: 'relative',
+                overflow: 'hidden',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <div style={{ 
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#e5e7eb',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#9ca3af',
+                  fontSize: '24px'
+                }}>
+                  🏰
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Carousel Navigation Arrows */}
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '16px' }}>
+            <button style={{ 
+              width: '40px', 
+              height: '40px', 
+              borderRadius: '50%', 
+              backgroundColor: '#f3f4f6', 
+              border: '1px solid #d1d5db',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '18px',
+              color: '#6b7280'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#e5e7eb';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#f3f4f6';
+            }}>
+              ‹
+            </button>
+            <button style={{ 
+              width: '40px', 
+              height: '40px', 
+              borderRadius: '50%', 
+              backgroundColor: '#f3f4f6', 
+              border: '1px solid #d1d5db',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '18px',
+              color: '#6b7280'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#e5e7eb';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#f3f4f6';
+            }}>
+              ›
+            </button>
+          </div>
+        </div>
+
+        {/* AMENITIES Section */}
+        <div style={{ marginBottom: '48px' }}>
+          {/* Main Title */}
+          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>AMENITIES</h2>
+          </div>
+
+          {/* Key Amenities Grid */}
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(3, 1fr)', 
+            gap: '24px',
+            marginBottom: '32px'
+          }}>
+            {/* 1 ANTE ROOM */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🛏️
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>1 ANTE ROOM</span>
+            </div>
+
+            {/* 2 EN SUITE BATHROOM */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🛁
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>2 EN SUITE BATHROOM</span>
+            </div>
+
+            {/* PALACE GARDEN VIEW */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🏔️
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>PALACE GARDEN VIEW</span>
+            </div>
+
+            {/* 1 KING BED */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🛏️
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>1 KING BED</span>
+            </div>
+
+            {/* 591 Sq. Ft. */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                ⬜
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>591 Sq. Ft.</span>
+            </div>
+
+            {/* DESIGNED BY CHANNA DASWATTE */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🏰
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>DESIGNED BY CHANNA DASWATTE</span>
+            </div>
+          </div>
+
+          {/* Divider Line */}
+          <div style={{ 
+            height: '1px', 
+            backgroundColor: '#e5e7eb', 
+            marginBottom: '24px' 
+          }}></div>
+
+          {/* ROOM FEATURES Section */}
+          <div>
+            <h3 style={{ 
+              fontSize: '24px', 
+              fontWeight: 'bold', 
+              color: '#000000', 
+              marginBottom: '24px',
+              fontFamily: '"Montserrat", sans-serif'
+            }}>
+              ROOM FEATURES
+            </h3>
+
+            {/* Expandable Categories */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+              {/* BATH Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>BATH</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+              </div>
+
+              {/* TECHNOLOGY Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>TECHNOLOGY</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+              </div>
+
+              {/* SERVICES Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>SERVICES</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+              </div>
+
+              {/* Fourth Category (placeholder) */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>AMENITIES</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* OTHER SUITES Section */}
+        <div style={{ marginBottom: '48px' }}>
+          {/* Main Title */}
+          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>OTHER SUITES</h2>
+          </div>
+
+          {/* Suites Grid */}
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(2, 1fr)', 
+            gap: '32px'
+          }}>
+            {/* GENERATOR SUITES */}
+            <div style={{ 
+              backgroundColor: '#ffffff',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+            }}>
+              {/* Image */}
+              <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                <img 
+                  src="/image-75.png" 
+                  alt="Generator Suites" 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'flex';
+                    }
+                  }}
+                />
+                {/* Fallback for Generator Suites image */}
+                <div style={{ 
+                  display: 'none', 
+                  width: '100%', 
+                  height: '100%', 
+                  backgroundColor: '#f8f9fa',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <div style={{ 
+                    width: '60%',
+                    height: '40%',
+                    backgroundColor: '#e5e7eb',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#9ca3af',
+                    fontSize: '24px'
+                  }}>
+                    🏭
+                  </div>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div style={{ padding: '24px' }}>
+                <h3 style={{ 
+                  fontSize: '20px', 
+                  fontWeight: 'bold', 
+                  color: '#000000', 
+                  marginBottom: '16px',
+                  textTransform: 'uppercase',
+                  fontFamily: '"Montserrat", sans-serif'
+                }}>
+                  GENERATOR SUITES
+                </h3>
+                <p style={{ 
+                  fontSize: '16px', 
+                  color: '#6b7280', 
+                  lineHeight: '1.6',
+                  fontFamily: '"Lato", sans-serif'
+                }}>
+                  Once the heart of the royal palace's power generation, these suites have now been transformed into a luxurious retreat, offering orchard views and outdoor bathtubs.
+                </p>
+              </div>
+            </div>
+
+            {/* FAMILY PALACE SUITE */}
+            <div style={{ 
+              backgroundColor: '#ffffff',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+            }}>
+              {/* Image */}
+              <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                <img 
+                  src="/image-76.png" 
+                  alt="Family Palace Suite" 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'flex';
+                    }
+                  }}
+                />
+                {/* Fallback for Family Palace Suite image */}
+                <div style={{ 
+                  display: 'none', 
+                  width: '100%', 
+                  height: '100%', 
+                  backgroundColor: '#f8f9fa',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <div style={{ 
+                    width: '60%',
+                    height: '40%',
+                    backgroundColor: '#e5e7eb',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#9ca3af',
+                    fontSize: '24px'
+                  }}>
+                    👨‍👩‍👧‍👦
+                  </div>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div style={{ padding: '24px' }}>
+                <h3 style={{ 
+                  fontSize: '20px', 
+                  fontWeight: 'bold', 
+                  color: '#000000', 
+                  marginBottom: '16px',
+                  textTransform: 'uppercase',
+                  fontFamily: '"Montserrat", sans-serif'
+                }}>
+                  FAMILY PALACE SUITE
+                </h3>
+                <p style={{ 
+                  fontSize: '16px', 
+                  color: '#6b7280', 
+                  lineHeight: '1.6',
+                  fontFamily: '"Lato", sans-serif'
+                }}>
+                  A fusion of two palace suites, featuring a spacious lounge- an expansive, lush private retreat perfect for families and added privacy.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Back to Accommodation Button */}
+       
       </div>
     </>
   );
@@ -5634,6 +10473,8 @@ function App() {
              currentPage === 'wellness' ? 'localhost:3000/wellness/' :
              currentPage === 'contact' ? 'localhost:3000/contact/' :
              currentPage === 'palace-suite' ? 'localhost:3000/palace-suite/' :
+             currentPage === 'palace-family-suite' ? 'localhost:3000/palace-family-suite/' :
+             currentPage === 'generator-suite' ? 'localhost:3000/generator-suite/' :
              'localhost:3000/'}
           </div>
         </div>
@@ -5822,10 +10663,16 @@ function App() {
         {currentPage === 'home' && renderHomePage()}
         {currentPage === 'accommodation' && renderAccommodationPage()}
         {currentPage === 'experiences' && renderExperiencesPage()}
+        {currentPage === 'wildlife' && renderWildlifePage()}
         {currentPage === 'dining' && renderDiningPage()}
         {currentPage === 'wellness' && renderWellnessPage()}
         {currentPage === 'contact' && renderContactPage()}
         {currentPage === 'palace-suite' && renderPalaceSuitePage()}
+        {currentPage === 'palace-family-suite' && renderPalaceFamilySuitePage()}
+        {currentPage === 'generator-suite' && renderGeneratorSuitePage()}
+        {currentPage === 'ice-mill-suite' && renderIceMillSuitePage()}
+        {currentPage === 'printing-press-suite' && renderPrintingPressSuitePage()}
+        {(currentPage === 'overview' || currentPage === 'rambha-villa') && renderAccommodationPage()}
       </main>
 
       {/* Footer */}
