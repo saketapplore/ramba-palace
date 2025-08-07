@@ -6,6 +6,7 @@ function App() {
   const [experiencesTab, setExperiencesTab] = useState('overview');
   const [palaceSuiteTab, setPalaceSuiteTab] = useState('overview');
   const [wellnessCurrentIndex, setWellnessCurrentIndex] = useState(0);
+  const [isHeaderSticky, setIsHeaderSticky] = useState(false);
 
   // Client-side routing: Update browser URL when currentPage changes
   useEffect(() => {
@@ -83,6 +84,17 @@ function App() {
     }
   }, [currentPage]);
 
+  // Sticky header functionality
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      setIsHeaderSticky(scrollTop > 50); // Make navigation sticky after 50px scroll
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const renderHomePage = () => (
     <>
       {/* Large Video */}
@@ -118,11 +130,12 @@ function App() {
               className="attachment-large size-large wp-image-79" 
               alt="Rambha Palace Logo"
               style={{ 
-                width: '200px', 
-                height: 'auto', 
+                width: '174px', 
+                height: '170.39px', 
                 maxWidth: '100%',
                 display: 'block',
-                margin: '0 auto'
+                margin: '10px 0px 0px',
+                objectFit: 'contain'
               }}
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
@@ -136,9 +149,9 @@ function App() {
             {/* Fallback logo if image fails to load */}
             <div style={{ 
               display: 'none', 
-              width: '200px', 
-              height: '200px', 
-              margin: '0 auto',
+              width: '174px', 
+              height: '170.39px', 
+              margin: '10px 0px 0px',
               position: 'relative'
             }}>
             {/* Crown */}
@@ -206,7 +219,7 @@ function App() {
       </div>
 
       {/* Image Carousel Section */}
-      <div style={{ maxWidth: '1024px', margin: '0 auto', marginTop: '64px', marginBottom: '64px' }}>
+      <div style={{ maxWidth: '1400px', margin: '0 auto', marginTop: '64px', marginBottom: '64px' }}>
         <div style={{
           position: 'relative',
           width: '100%',
@@ -246,7 +259,7 @@ function App() {
                 key={i}
                 className="carousel-image"
                 style={{
-                  flex: '0 0 33.33%',
+                  flex: '0 0 400px',
                   transition: 'all 0.3s ease',
                   scrollSnapAlign: 'center',
                   padding: '0 12px',
@@ -257,8 +270,8 @@ function App() {
                   src={`/image-${i}.png`}
                   alt={`Rambha Palace View ${i}`}
                   style={{
-                    width: '100%',
-                    height: '280px',
+                    width: '800px',
+                    height: '450px',
                     objectFit: 'cover',
                     display: 'block',
                     borderRadius: '12px',
@@ -275,8 +288,8 @@ function App() {
                 />
                 <div style={{
                   display: 'none',
-                  width: '100%',
-                  height: '280px',
+                  width: '800px',
+                  height: '450px',
                   backgroundColor: '#f3f4f6',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -360,7 +373,7 @@ function App() {
       </div>
 
       {/* Second Image Carousel Section */}
-      <div style={{ maxWidth: '1024px', margin: '0 auto', marginTop: '64px', marginBottom: '64px' }}>
+      <div style={{ maxWidth: '1400px', margin: '0 auto', marginTop: '64px', marginBottom: '64px' }}>
         <div style={{
           position: 'relative',
           width: '100%',
@@ -400,7 +413,7 @@ function App() {
                 key={i}
                 className="carousel-image-2"
                 style={{
-                  flex: '0 0 33.33%',
+                  flex: '0 0 400px',
                   transition: 'all 0.3s ease',
                   scrollSnapAlign: 'center',
                   padding: '0 12px',
@@ -411,8 +424,8 @@ function App() {
                   src={`/image-${i}.png`}
                   alt={`Rambha Palace View ${i}`}
                   style={{
-                    width: '100%',
-                    height: '280px',
+                    width: '800px',
+                    height: '450px',
                     objectFit: 'cover',
                     display: 'block',
                     borderRadius: '12px',
@@ -429,8 +442,8 @@ function App() {
                 />
                 <div style={{
                   display: 'none',
-                  width: '100%',
-                  height: '280px',
+                  width: '800px',
+                  height: '450px',
                   backgroundColor: '#f3f4f6',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -514,8 +527,8 @@ function App() {
       </div>
 
       {/* Three Cards Section - Wellness, Experience, Dining */}
-      <div style={{ maxWidth: '1024px', margin: '0 auto', marginTop: '64px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '32px', padding: '0 16px' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', marginTop: '64px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px', padding: '0 16px' }}>
           {/* Wellness Card */}
           <div style={{ 
             backgroundColor: 'white', 
@@ -537,7 +550,7 @@ function App() {
           onClick={() => setCurrentPage('wellness')}
           >
             {/* Image */}
-            <div style={{ width: '100%', height: '200px', overflow: 'hidden' }}>
+            <div style={{ width: '100%', height: '300px', overflow: 'hidden' }}>
               <img 
                 src="/image-57.png"
                 alt="Wellness"
@@ -590,17 +603,17 @@ function App() {
                 marginBottom: '16px',
                 textAlign: 'center'
               }}>
-                Discover ancient healing practices and rejuvenate your mind, body, and soul in our wellness center.
+                Mantnam- gifting you the realignment needed by your mind, body and soul. Striving for longevity, our treatments are inspired by ancient Indian wisdom.
               </p>
               <div style={{ textAlign: 'center' }}>
                 <span style={{ 
-                  color: '#d97706', 
+                  color: '#000000', 
                   fontSize: '14px', 
                   fontWeight: '600',
                   cursor: 'pointer',
                   textDecoration: 'underline'
                 }}>
-                  discover
+                  Discover
                 </span>
               </div>
             </div>
@@ -627,7 +640,7 @@ function App() {
           onClick={() => setCurrentPage('experiences')}
           >
             {/* Image */}
-            <div style={{ width: '100%', height: '200px', overflow: 'hidden' }}>
+            <div style={{ width: '100%', height: '300px', overflow: 'hidden' }}>
               <img 
                 src="/image-58.png"
                 alt="Experience"
@@ -680,17 +693,16 @@ function App() {
                 marginBottom: '16px',
                 textAlign: 'center'
               }}>
-                Immerse yourself in unique cultural experiences and explore the rich heritage of Odisha.
-              </p>
+               Every itinerary caters to a plethora of passions and preferences. Self discovery journeys, escapades in the wilderness and interactions with local artisans.              </p>
               <div style={{ textAlign: 'center' }}>
                 <span style={{ 
-                  color: '#d97706', 
+                  color: '#000000', 
                   fontSize: '14px', 
                   fontWeight: '600',
                   cursor: 'pointer',
                   textDecoration: 'underline'
                 }}>
-                  discover
+                  Discover
                 </span>
               </div>
             </div>
@@ -717,7 +729,7 @@ function App() {
           onClick={() => setCurrentPage('dining')}
           >
             {/* Image */}
-            <div style={{ width: '100%', height: '200px', overflow: 'hidden' }}>
+            <div style={{ width: '100%', height: '300px', overflow: 'hidden' }}>
               <img 
                 src="/image-59.png"
                 alt="Dining"
@@ -770,17 +782,16 @@ function App() {
                 marginBottom: '16px',
                 textAlign: 'center'
               }}>
-                Savor authentic Odia cuisine and royal dining experiences in our elegant restaurants.
-              </p>
+Orchard-to-table ingredients are at heart of our inventive culinary offerings at palace. Relish local cuisine or delectable flavours from across world.         </p>
               <div style={{ textAlign: 'center' }}>
                 <span style={{ 
-                  color: '#d97706', 
+                  color: '#000000', 
                   fontSize: '14px', 
                   fontWeight: '600',
                   cursor: 'pointer',
                   textDecoration: 'underline'
                 }}>
-                  discover
+                  Discover
                 </span>
               </div>
             </div>
@@ -844,19 +855,20 @@ function App() {
           <div style={{ padding: '32px' }}>
             {/* Title */}
             <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-              <h2 style={{ 
-                fontSize: '20px', 
+                            <h2 style={{
+                fontSize: '20px',
                 fontWeight: 'bold', 
-                color: '#000000', 
+                color: '#333333', 
                 marginBottom: '16px',
-                textTransform: 'uppercase'
+                textTransform: 'uppercase',
+                fontFamily: '"Montserrat", sans-serif'
               }}>
                 EAT. PRAY. LOVE.
               </h2>
             </div>
 
             {/* Description */}
-            <div style={{ color: '#3A3A3A', lineHeight: '1.8', fontSize: '14px', fontFamily: '"Lato", sans-serif',textAlign: 'center' }}>
+            <div style={{ color: '#3A3A3A', lineHeight: '1.6', fontSize: '14px', fontFamily: 'sans-serif', textAlign: 'left', margin: '0px 0px 22.4px' }}>
               <p>
                 Where will your spiritual journey take you? Embark on a journey toward achieving mental peace and harmony while connecting with your spiritual self. Attune to your inner being, enhance your intuition, and forge connections with your inner self. Personalised itineraries offer you the opportunity to explore any ancient temple that captivates your spirit or sparks your spiritual curiosity.
               </p>
@@ -888,7 +900,7 @@ function App() {
                 Experience Rambha with a
               </p>
               
-              {/* Main Title */}
+                              {/* Main Title */}
               <h2 style={{ 
                 fontSize: '24px', 
                 fontWeight: '600', 
@@ -971,48 +983,45 @@ function App() {
 
           {/* Directions and Contact Info */}
           <div style={{ 
-            maxWidth: '800px', 
-            margin: '0 auto', 
-            textAlign: 'center', 
-            marginBottom: '48px' 
-          }} >
-            <p style={{ 
-              fontSize: '16px', 
-              color: '#7A7A7A', 
-              lineHeight: '1.8',
-              marginBottom: '24px'
-            }}>
-              From Bhubaneswar Airport, guests can embark on a scenic two-and-a-half-hour drive through Odisha's lush landscapes arriving directly at the palace gates.
-            </p>
-            <p style={{ 
-              fontSize: '16px', 
-              color: '#7A7A7A', 
-              lineHeight: '1.8',
-              marginBottom: '32px'
-            }}>
-              Please contact our reservations team at{' '}
-              <span style={{ color: '#7A7A7A', fontWeight: '600' }}>reservations@hiddenindia.com</span>
-              {' '}or{' '}
-              <span style={{ color: '#7A7A7A', fontWeight: '600' }}>+91 7800 208 002</span>
-              {' '}to arrange your preferred transfer.
-            </p>
-            <a 
-              href="https://maps.app.goo.gl/SkTYhSF9e2BDNjCo7" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              style={{ 
-                color: '#3A3A3A', 
-                textDecoration: 'underline',
-                fontSize: '16px',
-                fontWeight: '500',
-                cursor: 'pointer',
-                marginBottom: '24px'
-              }}
-              
-            >
-              Get Directions
-            </a>
-          </div>
+  maxWidth: '1200px',  // enough width to keep both lines unwrapped
+  margin: '0 auto', 
+  textAlign: 'center', 
+  marginBottom: '48px'
+}}>
+  <p style={{ 
+    fontSize: '16px', 
+    color: '#7A7A7A', 
+    lineHeight: '1.8',
+    marginBottom: '12px'
+  }}>
+    From Bhubaneswar Airport, guests can embark on a scenic two-and-a-half-hour drive through Odisha’s lush landscapes arriving directly at the palace gates.
+  </p>
+  
+  <p style={{ 
+    fontSize: '16px', 
+    color: '#7A7A7A', 
+    lineHeight: '1.8',
+    marginBottom: '32px'
+  }}>
+    Please contact our reservations team at <span style={{ fontWeight: '600' }}>reservations@hiddenindia.com</span> or <span style={{ fontWeight: '600' }}>+91 7800 208 002</span> to arrange your preferred transfer.
+  </p>
+
+  <a 
+    href="https://maps.app.goo.gl/SkTYhSF9e2BDNjCo7" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    style={{ 
+      color: '#3A3A3A', 
+      textDecoration: 'underline',
+      fontSize: '16px',
+      fontWeight: '500',
+      cursor: 'pointer'
+    }}
+  >
+    Get Directions
+  </a>
+</div>
+
 
           {/* Map of India */}
           <div style={{ 
@@ -12301,27 +12310,50 @@ function App() {
       </div>
 
       {/* Website Header - Light Beige Background */}
-      <header style={{ backgroundColor: 'rgb(241,236,229)' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 16px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '64px' }}>
+      <header style={{ backgroundColor: 'rgb(241,236,229)', padding: '20px 0' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 40px' }}>
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'space-between', 
+            height: '80px',
+            position: 'relative'
+          }}>
             {/* Menu Button */}
-            <button style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#4b5563' }}>
-              <svg style={{ width: '20px', height: '20px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '12px', 
+              color: '#4b5563',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: '12px 16px',
+              borderRadius: '4px',
+              transition: 'background-color 0.2s ease'
+            }}>
+              <svg style={{ width: '24px', height: '24px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
               <span style={{ 
                 fontFamily: '"Lato", Sans-serif',
-                fontSize: '17px',
-                fontWeight: '400',
-                lineHeight: '40px',
-                WebkitTextStrokeColor: '#000',
-                stroke: '#000',
-                color: '#000000'
+                fontSize: '16px',
+                fontWeight: '500',
+                color: '#000000',
+                letterSpacing: '0.5px'
               }}>Menu</span>
             </button>
             
-            {/* Logo - Hidden India */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            {/* Logo - Hidden India - Centered */}
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              position: 'absolute',
+              left: '50%',
+              top: '50%',
+              transform: 'translate(-50%, -50%)'
+            }}>
               <img 
                 fetchPriority="high" 
                 width="1024" 
@@ -12333,14 +12365,26 @@ function App() {
                 sizes="(max-width: 1024px) 100vw, 1024px"
                 style={{ 
                   height: 'auto',
-                  maxWidth: '200px',
+                  maxWidth: '220px',
                   width: 'auto'
                 }}
               />
             </div>
             
             {/* Book Now Button */}
-            <button style={{ border: '1px solid black', padding: '8px 16px', fontSize: '14px', fontWeight: '500' }}>
+            <button style={{ 
+              border: '1px solid #000000', 
+              padding: '12px 24px', 
+              fontSize: '14px', 
+              fontWeight: '500',
+              backgroundColor: 'transparent',
+              color: '#000000',
+              cursor: 'pointer',
+              borderRadius: '4px',
+              transition: 'all 0.2s ease',
+              fontFamily: '"Lato", Sans-serif',
+              letterSpacing: '0.5px'
+            }}>
               Book Now
             </button>
           </div>
@@ -12348,7 +12392,16 @@ function App() {
       </header>
 
       {/* Navigation Bar - Light Pink Background */}
-      <nav style={{ backgroundColor: '#ebc9c4' }}>
+      <nav style={{ 
+        backgroundColor: '#ebc9c4',
+        position: isHeaderSticky ? 'fixed' : 'relative',
+        top: isHeaderSticky ? '0' : 'auto', // Position at the top when sticky
+        left: '0',
+        right: '0',
+        zIndex: isHeaderSticky ? '1000' : 'auto',
+        boxShadow: isHeaderSticky ? '0 2px 10px rgba(0,0,0,0.1)' : 'none',
+        transition: 'all 0.3s ease'
+      }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 16px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '24px', padding: '12px 0' }}>
             <a 
@@ -12457,7 +12510,13 @@ function App() {
       </nav>
 
       {/* Main Content */}
-      <main style={{ maxWidth: '1280px', margin: '0 auto', padding: '32px 16px' }}>
+      <main style={{ 
+        maxWidth: '1280px', 
+        margin: '0 auto', 
+        padding: '32px 16px',
+        paddingTop: isHeaderSticky ? '80px' : '32px', // Add extra padding when navigation is sticky
+        transition: 'padding-top 0.3s ease'
+      }}>
         {currentPage === 'home' && renderHomePage()}
         {currentPage === 'accommodation' && renderAccommodationPage()}
         {currentPage === 'experiences' && renderExperiencesPage()}
