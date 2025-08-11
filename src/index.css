@@ -1,3 +1,77 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Override Tailwind button styles for accommodation tabs */
+.accommodation-tab-button {
+  all: unset !important;
+  padding: 8px 0 !important;
+  border: none !important;
+  background-color: transparent !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  font-family: sans-serif !important;
+  position: relative !important;
+  transition: none !important;
+  outline: none !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+.accommodation-tab-button:hover {
+  color: inherit !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+.accommodation-tab-button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.accommodation-tab-button:active {
+  color: inherit !important;
+  background-color: transparent !important;
+  transform: none !important;
+}
+
+/* Additional specific overrides for any remaining Tailwind button styles */
+button.accommodation-tab-button,
+button.accommodation-tab-button:hover,
+button.accommodation-tab-button:focus,
+button.accommodation-tab-button:active {
+  color: inherit !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+  text-decoration: none !important;
+  outline: none !important;
+}
+
+/* Override any Tailwind button base styles */
+button.accommodation-tab-button {
+  all: unset !important;
+  display: inline-block !important;
+  padding: 8px 0 !important;
+  font-size: 14px !important;
+  font-family: sans-serif !important;
+  cursor: pointer !important;
+  position: relative !important;
+  transition: none !important;
+}

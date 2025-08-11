@@ -870,7 +870,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             {/* Description */}
             <div style={{ color: '#3A3A3A', lineHeight: '1.6', fontSize: '14px', fontFamily: 'sans-serif', textAlign: 'left', margin: '0px 0px 22.4px' }}>
               <p>
-                Where will your spiritual journey take you? Embark on a journey toward achieving mental peace and harmony while connecting with your spiritual self. Attune to your inner being, enhance your intuition, and forge connections with your inner self. Personalised itineraries offer you the opportunity to explore any ancient temple that captivates your spirit or sparks your spiritual curiosity.
+                Where will your spiritual journey take you? Embark on a journey toward achieving mental peace and harmony while connecting with your spiritual self. Attune to your inner being, enhance your intuition,forge connections with your inner self.Personalised itineraries offer the opportunity to explore any ancient temple that captivates your spirit or sparks your spiritual curiosity.
               </p>
             </div>
           </div>
@@ -992,9 +992,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
     fontSize: '16px', 
     color: '#7A7A7A', 
     lineHeight: '1.8',
-    marginBottom: '12px'
+    // marginBottom: '6px'
   }}>
-    From Bhubaneswar Airport, guests can embark on a scenic two-and-a-half-hour drive through Odisha’s lush landscapes arriving directly at the palace gates.
+    From Bhubaneswar Airport, guests can embark two-and-a-half-hour drive Odisha’s lush landscapes arriving directly at the palace gates.
   </p>
   
   <p style={{ 
@@ -1003,7 +1003,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
     lineHeight: '1.8',
     marginBottom: '32px'
   }}>
-    Please contact our reservations team at <span style={{ fontWeight: '600' }}>reservations@hiddenindia.com</span> or <span style={{ fontWeight: '600' }}>+91 7800 208 002</span> to arrange your preferred transfer.
+    Please contact our reservations team at <span style={{ fontWeight: '600' ,color: '#212121'}}>reservations@hiddenindia.com</span> or <span style={{ fontWeight: '600' ,color: '#000000'}}>+91 7800 208 002</span> to arrange your preferred transfer.
   </p>
 
   <a 
@@ -1058,16 +1058,31 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       
       
       {/* Main Title */}
-      <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-        <h1 style={{ fontSize: '32px', fontWeight: '200', fontFamily: '"Montserrat", sans-serif',color: '#000000', marginBottom: '16px' }}>Accommodation</h1>
-      </div>
+      <div style={{
+        maxWidth: '1524px',
+  fontFamily: 'Montserrat',
+  fontSize: '32px',
+  fontWeight: 400,
+  lineHeight: '39.01px',
+  textAlign: 'center'
+}}>
+  Accommodation
+</div>
+
 
       {/* Tab Navigation */}
-      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px', borderBottom: '1px solid #e5e7eb' }}>
-        <div style={{ display: 'flex', gap: '0' }}>
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        marginBottom: '32px', 
+        backgroundColor: 'rgb(241,236,229)',
+        padding: '16px 0'
+      }}>
+        <div style={{ display: 'flex', gap: '32px' }}>
           {['Overview', 'Rambha Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite', 'Ice Mill Suite', 'Printing Press Suite'].map((tab) => (
             <button
               key={tab}
+              className="accommodation-tab-button"
               onClick={() => {
                 if (tab === 'Palace Suite') {
                   setCurrentPage('palace-suite');
@@ -1080,17 +1095,64 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 }
               }}
               style={{
-                padding: '12px 24px',
-                border: 'none',
-                backgroundColor: 'transparent',
-                color: activeTab === tab.toLowerCase().replace(' ', '-') ? '#d97706' : '#6b7280',
-                fontWeight: activeTab === tab.toLowerCase().replace(' ', '-') ? '600' : '500',
-                borderBottom: activeTab === tab.toLowerCase().replace(' ', '-') ? '2px solid #d97706' : 'none',
-                cursor: 'pointer',
-                fontSize: '14px'
+                padding: '8px 0 !important',
+                border: 'none !important',
+                backgroundColor: 'transparent !important',
+                color: activeTab === tab.toLowerCase().replace(' ', '-') ? '#000000 !important' : '#6b7280 !important',
+                fontWeight: activeTab === tab.toLowerCase().replace(' ', '-') ? '600 !important' : '400 !important',
+                borderBottom: activeTab === tab.toLowerCase().replace(' ', '-') ? '2px solid #000000 !important' : 'none !important',
+                cursor: 'pointer !important',
+                fontSize: '14px !important',
+                fontFamily: 'sans-serif !important',
+                position: 'relative',
+                transition: 'none !important',
+                outline: 'none !important',
+                textDecoration: 'none !important',
+                boxShadow: 'none !important',
+                transform: 'none !important',
+                filter: 'none !important',
+                opacity: '1 !important',
+                WebkitAppearance: 'none',
+                MozAppearance: 'none',
+                appearance: 'none'
+              }}
+              onMouseEnter={(e) => {
+                // Force prevent any hover color changes with !important
+                const target = e.target as HTMLButtonElement;
+                target.style.setProperty('color', activeTab === tab.toLowerCase().replace(' ', '-') ? '#000000' : '#6b7280', 'important');
+                target.style.setProperty('backgroundColor', 'transparent', 'important');
+                target.style.setProperty('borderColor', 'transparent', 'important');
+                target.style.setProperty('boxShadow', 'none', 'important');
+                target.style.setProperty('transform', 'none', 'important');
+                target.style.setProperty('filter', 'none', 'important');
+                target.style.setProperty('opacity', '1', 'important');
+                target.style.setProperty('WebkitAppearance', 'none', 'important');
+                target.style.setProperty('MozAppearance', 'none', 'important');
+                target.style.setProperty('appearance', 'none', 'important');
+              }}
+              onMouseLeave={(e) => {
+                // Force ensure color stays the same on mouse leave with !important
+                const target = e.target as HTMLButtonElement;
+                target.style.setProperty('color', activeTab === tab.toLowerCase().replace(' ', '-') ? '#000000' : '#6b7280', 'important');
+                target.style.setProperty('backgroundColor', 'transparent', 'important');
+                target.style.setProperty('borderColor', 'transparent', 'important');
+                target.style.setProperty('boxShadow', 'none', 'important');
+                target.style.setProperty('transform', 'none', 'important');
+                target.style.setProperty('filter', 'none', 'important');
+                target.style.setProperty('opacity', '1', 'important');
+                target.style.setProperty('WebkitAppearance', 'none', 'important');
+                target.style.setProperty('MozAppearance', 'none', 'important');
+                target.style.setProperty('appearance', 'none', 'important');
               }}
             >
               {tab}
+              {activeTab === tab.toLowerCase().replace(' ', '-') && (
+                <span style={{ 
+                  marginLeft: '4px', 
+                  color: '#000000',
+                  fontWeight: '600'
+                }}> ›</span>
+              )}
             </button>
           ))}
         </div>
@@ -1264,22 +1326,6 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             />
             
             {/* Debug overlay - visible indicator for testing */}
-            <div
-              style={{
-                position: 'absolute',
-                top: '10px',
-                right: '10px',
-                backgroundColor: 'rgba(255, 0, 0, 0.8)',
-                color: 'white',
-                padding: '4px 8px',
-                borderRadius: '4px',
-                fontSize: '12px',
-                zIndex: 20,
-                pointerEvents: 'none'
-              }}
-            >
-              CLICK HERE
-            </div>
             
             {/* Fallback design for first card */}
             <div style={{ 
@@ -1336,7 +1382,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             
             {/* Card Content */}
             <div style={{ padding: '24px', backgroundColor: 'white' }}>
-              <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', fontFamily: '"Montserrat", sans-serif' }}>PALACE SUITES</h3>
+              <h3 style={{ fontSize: '20px',fontWeight: '700', color: '#000000', stroke:'#000',marginBottom: '12px', fontFamily: '"Montserrat", sans-serif' }}>PALACE SUITES</h3>
               <p style={{ color: '#3A3A3A', lineHeight: '1.6', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
                 Experience the luxury and grandeur of the original palace block. Once the residence of the royal family in a bygone era—unparalleled sophistication at Rambha.
               </p>
@@ -1412,7 +1458,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             
             {/* Card Content */}
             <div style={{ padding: '24px', backgroundColor: 'white' }}>
-              <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>FAMILY PALACE SUITE</h3>
+              <h3 style={{ fontSize: '20px',fontWeight: '700', color: '#000000', stroke:'#000',marginBottom: '12px', fontFamily: '"Montserrat", sans-serif' }}>FAMILY PALACE SUITE</h3>
               <p style={{ color: '#3A3A3A', lineHeight: '1.6', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
                 A fusion of two palace suites, featuring a spacious lounge—an expansive, lush private retreat perfect for families and added privacy.
               </p>
@@ -1506,7 +1552,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             
             {/* Card Content */}
             <div style={{ padding: '24px', backgroundColor: 'white' }}>
-              <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>GENERATOR SUITES</h3>
+              <h3 style={{ fontSize: '20px',fontWeight: '700', color: '#000000', stroke:'#000',marginBottom: '12px', fontFamily: '"Montserrat", sans-serif' }}>GENERATOR SUITES</h3>
               <p style={{ color: '#3A3A3A', lineHeight: '1.6', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
                 Once the heart of the royal palace's power generation, these suites have now been transformed into a luxurious retreat, offering orchard views and outdoor bathtubs.
               </p>
@@ -1603,7 +1649,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             
             {/* Card Content */}
             <div style={{ padding: '24px', backgroundColor: 'white' }}>
-              <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>ICE MILL SUITES</h3>
+              <h3 style={{ fontSize: '20px',fontWeight: '700', color: '#000000', stroke:'#000',marginBottom: '12px', fontFamily: '"Montserrat", sans-serif' }}>ICE MILL SUITES</h3>
               <p style={{ color: '#3A3A3A', lineHeight: '1.6', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
                 Once used to store ice blocks for preserving the palace's fresh catches, these suites have been reimagined into a lavish retreat with an outdoor seating verandah.
               </p>
@@ -1694,7 +1740,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             
             {/* Card Content */}
             <div style={{ padding: '24px', backgroundColor: 'white' }}>
-              <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>PRINTING PRESS SUITES</h3>
+              <h3 style={{ fontSize: '20px',fontWeight: '700', color: '#000000', stroke:'#000',marginBottom: '12px', fontFamily: '"Montserrat", sans-serif' }}>PRINTING PRESS SUITES</h3>
               <p style={{ color: '#3A3A3A', lineHeight: '1.6', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
                 Once the palace's printing press, they now offer views of the orchard and palace verandah, retaining a name that reflects their storied past.
               </p>
@@ -1787,7 +1833,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             
             {/* Card Content */}
             <div style={{ padding: '24px', backgroundColor: 'white' }}>
-              <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>RAMBHA VILLA</h3>
+              <h3 style={{ fontSize: '20px',fontWeight: '700', color: '#000000', stroke:'#000',marginBottom: '12px', fontFamily: '"Montserrat", sans-serif' }}>RAMBHA VILLA</h3>
               <p style={{ color: '#3A3A3A', lineHeight: '1.6', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
                 A luxurious, standalone two-bedroom presidential suite featuring a spacious private garden, swimming pool, butler service and pantry with a comfortable lounge area.
               </p>
@@ -1845,11 +1891,39 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 padding: '12px 24px',
                 border: 'none',
                 backgroundColor: 'transparent',
-                color: experiencesTab === tab.toLowerCase() ? '#d97706' : '#6b7280',
-                fontWeight: experiencesTab === tab.toLowerCase() ? '600' : '500',
-                borderBottom: experiencesTab === tab.toLowerCase() ? '2px solid #d97706' : 'none',
+                color: experiencesTab === tab.toLowerCase() ? '#000000' : '#6b7280',
+                fontWeight: experiencesTab === tab.toLowerCase() ? '600' : '400',
+                borderBottom: experiencesTab === tab.toLowerCase() ? '2px solid #000000' : 'none',
                 cursor: 'pointer',
-                fontSize: '14px'
+                fontSize: '14px',
+                transition: 'none',
+                outline: 'none',
+                textDecoration: 'none',
+                boxShadow: 'none',
+                transform: 'none',
+                filter: 'none',
+                opacity: '1',
+                WebkitAppearance: 'none',
+                MozAppearance: 'none',
+                appearance: 'none'
+              }}
+              onMouseEnter={(e) => {
+                const target = e.target as HTMLButtonElement;
+                target.style.color = experiencesTab === tab.toLowerCase() ? '#000000' : '#6b7280';
+                target.style.backgroundColor = 'transparent';
+                target.style.borderBottom = experiencesTab === tab.toLowerCase() ? '2px solid #000000' : 'none';
+                target.style.setProperty('color', experiencesTab === tab.toLowerCase() ? '#000000' : '#6b7280', 'important');
+                target.style.setProperty('background-color', 'transparent', 'important');
+                target.style.setProperty('border-bottom', experiencesTab === tab.toLowerCase() ? '2px solid #000000' : 'none', 'important');
+              }}
+              onMouseLeave={(e) => {
+                const target = e.target as HTMLButtonElement;
+                target.style.color = experiencesTab === tab.toLowerCase() ? '#000000' : '#6b7280';
+                target.style.backgroundColor = 'transparent';
+                target.style.borderBottom = experiencesTab === tab.toLowerCase() ? '2px solid #000000' : 'none';
+                target.style.setProperty('color', experiencesTab === tab.toLowerCase() ? '#000000' : '#6b7280', 'important');
+                target.style.setProperty('background-color', 'transparent', 'important');
+                target.style.setProperty('border-bottom', experiencesTab === tab.toLowerCase() ? '2px solid #000000' : 'none', 'important');
               }}
             >
               {tab}
@@ -1932,8 +2006,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                     </div>
                   </div>
                   <div style={{ padding: '24px' }}>
-                    <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>DIVING DOLPHINS</h3>
-                    <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                    <h3 style={{ fontSize: '18px', color: '#000000', marginBottom: '12px', textTransform: 'uppercase' }}>DIVING DOLPHINS</h3>
+                    <p style={{ color: '#3A3A3A', font : '14px Lato, sans-serif' ,lineHeight: '1.6', fontSize: '12px' }}>
                       The endangered species of Irrawaddy dolphins can be spotted frolicking in Chilika Lake. Spot them happy in their habitat while you drift slowly in a private boat.
                     </p>
                   </div>
@@ -2001,8 +2075,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                     </div>
                   </div>
                   <div style={{ padding: '24px' }}>
-                    <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>TRACKING FISHING CAT</h3>
-                    <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                    <h3 style={{ fontSize: '18px', color: '#000000', marginBottom: '12px', textTransform: 'uppercase' }}>TRACKING FISHING CAT</h3>
+                    <p style={{ color: '#3A3A3A', font : '14px Lato, sans-serif' ,lineHeight: '1.6', fontSize: '12px' }}>
                       Embark on a boat safari in the wetlands to track elusive apex predators as they roam the banks on lookout for a hunt, or if you're lucky, even catch them on the prowl.
                     </p>
                   </div>
@@ -2078,8 +2152,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                     </div>
                   </div>
                   <div style={{ padding: '24px' }}>
-                    <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>FINDING FLAMINGOS</h3>
-                    <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                    <h3 style={{ fontSize: '18px', color: '#000000', marginBottom: '12px', textTransform: 'uppercase' }}>FINDING FLAMINGOS</h3>
+                    <p style={{ color: '#3A3A3A', font : '14px Lato, sans-serif' ,lineHeight: '1.6', fontSize: '12px' }}>
                       Set sail on Chilika Lake and get a chance to spot nature's fabulous divas, with their striking pink feathers and long, spindly legs.
                     </p>
                   </div>
@@ -2092,69 +2166,85 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '32px', textAlign: 'center', textTransform: 'uppercase' }}>SPIRITUAL</h2>
               
               {/* Main Image */}
-              <div style={{ marginBottom: '32px' }}>
-                <img 
-                  src="./image-9.png" 
-                  alt="Ancient Temples of Odisha" 
-                  style={{ 
-                    width: '100%', 
-                    height: 'auto', 
-                    maxWidth: '100%',
-                    borderRadius: '8px',
-                    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
-                  }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const nextSibling = target.nextSibling as HTMLElement;
-                    if (nextSibling) {
-                      nextSibling.style.display = 'block';
-                    }
-                  }}
-                />
-                {/* Fallback design if image fails to load */}
-                <div style={{
-                  display: 'none',
-                  width: '100%',
-                  height: '400px',
-                  backgroundColor: '#f3f4f6',
-                  borderRadius: '8px',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#6b7280',
-                  fontSize: '18px'
-                }}>
-                  Ancient Temples Image
-                </div>
-              </div>
-
-              {/* Text Content */}
+              {/* Unified Card - Image and Content Together */}
               <div style={{ 
                 backgroundColor: 'white', 
-                borderRadius: '8px', 
-                padding: '32px', 
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                maxWidth: '800px',
-                margin: '0 auto'
+                borderRadius: '12px', 
+                overflow: 'hidden', 
+                boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                maxWidth: '1000px',
+                margin: '0 auto',
+                marginBottom: '32px'
               }}>
-                <h3 style={{ 
-                  fontSize: '20px', 
-                  fontWeight: 'bold', 
-                  color: '#374151', 
-                  marginBottom: '16px', 
-                  textAlign: 'center',
-                  textTransform: 'uppercase'
+                {/* Image Section */}
+                <div style={{ 
+                  width: '100%', 
+                  height: '400px', 
+                  overflow: 'hidden',
+                  position: 'relative'
                 }}>
-                  AN ODISHA OF THE GODS
-                </h3>
-                <p style={{ 
-                  color: '#374151', 
-                  lineHeight: '1.8', 
-                  fontSize: '16px',
-                  textAlign: 'center'
+                  <img 
+                    src="./image-9.png" 
+                    alt="Ancient Temples of Odisha" 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover',
+                      display: 'block'
+                    }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  {/* Fallback design if image fails to load */}
+                  <div style={{
+                    display: 'none',
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: '#f3f4f6',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#6b7280',
+                    fontSize: '18px',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0
+                  }}>
+                    Ancient Temples Image
+                  </div>
+                </div>
+
+                {/* Content Section */}
+                <div style={{ 
+                  padding: '32px', 
+                  backgroundColor: 'white'
                 }}>
-                  Jagannath Puri, Konark Sun Temple and Tara Tarini are among the architectural and spiritual sanctuaries located a short drive from Rambha Palace. Experience guided tours that are both enlightening and transformative. Immerse yourself in the beauty of these enduring structures, which have stood for centuries, and discover a place of solace, inner serenity and peace.
-                </p>
+                  <h3 style={{ 
+                    fontSize: '20px', 
+                    fontWeight: 'bold', 
+                    color: '#374151', 
+                    marginBottom: '16px', 
+                    textAlign: 'center',
+                    textTransform: 'uppercase',
+                    
+                  }}>
+                    AN ODISHA OF THE GODS
+                  </h3>
+                  <p style={{ 
+                    color: '#374151', 
+                    lineHeight: '1.8', 
+                    fontSize: '16px',
+                    textAlign: 'center',
+                    
+                  }}>
+                    Jagannath Puri, Konark Sun Temple and Tara Tarini are among the architectural and spiritual sanctuaries located a short drive from Rambha Palace. Experience guided tours that are both enlightening and transformative. Immerse yourself in the beauty of these enduring structures, which have stood for centuries, and discover a place of solace, inner serenity and peace.
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -2226,7 +2316,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                   <div style={{ padding: '20px' }}>
                     <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#374151', marginBottom: '8px', textTransform: 'uppercase' }}>ART VILLAGE: RAGHURAJPUR</h3>
                     <p style={{ color: '#6b7280', lineHeight: '1.5', fontSize: '13px' }}>
-                      Discover the ancient art of Pattachitra paintings and Chadhiapalli mask making in Odisha's heritage village.
+                    Navigate town lanes, visit artisans’ homes & studios and unravel the stories behind Pattachitra paintings, delve into Chadhiapalli mask making and its symbolism in Odisha.
                     </p>
                   </div>
                 </div>
@@ -2275,7 +2365,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                   <div style={{ padding: '20px' }}>
                     <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#374151', marginBottom: '8px', textTransform: 'uppercase' }}>UDAYGIRI CAVES</h3>
                     <p style={{ color: '#6b7280', lineHeight: '1.5', fontSize: '13px' }}>
-                      Explore intricate carvings and ancient architecture from 2nd Century BC in these historic cave complexes.
+                    Constructed in 2nd Century BC, Udaygiri caves feature intricate carvings depicting popular legends, historical events, and religious rituals.
                     </p>
                   </div>
                 </div>
@@ -2324,7 +2414,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                   <div style={{ padding: '20px' }}>
                     <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#374151', marginBottom: '8px', textTransform: 'uppercase' }}>METAL CRAFT</h3>
                     <p style={{ color: '#6b7280', lineHeight: '1.5', fontSize: '13px' }}>
-                      Witness the skilled craftsmanship in replicating aquatic creatures and traditional metalwork artistry.
+                    Through the moulding of metal, artisans create sculptures of primarily aquatic creatures, effectively replicating their physical movement abilities. Skilful crafts at its finest.
                     </p>
                   </div>
                 </div>
@@ -2390,7 +2480,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                   <div style={{ padding: '24px' }}>
                     <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>BREAKFAST ON ISLAND</h3>
                     <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
-                      Experience a serene breakfast on the tranquil waters of Chilika Lake, surrounded by lush green islands and the gentle morning breeze.
+                    Set sail from the banks of Chilika Lake and cruise through calming waters. Enjoy breakfast aboard the boat, or step onto the island for a refreshing morning trail. Awaken to sounds of a gentle breeze and the buzz of critters.
                     </p>
                   </div>
                 </div>
@@ -2449,7 +2539,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                   <div style={{ padding: '24px' }}>
                     <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>ROMANTIC BEACH GETAWAY</h3>
                     <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
-                      Enjoy a candlelit feast by the lake, creating unforgettable moments in a romantic beach setting with ocean waves as your backdrop.
+                    Allow the palace butlers to orchestrate a candlelit feast by the lake. Relish a sumptuous banquet of your preferred cuisine, while the gentle whispers of waves caress the shore.
                     </p>
                   </div>
                 </div>
@@ -4471,11 +4561,39 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 padding: '12px 24px',
                 border: 'none',
                 backgroundColor: 'transparent',
-                color: experiencesTab === tab.toLowerCase() ? '#d97706' : '#6b7280',
-                fontWeight: experiencesTab === tab.toLowerCase() ? '600' : '500',
-                borderBottom: experiencesTab === tab.toLowerCase() ? '2px solid #d97706' : 'none',
+                color: experiencesTab === tab.toLowerCase() ? '#000000' : '#6b7280',
+                fontWeight: experiencesTab === tab.toLowerCase() ? '600' : '400',
+                borderBottom: experiencesTab === tab.toLowerCase() ? '2px solid #000000' : 'none',
                 cursor: 'pointer',
-                fontSize: '14px'
+                fontSize: '14px',
+                transition: 'none',
+                outline: 'none',
+                textDecoration: 'none',
+                boxShadow: 'none',
+                transform: 'none',
+                filter: 'none',
+                opacity: '1',
+                WebkitAppearance: 'none',
+                MozAppearance: 'none',
+                appearance: 'none'
+              }}
+              onMouseEnter={(e) => {
+                const target = e.target as HTMLButtonElement;
+                target.style.color = experiencesTab === tab.toLowerCase() ? '#000000' : '#6b7280';
+                target.style.backgroundColor = 'transparent';
+                target.style.borderBottom = experiencesTab === tab.toLowerCase() ? '2px solid #000000' : 'none';
+                target.style.setProperty('color', experiencesTab === tab.toLowerCase() ? '#000000' : '#6b7280', 'important');
+                target.style.setProperty('background-color', 'transparent', 'important');
+                target.style.setProperty('border-bottom', experiencesTab === tab.toLowerCase() ? '2px solid #000000' : 'none', 'important');
+              }}
+              onMouseLeave={(e) => {
+                const target = e.target as HTMLButtonElement;
+                target.style.color = experiencesTab === tab.toLowerCase() ? '#000000' : '#6b7280';
+                target.style.backgroundColor = 'transparent';
+                target.style.borderBottom = experiencesTab === tab.toLowerCase() ? '2px solid #000000' : 'none';
+                target.style.setProperty('color', experiencesTab === tab.toLowerCase() ? '#000000' : '#6b7280', 'important');
+                target.style.setProperty('background-color', 'transparent', 'important');
+                target.style.setProperty('border-bottom', experiencesTab === tab.toLowerCase() ? '2px solid #000000' : 'none', 'important');
               }}
             >
               {tab}
@@ -5730,21 +5848,38 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
           }}>
             <h2 style={{ 
               fontSize: '24px', 
-              fontWeight: 'bold', 
-              color: '#374151', 
+              fontWeight: '600', 
+              fontFamily: '"Montserrat", sans-serif',
+              color: '#000000',
+              lineHeight: '29.26px',
               marginBottom: '16px', 
               textAlign: 'left',
-              textTransform: 'uppercase'
+              textTransform: 'uppercase',
+              marginLeft: '128px'
             }}>
               CULINARY JOURNEY FROM WEST TO EAST
             </h2>
             <p style={{ 
-              color: '#374151', 
-              lineHeight: '1.8', 
-              fontSize: '16px',
-              textAlign: 'left'
+             color: '#374151', 
+            //  lineHeight: '1.6', 
+             fontSize: '16px',
+             textAlign: 'center',
+             maxWidth: '1200px',
+             margin: '0 auto',
+             fontFamily: 'Montserrat, sans-serif'
             }}>
-              Experience the finest meals on the Eastern coast of India, where inventive and delectable delicacies await your palate. Our orchard and sea-to-table philosophy brings you the freshest ingredients, prepared by exceptionally talented chefs who create Seven cuisines from the East to the West. Enjoy impeccably laid out food in the same dining room that has hosted centuries of royalty.
+             Rambha Palace serves the finest meals on the Eastern coast of India – inventive and delectable. Experience delicacies from across regions and fresh produce across seasons. Exemplifying the orchard and sea-to-table philosophy, a team of exceptionally talented chefs take you on a culinary sojourn across the globe, offering Seven cuisines from the East to the West. Savour the impeccably laid out food in the same dining room that has hosted centuries of royalty.
+
+
+
+
+
+
+
+
+
+
+
             </p>
           </div>
 
@@ -5754,21 +5889,51 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             <div style={{ 
               position: 'relative',
               maxWidth: '100%',
-              overflow: 'hidden'
+              display: 'flex',
+              alignItems: 'center',
+              gap: '20px'
             }}>
+              {/* Left Arrow */}
+              <button 
+                onClick={() => {
+                  setDiningCurrentIndex(prev => {
+                    const newIndex = prev - 1;
+                    // Handle infinite loop - when going below 0, wrap to the end
+                    return newIndex < 0 ? 2 : newIndex;
+                  });
+                }}
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  backgroundColor: '',
+                  border: '1px solid #2C3E50',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  zIndex: 10,
+                  flexShrink: 0
+                }}
+              >
+                <svg width="16" height="16" fill="none" stroke="#2C3E50" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+
               {/* Cards */}
               <div 
                 className="dining-cards-container"
                 style={{ 
                   display: 'flex', 
                   gap: '24px',
-                  padding: '0 80px', // More space for arrows
                   overflowX: 'auto',
                   scrollBehavior: 'smooth',
                   scrollbarWidth: 'none', // Hide scrollbar for Firefox
                   msOverflowStyle: 'none', // Hide scrollbar for IE/Edge
                   WebkitOverflowScrolling: 'touch',
-                  scrollSnapType: 'x mandatory'
+                  scrollSnapType: 'x mandatory',
+                  flex: 1
                 }}
               >
                 {visibleCards.map((card, index) => (
@@ -5843,38 +6008,6 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 ))}
               </div>
 
-              {/* Left Arrow */}
-              <button 
-                onClick={() => {
-                  setDiningCurrentIndex(prev => {
-                    const newIndex = prev - 1;
-                    // Handle infinite loop - when going below 0, wrap to the end
-                    return newIndex < 0 ? 2 : newIndex;
-                  });
-                }}
-                style={{
-                  position: 'absolute',
-                  left: '0',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '50%',
-                  backgroundColor: 'white',
-                  border: '1px solid #e5e7eb',
-                  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  zIndex: 10
-                }}
-              >
-                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-
               {/* Right Arrow */}
               <button 
                 onClick={() => {
@@ -5885,24 +6018,20 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                   });
                 }}
                 style={{
-                  position: 'absolute',
-                  right: '0',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
                   width: '40px',
                   height: '40px',
                   borderRadius: '50%',
-                  backgroundColor: 'white',
-                  border: '1px solid #e5e7eb',
-                  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+                  backgroundColor: '',
+                  border: '1px solid #2C3E50',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  zIndex: 10
+                  zIndex: 10,
+                  flexShrink: 0
                 }}
               >
-                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg width="16" height="16" fill="none" stroke="#2C3E50" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </button>
@@ -5915,27 +6044,56 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
           <div style={{ 
             position: 'relative',
             maxWidth: '100%',
-            overflow: 'hidden'
+            display: 'flex',
+            alignItems: 'center',
+            gap: '20px'
           }}>
+            {/* Left Arrow */}
+            <button 
+              onClick={() => {
+                const container = document.querySelector('.food-carousel-container') as HTMLElement;
+                if (container) {
+                  container.scrollBy({ left: -400, behavior: 'smooth' });
+                }
+              }}
+              style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                backgroundColor: '',
+                border: '1px solid #2C3E50',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 10,
+                flexShrink: 0
+              }}
+            >
+              <svg width="16" height="16" fill="none" stroke="#2C3E50" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
             {/* Food Images Container */}
             <div 
               className="food-carousel-container"
               style={{ 
                 display: 'flex', 
                 gap: '24px',
-                padding: '0 80px',
                 overflowX: 'auto',
                 scrollBehavior: 'smooth',
                 scrollbarWidth: 'none',
                 msOverflowStyle: 'none',
-                alignItems: 'center'
+                alignItems: 'center',
+                flex: 1
               }}
             >
               {/* Food Image 1 */}
               <div style={{ 
                 minWidth: '250px',
-                width: '250px',
-                height: '180px',
+                width: '700px',
+                height: '400px',
                 borderRadius: '8px',
                 overflow: 'hidden',
                 boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
@@ -5977,8 +6135,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               {/* Food Image 2 - Center (Larger) */}
               <div style={{ 
                 minWidth: '350px',
-                width: '250px',
-                height: '180px',
+                width: '700px',
+                height: '400px',
                 borderRadius: '8px',
                 overflow: 'hidden',
                 boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
@@ -6020,8 +6178,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               {/* Food Image 3 */}
               <div style={{ 
                 minWidth: '250px',
-                width: '250px',
-                height: '180px',
+                width: '700px',
+                height: '400px',
                 borderRadius: '8px',
                 overflow: 'hidden',
                 boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
@@ -6063,8 +6221,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               {/* Additional Food Images */}
               <div style={{ 
                 minWidth: '250px',
-                width: '250px',
-                height: '180px',
+                width: '700px',
+                height: '400px',
                 borderRadius: '8px',
                 overflow: 'hidden',
                 boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
@@ -6105,8 +6263,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
               <div style={{ 
                 minWidth: '250px',
-                width: '250px',
-                height: '180px',
+                width: '700px',
+                height: '400px',
                 borderRadius: '8px',
                 overflow: 'hidden',
                 boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
@@ -6146,36 +6304,6 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               </div>
             </div>
 
-            {/* Left Arrow */}
-            <button 
-              onClick={() => {
-                const container = document.querySelector('.food-carousel-container') as HTMLElement;
-                if (container) {
-                  container.scrollBy({ left: -400, behavior: 'smooth' });
-                }
-              }}
-              style={{
-                position: 'absolute',
-                left: '20px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                width: '40px',
-                height: '40px',
-                borderRadius: '50%',
-                backgroundColor: '#374151',
-                border: 'none',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                zIndex: 10
-              }}
-            >
-              <svg width="16" height="16" fill="none" stroke="white" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-
             {/* Right Arrow */}
             <button 
               onClick={() => {
@@ -6185,23 +6313,20 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 }
               }}
               style={{
-                position: 'absolute',
-                right: '20px',
-                top: '50%',
-                transform: 'translateY(-50%)',
                 width: '40px',
                 height: '40px',
                 borderRadius: '50%',
-                backgroundColor: '#374151',
-                border: 'none',
+                backgroundColor: '',
+                border: '1px solid #2C3E50',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                zIndex: 10
+                zIndex: 10,
+                flexShrink: 0
               }}
             >
-              <svg width="16" height="16" fill="none" stroke="white" viewBox="0 0 24 24">
+              <svg width="16" height="16" fill="none" stroke="#2C3E50" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
@@ -6213,10 +6338,12 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
           {/* Section Title */}
           <div style={{ textAlign: 'center', marginBottom: '48px' }}>
             <h2 style={{ 
-              fontSize: '32px', 
-              fontWeight: 'bold', 
-              color: '#374151', 
+              fontSize: '24px', 
+              fontWeight: '600', 
+              color: '#000000', 
               marginBottom: '16px',
+              lineHeight: '29.26px',
+              fontFamily: 'Montserrat, sans-serif',
               textTransform: 'uppercase'
             }}>
               DINING EXPERIENCES
@@ -6227,19 +6354,48 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
           <div style={{ 
             position: 'relative',
             maxWidth: '100%',
-            overflow: 'hidden'
+            display: 'flex',
+            alignItems: 'center',
+            gap: '20px'
           }}>
+            {/* Left Arrow */}
+            <button 
+              onClick={() => {
+                const container = document.querySelector('.dining-experiences-container') as HTMLElement;
+                if (container) {
+                  container.scrollBy({ left: -400, behavior: 'smooth' });
+                }
+              }}
+              style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                backgroundColor: '',
+                border: '1px solid #2C3E50',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 10,
+                flexShrink: 0
+              }}
+            >
+              <svg width="16" height="16" fill="none" stroke="#2C3E50" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
             {/* Cards Container */}
             <div 
               className="dining-experiences-container"
               style={{ 
                 display: 'flex', 
                 gap: '24px',
-                padding: '0 80px',
                 overflowX: 'auto',
                 scrollBehavior: 'smooth',
                 scrollbarWidth: 'none',
-                msOverflowStyle: 'none'
+                msOverflowStyle: 'none',
+                flex: 1
               }}
             >
               {/* Card 1: Orchard Feast */}
@@ -6286,8 +6442,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                   </div>
                 </div>
                 <div style={{ padding: '24px' }}>
-                  <h3 style={{ fontSize: '21px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>Orchard Feast</h3>
-                  <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                  <h3 style={{ fontSize: '16px', fontWeight: '500', color: '#000000',fontFamily:'Montserrat, sans-serif', marginBottom: '12px', lineHeight: '19.5px' }}>Orchard Feast</h3>
+                  <p style={{ color: '#3A3A3A', fontFamily:'Lato, sans-serif',lineHeight: '24px', fontSize: '14px', fontWeight: '500' }}>
                     An outdoor celebration of flavour & food - feast in the palace gardens with an elegant tablescape. Candle lit starry nights or bright Sunday brunches; the orchard offers it all.
                   </p>
                 </div>
@@ -6337,8 +6493,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                   </div>
                 </div>
                 <div style={{ padding: '24px' }}>
-                  <h3 style={{ fontSize: '21px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>Palace Garden High Tea</h3>
-                  <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                  <h3 style={{ fontSize: '16px', fontWeight: '500', color: '#000000',fontFamily:'Montserrat, sans-serif', marginBottom: '12px', lineHeight: '19.5px' }}>Palace Garden High Tea</h3>
+                  <p style={{ color: '#3A3A3A', fontFamily:'Lato, sans-serif',lineHeight: '24px', fontSize: '14px', fontWeight: '500' }}>
                     Delight in high tea while gazing at lush greenery and serene palace fountains, an enchanting experience that transports you to the grandeur and timeless splendor of a magnificent bygone era.
                   </p>
                 </div>
@@ -6388,8 +6544,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                   </div>
                 </div>
                 <div style={{ padding: '24px' }}>
-                  <h3 style={{ fontSize: '21px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>Breakfast on Island</h3>
-                  <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                  <h3 style={{ fontSize: '16px', fontWeight: '500', color: '#000000',fontFamily:'Montserrat, sans-serif', marginBottom: '12px', lineHeight: '19.5px' }}>Breakfast on Island</h3>
+                  <p style={{ color: '#3A3A3A', fontFamily:'Lato, sans-serif',lineHeight: '24px', fontSize: '14px', fontWeight: '500' }}>
                     Set sail from the banks of Chilika Lake and cruise through calming waters. Enjoy breakfast aboard the boat, or step onto the island for a refreshing morning trail.
                   </p>
                 </div>
@@ -6439,43 +6595,13 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                   </div>
                 </div>
                 <div style={{ padding: '24px' }}>
-                  <h3 style={{ fontSize: '21px', fontWeight: 'bold', color: '#374151', marginBottom: '12px' }}>Romantic Beach Getaway</h3>
-                  <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
+                  <h3 style={{ fontSize: '16px', fontWeight: '500', color: '#000000',fontFamily:'Montserrat, sans-serif', marginBottom: '12px', lineHeight: '19.5px' }}>Romantic Beach Getaway</h3>
+                  <p style={{ color: '#3A3A3A', fontFamily:'Lato, sans-serif',lineHeight: '24px', fontSize: '14px', fontWeight: '500' }}>
                     Allow the palace butlers to orchestrate a candlelit feast by the lake. Relish a sumptuous banquet of your preferred cuisine, while the gentle whispers of waves caress the shore.
                   </p>
                 </div>
               </div>
             </div>
-
-            {/* Left Arrow */}
-            <button 
-              onClick={() => {
-                const container = document.querySelector('.dining-experiences-container') as HTMLElement;
-                if (container) {
-                  container.scrollBy({ left: -400, behavior: 'smooth' });
-                }
-              }}
-              style={{
-                position: 'absolute',
-                left: '20px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                width: '40px',
-                height: '40px',
-                borderRadius: '50%',
-                backgroundColor: '#374151',
-                border: 'none',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                zIndex: 10
-              }}
-            >
-              <svg width="16" height="16" fill="none" stroke="white" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
 
             {/* Right Arrow */}
             <button 
@@ -6486,23 +6612,20 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 }
               }}
               style={{
-                position: 'absolute',
-                right: '20px',
-                top: '50%',
-                transform: 'translateY(-50%)',
                 width: '40px',
                 height: '40px',
                 borderRadius: '50%',
-                backgroundColor: '#374151',
-                border: 'none',
+                backgroundColor: '',
+                border: '1px solid #2C3E50',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                zIndex: 10
+                zIndex: 10,
+                flexShrink: 0
               }}
             >
-              <svg width="16" height="16" fill="none" stroke="white" viewBox="0 0 24 24">
+              <svg width="16" height="16" fill="none" stroke="#2C3E50" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
@@ -12534,8 +12657,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
       {/* Footer */}
       <footer style={{ 
-        backgroundColor: '#b0b0b0', 
+        backgroundColor: '#AFACA8', 
         padding: '64px 0 32px 0',
+        color: '#334155',
         marginTop: '64px'
       }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 16px' }}>
@@ -12546,11 +12670,12 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             marginBottom: '48px'
           }}>
             {/* Left Column - Hidden India Properties */}
-            <div>
+            <div style={{marginLeft: '48px'}}>
               <h2 style={{ 
                 fontSize: '20px', 
                 fontWeight: 'bold', 
-                color: 'white', 
+                color: '#FFFFFF', 
+                font:'16px Lato, sans-serif',
                 marginBottom: '24px',
                 textTransform: 'uppercase'
               }}>
@@ -12590,11 +12715,12 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               {/* Contact Us */}
               <div style={{ marginBottom: '32px' }}>
                 <h2 style={{ 
-                  fontSize: '20px', 
-                  fontWeight: 'bold', 
-                  color: 'white', 
-                  marginBottom: '24px',
-                  textTransform: 'uppercase'
+                fontSize: '20px', 
+                fontWeight: 'bold', 
+                color: '#FFFFFF', 
+                font:'16px Lato, sans-serif',
+                marginBottom: '24px',
+                textTransform: 'uppercase'
                 }}>
                   Contact Us
                 </h2>
@@ -12629,7 +12755,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               {/* Follow Us */}
               <div>
                 <p style={{ 
-                  fontSize: '20px', 
+                  font:'12px Lato, sans-serif',
                   fontWeight: 'bold', 
                   color: 'white', 
                   marginBottom: '24px',
@@ -12648,19 +12774,17 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                     target="_blank" 
                     rel="noopener noreferrer"
                     style={{ 
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      width: '40px',
-                      height: '40px',
-                      backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                      borderRadius: '50%',
-                      textDecoration: 'none'
+                      // display: 'flex',
+                      // alignItems: 'center',
+                      // justifyContent: 'center',
+                      // width: '40px',
+                      // height: '40px',
+                      // backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                      // borderRadius: '50%',
+                      // textDecoration: 'none'
                     }}
                   >
-                    <svg width="20" height="20" viewBox="0 0 24 25" fill="none">
-                      <path d="M24 12.5777C24 10.4649 23.4915 8.49457 22.4746 6.66681C21.4743 4.88936 20.1156 3.45567 18.3984 2.36572C16.6479 1.24224 14.7223 0.625998 12.6217 0.517004C10.5211 0.408009 8.53725 0.823027 6.67005 1.76206C4.85286 2.66755 3.36077 3.95033 2.19377 5.6104C0.993429 7.32078 0.284893 9.22399 0.0681646 11.32C-0.148564 13.4161 0.151522 15.4283 0.968422 17.3567C1.76865 19.218 2.96899 20.7858 4.56945 22.0602C6.20325 23.3514 8.05378 24.1646 10.121 24.5V16.0739H7.07016V12.5777H10.121V9.9115C10.121 8.41911 10.5295 7.26209 11.3464 6.44044C12.1633 5.61879 13.2636 5.20796 14.6473 5.20796C15.5476 5.22473 16.4478 5.30857 17.3481 5.45949V8.42749H15.8227C15.5726 8.39396 15.3184 8.41911 15.0599 8.50295C14.8015 8.58679 14.5806 8.72094 14.3973 8.90539C14.2139 9.08985 14.0763 9.30364 13.9846 9.54678C13.8929 9.78993 13.8554 10.0456 13.8721 10.3139V12.5777H17.1981L16.6729 16.0739H13.8721V24.5C15.7893 24.1982 17.5315 23.4687 19.0986 22.3117C20.6157 21.1882 21.8077 19.7881 22.6746 18.1112C23.5582 16.3673 24 14.5228 24 12.5777Z" fill="white"/>
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"><path d="M24 12.5777C24 10.4649 23.4915 8.49457 22.4746 6.66681C21.4743 4.88936 20.1156 3.45567 18.3984 2.36572C16.6479 1.24224 14.7223 0.625998 12.6217 0.517004C10.5211 0.408009 8.53725 0.823027 6.67005 1.76206C4.85286 2.66755 3.36077 3.95033 2.19377 5.6104C0.993429 7.32078 0.284893 9.22399 0.0681646 11.32C-0.148564 13.4161 0.151522 15.4283 0.968422 17.3567C1.76865 19.218 2.96899 20.7858 4.56945 22.0602C6.20325 23.3514 8.05378 24.1646 10.121 24.5V16.0739H7.07016V12.5777H10.121V9.9115C10.121 8.41911 10.5295 7.26209 11.3464 6.44044C12.1633 5.61879 13.2636 5.20796 14.6473 5.20796C15.5476 5.22473 16.4478 5.30857 17.3481 5.45949V8.42749H15.8227C15.5726 8.39396 15.3184 8.41911 15.0599 8.50295C14.8015 8.58679 14.5806 8.72094 14.3973 8.90539C14.2139 9.08985 14.0763 9.30364 13.9846 9.54678C13.8929 9.78993 13.8554 10.0456 13.8721 10.3139V12.5777H17.1981L16.6729 16.0739H13.8721V24.5C15.7893 24.1982 17.5315 23.4687 19.0986 22.3117C20.6157 21.1882 21.8077 19.7881 22.6746 18.1112C23.5582 16.3673 24 14.5228 24 12.5777Z" fill="white"></path></svg>
                   </a>
 
                   {/* Instagram */}
@@ -12669,14 +12793,14 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                     target="_blank" 
                     rel="noopener noreferrer"
                     style={{ 
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      width: '40px',
-                      height: '40px',
-                      backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                      borderRadius: '50%',
-                      textDecoration: 'none'
+                      // display: 'flex',
+                      // alignItems: 'center',
+                      // justifyContent: 'center',
+                      // width: '40px',
+                      // height: '40px',
+                      // backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                      // borderRadius: '50%',
+                      // textDecoration: 'none'
                     }}
                   >
                     <svg width="20" height="20" viewBox="0 0 24 25" fill="none">
@@ -12690,14 +12814,14 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                     target="_blank" 
                     rel="noopener noreferrer"
                     style={{ 
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      width: '40px',
-                      height: '40px',
-                      backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                      borderRadius: '50%',
-                      textDecoration: 'none'
+                      // display: 'flex',
+                      // alignItems: 'center',
+                      // justifyContent: 'center',
+                      // width: '40px',
+                      // height: '40px',
+                      // backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                      // borderRadius: '50%',
+                      // textDecoration: 'none'
                     }}
                   >
                     <svg width="20" height="20" viewBox="0 0 24 25" fill="none">
@@ -12711,14 +12835,14 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                     target="_blank" 
                     rel="noopener noreferrer"
                     style={{ 
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      width: '40px',
-                      height: '40px',
-                      backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                      borderRadius: '50%',
-                      textDecoration: 'none'
+                      // display: 'flex',
+                      // alignItems: 'center',
+                      // justifyContent: 'center',
+                      // width: '40px',
+                      // height: '40px',
+                      // backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                      // borderRadius: '50%',
+                      // textDecoration: 'none'
                     }}
                   >
                     <svg width="20" height="20" viewBox="0 0 24 25" fill="none">
@@ -12732,14 +12856,14 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                     target="_blank" 
                     rel="noopener noreferrer"
                     style={{ 
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      width: '40px',
-                      height: '40px',
-                      backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                      borderRadius: '50%',
-                      textDecoration: 'none'
+                      // display: 'flex',
+                      // alignItems: 'center',
+                      // justifyContent: 'center',
+                      // width: '40px',
+                      // height: '40px',
+                      // backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                      // borderRadius: '50%',
+                      // textDecoration: 'none'
                     }}
                   >
                     <svg width="24" height="20" viewBox="0 0 32 25" fill="none">
@@ -12758,7 +12882,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                   src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/HiddenIndia-WhiteLogo.svg" 
                   alt="Hidden India Logo"
                   style={{ 
-                    width: '200px', 
+                    width: '318px', 
                     height: 'auto',
                     maxWidth: '100%'
                   }}
@@ -12769,11 +12893,14 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               <div style={{ marginBottom: '16px' }}>
                 <h2 style={{ 
                   fontSize: '14px', 
-                  fontWeight: 'normal', 
-                  color: 'white',
-                  margin: 0
+                  fontWeight: '400', 
+                  color: '#FFFFFF',
+                  font:'13px Lato, sans-serif',
+                  margin: 0,
+                  textAlign:'left',
+                  maxWidth:'696px'
                 }}>
-                  COPYRIGHT 2024, Hidden India EXPERIENCES PRIVATE LIMITED.
+                  COPYRIGHT 2024,Hidden India EXPERIENCES PRIVATE LIMITED.
                 </h2>
               </div>
               
@@ -12782,8 +12909,12 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 <h2 style={{ 
                   fontSize: '16px', 
                   fontWeight: 'bold', 
-                  color: 'white',
-                  margin: 0
+                  color: '#FFFFFF',
+                  font:'16px Lato, sans-serif',
+                  margin: 0,
+                  marginTop: '64px',
+                  marginRight: '48px'
+
                 }}>
                   English
                 </h2>
