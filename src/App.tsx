@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import IconContainer from './components/IconContainer';
+
+
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -220,6 +223,7 @@ function App() {
 
       {/* Image Carousel Section */}
       <div style={{ maxWidth: '1400px', margin: '0 auto', marginTop: '64px', marginBottom: '64px' }}>
+        {/* Carousel Container with overflow hidden */}
         <div style={{
           position: 'relative',
           width: '100%',
@@ -227,7 +231,6 @@ function App() {
           borderRadius: '12px',
           boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
         }}>
-          {/* Carousel Container */}
           <div
             id="imageCarousel"
             style={{
@@ -302,8 +305,17 @@ function App() {
               </div>
             ))}
           </div>
+        </div>
 
-          {/* Navigation Buttons */}
+        {/* Navigation Buttons positioned below the carousel */}
+        <div style={{
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '24px',
+          gap: '32px'
+        }}>
           <button
             onClick={() => {
               const carousel = document.getElementById('imageCarousel');
@@ -312,10 +324,6 @@ function App() {
               }
             }}
             style={{
-              position: 'absolute',
-              left: '16px',
-              top: '50%',
-              transform: 'translateY(-50%)',
               backgroundColor: 'rgba(255, 255, 255, 0.9)',
               border: 'none',
               borderRadius: '50%',
@@ -342,10 +350,6 @@ function App() {
               }
             }}
             style={{
-              position: 'absolute',
-              right: '16px',
-              top: '50%',
-              transform: 'translateY(-50%)',
               backgroundColor: 'rgba(255, 255, 255, 0.9)',
               border: 'none',
               borderRadius: '50%',
@@ -372,18 +376,16 @@ function App() {
         <h2 style={{ fontSize: '24px',  color: '#3A3A3A',fontWeight: '600', marginBottom: '32px', textTransform: 'uppercase' }}>ACCOMMODATION</h2>
       </div>
 
-      {/* Second Image Carousel Section */}
+      {/* Accommodation Carousel Section */}
       <div style={{ maxWidth: '1400px', margin: '0 auto', marginTop: '64px', marginBottom: '64px' }}>
         <div style={{
           position: 'relative',
           width: '100%',
-          overflow: 'hidden',
           borderRadius: '12px',
-          boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
         }}>
           {/* Carousel Container */}
           <div
-            id="imageCarousel2"
+            id="accommodationCarousel"
             style={{
               display: 'flex',
               transition: 'transform 0.3s ease-in-out',
@@ -394,7 +396,7 @@ function App() {
               padding: '0 24px',
             }}
             onScroll={(e) => {
-              const items = e.currentTarget.querySelectorAll('.carousel-image-2');
+              const items = e.currentTarget.querySelectorAll('.accommodation-card');
               items.forEach((el) => {
                 if (el instanceof HTMLElement) {
                   const box = el.getBoundingClientRect();
@@ -408,70 +410,460 @@ function App() {
               });
             }}
           >
-            {[51, 52, 53, 54, 55, 56].map((i) => (
-              <div
-                key={i}
-                className="carousel-image-2"
-                style={{
-                  flex: '0 0 400px',
-                  transition: 'all 0.3s ease',
-                  scrollSnapAlign: 'center',
-                  padding: '0 12px',
-                  boxSizing: 'border-box'
-                }}
-              >
+            {/* Ice Mill Suites */}
+            <div
+              className="accommodation-card"
+              style={{
+                flex: '0 0 400px',
+                transition: 'all 0.3s ease',
+                scrollSnapAlign: 'center',
+                padding: '0 12px',
+                boxSizing: 'border-box'
+              }}
+            >
+              <div style={{
+                backgroundColor: 'white',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                height: '100%'
+              }}>
                 <img
-                  src={`/image-${i}.png`}
-                  alt={`Rambha Palace View ${i}`}
+                  src="/image-51.png"
+                  alt="Ice Mill Suites"
                   style={{
-                    width: '800px',
-                    height: '450px',
+                    width: '100%',
+                    height: '250px',
                     objectFit: 'cover',
-                    display: 'block',
-                    borderRadius: '12px',
-                    transition: 'all 0.3s ease'
-                  }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const nextSibling = target.nextSibling as HTMLElement;
-                    if (nextSibling) {
-                      nextSibling.style.display = 'flex';
-                    }
+                    display: 'block'
                   }}
                 />
-                <div style={{
-                  display: 'none',
-                  width: '800px',
-                  height: '450px',
-                  backgroundColor: '#f3f4f6',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#6b7280',
-                  fontSize: '18px',
-                  borderRadius: '12px'
-                }}>
-                  Palace View {i}
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{
+                    fontSize: '16px',
+                    fontWeight: '500',
+                    color: '#000',
+                    textTransform: 'uppercase',
+                    margin: '0 0 16px 0',
+                    textAlign: 'center',
+                    fontFamily: '"Montserrat", sans-serif'
+                  }}>
+                    ICE MILL SUITES
+                  </h3>
+                  <p style={{
+                    fontSize: '14px',
+                    color: '#3A3A3A',
+                    
+                    lineHeight: '1.5',
+                    margin: '0 0 24px 0',
+                    textAlign: 'left',
+                    fontFamily: '"Lato", sans-serif'
+                  }}>
+                    Once used to store ice blocks for preserving the palace's fresh catches, these suites have been reimagined into a lavish retreat with an outdoor seating verandah.
+                  </p>
+                  <button 
+                    onClick={() => setCurrentPage('ice-mill-suite')}
+                    style={{
+                      backgroundColor: '#000',
+                      color: 'white',
+                      border: 'none',
+                      padding: '12px 32px',
+                      borderRadius: '6px',
+                      fontSize: '14px',
+                      fontWeight: '600',
+                      textTransform: 'uppercase',
+                      cursor: 'pointer',
+                      width: '100%',
+                      fontFamily: '"Montserrat", sans-serif'
+                    }}
+                  >
+                    VIEW
+                  </button>
                 </div>
               </div>
-            ))}
+            </div>
+
+            {/* Palace Suite */}
+            <div
+              className="accommodation-card"
+              style={{
+                flex: '0 0 400px',
+                transition: 'all 0.3s ease',
+                scrollSnapAlign: 'center',
+                padding: '0 12px',
+                boxSizing: 'border-box'
+              }}
+            >
+              <div style={{
+                backgroundColor: 'white',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                height: '100%'
+              }}>
+                <img
+                  src="/image-52.png"
+                  alt="Palace Suite"
+                  style={{
+                    width: '100%',
+                    height: '250px',
+                    objectFit: 'cover',
+                    display: 'block'
+                  }}
+                />
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{
+                      fontSize: '16px',
+                      fontWeight: '500',
+                      color: '#000',
+                      textTransform: 'uppercase',
+                      margin: '0 0 16px 0',
+                      textAlign: 'center',
+                      fontFamily: '"Montserrat", sans-serif'
+                  }}>
+                    PALACE SUITE
+                  </h3>
+                  <p style={{
+                    fontSize: '14px',
+                    color: '#3A3A3A',
+                    
+                    lineHeight: '1.5',
+                    margin: '0 0 24px 0',
+                    textAlign: 'left',
+                    fontFamily: '"Lato", sans-serif'
+                  }}>
+                    Experience the luxury and grandeur of the original palace block. Once the residence of the royal family in a bygone era—unparalleled sophistication at Rambha.
+                  </p>
+                  <button 
+                    onClick={() => setCurrentPage('palace-suite')}
+                    style={{
+                      backgroundColor: '#000',
+                      color: 'white',
+                      border: 'none',
+                      padding: '12px 32px',
+                      borderRadius: '6px',
+                      fontSize: '14px',
+                      fontWeight: '600',
+                      textTransform: 'uppercase',
+                      cursor: 'pointer',
+                      width: '100%',
+                      fontFamily: '"Montserrat", sans-serif'
+                    }}
+                  >
+                    VIEW
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Palace Family Suite */}
+            <div
+              className="accommodation-card"
+              style={{
+                flex: '0 0 400px',
+                transition: 'all 0.3s ease',
+                scrollSnapAlign: 'center',
+                padding: '0 12px',
+                boxSizing: 'border-box'
+              }}
+            >
+              <div style={{
+                backgroundColor: 'white',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                height: '100%'
+              }}>
+                <img
+                  src="/image-53.png"
+                  alt="Palace Family Suite"
+                  style={{
+                    width: '100%',
+                    height: '250px',
+                    objectFit: 'cover',
+                    display: 'block'
+                  }}
+                />
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{
+                      fontSize: '16px',
+                      fontWeight: '500',
+                      color: '#000',
+                      textTransform: 'uppercase',
+                      margin: '0 0 16px 0',
+                      textAlign: 'center',
+                      fontFamily: '"Montserrat", sans-serif'
+                  }}>
+                    PALACE FAMILY SUITE
+                  </h3>
+                  <p style={{
+                    fontSize: '14px',
+                    color: '#3A3A3A',
+                    
+                    lineHeight: '1.5',
+                    margin: '0 0 24px 0',
+                    textAlign: 'left',
+                    fontFamily: '"Lato", sans-serif'
+                  }}>
+                    A fusion of two palace suites, featuring a spacious lounge-an expansive, lush private retreat perfect for families and added privacy.
+                  </p>
+                  <button 
+                    onClick={() => setCurrentPage('palace-family-suite')}
+                    style={{
+                      backgroundColor: '#000',
+                      color: 'white',
+                      border: 'none',
+                      padding: '12px 32px',
+                      borderRadius: '6px',
+                      fontSize: '14px',
+                      fontWeight: '600',
+                      textTransform: 'uppercase',
+                      cursor: 'pointer',
+                      width: '100%',
+                      fontFamily: '"Montserrat", sans-serif'
+                    }}
+                  >
+                    VIEW
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Generator Suites */}
+            <div
+              className="accommodation-card"
+              style={{
+                flex: '0 0 400px',
+                transition: 'all 0.3s ease',
+                scrollSnapAlign: 'center',
+                padding: '0 12px',
+                boxSizing: 'border-box'
+              }}
+            >
+              <div style={{
+                backgroundColor: 'white',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                height: '100%'
+              }}>
+                <img
+                  src="/image-54.png"
+                  alt="Generator Suites"
+                  style={{
+                    width: '100%',
+                    height: '250px',
+                    objectFit: 'cover',
+                    display: 'block'
+                  }}
+                />
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{
+                       fontSize: '16px',
+                       fontWeight: '500',
+                       color: '#000',
+                       textTransform: 'uppercase',
+                       margin: '0 0 16px 0',
+                       textAlign: 'center',
+                       fontFamily: '"Montserrat", sans-serif'
+                  }}>
+                    GENERATOR SUITES
+                  </h3>
+                  <p style={{
+                     fontSize: '14px',
+                     color: '#3A3A3A',
+                     
+                     lineHeight: '1.5',
+                     margin: '0 0 24px 0',
+                     textAlign: 'left',
+                     fontFamily: '"Lato", sans-serif'
+                  }}>
+                    Once the heart of the royal palace's power generation, these suites have now been transformed into a luxurious retreat, offering orchard views and outdoor bathtubs.
+                  </p>
+                  <button
+                    onClick={() => setCurrentPage('generator-suite')}
+                    style={{
+                      backgroundColor: '#000',
+                      color: 'white',
+                      border: 'none',
+                      padding: '12px 32px',
+                      borderRadius: '6px',
+                      fontSize: '14px',
+                      fontWeight: '600',
+                      textTransform: 'uppercase',
+                      cursor: 'pointer',
+                      width: '100%',
+                      fontFamily: '"Montserrat", sans-serif'
+                    }}
+                  >
+                    VIEW
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Printing Press Suites */}
+            <div
+              className="accommodation-card"
+              style={{
+                flex: '0 0 400px',
+                transition: 'all 0.3s ease',
+                scrollSnapAlign: 'center',
+                padding: '0 12px',
+                boxSizing: 'border-box'
+              }}
+            >
+              <div style={{
+                backgroundColor: 'white',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                height: '100%'
+              }}>
+                <img
+                  src="/image-55.png"
+                  alt="Printing Press Suites"
+                  style={{
+                    width: '100%',
+                    height: '250px',
+                    objectFit: 'cover',
+                    display: 'block'
+                  }}
+                />
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{
+                      fontSize: '16px',
+                      fontWeight: '500',
+                      color: '#000',
+                      textTransform: 'uppercase',
+                      margin: '0 0 16px 0',
+                      textAlign: 'center',
+                      fontFamily: '"Montserrat", sans-serif'
+                  }}>
+                    PRINTING PRESS SUITES
+                  </h3>
+                  <p style={{
+                   fontSize: '14px',
+                   color: '#3A3A3A',
+                   
+                   lineHeight: '1.5',
+                   margin: '0 0 24px 0',
+                   textAlign: 'left',
+                   fontFamily: '"Lato", sans-serif'
+                  }}>
+                    Once the palace's printing press, they now offer views of the orchard and palace verandah, retaining a name that reflects their storied past.
+                  </p>
+                  <button
+                    onClick={() => setCurrentPage('printing-press-suite')}
+                    style={{
+                      backgroundColor: '#000',
+                      color: 'white',
+                      border: 'none',
+                      padding: '12px 32px',
+                      borderRadius: '6px',
+                      fontSize: '14px',
+                      fontWeight: '600',
+                      textTransform: 'uppercase',
+                      cursor: 'pointer',
+                      width: '100%',
+                      fontFamily: '"Montserrat", sans-serif'
+                    }}
+                  >
+                    VIEW
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Rambha Villa */}
+            <div
+              className="accommodation-card"
+              style={{
+                flex: '0 0 400px',
+                transition: 'all 0.3s ease',
+                scrollSnapAlign: 'center',
+                padding: '0 12px',
+                boxSizing: 'border-box'
+              }}
+            >
+              <div style={{
+                backgroundColor: 'white',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                height: '100%'
+              }}>
+                <img
+                  src="/image-56.png"
+                  alt="Rambha Villa"
+                  style={{
+                    width: '100%',
+                    height: '250px',
+                    objectFit: 'cover',
+                    display: 'block'
+                  }}
+                />
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{
+                    fontSize: '16px',
+                    fontWeight: '500',
+                    color: '#000',
+                    textTransform: 'uppercase',
+                    margin: '0 0 16px 0',
+                    textAlign: 'center',
+                    fontFamily: '"Montserrat", sans-serif'
+                  }}>
+                    RAMBHA VILLA
+                  </h3>
+                  <p style={{
+                     fontSize: '14px',
+                     color: '#3A3A3A',
+                     
+                     lineHeight: '1.5',
+                     margin: '0 0 24px 0',
+                     textAlign: 'left',
+                     fontFamily: '"Lato", sans-serif'
+                  }}>
+                    A luxurious, standalone two-bedroom presidential suite featuring a spacious private garden, swimming pool, butler service and pantry with a comfortable lounge area.
+                  </p>
+                  <button
+                    onClick={() => setCurrentPage('rambha-villa')}
+                    style={{
+                      backgroundColor: '#000',
+                      color: 'white',
+                      border: 'none',
+                      padding: '12px 32px',
+                      borderRadius: '6px',
+                      fontSize: '14px',
+                      fontWeight: '600',
+                      textTransform: 'uppercase',
+                      cursor: 'pointer',
+                      width: '100%',
+                      fontFamily: '"Montserrat", sans-serif'
+                    }}
+                  >
+                    VIEW
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Navigation Buttons */}
           <button
             onClick={() => {
-              const carousel = document.getElementById('imageCarousel2');
+              const carousel = document.getElementById('accommodationCarousel');
               if (carousel) {
                 carousel.scrollBy({ left: -carousel.offsetWidth / 2, behavior: 'smooth' });
               }
             }}
             style={{
               position: 'absolute',
-              left: '16px',
-              top: '50%',
-              transform: 'translateY(-50%)',
+              left: '50%',
+              top: 'calc(100% + 20px)',
+              transform: 'translateX(-50%)',
               backgroundColor: 'rgba(255, 255, 255, 0.9)',
-              border: 'none',
+              border: '1px solid #d1d5db',
               borderRadius: '50%',
               width: '48px',
               height: '48px',
@@ -490,18 +882,18 @@ function App() {
 
           <button
             onClick={() => {
-              const carousel = document.getElementById('imageCarousel2');
+              const carousel = document.getElementById('accommodationCarousel');
               if (carousel) {
                 carousel.scrollBy({ left: carousel.offsetWidth / 2, behavior: 'smooth' });
               }
             }}
             style={{
               position: 'absolute',
-              right: '16px',
-              top: '50%',
-              transform: 'translateY(-50%)',
+              left: 'calc(50% + 60px)',
+              top: 'calc(100% + 20px)',
+              transform: 'translateX(-50%)',
               backgroundColor: 'rgba(255, 255, 255, 0.9)',
-              border: 'none',
+              border: '1px solid #d1d5db',
               borderRadius: '50%',
               width: '48px',
               height: '48px',
@@ -597,8 +989,9 @@ function App() {
                 Wellness
               </h3>
               <p style={{ 
-                color: '#6b7280', 
-                fontSize: '14px', 
+                color: '#3A3A3A', 
+                fontSize: '13px',
+                fontFamily: '"Lato", sans-serif', 
                 lineHeight: '1.6', 
                 marginBottom: '16px',
                 textAlign: 'center'
@@ -687,8 +1080,9 @@ function App() {
                 Experience
               </h3>
               <p style={{ 
-                color: '#6b7280', 
-                fontSize: '14px', 
+                color: '#3A3A3A', 
+                fontSize: '13px',
+                fontFamily: '"Lato", sans-serif',
                 lineHeight: '1.6', 
                 marginBottom: '16px',
                 textAlign: 'center'
@@ -776,8 +1170,9 @@ function App() {
                 Dining
               </h3>
               <p style={{ 
-                color: '#6b7280', 
-                fontSize: '14px', 
+                color: '#3A3A3A', 
+                fontSize: '13px',
+                fontFamily: '"Lato", sans-serif',
                 lineHeight: '1.6', 
                 marginBottom: '16px',
                 textAlign: 'center'
@@ -1098,9 +1493,6 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 padding: '8px 0 !important',
                 border: 'none !important',
                 backgroundColor: 'transparent !important',
-                color: activeTab === tab.toLowerCase().replace(' ', '-') ? '#000000 !important' : '#6b7280 !important',
-                fontWeight: activeTab === tab.toLowerCase().replace(' ', '-') ? '600 !important' : '400 !important',
-                borderBottom: activeTab === tab.toLowerCase().replace(' ', '-') ? '2px solid #000000 !important' : 'none !important',
                 cursor: 'pointer !important',
                 fontSize: '14px !important',
                 fontFamily: 'sans-serif !important',
@@ -1114,35 +1506,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 opacity: '1 !important',
                 WebkitAppearance: 'none',
                 MozAppearance: 'none',
-                appearance: 'none'
-              }}
-              onMouseEnter={(e) => {
-                // Force prevent any hover color changes with !important
-                const target = e.target as HTMLButtonElement;
-                target.style.setProperty('color', activeTab === tab.toLowerCase().replace(' ', '-') ? '#000000' : '#6b7280', 'important');
-                target.style.setProperty('backgroundColor', 'transparent', 'important');
-                target.style.setProperty('borderColor', 'transparent', 'important');
-                target.style.setProperty('boxShadow', 'none', 'important');
-                target.style.setProperty('transform', 'none', 'important');
-                target.style.setProperty('filter', 'none', 'important');
-                target.style.setProperty('opacity', '1', 'important');
-                target.style.setProperty('WebkitAppearance', 'none', 'important');
-                target.style.setProperty('MozAppearance', 'none', 'important');
-                target.style.setProperty('appearance', 'none', 'important');
-              }}
-              onMouseLeave={(e) => {
-                // Force ensure color stays the same on mouse leave with !important
-                const target = e.target as HTMLButtonElement;
-                target.style.setProperty('color', activeTab === tab.toLowerCase().replace(' ', '-') ? '#000000' : '#6b7280', 'important');
-                target.style.setProperty('backgroundColor', 'transparent', 'important');
-                target.style.setProperty('borderColor', 'transparent', 'important');
-                target.style.setProperty('boxShadow', 'none', 'important');
-                target.style.setProperty('transform', 'none', 'important');
-                target.style.setProperty('filter', 'none', 'important');
-                target.style.setProperty('opacity', '1', 'important');
-                target.style.setProperty('WebkitAppearance', 'none', 'important');
-                target.style.setProperty('MozAppearance', 'none', 'important');
-                target.style.setProperty('appearance', 'none', 'important');
+                appearance: 'none',
               }}
             >
               {tab}
@@ -5803,15 +6167,16 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
     return (
       <>
         {/* Main Content Area */}
-        <div style={{ maxWidth: '1024px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
           {/* Dining Room Image */}
           <div style={{ marginBottom: '48px' }}>
             <img 
               src="./image-15.png" 
               alt="Luxurious Dining Room at Rambha Palace" 
               style={{ 
-                width: '100%', 
+                width: '1024px', 
                 height: 'auto', 
+                margin: '0 auto',
                 maxWidth: '100%',
                 borderRadius: '8px',
                 boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
@@ -5869,17 +6234,6 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
              fontFamily: 'Montserrat, sans-serif'
             }}>
              Rambha Palace serves the finest meals on the Eastern coast of India – inventive and delectable. Experience delicacies from across regions and fresh produce across seasons. Exemplifying the orchard and sea-to-table philosophy, a team of exceptionally talented chefs take you on a culinary sojourn across the globe, offering Seven cuisines from the East to the West. Savour the impeccably laid out food in the same dining room that has hosted centuries of royalty.
-
-
-
-
-
-
-
-
-
-
-
             </p>
           </div>
 
@@ -5888,7 +6242,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             {/* Cards Container with Scroll */}
             <div style={{ 
               position: 'relative',
-              maxWidth: '100%',
+              // maxWidth: '100%',
+              maxWidth: '1200px',
               display: 'flex',
               alignItems: 'center',
               gap: '20px'
@@ -5944,7 +6299,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                       borderRadius: '8px', 
                       overflow: 'hidden', 
                       boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                      minWidth: '300px',
+                      minWidth: '350px',
                       flex: '1',
                       scrollSnapAlign: 'start'
                     }}
@@ -6746,23 +7101,24 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
           marginTop: '128px',
           backgroundColor: '#ebc9c4', // Light beige background as per first image
           padding: '80px 0',
-          position: 'relative'
+          position: 'relative',
+          width: '100%',
         }}>
           {/* Container */}
           <div style={{ 
-            maxWidth: '1200px', 
+             maxWidth: '100%',
             margin: '0 auto', 
             padding: '0 24px',
             position: 'relative'
           }}>
             {/* Pink Content Block */}
             <div style={{ 
-              backgroundColor: '#fdf2f8', // Light pink background
+              // backgroundColor: '#fdf2f8', // Light pink background
               borderRadius: '12px',
               padding: '60px',
-              maxWidth: '900px',
+              maxWidth: '100%',
               marginLeft: '0',
-              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+              // boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
               display: 'flex',
               alignItems: 'center',
               gap: '40px',
@@ -6773,18 +7129,21 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 {/* Small heading */}
                 <p style={{ 
                   fontSize: '16px', 
-                  color: '#9ca3af', 
+                  color: '#F1ECF5', 
+                  fontFamily: '"Montserrat", sans-serif',
+                  fontWeight: '400',
                   marginBottom: '16px',
-                  fontWeight: '500'
+                  fontStyle: 'italic'
                 }}>
                   Seasonal and Local ingredients from
                 </p>
                 
                 {/* Main heading */}
                 <h2 style={{ 
-                  fontSize: '32px', 
-                  fontWeight: 'bold', 
-                  color: '#111827', 
+                  fontFamily: '"Montserrat", sans-serif',
+                  fontSize: '24px', 
+                  fontWeight: '600', 
+                  color: '#000000', 
                   marginBottom: '24px',
                   textTransform: 'uppercase',
                   lineHeight: '1.2'
@@ -6804,7 +7163,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                     fontWeight: '500', 
                     lineHeight: '24px', 
                     textAlign: 'justify',
-                    color: '#374151'
+                    color: '#7A7A7A'
                   }}>
                     Expertly weaving a tapestry of rich flavors, our skilled chefs present an array of cuisines infused with their unique flair. With a deep understanding of the nuances of textures, spices, and seasonal produce, each dish is crafted and presented to deliver an elevated culinary experience.
                   </p>
@@ -6812,7 +7171,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               </div>
 
               {/* Right Image */}
-              <div style={{ flex: '1', display: 'flex', justifyContent: 'center' }}>
+              <div className='ml-12' style={{ flex: '1', display: 'flex', justifyContent: 'center' }}>
                 <div style={{ 
                   width: '400px', 
                   height: '300px',
@@ -6868,7 +7227,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
         {/* People behind Hidden India Section */}
         <div style={{ 
           marginTop: '128px',
-          backgroundColor: '#ebc9c4', // Light beige background
+          // backgroundColor: '#ebc9c4', // Light beige background
           padding: '80px 0',
           position: 'relative'
         }}>
@@ -6885,9 +7244,10 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             <div style={{ flex: '1', maxWidth: '500px' }}>
               {/* Main heading */}
               <h2 style={{ 
-                fontSize: '36px', 
-                fontWeight: 'bold', 
-                color: '#111827', 
+                fontSize: '20px', 
+                fontWeight: '600',
+                fontFamily: '"Montserrat", sans-serif',
+                color: '#000000', 
                 marginBottom: '24px',
                 lineHeight: '1.2',
                 textTransform: 'uppercase'
@@ -6897,8 +7257,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               
               {/* Description text */}
               <p style={{ 
-                fontSize: '16px', 
-                color: '#374151', 
+                fontSize: '12px', 
+                color: '#3A3A3A',
+                fontFamily: '"Lato", sans-serif',
                 lineHeight: '1.6',
                 marginBottom: '32px'
               }}>
@@ -7405,16 +7766,20 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
           {/* Left Column - Contact Info */}
           <div style={{ textAlign: 'center' }}>
             <div style={{ 
-              color: '#374151',
+              color: '#3C3C3C',
+              fontFamily: '"Lato", sans-serif',
               fontSize: '16px',
-              fontWeight: '500',
+              // fontWeight: '600',
               marginBottom: '8px'
             }}>
               Hidden India Rambha Palace
             </div>
             <div style={{ 
-              color: '#6b7280',
-              fontSize: '14px'
+              color: '#7A7A7A',
+              fontSize: '14px',
+              fontFamily: '"Lato", sans-serif',
+              // fontWeight: '400',
+              lineHeight: '1.6'
             }}>
               rambhapalace@hiddenindia.com
             </div>
@@ -7423,111 +7788,24 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
           {/* Middle Column - Address */}
           <div style={{ textAlign: 'center' }}>
             <div style={{ 
-              color: '#374151',
-              fontSize: '14px',
+              color: '#3C3C3C',
+              font: '14px"Lato", sans-serif',
               lineHeight: '1.6',
               marginBottom: '8px'
             }}>
               Tehsil, PS, Rambha, Khallikot, Odisha, India, 761030.
             </div>
             <div style={{ 
-              color: '#d97706',
+              color: '#7A7A7A',
               fontSize: '14px',
-              fontWeight: '500',
+              fontWeight: '400',
               cursor: 'pointer'
             }}>
               Get Directions
             </div>
           </div>
 
-          {/* Right Column - Social Media */}
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: '24px'
-          }}>
-            {/* Facebook */}
-            <div style={{ 
-              width: '40px',
-              height: '40px',
-              backgroundColor: '#374151',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              transition: 'background-color 0.2s'
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.backgroundColor = '#1f2937';
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.backgroundColor = '#374151';
-            }}>
-              <span style={{ 
-                color: 'white',
-                fontSize: '16px',
-                fontWeight: 'bold'
-              }}>
-                f
-              </span>
-            </div>
-
-            {/* Instagram */}
-            <div style={{ 
-              width: '40px',
-              height: '40px',
-              backgroundColor: '#374151',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              transition: 'background-color 0.2s'
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.backgroundColor = '#1f2937';
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.backgroundColor = '#374151';
-            }}>
-              <span style={{ 
-                color: 'white',
-                fontSize: '16px',
-                fontWeight: 'bold'
-              }}>
-                📷
-              </span>
-            </div>
-
-            {/* LinkedIn */}
-            <div style={{ 
-              width: '40px',
-              height: '40px',
-              backgroundColor: '#374151',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              transition: 'background-color 0.2s'
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.backgroundColor = '#1f2937';
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.backgroundColor = '#374151';
-            }}>
-              <span style={{ 
-                color: 'white',
-                fontSize: '16px',
-                fontWeight: 'bold'
-              }}>
-                in
-              </span>
-            </div>
-          </div>
+          <IconContainer/>
         </div>
       </div>
     </>
@@ -7576,9 +7854,6 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 padding: '12px 24px',
                 border: 'none',
                 backgroundColor: 'transparent',
-                color: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '#d97706' : '#6b7280',
-                fontWeight: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '600' : '500',
-                borderBottom: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '2px solid #d97706' : 'none',
                 cursor: 'pointer',
                 fontSize: '14px'
               }}
@@ -8429,9 +8704,6 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 padding: '12px 24px',
                 border: 'none',
                 backgroundColor: 'transparent',
-                color: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '#d97706' : '#6b7280',
-                fontWeight: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '600' : '500',
-                borderBottom: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '2px solid #d97706' : 'none',
                 cursor: 'pointer',
                 fontSize: '14px'
               }}
@@ -9065,9 +9337,6 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 padding: '12px 24px',
                 border: 'none',
                 backgroundColor: 'transparent',
-                color: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '#d97706' : '#6b7280',
-                fontWeight: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '600' : '500',
-                borderBottom: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '2px solid #d97706' : 'none',
                 cursor: 'pointer',
                 fontSize: '14px'
               }}
@@ -9703,9 +9972,6 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 padding: '12px 24px',
                 border: 'none',
                 backgroundColor: 'transparent',
-                color: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '#d97706' : '#6b7280',
-                fontWeight: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '600' : '500',
-                borderBottom: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '2px solid #d97706' : 'none',
                 cursor: 'pointer',
                 fontSize: '14px'
               }}
@@ -10552,9 +10818,6 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 padding: '12px 24px',
                 border: 'none',
                 backgroundColor: 'transparent',
-                color: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '#d97706' : '#6b7280',
-                fontWeight: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '600' : '500',
-                borderBottom: palaceSuiteTab === tab.toLowerCase().replace(' ', '-') ? '2px solid #d97706' : 'none',
                 cursor: 'pointer',
                 fontSize: '14px'
               }}
@@ -11381,18 +11644,21 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       {/* Wellness Content */}
       <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
         <h1 style={{ 
-          fontSize: '36px', 
-          fontWeight: 'bold', 
-          color: '#374151', 
+          fontFamily: '"Montserrat", sans-serif',
+          fontSize: '24px', 
+          fontWeight: '600', 
+          color: '#000000', 
           marginBottom: '32px',
+          lineHeight: '29.26px',
           textTransform: 'uppercase'
         }}>
           WELL BEYOND WELLNESS WITH MANTNAM
         </h1>
         
         <p style={{ 
-          fontSize: '18px', 
-          color: '#374151', 
+          // fontSize: '18px', 
+          fontFamily: '14px"Lato", sans-serif',
+          color: '#3A3A3A', 
           lineHeight: '1.8',
           textAlign: 'center'
         }}>
@@ -11576,7 +11842,6 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       <div style={{ marginTop: '80px' }}>
         {/* Carousel Container */}
         <div style={{ 
-          position: 'relative',
           maxWidth: '1200px',
           margin: '0 auto',
           padding: '0 60px'
@@ -11596,8 +11861,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
           >
             {/* Image 1 */}
             <div style={{ 
-              minWidth: '350px',
-              height: '250px',
+              minWidth: '500px',
+              height: '350px',
               backgroundColor: '#f3f4f6',
               borderRadius: '8px',
               overflow: 'hidden',
@@ -11642,8 +11907,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
             {/* Image 2 */}
             <div style={{ 
-              minWidth: '350px',
-              height: '250px',
+              minWidth: '500px',
+              height: '350px',
               backgroundColor: '#f3f4f6',
               borderRadius: '8px',
               overflow: 'hidden',
@@ -11688,8 +11953,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
             {/* Image 3 */}
             <div style={{ 
-              minWidth: '350px',
-              height: '250px',
+              minWidth: '500px',
+              height: '350px',
               backgroundColor: '#f3f4f6',
               borderRadius: '8px',
               overflow: 'hidden',
@@ -11734,8 +11999,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
             {/* Image 4 */}
             <div style={{ 
-              minWidth: '350px',
-              height: '250px',
+              minWidth: '500px',
+              height: '350px',
               backgroundColor: '#f3f4f6',
               borderRadius: '8px',
               overflow: 'hidden',
@@ -11780,8 +12045,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
             {/* Image 5 */}
             <div style={{ 
-              minWidth: '350px',
-              height: '250px',
+              minWidth: '500px',
+              height: '350px',
               backgroundColor: '#f3f4f6',
               borderRadius: '8px',
               overflow: 'hidden',
@@ -11826,8 +12091,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
             {/* Image 6 */}
             <div style={{ 
-              minWidth: '350px',
-              height: '250px',
+              minWidth: '500px',
+              height: '350px',
               backgroundColor: '#f3f4f6',
               borderRadius: '8px',
               overflow: 'hidden',
@@ -11871,65 +12136,64 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             </div>
           </div>
 
-          {/* Left Arrow */}
-          <button 
-            onClick={() => {
-              const container = document.querySelector('.wellness-gallery-carousel-container') as HTMLElement;
-              if (container) {
-                container.scrollBy({ left: -370, behavior: 'smooth' });
-              }
-            }}
-            style={{
-              position: 'absolute',
-              left: '0',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              width: '40px',
-              height: '40px',
-              borderRadius: '50%',
-              backgroundColor: 'white',
-              border: '2px solid #d1d5db',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              zIndex: 10
-            }}
-          >
-            <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
+          {/* Navigation Arrows - Below Carousel */}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '20px',
+            marginTop: '20px'
+          }}>
+                            {/* Left Arrow */}
+                <button
+                  onClick={() => {
+                    const container = document.querySelector('.wellness-gallery-carousel-container') as HTMLElement;
+                    if (container) {
+                      container.scrollBy({ left: -370, behavior: 'smooth' });
+                    }
+                  }}
+                  style={{
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '50%',
+                    backgroundColor: 'white',
+                    border: '2px solid #d1d5db',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                >
+                  <svg width="16" height="16" fill="none" stroke="#4A5568" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
 
-          {/* Right Arrow */}
-          <button 
-            onClick={() => {
-              const container = document.querySelector('.wellness-gallery-carousel-container') as HTMLElement;
-              if (container) {
-                container.scrollBy({ left: 370, behavior: 'smooth' });
-              }
-            }}
-            style={{
-              position: 'absolute',
-              right: '0',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              width: '40px',
-              height: '40px',
-              borderRadius: '50%',
-              backgroundColor: 'white',
-              border: '2px solid #d1d5db',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              zIndex: 10
-            }}
-          >
-            <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
+                                             {/* Right Arrow */}
+                       <button
+                         onClick={() => {
+                           const container = document.querySelector('.wellness-gallery-carousel-container') as HTMLElement;
+                           if (container) {
+                             container.scrollBy({ left: 370, behavior: 'smooth' });
+                           }
+                         }}
+                         style={{
+                          width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                backgroundColor: 'white',
+                border: '2px solid #d1d5db',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+                         }}
+                       >
+                         <svg width="16" height="16" fill="none" stroke="#4A5568" viewBox="0 0 24 24">
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                         </svg>
+                       </button>
+          </div>
         </div>
       </div>
 
@@ -12268,7 +12532,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       {/* MANTNAM Section */}
       <div style={{ 
         marginTop: '80px',
-        backgroundColor: '#f7beb5',
+        backgroundColor: '#ebc9c4',
         padding: '80px 24px'
       }}>
         <div style={{
@@ -12281,28 +12545,38 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
           {/* Left Content */}
           <div style={{ flex: '1' }}>
             <h3 style={{
-              fontSize: '18px',
-              fontWeight: '500',
-              color: '#6b7280',
+              fontSize: '12px',
+              fontWeight: '400',
+              color: '#F1ECE5',
               marginBottom: '16px',
-              textTransform: 'uppercase'
+              fontStyle: 'italic',
+              fontFamily: '"Montserrat", sans-serif',
+              textTransform: 'uppercase',
+              marginLeft: '24px'
             }}>
               Ancient wisdom and modern techniques
             </h3>
             <h2 style={{
-              fontSize: '48px',
-              fontWeight: 'bold',
-              color: '#111827',
+              fontSize: '20px',
+              fontFamily: '"Montserrat", sans-serif',
+              fontWeight: '600',
+              color: '#000000',
               marginBottom: '24px',
+              marginLeft: '24px',
               textTransform: 'uppercase'
             }}>
               MANTNAM
             </h2>
             <p style={{
-              fontSize: '16px',
-              color: '#374151',
+              fontFamily: '"Lato"',
+              fontSize: '14px',
+              fontWeight: '400',
+              textAlign: 'justify',
+              color: '#7A7A7A',
+              marginLeft: '24px',
               lineHeight: '1.6',
-              maxWidth: '600px'
+              width: '384px',
+              height: '168px'
             }}>
               Mantnam conceptualises wellness as a holistic endeavour. Its attainment requires an equilibrium of mind, body and soul through recalibration and training. Combining ancient techniques and modern equipment, it provides a space which can be used to accomplish various goals for guests-anti-aging, detoxing, muscle strengthening, flexibility, de-stressing, and beautifying your body from the inside out.
             </p>
@@ -12317,20 +12591,20 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             <div style={{
               width: '300px',
               height: '300px',
-              backgroundColor: '#f5f5f0',
-              borderRadius: '12px',
+              // backgroundColor: '#f5f5f0',
+              // borderRadius: '12px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+              // boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
             }}>
               <img
                 src="./image-30.png"
                 alt="Mantnam Logo"
                 style={{
-                  width: '200px',
-                  height: 'auto',
-                  maxWidth: '100%'
+                  width: '720px',
+                  height: '260px',
+                  // maxWidth: '100%'
                 }}
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
@@ -12526,108 +12800,145 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
         transition: 'all 0.3s ease'
       }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 16px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '24px', padding: '12px 0' }}>
-            <a 
-              href="#" 
-              onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }}
-              style={{ 
-                color: '#050505', 
-                fill: '#050505', 
-                paddingLeft: '15px', 
-                paddingRight: '15px', 
-                fontFamily: '"Lato", Sans-serif', 
-                fontSize: '14px', 
-                fontWeight: '500', 
-                wordSpacing: '2px' 
-              }}
-            >
-              Rambha Palace
-            </a>
-            <span style={{ color: '#9ca3af' }}>{'>'}</span>
-            <a 
-              href="#" 
-              onClick={(e) => { e.preventDefault(); setCurrentPage('accommodation'); }}
-              style={{ 
-                color: '#000000', 
-                fill: '#000000', 
-                paddingLeft: '13px', 
-                paddingRight: '25px', 
-                fontFamily: '"Lato", Sans-serif', 
-                fontSize: '14px', 
-                fontWeight: '500', 
-                wordSpacing: '2px' 
-              }}
-            >
-              Accommodation
-            </a>
-            <span style={{ color: 'black' }}>•</span>
-            <a 
-              href="#" 
-              onClick={(e) => { e.preventDefault(); setCurrentPage('experiences'); }}
-              style={{ 
-                color: '#000000', 
-                fill: '#000000', 
-                paddingLeft: '13px', 
-                paddingRight: '25px', 
-                fontFamily: '"Lato", Sans-serif', 
-                fontSize: '14px', 
-                fontWeight: '500', 
-                wordSpacing: '2px' 
-              }}
-            >
-              Experiences
-            </a>
-            <span style={{ color: 'black' }}>•</span>
-            <a 
-              href="#" 
-              onClick={(e) => { e.preventDefault(); setCurrentPage('dining'); }}
-              style={{ 
-                color: '#000000', 
-                fill: '#000000', 
-               paddingLeft: '13px', 
-                paddingRight: '25px',
-                fontFamily: '"Lato", Sans-serif', 
-                fontSize: '14px', 
-                fontWeight: '500', 
-                wordSpacing: '2px' 
-              }}
-            >
-              Dining
-            </a>
-            <span style={{ color: 'black' }}>•</span>
-            <a 
-              href="/wellness" 
-              onClick={(e) => { e.preventDefault(); setCurrentPage('wellness'); }}
-              style={{ 
-                color: '#000000', 
-                fill: '#000000', 
-                paddingLeft: '13px', 
-                paddingRight: '25px',
-                fontFamily: '"Lato", Sans-serif', 
-                fontSize: '14px', 
-                fontWeight: '500', 
-                wordSpacing: '2px' 
-              }}
-            >
-              Wellness
-            </a>
-            <span style={{ color: 'black' }}>•</span>
-            <a 
-              href="#" 
-              onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); }}
-              style={{ 
-                color: '#000000', 
-                fill: '#000000', 
-                paddingLeft: '13px', 
-                paddingRight: '25px',
-                fontFamily: '"Lato", Sans-serif', 
-                fontSize: '14px', 
-                fontWeight: '500', 
-                wordSpacing: '2px' 
-              }}
-            >
-              Contact Us
-            </a>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0' }}>
+            {/* Logo - Show when header is sticky */}
+            {isHeaderSticky && (
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                marginRight: '16px'
+              }}>
+                <img 
+                  width="768" 
+                  height="377" 
+                  src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/TigerBlack-768x377.png" 
+                  alt="Rambha Palace Logo" 
+                  style={{ 
+                    height: '35px',
+                    width: 'auto',
+                    maxWidth: '100px'
+                  }}
+                />
+              </div>
+            )}
+            
+            {/* Navigation Links - Centered when no logo, left-aligned when logo is present */}
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: isHeaderSticky ? 'flex-start' : 'center', 
+              gap: '16px',
+              flex: isHeaderSticky ? '1' : 'auto',
+              marginLeft: isHeaderSticky ? '16px' : '0'
+            }}>
+              <a 
+                href="#" 
+                onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }}
+                style={{ 
+                  color: '#050505', 
+                  fill: '#050505', 
+                  paddingLeft: '15px', 
+                  paddingRight: '15px', 
+                  fontFamily: '"Lato", Sans-serif', 
+                  fontSize: '14px', 
+                  fontWeight: currentPage === 'home' ? '700' : '500', 
+                  wordSpacing: '2px' 
+                }}
+              >
+                Rambha Palace
+              </a>
+              <span style={{ color: '#9ca3af' }}>{'>'}</span>
+              <a 
+                href="#" 
+                onClick={(e) => { e.preventDefault(); setCurrentPage('accommodation'); }}
+                style={{ 
+                  color: '#000000', 
+                  fill: '#000000', 
+                  paddingLeft: '13px', 
+                  paddingRight: '25px', 
+                  fontFamily: '"Lato", Sans-serif', 
+                  fontSize: '14px', 
+                  fontWeight: currentPage === 'accommodation' ? '700' : '500', 
+                  wordSpacing: '2px' 
+                }}
+              >
+                Accommodation
+              </a>
+              <span style={{ color: 'black' }}>•</span>
+              <a 
+                href="#" 
+                onClick={(e) => { e.preventDefault(); setCurrentPage('experiences'); }}
+                style={{ 
+                  color: '#000000', 
+                  fill: '#000000', 
+                  paddingLeft: '13px', 
+                  paddingRight: '25px', 
+                  fontFamily: '"Lato", Sans-serif', 
+                  fontSize: '14px', 
+                  fontWeight: currentPage === 'experiences' ? '700' : '500', 
+                  wordSpacing: '2px' 
+                }}
+              >
+                Experiences
+              </a>
+              <span style={{ color: 'black' }}>•</span>
+              <a 
+                href="#" 
+                onClick={(e) => { e.preventDefault(); setCurrentPage('dining'); }}
+                style={{ 
+                  color: '#000000', 
+                  fill: '#000000', 
+                 paddingLeft: '13px', 
+                  paddingRight: '25px',
+                  fontFamily: '"Lato", Sans-serif', 
+                  fontSize: '14px', 
+                  fontWeight: currentPage === 'dining' ? '700' : '500', 
+                  wordSpacing: '2px' 
+                }}
+              >
+                Dining
+              </a>
+              <span style={{ color: 'black' }}>•</span>
+              <a 
+                href="/wellness" 
+                onClick={(e) => { e.preventDefault(); setCurrentPage('wellness'); }}
+                style={{ 
+                  color: '#000000', 
+                  fill: '#000000', 
+                  paddingLeft: '13px', 
+                  paddingRight: '25px',
+                  fontFamily: '"Lato", Sans-serif', 
+                  fontSize: '14px', 
+                  fontWeight: currentPage === 'wellness' ? '700' : '500', 
+                  wordSpacing: '2px' 
+                }}
+              >
+                Wellness
+              </a>
+              <span style={{ color: 'black' }}>•</span>
+                          <a 
+                href="#" 
+                onClick={(e) => { e.preventDefault(); setCurrentPage('contact'); }}
+                style={{ 
+                  color: '#000000', 
+                  fill: '#000000', 
+                  paddingLeft: '13px', 
+                  paddingRight: '25px', 
+                  fontFamily: '"Lato", Sans-serif', 
+                  fontSize: '14px', 
+                  fontWeight: currentPage === 'contact' ? '700' : '500', 
+                  wordSpacing: '2px' 
+                }}
+              >
+                Contact Us
+              </a>
+            </div>
+            
+            {/* Right side spacer when logo is present */}
+            {isHeaderSticky && (
+              <div style={{ width: '100px' }}></div>
+            )}
           </div>
         </div>
       </nav>
