@@ -141,7 +141,7 @@ function App() {
           <div style={{ aspectRatio: '16/9', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}>
             <video 
               className="elementor-video" 
-              src="https://rambhapalace.growwithwhats.app/wp-content/uploads/2024/11/Hidden_India.mp4" 
+              src="/VID-20241019-WA0011.mp4" 
               autoPlay 
               loop 
               controls 
