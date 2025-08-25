@@ -9,7 +9,18 @@ function App() {
   const [experiencesTab, setExperiencesTab] = useState('overview');
   const [palaceSuiteTab, setPalaceSuiteTab] = useState('overview');
   const [wellnessCurrentIndex, setWellnessCurrentIndex] = useState(0);
+  const [wellnessGalleryCurrentIndex, setWellnessGalleryCurrentIndex] = useState(0);
+  const [palaceSuiteCarouselCurrentIndex, setPalaceSuiteCarouselCurrentIndex] = useState(0);
+  const [landscapeCarouselCurrentIndex, setLandscapeCarouselCurrentIndex] = useState(0);
+  const [templeCurrentIndex, setTempleCurrentIndex] = useState(0);
+  const [raghurajpurCurrentIndex, setRaghurajpurCurrentIndex] = useState(0);
   const [isHeaderSticky, setIsHeaderSticky] = useState(false);
+  
+  // Room Features expandable state
+  const [isRoomFeaturesExpanded, setIsRoomFeaturesExpanded] = useState(false);
+  const [isBathExpanded, setIsBathExpanded] = useState(false);
+  const [isTechnologyExpanded, setIsTechnologyExpanded] = useState(false);
+  const [isServicesExpanded, setIsServicesExpanded] = useState(false);
 
   // Client-side routing: Update browser URL when currentPage changes
   useEffect(() => {
@@ -35,6 +46,30 @@ function App() {
     console.log('🔍 currentPage changed to:', currentPage);
     console.log('🔍 URL should be:', currentPage === 'home' ? '/' : `/${currentPage}`);
   }, [currentPage]);
+
+  // Scroll to top when page changes
+  useEffect(() => {
+    // Use setTimeout to ensure DOM is fully rendered
+    const timer = setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, [currentPage]);
+
+  // Ensure Experiences sub-tabs (e.g., Cultural, Spiritual) also open from top
+  useEffect(() => {
+    if (currentPage === 'experiences') {
+      const timer = setTimeout(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      }, 50);
+      return () => clearTimeout(timer);
+    }
+  }, [experiencesTab, currentPage]);
 
   // Set correct tab when navigating to Palace Suite page
   useEffect(() => {
@@ -223,152 +258,176 @@ function App() {
 
       {/* Image Carousel Section */}
       <div style={{ maxWidth: '1400px', margin: '0 auto', marginTop: '64px', marginBottom: '64px' }}>
-        {/* Carousel Container with overflow hidden */}
-        <div style={{
-          position: 'relative',
-          width: '100%',
-          overflow: 'hidden',
-          borderRadius: '12px',
-          boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
-        }}>
-          <div
-            id="imageCarousel"
+  {/* Carousel Container with overflow hidden */}
+  <div style={{
+    position: 'relative',
+    width: '100%',
+    overflow: 'hidden',
+    borderRadius: '12px',
+    boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
+  }}>
+    <div
+      id="imageCarousel"
+      style={{
+        display: 'flex',
+        transition: 'transform 0.3s ease-in-out',
+        width: '100%',
+        scrollSnapType: 'x mandatory',
+        overflowX: 'scroll',
+        scrollbarWidth: 'none',
+        padding: '0 24px',
+      }}
+      onScroll={(e) => {
+        const carousel = e.currentTarget;
+        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+        // 🔄 Infinite Loop Reset
+        if (carousel.scrollLeft <= 0) {
+          carousel.scrollLeft = maxScroll - carousel.clientWidth;
+        } else if (carousel.scrollLeft >= maxScroll) {
+          carousel.scrollLeft = carousel.clientWidth;
+        }
+
+        // Existing scaling + opacity
+        const items = carousel.querySelectorAll('.carousel-image');
+        items.forEach((el) => {
+          if (el instanceof HTMLElement) {
+            const box = el.getBoundingClientRect();
+            const center = window.innerWidth / 2;
+            const offset = Math.abs(box.left + box.width / 2 - center);
+            const scale = Math.max(0.9, 1.05 - offset / 1000);
+            const opacity = Math.max(0.5, 1 - offset / 800);
+            el.style.transform = `scale(${scale})`;
+            el.style.opacity = opacity.toString();
+          }
+        });
+      }}
+    >
+      {/* 🔄 Duplicate images for infinite loop effect */}
+      {[...Array(3)].flatMap(() => [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50]).map((i, idx) => (
+        <div
+          key={idx}
+          className="carousel-image"
+          style={{
+            flex: '0 0 400px',
+            transition: 'all 0.3s ease',
+            scrollSnapAlign: 'center',
+            padding: '0 12px',
+            boxSizing: 'border-box'
+          }}
+        >
+          <img
+            src={`/image-${i}.png`}
+            alt={`Rambha Palace View ${i}`}
             style={{
-              display: 'flex',
-              transition: 'transform 0.3s ease-in-out',
-              width: '100%',
-              scrollSnapType: 'x mandatory',
-              overflowX: 'scroll',
-              scrollbarWidth: 'none',
-              padding: '0 24px',
+              width: '800px',
+              height: '450px',
+              objectFit: 'cover',
+              display: 'block',
+              borderRadius: '12px',
+              transition: 'all 0.3s ease'
             }}
-            onScroll={(e) => {
-              const items = e.currentTarget.querySelectorAll('.carousel-image');
-              items.forEach((el) => {
-                if (el instanceof HTMLElement) {
-                  const box = el.getBoundingClientRect();
-                  const center = window.innerWidth / 2;
-                  const offset = Math.abs(box.left + box.width / 2 - center);
-                  const scale = Math.max(0.9, 1.05 - offset / 1000);
-                  const opacity = Math.max(0.5, 1 - offset / 800);
-                  el.style.transform = `scale(${scale})`;
-                  el.style.opacity = opacity.toString();
-                }
-              });
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.style.display = 'none';
+              const nextSibling = target.nextSibling as HTMLElement;
+              if (nextSibling) {
+                nextSibling.style.display = 'flex';
+              }
             }}
-          >
-            {[40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50].map((i) => (
-              <div
-                key={i}
-                className="carousel-image"
-                style={{
-                  flex: '0 0 400px',
-                  transition: 'all 0.3s ease',
-                  scrollSnapAlign: 'center',
-                  padding: '0 12px',
-                  boxSizing: 'border-box'
-                }}
-              >
-                <img
-                  src={`/image-${i}.png`}
-                  alt={`Rambha Palace View ${i}`}
-                  style={{
-                    width: '800px',
-                    height: '450px',
-                    objectFit: 'cover',
-                    display: 'block',
-                    borderRadius: '12px',
-                    transition: 'all 0.3s ease'
-                  }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const nextSibling = target.nextSibling as HTMLElement;
-                    if (nextSibling) {
-                      nextSibling.style.display = 'flex';
-                    }
-                  }}
-                />
-                <div style={{
-                  display: 'none',
-                  width: '800px',
-                  height: '450px',
-                  backgroundColor: '#f3f4f6',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#6b7280',
-                  fontSize: '18px',
-                  borderRadius: '12px'
-                }}>
-                  Palace View {i}
-                </div>
-              </div>
-            ))}
+          />
+          <div style={{
+            display: 'none',
+            width: '800px',
+            height: '450px',
+            backgroundColor: '#f3f4f6',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#6b7280',
+            fontSize: '18px',
+            borderRadius: '12px'
+          }}>
+            Palace View {i}
           </div>
         </div>
+      ))}
+    </div>
+  </div>
 
-        {/* Navigation Buttons positioned below the carousel */}
-        <div style={{
-          position: 'relative',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginTop: '24px',
-          gap: '32px'
-        }}>
-          <button
-            onClick={() => {
-              const carousel = document.getElementById('imageCarousel');
-              if (carousel) {
-                carousel.scrollBy({ left: -carousel.offsetWidth / 2, behavior: 'smooth' });
-              }
-            }}
-            style={{
-              backgroundColor: 'rgba(255, 255, 255, 0.9)',
-              border: 'none',
-              borderRadius: '50%',
-              width: '48px',
-              height: '48px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-              zIndex: 10
-            }}
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M15 18L9 12L15 6" stroke="#374151" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
+  {/* Navigation Buttons positioned below the carousel */}
+  <div style={{
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '24px',
+    gap: '32px'
+  }}>
+    {/* Prev Button */}
+<button
+  onClick={() => {
+    const carousel = document.getElementById('imageCarousel');
+    if (carousel) {
+      const firstItem = carousel.querySelector('.carousel-image') as HTMLElement;
+      if (firstItem) {
+        const itemWidth = firstItem.offsetWidth; // 👈 get image width with padding
+        carousel.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+      }
+    }
+  }}
+  style={{
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    border: 'none',
+    borderRadius: '50%',
+    width: '48px',
+    height: '48px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'pointer',
+    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+    zIndex: 10
+  }}
+>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path d="M15 18L9 12L15 6" stroke="#374151" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+</button>
 
-          <button
-            onClick={() => {
-              const carousel = document.getElementById('imageCarousel');
-              if (carousel) {
-                carousel.scrollBy({ left: carousel.offsetWidth / 2, behavior: 'smooth' });
-              }
-            }}
-            style={{
-              backgroundColor: 'rgba(255, 255, 255, 0.9)',
-              border: 'none',
-              borderRadius: '50%',
-              width: '48px',
-              height: '48px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-              zIndex: 10
-            }}
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M9 18L15 12L9 6" stroke="#374151" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-        </div>
-      </div>
+{/* Next Button */}
+<button
+  onClick={() => {
+    const carousel = document.getElementById('imageCarousel');
+    if (carousel) {
+      const firstItem = carousel.querySelector('.carousel-image') as HTMLElement;
+      if (firstItem) {
+        const itemWidth = firstItem.offsetWidth; // 👈 same here
+        carousel.scrollBy({ left: itemWidth, behavior: 'smooth' });
+      }
+    }
+  }}
+  style={{
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    border: 'none',
+    borderRadius: '50%',
+    width: '48px',
+    height: '48px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'pointer',
+    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+    zIndex: 10
+  }}
+>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path d="M9 18L15 12L9 6" stroke="#374151" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+</button>
+
+  </div>
+</div>
+
 
       {/* Experience the Luxury - ACCOMMODATION Section */}
       <div style={{ maxWidth: '1024px', margin: '0 auto', marginTop: '64px', textAlign: 'center' }}>
@@ -381,7 +440,9 @@ function App() {
         <div style={{
           position: 'relative',
           width: '100%',
+          // overflow: 'hidden',
           borderRadius: '12px',
+          // boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
         }}>
           {/* Carousel Container */}
           <div
@@ -396,7 +457,18 @@ function App() {
               padding: '0 24px',
             }}
             onScroll={(e) => {
-              const items = e.currentTarget.querySelectorAll('.accommodation-card');
+              const carousel = e.currentTarget;
+              const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+              // 🔄 Infinite Loop Reset
+              if (carousel.scrollLeft <= 0) {
+                carousel.scrollLeft = maxScroll - carousel.clientWidth;
+              } else if (carousel.scrollLeft >= maxScroll) {
+                carousel.scrollLeft = carousel.clientWidth;
+              }
+
+              // Existing scaling + opacity
+              const items = carousel.querySelectorAll('.accommodation-card');
               items.forEach((el) => {
                 if (el instanceof HTMLElement) {
                   const box = el.getBoundingClientRect();
@@ -847,68 +919,518 @@ function App() {
                 </div>
               </div>
             </div>
+
+            {/* 🔄 Duplicate set 1 for infinite loop effect */}
+            {/* Ice Mill Suites */}
+            <div
+              className="accommodation-card"
+              style={{
+                flex: '0 0 400px',
+                transition: 'all 0.3s ease',
+                scrollSnapAlign: 'center',
+                padding: '0 12px',
+                boxSizing: 'border-box'
+              }}
+            >
+              <div style={{
+                backgroundColor: 'white',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                height: '100%'
+              }}>
+                <img
+                  src="/image-51.png"
+                  alt="Ice Mill Suites"
+                  style={{
+                    width: '100%',
+                    height: '250px',
+                    objectFit: 'cover',
+                    display: 'block'
+                  }}
+                />
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{
+                    fontSize: '16px',
+                    fontWeight: '500',
+                    color: '#000',
+                    textTransform: 'uppercase',
+                    margin: '0 0 16px 0',
+                    textAlign: 'center',
+                    fontFamily: '"Montserrat", sans-serif'
+                  }}>
+                    ICE MILL SUITES
+                  </h3>
+                  <p style={{
+                    fontSize: '14px',
+                    color: '#3A3A3A',
+                    
+                    lineHeight: '1.5',
+                    margin: '0 0 24px 0',
+                    textAlign: 'left',
+                    fontFamily: '"Lato", sans-serif'
+                  }}>
+                    Once used to store ice blocks for preserving the palace's fresh catches, these suites have been reimagined into a lavish retreat with an outdoor seating verandah.
+                  </p>
+                  <button 
+                    onClick={() => setCurrentPage('ice-mill-suite')}
+                    style={{
+                      backgroundColor: '#000',
+                      color: 'white',
+                      border: 'none',
+                      padding: '12px 32px',
+                      borderRadius: '6px',
+                      fontSize: '14px',
+                      fontWeight: '600',
+                      textTransform: 'uppercase',
+                      cursor: 'pointer',
+                      width: '100%',
+                      fontFamily: '"Montserrat", sans-serif'
+                    }}
+                  >
+                    VIEW
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Palace Suite */}
+            <div
+              className="accommodation-card"
+              style={{
+                flex: '0 0 400px',
+                transition: 'all 0.3s ease',
+                scrollSnapAlign: 'center',
+                padding: '0 12px',
+                boxSizing: 'border-box'
+              }}
+            >
+              <div style={{
+                backgroundColor: 'white',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                height: '100%'
+              }}>
+                <img
+                  src="/image-52.png"
+                  alt="Palace Suite"
+                  style={{
+                    width: '100%',
+                    height: '250px',
+                    objectFit: 'cover',
+                    display: 'block'
+                  }}
+                />
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{
+                      fontSize: '16px',
+                      fontWeight: '500',
+                      color: '#000',
+                      textTransform: 'uppercase',
+                      margin: '0 0 16px 0',
+                      textAlign: 'center',
+                      fontFamily: '"Montserrat", sans-serif'
+                  }}>
+                    PALACE SUITE
+                  </h3>
+                  <p style={{
+                    fontSize: '14px',
+                    color: '#3A3A3A',
+                    
+                    lineHeight: '1.5',
+                    margin: '0 0 24px 0',
+                    textAlign: 'left',
+                    fontFamily: '"Lato", sans-serif'
+                  }}>
+                    Experience the luxury and grandeur of the original palace block. Once the residence of the royal family in a bygone era—unparalleled sophistication at Rambha.
+                  </p>
+                  <button 
+                    onClick={() => setCurrentPage('palace-suite')}
+                    style={{
+                      backgroundColor: '#000',
+                      color: 'white',
+                      border: 'none',
+                      padding: '12px 32px',
+                      borderRadius: '6px',
+                      fontSize: '14px',
+                      fontWeight: '600',
+                      textTransform: 'uppercase',
+                      cursor: 'pointer',
+                      width: '100%',
+                      fontFamily: '"Montserrat", sans-serif'
+                    }}
+                  >
+                    VIEW
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Palace Family Suite */}
+            <div
+              className="accommodation-card"
+              style={{
+                flex: '0 0 400px',
+                transition: 'all 0.3s ease',
+                scrollSnapAlign: 'center',
+                padding: '0 12px',
+                boxSizing: 'border-box'
+              }}
+            >
+              <div style={{
+                backgroundColor: 'white',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                height: '100%'
+              }}>
+                <img
+                  src="/image-53.png"
+                  alt="Palace Family Suite"
+                  style={{
+                    width: '100%',
+                    height: '250px',
+                    objectFit: 'cover',
+                    display: 'block'
+                  }}
+                />
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{
+                      fontSize: '16px',
+                      fontWeight: '500',
+                      color: '#000',
+                      textTransform: 'uppercase',
+                      margin: '0 0 16px 0',
+                      textAlign: 'center',
+                      fontFamily: '"Montserrat", sans-serif'
+                  }}>
+                    PALACE FAMILY SUITE
+                  </h3>
+                  <p style={{
+                    fontSize: '14px',
+                    color: '#3A3A3A',
+                    
+                    lineHeight: '1.5',
+                    margin: '0 0 24px 0',
+                    textAlign: 'left',
+                    fontFamily: '"Lato", sans-serif'
+                  }}>
+                    A fusion of two palace suites, featuring a spacious lounge-an expansive, lush private retreat perfect for families and added privacy.
+                  </p>
+                  <button 
+                    onClick={() => setCurrentPage('palace-family-suite')}
+                    style={{
+                      backgroundColor: '#000',
+                      color: 'white',
+                      border: 'none',
+                      padding: '12px 32px',
+                      borderRadius: '6px',
+                      fontSize: '14px',
+                      fontWeight: '600',
+                      textTransform: 'uppercase',
+                      cursor: 'pointer',
+                      width: '100%',
+                      fontFamily: '"Montserrat", sans-serif'
+                    }}
+                  >
+                    VIEW
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Generator Suites */}
+            <div
+              className="accommodation-card"
+              style={{
+                flex: '0 0 400px',
+                transition: 'all 0.3s ease',
+                scrollSnapAlign: 'center',
+                padding: '0 12px',
+                boxSizing: 'border-box'
+              }}
+            >
+              <div style={{
+                backgroundColor: 'white',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                height: '100%'
+              }}>
+                <img
+                  src="/image-54.png"
+                  alt="Generator Suites"
+                  style={{
+                    width: '100%',
+                    height: '250px',
+                    objectFit: 'cover',
+                    display: 'block'
+                  }}
+                />
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{
+                       fontSize: '16px',
+                       fontWeight: '500',
+                       color: '#000',
+                       textTransform: 'uppercase',
+                       margin: '0 0 16px 0',
+                       textAlign: 'center',
+                       fontFamily: '"Montserrat", sans-serif'
+                  }}>
+                    GENERATOR SUITES
+                  </h3>
+                  <p style={{
+                     fontSize: '14px',
+                     color: '#3A3A3A',
+                     
+                     lineHeight: '1.5',
+                     margin: '0 0 24px 0',
+                     textAlign: 'left',
+                     fontFamily: '"Lato", sans-serif'
+                  }}>
+                    Once the heart of the royal palace's power generation, these suites have now been transformed into a luxurious retreat, offering orchard views and outdoor bathtubs.
+                  </p>
+                  <button
+                    onClick={() => setCurrentPage('generator-suite')}
+                    style={{
+                      backgroundColor: '#000',
+                      color: 'white',
+                      border: 'none',
+                      padding: '12px 32px',
+                      borderRadius: '6px',
+                      fontSize: '14px',
+                      fontWeight: '600',
+                      textTransform: 'uppercase',
+                      cursor: 'pointer',
+                      width: '100%',
+                      fontFamily: '"Montserrat", sans-serif'
+                    }}
+                  >
+                    VIEW
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Printing Press Suites */}
+            <div
+              className="accommodation-card"
+              style={{
+                flex: '0 0 400px',
+                transition: 'all 0.3s ease',
+                scrollSnapAlign: 'center',
+                padding: '0 12px',
+                boxSizing: 'border-box'
+              }}
+            >
+              <div style={{
+                backgroundColor: 'white',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px -1px rgba(0, 0.1)',
+                height: '100%'
+              }}>
+                <img
+                  src="/image-55.png"
+                  alt="Printing Press Suites"
+                  style={{
+                    width: '100%',
+                    height: '250px',
+                    objectFit: 'cover',
+                    display: 'block'
+                  }}
+                />
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{
+                      fontSize: '16px',
+                      fontWeight: '500',
+                      color: '#000',
+                      textTransform: 'uppercase',
+                      margin: '0 0 16px 0',
+                      textAlign: 'center',
+                      fontFamily: '"Montserrat", sans-serif'
+                  }}>
+                    PRINTING PRESS SUITES
+                  </h3>
+                  <p style={{
+                   fontSize: '14px',
+                   color: '#3A3A3A',
+                   
+                   lineHeight: '1.5',
+                   margin: '0 0 24px 0',
+                   textAlign: 'left',
+                   fontFamily: '"Lato", sans-serif'
+                  }}>
+                    Once the palace's printing press, they now offer views of the orchard and palace verandah, retaining a name that reflects their storied past.
+                  </p>
+                  <button
+                    onClick={() => setCurrentPage('printing-press-suite')}
+                    style={{
+                      backgroundColor: '#000',
+                      color: 'white',
+                      border: 'none',
+                      padding: '12px 32px',
+                      borderRadius: '6px',
+                      fontSize: '14px',
+                      fontWeight: '600',
+                      textTransform: 'uppercase',
+                      cursor: 'pointer',
+                      width: '100%',
+                      fontFamily: '"Montserrat", sans-serif'
+                    }}
+                  >
+                    VIEW
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Rambha Villa */}
+            <div
+              className="accommodation-card"
+              style={{
+                flex: '0 0 400px',
+                transition: 'all 0.3s ease',
+                scrollSnapAlign: 'center',
+                padding: '0 12px',
+                boxSizing: 'border-box'
+              }}
+            >
+              <div style={{
+                backgroundColor: 'white',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                height: '100%'
+              }}>
+                <img
+                  src="/image-56.png"
+                  alt="Rambha Villa"
+                  style={{
+                    width: '100%',
+                    height: '250px',
+                    objectFit: 'cover',
+                    display: 'block'
+                  }}
+                />
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{
+                    fontSize: '16px',
+                    fontWeight: '500',
+                    color: '#000',
+                    textTransform: 'uppercase',
+                    margin: '0 0 16px 0',
+                    textAlign: 'center',
+                    fontFamily: '"Montserrat", sans-serif'
+                  }}>
+                    RAMBHA VILLA
+                  </h3>
+                  <p style={{
+                     fontSize: '14px',
+                     color: '#3A3A3A',
+                     
+                     lineHeight: '1.5',
+                     margin: '0 0 24px 0',
+                     textAlign: 'left',
+                     fontFamily: '"Lato", sans-serif'
+                  }}>
+                    A luxurious, standalone two-bedroom presidential suite featuring a spacious private garden, swimming pool, butler service and pantry with a comfortable lounge area.
+                  </p>
+                  <button
+                    onClick={() => setCurrentPage('rambha-villa')}
+                    style={{
+                      backgroundColor: '#000',
+                      color: 'white',
+                      border: 'none',
+                      padding: '12px 32px',
+                      borderRadius: '6px',
+                      fontSize: '14px',
+                      fontWeight: '600',
+                      textTransform: 'uppercase',
+                      cursor: 'pointer',
+                      width: '100%',
+                      fontFamily: '"Montserrat", sans-serif'
+                    }}
+                  >
+                    VIEW
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Navigation Buttons */}
-          <button
-            onClick={() => {
-              const carousel = document.getElementById('accommodationCarousel');
-              if (carousel) {
-                carousel.scrollBy({ left: -carousel.offsetWidth / 2, behavior: 'smooth' });
-              }
-            }}
-            style={{
-              position: 'absolute',
-              left: '50%',
-              top: 'calc(100% + 20px)',
-              transform: 'translateX(-50%)',
-              backgroundColor: 'rgba(255, 255, 255, 0.9)',
-              border: '1px solid #d1d5db',
-              borderRadius: '50%',
-              width: '48px',
-              height: '48px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-              zIndex: 10
-            }}
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M15 18L9 12L15 6" stroke="#374151" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
+          {/* Navigation Buttons positioned below the carousel */}
+          <div style={{
+            position: 'relative',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: '24px',
+            gap: '32px'
+          }}>
+            {/* Prev Button */}
+            <button
+              onClick={() => {
+                const carousel = document.getElementById('accommodationCarousel');
+                if (carousel) {
+                  const firstItem = carousel.querySelector('.accommodation-card') as HTMLElement;
+                  if (firstItem) {
+                    const itemWidth = firstItem.offsetWidth; // 👈 get card width with padding
+                    carousel.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+                  }
+                }
+              }}
+              style={{
+                backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                border: 'none',
+                borderRadius: '50%',
+                width: '48px',
+                height: '48px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                zIndex: 10
+              }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M15 18L9 12L15 6" stroke="#374151" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
 
-          <button
-            onClick={() => {
-              const carousel = document.getElementById('accommodationCarousel');
-              if (carousel) {
-                carousel.scrollBy({ left: carousel.offsetWidth / 2, behavior: 'smooth' });
-              }
-            }}
-            style={{
-              position: 'absolute',
-              left: 'calc(50% + 60px)',
-              top: 'calc(100% + 20px)',
-              transform: 'translateX(-50%)',
-              backgroundColor: 'rgba(255, 255, 255, 0.9)',
-              border: '1px solid #d1d5db',
-              borderRadius: '50%',
-              width: '48px',
-              height: '48px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-              zIndex: 10
-            }}
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M9 18L15 12L9 6" stroke="#374151" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
+            {/* Next Button */}
+            <button
+              onClick={() => {
+                const carousel = document.getElementById('accommodationCarousel');
+                if (carousel) {
+                  const firstItem = carousel.querySelector('.accommodation-card') as HTMLElement;
+                  if (firstItem) {
+                    const itemWidth = firstItem.offsetWidth; // 👈 same here
+                    carousel.scrollBy({ left: itemWidth, behavior: 'smooth' });
+                  }
+                }
+              }}
+              style={{
+                backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                border: 'none',
+                borderRadius: '50%',
+                width: '48px',
+                height: '48px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                zIndex: 10
+              }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M9 18L15 12L9 6" stroke="#374151" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -1274,12 +1796,19 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
       {/* Hidden India Playlist Section */}
       <div style={{ 
-        background: 'linear-gradient(to bottom, #f0d1cc 0%, #f7beb5 100%)', 
-        marginTop: '64px', 
-        padding: '64px 0',
-        width: '100%'
+         background: 'linear-gradient(to bottom, #f0d1cc 0%, #f7beb5 100%)', 
+         marginTop: '64px', 
+         padding: '64px 0',
+         width: '100vw',            // ✅ Full viewport width
+         position: 'relative', 
+         left: '50%', 
+         right: '50%', 
+         marginLeft: '-50vw',       // ✅ Remove body margin gap
+         marginRight: '-50vw'
       }}>
-        <div style={{ width: '100%', padding: '0 32px' }}>
+        <div style={{   maxWidth: '1400px',       // ✅ optional: limit content width
+    margin: '0 auto',
+    padding: '0 32px' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', alignItems: 'center' }}>
             {/* Left Section - Text Content */}
             <div>
@@ -1471,7 +2000,12 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
         justifyContent: 'center', 
         marginBottom: '32px', 
         backgroundColor: 'rgb(241,236,229)',
-        padding: '16px 0'
+        padding: '16px 0',
+        position: 'sticky',
+        top: isHeaderSticky ? 48 : 0,
+        zIndex: 1000,
+        boxShadow: 'none',
+        marginTop: isHeaderSticky ? '-1px' : '0'
       }}>
         <div style={{ display: 'flex', gap: '32px' }}>
           {['Overview', 'Rambha Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite', 'Ice Mill Suite', 'Printing Press Suite'].map((tab) => (
@@ -2231,7 +2765,17 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       </div>
 
       {/* Sub-navigation */}
-      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px', borderBottom: '1px solid #e5e7eb' }}>
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        marginBottom: '32px', 
+        borderBottom: '1px solid #e5e7eb',
+        position: 'sticky',
+        top: isHeaderSticky ? 48 : 0,
+        zIndex: 1000,
+        backgroundColor: 'rgb(241,236,229)',
+        marginTop: isHeaderSticky ? '-1px' : '0'
+      }}>
         <div style={{ display: 'flex', gap: '0' }}>
           {['Overview', 'Wildlife', 'Spiritual', 'Cultural'].map((tab) => (
             <button
@@ -2257,7 +2801,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 backgroundColor: 'transparent',
                 color: experiencesTab === tab.toLowerCase() ? '#000000' : '#6b7280',
                 fontWeight: experiencesTab === tab.toLowerCase() ? '600' : '400',
-                borderBottom: experiencesTab === tab.toLowerCase() ? '2px solid #000000' : 'none',
+                borderBottom: 'none',
                 cursor: 'pointer',
                 fontSize: '14px',
                 transition: 'none',
@@ -2275,23 +2819,22 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 const target = e.target as HTMLButtonElement;
                 target.style.color = experiencesTab === tab.toLowerCase() ? '#000000' : '#6b7280';
                 target.style.backgroundColor = 'transparent';
-                target.style.borderBottom = experiencesTab === tab.toLowerCase() ? '2px solid #000000' : 'none';
+                target.style.borderBottom = 'none';
                 target.style.setProperty('color', experiencesTab === tab.toLowerCase() ? '#000000' : '#6b7280', 'important');
                 target.style.setProperty('background-color', 'transparent', 'important');
-                target.style.setProperty('border-bottom', experiencesTab === tab.toLowerCase() ? '2px solid #000000' : 'none', 'important');
+                target.style.setProperty('border-bottom', 'none', 'important');
               }}
               onMouseLeave={(e) => {
                 const target = e.target as HTMLButtonElement;
                 target.style.color = experiencesTab === tab.toLowerCase() ? '#000000' : '#6b7280';
                 target.style.backgroundColor = 'transparent';
-                target.style.borderBottom = experiencesTab === tab.toLowerCase() ? '2px solid #000000' : 'none';
+                target.style.borderBottom = 'none';
                 target.style.setProperty('color', experiencesTab === tab.toLowerCase() ? '#000000' : '#6b7280', 'important');
                 target.style.setProperty('background-color', 'transparent', 'important');
-                target.style.setProperty('border-bottom', experiencesTab === tab.toLowerCase() ? '2px solid #000000' : 'none', 'important');
+                target.style.setProperty('border-bottom', 'none', 'important');
               }}
             >
               {tab}
-              {experiencesTab === tab.toLowerCase() && <span style={{ marginLeft: '8px' }}>{'>'}</span>}
             </button>
           ))}
         </div>
@@ -3016,181 +3559,114 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '24px', textTransform: 'uppercase' }}>SPIRITUAL EXPERIENCES</h2>
               <div style={{ maxWidth: '800px', margin: '0 auto', color: '#374151', lineHeight: '1.8', fontSize: '16px' }}>
                 <p style={{ marginBottom: '16px' }}>
-                  Where will your spiritual journey take you? Embark on a journey toward achieving mental peace and harmony while connecting with your spiritual self. Attune to your inner being, enhance your intuition, and forge connections with your inner self.
-                </p>
+                Odisha, the Land of Temples, is home to over 700 ancient places of worship, presenting guests with a wealth of spiritual and architectural treasures to discover. Experience traditional blessing ceremonies, meditative-stillness and sense of spiritual enlightenment imbues all visitors that explore these impressive structures which have stood witness to time immemorial.</p>
                 <p style={{ marginBottom: '16px' }}>
-                  Personalised itineraries offer you the opportunity to explore any ancient temple that captivates your spirit or sparks your spiritual curiosity. Jagannath Puri, Konark Sun Temple and Tara Tarini are among the architectural and spiritual sanctuaries located a short drive from Rambha Palace.
                 </p>
                 <p>
-                  Experience guided tours that are both enlightening and transformative. Immerse yourself in the beauty of these enduring structures, which have stood as testaments to faith and devotion for centuries, offering a profound connection to the spiritual heritage of Odisha.
                 </p>
               </div>
             </div>
 
             {/* Temple Carousel */}
             <div style={{ marginBottom: '48px' }}>
-              <div 
-                data-spiritual-carousel
+              <div style={{ 
+                position: 'relative',
+                maxWidth: '1200px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '20px'
+              }}>
+                {/* Left Arrow */}
+                <button 
+                  onClick={() => {
+                    setTempleCurrentIndex(prev => {
+                      const newIndex = prev - 1;
+                      return newIndex < 0 ? 1 : newIndex; // 4 items, show 3 → wrap 0..1
+                    });
+                  }}
+                  style={{
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '50%',
+                    backgroundColor: '',
+                    border: '1px solid #2C3E50',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 10,
+                    flexShrink: 0
+                  }}
+                >
+                  <svg width="16" height="16" fill="none" stroke="#2C3E50" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+
+                {/* Cards */}
+                <div 
+                  className="temple-cards-container"
                 style={{ 
                   display: 'flex', 
+                    gap: '24px',
                   overflowX: 'auto', 
-                  gap: '20px', 
-                  padding: '20px 0',
+                    scrollBehavior: 'smooth',
+                    scrollbarWidth: 'none',
+                    msOverflowStyle: 'none',
+                    WebkitOverflowScrolling: 'touch',
                   scrollSnapType: 'x mandatory',
-                  WebkitOverflowScrolling: 'touch'
-                }}
-              >
-                {/* Jagannath Temple */}
-                <div style={{ 
-                  minWidth: '331px', 
-                  backgroundColor: 'white', 
-                  borderRadius: '8px', 
-                  overflow: 'hidden', 
-                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                  scrollSnapAlign: 'start'
-                }}>
-                  <div style={{ height: '200px', backgroundColor: '#f3f4f6' }}>
-                    <img 
-                      src="/jagannath.png" 
-                      alt="Jagannath Temple" 
-                      style={{ 
-                        width: '100%', 
-                        height: '100%', 
-                        objectFit: 'cover'
-                      }}
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const nextSibling = target.nextSibling as HTMLElement;
-                        if (nextSibling) {
-                          nextSibling.style.display = 'flex';
-                        }
-                      }}
-                    />
-                    {/* Fallback design if image fails to load */}
-                    <div style={{ 
-                      display: 'none', 
-                      width: '100%', 
-                      height: '100%', 
-                      backgroundColor: '#8b4513',
-                      position: 'relative',
-                      overflow: 'hidden'
-                    }}>
-                      {/* Temple Structure */}
-                      <div style={{ 
-                        position: 'absolute', 
-                        bottom: '20%', 
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        width: '60%',
-                        height: '50%',
-                        backgroundColor: '#a0522d',
-                        borderRadius: '8px 8px 0 0'
-                      }}>
-                        {/* Temple top */}
-                        <div style={{ 
-                          position: 'absolute',
-                          top: '-10%',
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                          width: '80%',
-                          height: '20%',
-                          backgroundColor: '#cd853f',
-                          borderRadius: '50%'
-                        }}></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div style={{ padding: '20px' }}>
-                    <h3 style={{ fontSize: '21px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>Jagannath Temple</h3>
-                    <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
-                      A UNESCO heritage site constructed in 800 CE; the temple is a major pilgrimage site. Sculptures of Hindu deities are placed upon a bejewelled base- a visit here is nothing short of enlightenment.
-                    </p>
-                  </div>
-                </div>
+                    flex: 1
+                  }}
+                >
+                  {(() => {
+                    const templeCards = [
+                      {
+                        key: 'jagannath',
+                        image: '/jagannath.png',
+                        title: 'Jagannath Temple',
+                        description: 'A UNESCO heritage site constructed in 800 CE; the temple is a major pilgrimage site. Sculptures of Hindu deities are placed upon a bejewelled base- a visit here is nothing short of enlightenment.'
+                      },
+                      {
+                        key: 'konark',
+                        image: 'konark.png',
+                        title: 'Konark Sun Temple',
+                        description: 'Dedicated to the Hindu Sun God, Konark Temple was hewn from stone in the 13th century. The temple showcases a magnificent sun idol, seemingly suspended in a celestial embrace.'
+                      },
+                      {
+                        key: 'shanti',
+                        image: '/shanti.png',
+                        title: 'Shanti Stupa, Dhauligiri',
+                        description: "As you stand before the 'peace pagoda' site, the peaceful atmosphere envelops you, a poignant reminder of King Ashoka's commitment to peace after the Kalinga War."
+                      },
+                      {
+                        key: 'lingaraj',
+                        image: 'lingaraj.png',
+                        title: 'Lingaraj Temple',
+                        description: 'The largest temple in Bhubaneswar, dedicated to Lord Shiva, exemplifies the essence of Kalinga architecture. The festival of Shivaratri is celebrated here on a grand scale.'
+                      }
+                    ];
 
-                {/* Konark Sun Temple */}
-                <div style={{ 
-                  minWidth: '331px', 
-                  backgroundColor: 'white', 
-                  borderRadius: '8px', 
-                  overflow: 'hidden', 
-                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                  scrollSnapAlign: 'start'
-                }}>
-                  <div style={{ height: '200px', backgroundColor: '#f3f4f6' }}>
-                    <img 
-                      src="konark.png" 
-                      alt="Konark Sun Temple" 
-                      style={{ 
-                        width: '100%', 
-                        height: '100%', 
-                        objectFit: 'cover'
-                      }}
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const nextSibling = target.nextSibling as HTMLElement;
-                        if (nextSibling) {
-                          nextSibling.style.display = 'flex';
-                        }
-                      }}
-                    />
-                    {/* Fallback design if image fails to load */}
-                    <div style={{ 
-                      display: 'none', 
-                      width: '100%', 
-                      height: '100%', 
-                      backgroundColor: '#d2691e',
-                      position: 'relative',
-                      overflow: 'hidden'
-                    }}>
-                      {/* Sun Temple Structure */}
-                      <div style={{ 
-                        position: 'absolute', 
-                        bottom: '20%', 
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        width: '70%',
-                        height: '60%',
-                        backgroundColor: '#b8860b',
-                        borderRadius: '8px 8px 0 0'
-                      }}>
-                        {/* Sun wheel */}
-                        <div style={{ 
-                          position: 'absolute',
-                          top: '20%',
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                          width: '60%',
-                          height: '60%',
-                          backgroundColor: '#ffd700',
-                          borderRadius: '50%'
-                        }}></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div style={{ padding: '20px' }}>
-                    <h3 style={{ fontSize: '21px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>Konark Sun Temple</h3>
-                    <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
-                      Dedicated to the Hindu Sun God, Konark Temple was hewn from stone in the 13th century. The temple showcases a magnificent sun idol, seemingly suspended in a celestial embrace.
-                    </p>
-                  </div>
-                </div>
+                    const extended = [...templeCards, ...templeCards, ...templeCards];
+                    const startIndex = templeCards.length + templeCurrentIndex;
+                    const visible = extended.slice(startIndex, startIndex + 3);
 
-                {/* Shanti Stupa, Dhauligiri */}
-                <div style={{ 
-                  minWidth: '331px', 
+                    return visible.map((card, index) => (
+                      <div 
+                        key={`${card.key}-${startIndex + index}`}
+                      style={{ 
                   backgroundColor: 'white', 
                   borderRadius: '8px', 
                   overflow: 'hidden', 
                   boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                          minWidth: '350px',
+                          flex: 1,
                   scrollSnapAlign: 'start'
-                }}>
-                  <div style={{ height: '200px', backgroundColor: '#f3f4f6' }}>
+                        }}
+                      >
+                        <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <img 
-                      src="/shanti.png" 
-                      alt="Shanti Stupa, Dhauligiri" 
+                            src={card.image}
+                            alt={card.title}
                       style={{ 
                         width: '100%', 
                         height: '100%', 
@@ -3205,188 +3681,43 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                         }
                       }}
                     />
-                    {/* Fallback design if image fails to load */}
-                    <div style={{ 
-                      display: 'none', 
-                      width: '100%', 
-                      height: '100%', 
-                      backgroundColor: '#87ceeb',
-                      position: 'relative',
-                      overflow: 'hidden'
-                    }}>
-                      {/* Stupa Structure */}
-                      <div style={{ 
-                        position: 'absolute', 
-                        bottom: '20%', 
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        width: '50%',
-                        height: '50%',
-                        backgroundColor: '#ffffff',
-                        borderRadius: '50%'
-                      }}>
-                        {/* Stupa top */}
-                        <div style={{ 
-                          position: 'absolute',
-                          top: '-10%',
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                          width: '30%',
-                          height: '20%',
-                          backgroundColor: '#ffd700',
-                          borderRadius: '50%'
-                        }}></div>
                       </div>
-                    </div>
-                  </div>
-                  <div style={{ padding: '20px' }}>
-                    <h3 style={{ fontSize: '21px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>Shanti Stupa, Dhauligiri</h3>
+                        <div style={{ padding: '24px' }}>
+                          <h3 style={{ fontSize: '21px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>{card.title}</h3>
                     <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
-                      As you stand before the 'peace pagoda' site, the peaceful atmosphere envelops you, a poignant reminder of King Ashoka's commitment to peace after the Kalinga War.
+                            {card.description}
                     </p>
                   </div>
                 </div>
-
-                {/* Lingaraj Temple */}
-                <div style={{ 
-                  minWidth: '331px', 
-                  backgroundColor: 'white', 
-                  borderRadius: '8px', 
-                  overflow: 'hidden', 
-                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                  scrollSnapAlign: 'start'
-                }}>
-                  <div style={{ height: '200px', backgroundColor: '#f3f4f6' }}>
-                    <img 
-                      src="lingaraj.png" 
-                      alt="Lingaraj Temple" 
-                      style={{ 
-                        width: '100%', 
-                        height: '100%', 
-                        objectFit: 'cover'
-                      }}
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const nextSibling = target.nextSibling as HTMLElement;
-                        if (nextSibling) {
-                          nextSibling.style.display = 'flex';
-                        }
-                      }}
-                    />
-                    {/* Fallback design if image fails to load */}
-                    <div style={{ 
-                      display: 'none', 
-                      width: '100%', 
-                      height: '100%', 
-                      backgroundColor: '#8b4513',
-                      position: 'relative',
-                      overflow: 'hidden'
-                    }}>
-                      {/* Lingaraj Temple Structure */}
-                      <div style={{ 
-                        position: 'absolute', 
-                        bottom: '20%', 
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        width: '60%',
-                        height: '60%',
-                        backgroundColor: '#a0522d',
-                        borderRadius: '8px 8px 0 0'
-                      }}>
-                        {/* Multiple towers */}
-                        <div style={{ 
-                          position: 'absolute',
-                          top: '-5%',
-                          left: '20%',
-                          width: '20%',
-                          height: '25%',
-                          backgroundColor: '#cd853f',
-                          borderRadius: '8px 8px 0 0'
-                        }}></div>
-                        <div style={{ 
-                          position: 'absolute',
-                          top: '-10%',
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                          width: '30%',
-                          height: '30%',
-                          backgroundColor: '#cd853f',
-                          borderRadius: '8px 8px 0 0'
-                        }}></div>
-                        <div style={{ 
-                          position: 'absolute',
-                          top: '-5%',
-                          right: '20%',
-                          width: '20%',
-                          height: '25%',
-                          backgroundColor: '#cd853f',
-                          borderRadius: '8px 8px 0 0'
-                        }}></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div style={{ padding: '20px' }}>
-                    <h3 style={{ fontSize: '21px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>Lingaraj Temple</h3>
-                    <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
-                      The largest temple in Bhubaneswar, dedicated to Lord Shiva, exemplifies the essence of Kalinga architecture. The festival of Shivaratri is celebrated here on a grand scale.
-                    </p>
-                  </div>
-                </div>
+                    ));
+                  })()}
               </div>
 
-              {/* Navigation Arrows */}
-              <div style={{ 
-                display: 'flex', 
-                justifyContent: 'center', 
-                gap: '20px', 
-                marginTop: '20px' 
-              }}>
+                {/* Right Arrow */}
                 <button 
                   onClick={() => {
-                    const container = document.querySelector('[data-spiritual-carousel]') as HTMLElement;
-                    if (container) {
-                      container.scrollBy({ left: -351, behavior: 'smooth' });
-                    }
+                    setTempleCurrentIndex(prev => {
+                      const newIndex = prev + 1;
+                      return newIndex > 1 ? 0 : newIndex; // wrap
+                    });
                   }}
                   style={{
                     width: '40px',
                     height: '40px',
                     borderRadius: '50%',
-                    border: 'none',
-                    backgroundColor: '#f3f4f6',
-                    color: '#6b7280',
+                    backgroundColor: '',
+                    border: '1px solid #2C3E50',
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: '16px'
+                    zIndex: 10,
+                    flexShrink: 0
                   }}
                 >
-                  ‹
-                </button>
-                <button 
-                  onClick={() => {
-                    const container = document.querySelector('[data-spiritual-carousel]') as HTMLElement;
-                    if (container) {
-                      container.scrollBy({ left: 351, behavior: 'smooth' });
-                    }
-                  }}
-                  style={{
-                    width: '40px',
-                    height: '40px',
-                    borderRadius: '50%',
-                    border: 'none',
-                    backgroundColor: '#f3f4f6',
-                    color: '#6b7280',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '16px'
-                  }}
-                >
-                  ›
+                  <svg width="16" height="16" fill="none" stroke="#2C3E50" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
                 </button>
               </div>
             </div>
@@ -3561,20 +3892,71 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
             {/* Landscape Carousel */}
             <div style={{ marginBottom: '48px' }}>
-              <div 
-                data-landscape-carousel
-                style={{ 
-                  display: 'flex', 
-                  overflowX: 'auto', 
-                  gap: '20px', 
-                  padding: '20px 0',
-                  scrollSnapType: 'x mandatory',
-                  WebkitOverflowScrolling: 'touch'
-                }}
-              >
-                {/* Image 1 */}
                 <div style={{ 
-                  minWidth: '844px', 
+                      position: 'relative',
+                maxWidth: '1200px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '20px'
+              }}>
+                {/* Left Arrow */}
+                <button 
+                  onClick={() => {
+                    setLandscapeCarouselCurrentIndex(prev => {
+                      const newIndex = prev - 1;
+                      return newIndex < 0 ? 3 : newIndex; // 5 items, show 2 → start indices 0..3
+                    });
+                  }}
+                      style={{ 
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '50%',
+                    backgroundColor: '',
+                    border: '1px solid #2C3E50',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 10,
+                    flexShrink: 0
+                  }}
+                >
+                  <svg width="16" height="16" fill="none" stroke="#2C3E50" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+
+                {/* Images Container */}
+                <div 
+                  className="landscape-cards-container"
+                      style={{ 
+                    display: 'flex', 
+                    gap: '24px',
+                    overflowX: 'auto',
+                    scrollBehavior: 'smooth',
+                    scrollbarWidth: 'none',
+                    msOverflowStyle: 'none',
+                    WebkitOverflowScrolling: 'touch',
+                    scrollSnapType: 'x mandatory',
+                    flex: 1
+                  }}
+                >
+                  {(() => {
+                    const landscapeCards = [
+                      { src: 'img-10.png', alt: 'Ancient Temple Architecture' },
+                      { src: 'img-11.png', alt: 'Temple Complex' },
+                      { src: 'img-12.png', alt: 'Ancient Ruins' },
+                      { src: 'img-13.png', alt: 'Temple Architecture' },
+                      { src: 'img-14.png', alt: 'Jagannath Temple' }
+                    ];
+
+                    const extended = [...landscapeCards, ...landscapeCards, ...landscapeCards];
+                    const startIndex = landscapeCards.length + landscapeCarouselCurrentIndex;
+                    const visible = extended.slice(startIndex, startIndex + 2);
+
+                    return visible.map((card, index) => (
+                      <div key={`${card.alt}-${startIndex + index}`} style={{ 
+                        minWidth: '560px',
                   backgroundColor: 'white', 
                   borderRadius: '8px', 
                   overflow: 'hidden', 
@@ -3583,8 +3965,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 }}>
                   <div style={{ height: '462px', backgroundColor: '#f3f4f6' }}>
                     <img 
-                      src="img-10.png" 
-                      alt="Ancient Temple Architecture" 
+                            src={card.src}
+                            alt={card.alt}
                       style={{ 
                         width: '100%', 
                         height: '100%', 
@@ -3599,371 +3981,37 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                         }
                       }}
                     />
-                    {/* Fallback design if image fails to load */}
-                    <div style={{ 
-                      display: 'none', 
-                      width: '100%', 
-                      height: '100%', 
-                      backgroundColor: '#8b4513',
-                      position: 'relative',
-                      overflow: 'hidden'
-                    }}>
-                      {/* Temple Structure */}
-                      <div style={{ 
-                        position: 'absolute', 
-                        bottom: '20%', 
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        width: '60%',
-                        height: '50%',
-                        backgroundColor: '#a0522d',
-                        borderRadius: '8px 8px 0 0'
-                      }}>
-                        {/* Temple top */}
-                        <div style={{ 
-                          position: 'absolute',
-                          top: '-10%',
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                          width: '80%',
-                          height: '20%',
-                          backgroundColor: '#cd853f',
-                          borderRadius: '50%'
-                        }}></div>
                       </div>
                     </div>
-                  </div>
-                </div>
-
-                {/* Image 2 */}
-                <div style={{ 
-                  minWidth: '844px', 
-                  backgroundColor: 'white', 
-                  borderRadius: '8px', 
-                  overflow: 'hidden', 
-                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                  scrollSnapAlign: 'start'
-                }}>
-                  <div style={{ height: '462px', backgroundColor: '#f3f4f6' }}>
-                    <img 
-                      src="img-11.png" 
-                      alt="Temple Complex" 
-                      style={{ 
-                        width: '100%', 
-                        height: '100%', 
-                        objectFit: 'cover'
-                      }}
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const nextSibling = target.nextSibling as HTMLElement;
-                        if (nextSibling) {
-                          nextSibling.style.display = 'flex';
-                        }
-                      }}
-                    />
-                    {/* Fallback design if image fails to load */}
-                    <div style={{ 
-                      display: 'none', 
-                      width: '100%', 
-                      height: '100%', 
-                      backgroundColor: '#d2691e',
-                      position: 'relative',
-                      overflow: 'hidden'
-                    }}>
-                      {/* Temple Complex */}
-                      <div style={{ 
-                        position: 'absolute', 
-                        bottom: '20%', 
-                        left: '20%',
-                        width: '20%',
-                        height: '40%',
-                        backgroundColor: '#b8860b',
-                        borderRadius: '8px 8px 0 0'
-                      }}></div>
-                      <div style={{ 
-                        position: 'absolute', 
-                        bottom: '20%', 
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        width: '25%',
-                        height: '50%',
-                        backgroundColor: '#b8860b',
-                        borderRadius: '8px 8px 0 0'
-                      }}></div>
-                      <div style={{ 
-                        position: 'absolute', 
-                        bottom: '20%', 
-                        right: '20%',
-                        width: '20%',
-                        height: '40%',
-                        backgroundColor: '#b8860b',
-                        borderRadius: '8px 8px 0 0'
-                      }}></div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Image 3 */}
-                <div style={{ 
-                  minWidth: '844px', 
-                  backgroundColor: 'white', 
-                  borderRadius: '8px', 
-                  overflow: 'hidden', 
-                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                  scrollSnapAlign: 'start'
-                }}>
-                  <div style={{ height: '462px', backgroundColor: '#f3f4f6' }}>
-                    <img 
-                      src="img-12.png" 
-                      alt="Ancient Ruins" 
-                      style={{ 
-                        width: '100%', 
-                        height: '100%', 
-                        objectFit: 'cover'
-                      }}
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const nextSibling = target.nextSibling as HTMLElement;
-                        if (nextSibling) {
-                          nextSibling.style.display = 'flex';
-                        }
-                      }}
-                    />
-                    {/* Fallback design if image fails to load */}
-                    <div style={{ 
-                      display: 'none', 
-                      width: '100%', 
-                      height: '100%', 
-                      backgroundColor: '#87ceeb',
-                      position: 'relative',
-                      overflow: 'hidden'
-                    }}>
-                      {/* Ruins Structure */}
-                      <div style={{ 
-                        position: 'absolute', 
-                        bottom: '20%', 
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        width: '50%',
-                        height: '50%',
-                        backgroundColor: '#8b4513',
-                        borderRadius: '8px 8px 0 0'
-                      }}>
-                        {/* Pillar */}
-                        <div style={{ 
-                          position: 'absolute',
-                          top: '20%',
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                          width: '20%',
-                          height: '60%',
-                          backgroundColor: '#a0522d',
-                          borderRadius: '8px'
-                        }}></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Image 4 */}
-                <div style={{ 
-                  minWidth: '844px', 
-                  backgroundColor: 'white', 
-                  borderRadius: '8px', 
-                  overflow: 'hidden', 
-                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                  scrollSnapAlign: 'start'
-                }}>
-                  <div style={{ height: '462px', backgroundColor: '#f3f4f6' }}>
-                    <img 
-                      src="img-13.png" 
-                      alt="Temple Architecture" 
-                      style={{ 
-                        width: '100%', 
-                        height: '100%', 
-                        objectFit: 'cover'
-                      }}
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const nextSibling = target.nextSibling as HTMLElement;
-                        if (nextSibling) {
-                          nextSibling.style.display = 'flex';
-                        }
-                      }}
-                    />
-                    {/* Fallback design if image fails to load */}
-                    <div style={{ 
-                      display: 'none', 
-                      width: '100%', 
-                      height: '100%', 
-                      backgroundColor: '#8b4513',
-                      position: 'relative',
-                      overflow: 'hidden'
-                    }}>
-                      {/* Temple Architecture */}
-                      <div style={{ 
-                        position: 'absolute', 
-                        bottom: '20%', 
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        width: '60%',
-                        height: '60%',
-                        backgroundColor: '#a0522d',
-                        borderRadius: '8px 8px 0 0'
-                      }}>
-                        {/* Multiple towers */}
-                        <div style={{ 
-                          position: 'absolute',
-                          top: '-5%',
-                          left: '20%',
-                          width: '20%',
-                          height: '25%',
-                          backgroundColor: '#cd853f',
-                          borderRadius: '8px 8px 0 0'
-                        }}></div>
-                        <div style={{ 
-                          position: 'absolute',
-                          top: '-10%',
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                          width: '30%',
-                          height: '30%',
-                          backgroundColor: '#cd853f',
-                          borderRadius: '8px 8px 0 0'
-                        }}></div>
-                        <div style={{ 
-                          position: 'absolute',
-                          top: '-5%',
-                          right: '20%',
-                          width: '20%',
-                          height: '25%',
-                          backgroundColor: '#cd853f',
-                          borderRadius: '8px 8px 0 0'
-                        }}></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Image 5 */}
-                <div style={{ 
-                  minWidth: '844px', 
-                  backgroundColor: 'white', 
-                  borderRadius: '8px', 
-                  overflow: 'hidden', 
-                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                  scrollSnapAlign: 'start'
-                }}>
-                  <div style={{ height: '462px', backgroundColor: '#f3f4f6' }}>
-                    <img 
-                      src="img-14.png" 
-                      alt="Jagannath Temple" 
-                      style={{ 
-                        width: '100%', 
-                        height: '100%', 
-                        objectFit: 'cover'
-                      }}
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const nextSibling = target.nextSibling as HTMLElement;
-                        if (nextSibling) {
-                          nextSibling.style.display = 'flex';
-                        }
-                      }}
-                    />
-                    {/* Fallback design if image fails to load */}
-                    <div style={{ 
-                      display: 'none', 
-                      width: '100%', 
-                      height: '100%', 
-                      backgroundColor: '#8b4513',
-                      position: 'relative',
-                      overflow: 'hidden'
-                    }}>
-                      {/* Jagannath Temple Structure */}
-                      <div style={{ 
-                        position: 'absolute', 
-                        bottom: '20%', 
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        width: '60%',
-                        height: '50%',
-                        backgroundColor: '#a0522d',
-                        borderRadius: '8px 8px 0 0'
-                      }}>
-                        {/* Temple top */}
-                        <div style={{ 
-                          position: 'absolute',
-                          top: '-10%',
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                          width: '80%',
-                          height: '20%',
-                          backgroundColor: '#cd853f',
-                          borderRadius: '50%'
-                        }}></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                    ));
+                  })()}
               </div>
 
-              {/* Navigation Arrows */}
-              <div style={{ 
-                display: 'flex', 
-                justifyContent: 'center', 
-                gap: '20px', 
-                marginTop: '20px' 
-              }}>
+                {/* Right Arrow */}
                 <button 
                   onClick={() => {
-                    const container = document.querySelector('[data-landscape-carousel]') as HTMLElement;
-                    if (container) {
-                      container.scrollBy({ left: -864, behavior: 'smooth' });
-                    }
+                    setLandscapeCarouselCurrentIndex(prev => {
+                      const newIndex = prev + 1;
+                      return newIndex > 3 ? 0 : newIndex; // wrap for two-visible
+                    });
                   }}
                   style={{
                     width: '40px',
                     height: '40px',
                     borderRadius: '50%',
-                    border: 'none',
-                    backgroundColor: '#f3f4f6',
-                    color: '#6b7280',
+                    backgroundColor: '',
+                    border: '1px solid #2C3E50',
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: '16px'
+                    zIndex: 10,
+                    flexShrink: 0
                   }}
                 >
-                  ‹
-                </button>
-                <button 
-                  onClick={() => {
-                    const container = document.querySelector('[data-landscape-carousel]') as HTMLElement;
-                    if (container) {
-                      container.scrollBy({ left: 864, behavior: 'smooth' });
-                    }
-                  }}
-                  style={{
-                    width: '40px',
-                    height: '40px',
-                    borderRadius: '50%',
-                    border: 'none',
-                    backgroundColor: '#f3f4f6',
-                    color: '#6b7280',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '16px'
-                  }}
-                >
-                  ›
+                  <svg width="16" height="16" fill="none" stroke="#2C3E50" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
                 </button>
               </div>
             </div>
@@ -4605,27 +4653,70 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 margin: '0 auto',
                 position: 'relative'
               }}>
-                {/* Carousel Container */}
                 <div style={{ 
                   position: 'relative',
-                  overflow: 'hidden',
-                  padding: '16px 0'
+                  padding: '16px 0',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '20px'
                 }}>
+                  {/* Left Arrow */}
+                  <button 
+                    onClick={() => {
+                      setRaghurajpurCurrentIndex(prev => {
+                        const newIndex = prev - 1;
+                        return newIndex < 0 ? 2 : newIndex; // 5 items, show 3 → start indices 0..2
+                      });
+                    }}
+                    style={{
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '50%',
+                      backgroundColor: '',
+                      border: '1px solid #2C3E50',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      zIndex: 10,
+                      flexShrink: 0
+                    }}
+                  >
+                    <svg width="16" height="16" fill="none" stroke="#2C3E50" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
 
-                  {/* Carousel Items Container */}
-                  <div style={{ 
+                  {/* Cards Container */}
+                  <div 
+                    className="raghurajpur-cards-container"
+                    style={{ 
                     display: 'flex',
+                      gap: '20px',
                     overflowX: 'auto',
                     scrollBehavior: 'smooth',
                     scrollSnapType: 'x mandatory',
                     WebkitOverflowScrolling: 'touch',
-                    gap: '20px',
                     padding: '0 32px',
                     scrollbarWidth: 'none',
-                    msOverflowStyle: 'none'
-                  }} className="raghurajpur-carousel">
-                    {/* Carousel Item 1 */}
-                    <div style={{ 
+                      msOverflowStyle: 'none',
+                      flex: 1
+                    }}
+                  >
+                    {(() => {
+                      const cards = [
+                        { src: 'img-30.png', alt: 'Raghurajpur Odisha Rambha', title: 'Raghurajpur Rambha' },
+                        { src: 'img-31.png', alt: 'Raghurajpur Painting', title: 'Raghurajpur Painting' },
+                        { src: 'img-32.png', alt: 'Raghurajpur Temple Odisha', title: 'Raghurajpur Temple' },
+                        { src: 'img-33.png', alt: 'Raghurajpur Pattachitra Art', title: 'Raghurajpur Pattachitra' },
+                        { src: 'img-34.png', alt: 'Raghurajpur Odisha Visit', title: 'Raghurajpur Visit' }
+                      ];
+                      const extended = [...cards, ...cards, ...cards];
+                      const startIndex = cards.length + raghurajpurCurrentIndex;
+                      const visible = extended.slice(startIndex, startIndex + 3);
+
+                      return visible.map((card, index) => (
+                        <div key={`${card.alt}-${startIndex + index}`} style={{ 
                       flex: '0 0 300px',
                       scrollSnapAlign: 'start',
                       borderRadius: '8px',
@@ -4634,8 +4725,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                       backgroundColor: '#f3f4f6'
                     }}>
                       <img 
-                        src="img-30.png" 
-                        alt="Raghurajpur Odisha Rambha" 
+                            src={card.src}
+                            alt={card.alt}
                         style={{ 
                           width: '100%', 
                           height: '200px', 
@@ -4660,226 +4751,38 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                         color: '#6b7280',
                         fontSize: '14px'
                       }}>
-                        Raghurajpur Rambha
+                            {card.title}
                       </div>
                     </div>
-
-                    {/* Carousel Item 2 */}
-                    <div style={{ 
-                      flex: '0 0 300px',
-                      scrollSnapAlign: 'start',
-                      borderRadius: '8px',
-                      overflow: 'hidden',
-                      boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                      backgroundColor: '#f3f4f6'
-                    }}>
-                      <img 
-                        src="img-31.png" 
-                        alt="Raghurajpur Painting" 
-                        style={{ 
-                          width: '100%', 
-                          height: '200px', 
-                          objectFit: 'cover'
-                        }}
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
-                          const nextSibling = target.nextSibling as HTMLElement;
-                          if (nextSibling) {
-                            nextSibling.style.display = 'flex';
-                          }
-                        }}
-                      />
-                      <div style={{
-                        display: 'none',
-                        width: '100%',
-                        height: '200px',
-                        backgroundColor: '#f3f4f6',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: '#6b7280',
-                        fontSize: '14px'
-                      }}>
-                        Raghurajpur Painting
-                      </div>
+                      ));
+                    })()}
                     </div>
 
-                    {/* Carousel Item 3 */}
-                    <div style={{ 
-                      flex: '0 0 300px',
-                      scrollSnapAlign: 'start',
-                      borderRadius: '8px',
-                      overflow: 'hidden',
-                      boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                      backgroundColor: '#f3f4f6'
-                    }}>
-                      <img 
-                        src="img-32.png" 
-                        alt="Raghurajpur Temple Odisha" 
-                        style={{ 
-                          width: '100%', 
-                          height: '200px', 
-                          objectFit: 'cover'
-                        }}
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
-                          const nextSibling = target.nextSibling as HTMLElement;
-                          if (nextSibling) {
-                            nextSibling.style.display = 'flex';
-                          }
-                        }}
-                      />
-                      <div style={{
-                        display: 'none',
-                        width: '100%',
-                        height: '200px',
-                        backgroundColor: '#f3f4f6',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: '#6b7280',
-                        fontSize: '14px'
-                      }}>
-                        Raghurajpur Temple
-                      </div>
-                    </div>
-
-                    {/* Carousel Item 4 */}
-                    <div style={{ 
-                      flex: '0 0 300px',
-                      scrollSnapAlign: 'start',
-                      borderRadius: '8px',
-                      overflow: 'hidden',
-                      boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                      backgroundColor: '#f3f4f6'
-                    }}>
-                      <img 
-                        src="img-33.png" 
-                        alt="Raghurajpur Pattachitra Art" 
-                        style={{ 
-                          width: '100%', 
-                          height: '200px', 
-                          objectFit: 'cover'
-                        }}
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
-                          const nextSibling = target.nextSibling as HTMLElement;
-                          if (nextSibling) {
-                            nextSibling.style.display = 'flex';
-                          }
-                        }}
-                      />
-                      <div style={{
-                        display: 'none',
-                        width: '100%',
-                        height: '200px',
-                        backgroundColor: '#f3f4f6',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: '#6b7280',
-                        fontSize: '14px'
-                      }}>
-                        Raghurajpur Pattachitra
-                      </div>
-                    </div>
-
-                    {/* Carousel Item 5 */}
-                    <div style={{ 
-                      flex: '0 0 300px',
-                      scrollSnapAlign: 'start',
-                      borderRadius: '8px',
-                      overflow: 'hidden',
-                      boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                      backgroundColor: '#f3f4f6'
-                    }}>
-                      <img 
-                        src="img-34.png" 
-                        alt="Raghurajpur Odisha Visit" 
-                        style={{ 
-                          width: '100%', 
-                          height: '200px', 
-                          objectFit: 'cover'
-                        }}
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
-                          const nextSibling = target.nextSibling as HTMLElement;
-                          if (nextSibling) {
-                            nextSibling.style.display = 'flex';
-                          }
-                        }}
-                      />
-                      <div style={{
-                        display: 'none',
-                        width: '100%',
-                        height: '200px',
-                        backgroundColor: '#f3f4f6',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: '#6b7280',
-                        fontSize: '14px'
-                      }}>
-                        Raghurajpur Visit
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Navigation Buttons */}
+                  {/* Right Arrow */}
                   <button 
                     onClick={() => {
-                      const carousel = document.querySelector('.raghurajpur-carousel') as HTMLElement;
-                      if (carousel) {
-                        carousel.scrollBy({ left: -320, behavior: 'smooth' });
-                      }
+                      setRaghurajpurCurrentIndex(prev => {
+                        const newIndex = prev + 1;
+                        return newIndex > 2 ? 0 : newIndex; // wrap for three-visible
+                      });
                     }}
                     style={{
-                      position: 'absolute',
-                      left: '16px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                      border: 'none',
-                      borderRadius: '50%',
                       width: '40px',
                       height: '40px',
+                      borderRadius: '50%',
+                      backgroundColor: '',
+                      border: '1px solid #2C3E50',
+                      cursor: 'pointer',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      cursor: 'pointer',
-                      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-                      zIndex: 10
+                      zIndex: 10,
+                      flexShrink: 0
                     }}
                   >
-                    <span style={{ fontSize: '18px', color: '#374151' }}>‹</span>
-                  </button>
-
-                  <button 
-                    onClick={() => {
-                      const carousel = document.querySelector('.raghurajpur-carousel') as HTMLElement;
-                      if (carousel) {
-                        carousel.scrollBy({ left: 320, behavior: 'smooth' });
-                      }
-                    }}
-                    style={{
-                      position: 'absolute',
-                      right: '16px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                      border: 'none',
-                      borderRadius: '50%',
-                      width: '40px',
-                      height: '40px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
-                      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-                      zIndex: 10
-                    }}
-                  >
-                    <span style={{ fontSize: '18px', color: '#374151' }}>›</span>
+                    <svg width="16" height="16" fill="none" stroke="#2C3E50" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
                   </button>
                 </div>
               </div>
@@ -4898,7 +4801,17 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       </div>
 
       {/* Sub-navigation */}
-      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px', borderBottom: '1px solid #e5e7eb' }}>
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        marginBottom: '32px', 
+        borderBottom: '1px solid #e5e7eb',
+        position: 'sticky',
+        top: isHeaderSticky ? 48 : 0,
+        zIndex: 1000,
+        backgroundColor: 'rgb(241,236,229)',
+        marginTop: isHeaderSticky ? '-1px' : '0'
+      }}>
         <div style={{ display: 'flex', gap: '0' }}>
           {['Overview', 'Wildlife', 'Spiritual', 'Cultural'].map((tab) => (
             <button
@@ -4927,7 +4840,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 backgroundColor: 'transparent',
                 color: experiencesTab === tab.toLowerCase() ? '#000000' : '#6b7280',
                 fontWeight: experiencesTab === tab.toLowerCase() ? '600' : '400',
-                borderBottom: experiencesTab === tab.toLowerCase() ? '2px solid #000000' : 'none',
+                borderBottom: 'none',
                 cursor: 'pointer',
                 fontSize: '14px',
                 transition: 'none',
@@ -4945,23 +4858,22 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 const target = e.target as HTMLButtonElement;
                 target.style.color = experiencesTab === tab.toLowerCase() ? '#000000' : '#6b7280';
                 target.style.backgroundColor = 'transparent';
-                target.style.borderBottom = experiencesTab === tab.toLowerCase() ? '2px solid #000000' : 'none';
+                target.style.borderBottom = 'none';
                 target.style.setProperty('color', experiencesTab === tab.toLowerCase() ? '#000000' : '#6b7280', 'important');
                 target.style.setProperty('background-color', 'transparent', 'important');
-                target.style.setProperty('border-bottom', experiencesTab === tab.toLowerCase() ? '2px solid #000000' : 'none', 'important');
+                target.style.setProperty('border-bottom', 'none', 'important');
               }}
               onMouseLeave={(e) => {
                 const target = e.target as HTMLButtonElement;
                 target.style.color = experiencesTab === tab.toLowerCase() ? '#000000' : '#6b7280';
                 target.style.backgroundColor = 'transparent';
-                target.style.borderBottom = experiencesTab === tab.toLowerCase() ? '2px solid #000000' : 'none';
+                target.style.borderBottom = 'none';
                 target.style.setProperty('color', experiencesTab === tab.toLowerCase() ? '#000000' : '#6b7280', 'important');
                 target.style.setProperty('background-color', 'transparent', 'important');
-                target.style.setProperty('border-bottom', experiencesTab === tab.toLowerCase() ? '2px solid #000000' : 'none', 'important');
+                target.style.setProperty('border-bottom', 'none', 'important');
               }}
             >
               {tab}
-              {experiencesTab === tab.toLowerCase() && <span style={{ marginLeft: '8px' }}>{'>'}</span>}
             </button>
           ))}
         </div>
@@ -5052,13 +4964,13 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
           <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '24px', textTransform: 'uppercase' }}>WILDLIFE EXPERIENCES</h2>
           <div style={{ maxWidth: '800px', margin: '0 auto', color: '#374151', lineHeight: '1.8', fontSize: '16px' }}>
             <p style={{ marginBottom: '16px' }}>
-              Discover the rich biodiversity of Odisha through our carefully curated wildlife experiences. From the majestic antelopes roaming the grasslands to the diverse birdlife and marine creatures, every encounter offers a unique glimpse into the natural wonders of this region.
+            Rambha Palace is situated in a globally recognised biodiversity hotspot, with resident naturalists to take you around the area. Chilika Lake is home to an imposing variety of migratory and resident bird species including, flamingos, sea eagles, pelicans and a wide range of elusive animals from melanistic tigers to fishing cats. India’s largest brakish water lagoon is also home to the unmistakable Irawaddy dolphin. Watching the Olive-Riddley turtle nesting is another exciting expedition to embark on.
             </p>
             <p style={{ marginBottom: '16px' }}>
-              Our expert guides will take you on unforgettable journeys through pristine habitats, where you can observe wildlife in their natural environment. Whether it's tracking antelopes in the grasslands, birdwatching in the wetlands, or exploring the marine life of Chilika Lake, each experience is designed to create lasting memories.
+             
             </p>
             <p>
-              Experience the thrill of wildlife photography, learn about conservation efforts, and connect with nature in ways that will stay with you long after your visit.
+             
             </p>
           </div>
         </div>
@@ -5068,40 +4980,80 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
           {/* Carousel Container */}
           <div style={{ 
             position: 'relative',
-            maxWidth: '100%',
-            overflow: 'hidden'
+            width: '100%',
+            // overflow: 'hidden',
+            borderRadius: '12px',
+            // boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
           }}>
             {/* Carousel Cards */}
             <div 
               id="wildlife-carousel"
               style={{ 
                 display: 'flex', 
-                gap: '12px',
-                padding: '0 50px', // Further reduced space for arrows
+                gap: '24px',
+                padding: '0 24px',
                 overflowX: 'auto',
                 scrollBehavior: 'smooth',
-                scrollbarWidth: 'none', // Hide scrollbar for Firefox
-                msOverflowStyle: 'none', // Hide scrollbar for IE/Edge
-                WebkitOverflowScrolling: 'touch', // Smooth scrolling on iOS
-                scrollSnapType: 'x mandatory' // Snap to cards
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+                scrollSnapType: 'x mandatory',
+                transition: 'transform 0.3s ease-in-out',
+                width: '100%'
+              }}
+              onScroll={(e) => {
+                const carousel = e.currentTarget;
+                const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+                // 🔄 Infinite Loop Reset
+                if (carousel.scrollLeft <= 0) {
+                  carousel.scrollLeft = maxScroll - carousel.clientWidth;
+                } else if (carousel.scrollLeft >= maxScroll) {
+                  carousel.scrollLeft = carousel.clientWidth;
+                }
+
+                // Dynamic scaling + opacity effects
+                const items = carousel.querySelectorAll('.wildlife-card');
+                items.forEach((el) => {
+                  if (el instanceof HTMLElement) {
+                    const box = el.getBoundingClientRect();
+                    const center = window.innerWidth / 2;
+                    const offset = Math.abs(box.left + box.width / 2 - center);
+                    const scale = Math.max(0.9, 1.05 - offset / 1000);
+                    const opacity = Math.max(0.5, 1 - offset / 800);
+                    el.style.transform = `scale(${scale})`;
+                    el.style.opacity = opacity.toString();
+                  }
+                });
               }}
             >
               {/* Card 1: Diving Dolphins */}
-              <div style={{ 
-                minWidth: '240px', // Further reduced from 280px
-                backgroundColor: '#ffffff',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'start'
-              }}>
+              <div 
+                className="wildlife-card"
+                style={{ 
+                  flex: '0 0 400px',
+                  backgroundColor: '#ffffff',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                  flexShrink: 0,
+                  scrollSnapAlign: 'center',
+                  padding: '0 12px',
+                  boxSizing: 'border-box',
+                  transition: 'all 0.3s ease'
+                }}
+              >
                 {/* Image */}
-                <div style={{ position: 'relative', width: '100%', height: '160px' }}> {/* Further reduced from 200px */}
+                <div style={{ position: 'relative', width: '100%', height: '250px' }}>
                   <img 
                     src="/Dolphin.png" 
                     alt="Diving Dolphins" 
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover',
+                      borderRadius: '12px',
+                      transition: 'all 0.3s ease'
+                    }}
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.style.display = 'none';
@@ -5120,7 +5072,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                     position: 'relative',
                     overflow: 'hidden',
                     alignItems: 'center',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    borderRadius: '12px'
                   }}>
                     <div style={{ 
                       width: '60%',
@@ -5139,19 +5092,19 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 </div>
 
                 {/* Content */}
-                <div style={{ padding: '16px' }}> {/* Further reduced from 20px */}
+                <div style={{ padding: '20px' }}>
                   <h3 style={{ 
-                    fontSize: '16px', // Further reduced from 18px
-                    fontWeight: 'bold', 
+                    fontSize: '18px',
+                    fontWeight: '600', 
                     color: '#000000', 
-                    marginBottom: '8px', // Further reduced from 12px
+                    marginBottom: '12px',
                     textTransform: 'uppercase',
                     fontFamily: '"Montserrat", sans-serif'
                   }}>
                     DIVING DOLPHINS
                   </h3>
                   <p style={{ 
-                    fontSize: '12px', // Further reduced from 14px
+                    fontSize: '14px',
                     color: '#6b7280', 
                     lineHeight: '1.5',
                     fontFamily: '"Lato", sans-serif'
@@ -5162,21 +5115,33 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               </div>
 
               {/* Card 2: Turtle Treasure */}
-              <div style={{ 
-                minWidth: '240px', // Further reduced from 280px
-                backgroundColor: '#ffffff',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'start'
-              }}>
+              <div 
+                className="wildlife-card"
+                style={{ 
+                  flex: '0 0 400px',
+                  backgroundColor: '#ffffff',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                  flexShrink: 0,
+                  scrollSnapAlign: 'center',
+                  padding: '0 12px',
+                  boxSizing: 'border-box',
+                  transition: 'all 0.3s ease'
+                }}
+              >
                 {/* Image */}
-                <div style={{ position: 'relative', width: '100%', height: '160px' }}> {/* Further reduced from 200px */}
+                <div style={{ position: 'relative', width: '100%', height: '250px' }}>
                   <img 
                     src="/Turtle.png" 
                     alt="Turtle Treasure" 
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover',
+                      borderRadius: '12px',
+                      transition: 'all 0.3s ease'
+                    }}
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.style.display = 'none';
@@ -5195,7 +5160,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                     position: 'relative',
                     overflow: 'hidden',
                     alignItems: 'center',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    borderRadius: '12px'
                   }}>
                     <div style={{ 
                       width: '60%',
@@ -5214,19 +5180,19 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 </div>
 
                 {/* Content */}
-                <div style={{ padding: '16px' }}> {/* Further reduced from 20px */}
+                <div style={{ padding: '20px' }}>
                   <h3 style={{ 
-                    fontSize: '16px', // Further reduced from 18px
-                    fontWeight: 'bold', 
+                    fontSize: '18px',
+                    fontWeight: '600', 
                     color: '#000000', 
-                    marginBottom: '8px', // Further reduced from 12px
+                    marginBottom: '12px',
                     textTransform: 'uppercase',
                     fontFamily: '"Montserrat", sans-serif'
                   }}>
                     TURTLE TREASURE
                   </h3>
                   <p style={{ 
-                    fontSize: '12px', // Further reduced from 14px
+                    fontSize: '14px',
                     color: '#6b7280', 
                     lineHeight: '1.5',
                     fontFamily: '"Lato", sans-serif'
@@ -5237,21 +5203,33 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               </div>
 
               {/* Card 3: Tracking Fishing Cats */}
-              <div style={{ 
-                minWidth: '240px', // Further reduced from 280px
-                backgroundColor: '#ffffff',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'start'
-              }}>
+              <div 
+                className="wildlife-card"
+                style={{ 
+                  flex: '0 0 400px',
+                  backgroundColor: '#ffffff',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                  flexShrink: 0,
+                  scrollSnapAlign: 'center',
+                  padding: '0 12px',
+                  boxSizing: 'border-box',
+                  transition: 'all 0.3s ease'
+                }}
+              >
                 {/* Image */}
-                <div style={{ position: 'relative', width: '100%', height: '160px' }}> {/* Further reduced from 200px */}
+                <div style={{ position: 'relative', width: '100%', height: '250px' }}>
                   <img 
                     src="/FishingCats.png" 
                     alt="Tracking Fishing Cats" 
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover',
+                      borderRadius: '12px',
+                      transition: 'all 0.3s ease'
+                    }}
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.style.display = 'none';
@@ -5270,13 +5248,14 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                     position: 'relative',
                     overflow: 'hidden',
                     alignItems: 'center',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    borderRadius: '12px'
                   }}>
                     <div style={{ 
                       width: '60%',
                       height: '40%',
                       backgroundColor: '#e5e7eb',
-                      borderRadius: '50% 50% 0 0',
+                      borderRadius: '50% 0 0 50%',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -5289,19 +5268,19 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 </div>
 
                 {/* Content */}
-                <div style={{ padding: '16px' }}> {/* Further reduced from 20px */}
+                <div style={{ padding: '20px' }}>
                   <h3 style={{ 
-                    fontSize: '16px', // Further reduced from 18px
-                    fontWeight: 'bold', 
+                    fontSize: '18px',
+                    fontWeight: '600', 
                     color: '#000000', 
-                    marginBottom: '8px', // Further reduced from 12px
+                    marginBottom: '12px',
                     textTransform: 'uppercase',
                     fontFamily: '"Montserrat", sans-serif'
                   }}>
                     TRACKING FISHING CATS
                   </h3>
                   <p style={{ 
-                    fontSize: '12px', // Further reduced from 14px
+                    fontSize: '14px',
                     color: '#6b7280', 
                     lineHeight: '1.5',
                     fontFamily: '"Lato", sans-serif'
@@ -5312,21 +5291,33 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               </div>
 
               {/* Card 4: Bouncing Blackbucks */}
-              <div style={{ 
-                minWidth: '240px', // Further reduced from 280px
-                backgroundColor: '#ffffff',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'start'
-              }}>
+              <div 
+                className="wildlife-card"
+                style={{ 
+                  flex: '0 0 400px',
+                  backgroundColor: '#ffffff',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                  flexShrink: 0,
+                  scrollSnapAlign: 'center',
+                  padding: '0 12px',
+                  boxSizing: 'border-box',
+                  transition: 'all 0.3s ease'
+                }}
+              >
                 {/* Image */}
-                <div style={{ position: 'relative', width: '100%', height: '160px' }}> {/* Further reduced from 200px */}
+                <div style={{ position: 'relative', width: '100%', height: '250px' }}>
                   <img 
                     src="/Blackbuck.png" 
                     alt="Bouncing Blackbucks" 
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover',
+                      borderRadius: '12px',
+                      transition: 'all 0.3s ease'
+                    }}
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.style.display = 'none';
@@ -5345,7 +5336,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                     position: 'relative',
                     overflow: 'hidden',
                     alignItems: 'center',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    borderRadius: '12px'
                   }}>
                     <div style={{ 
                       width: '60%',
@@ -5364,93 +5356,451 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 </div>
 
                 {/* Content */}
-                <div style={{ padding: '16px' }}> {/* Further reduced from 20px */}
+                <div style={{ padding: '20px' }}>
                   <h3 style={{ 
-                    fontSize: '16px', // Further reduced from 18px
-                    fontWeight: 'bold', 
+                    fontSize: '18px',
+                    fontWeight: '600', 
                     color: '#000000', 
-                    marginBottom: '8px', // Further reduced from 12px
+                    marginBottom: '12px',
                     textTransform: 'uppercase',
                     fontFamily: '"Montserrat", sans-serif'
                   }}>
                     BOUNCING BLACKBUCKS
                   </h3>
                   <p style={{ 
-                    fontSize: '12px', // Further reduced from 14px
+                    fontSize: '14px',
                     color: '#6b7280', 
                     lineHeight: '1.5',
                     fontFamily: '"Lato", sans-serif'
                   }}>
-                    Ride out in in jeeps and spot these graceful and critically endangered creatures which have found refuge in the surrounding paddy fields.
+                    Ride out in jeeps and spot these graceful and critically endangered creatures which have found refuge in the surrounding paddy fields.
+                  </p>
+                </div>
+              </div>
+
+              {/* 🔄 Duplicate set 1 for infinite loop effect */}
+              {/* Card 1: Diving Dolphins */}
+              <div 
+                className="wildlife-card"
+                style={{ 
+                  flex: '0 0 400px',
+                  backgroundColor: '#ffffff',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                  flexShrink: 0,
+                  scrollSnapAlign: 'center',
+                  padding: '0 12px',
+                  boxSizing: 'border-box',
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                {/* Image */}
+                <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                  <img 
+                    src="/Dolphin.png" 
+                    alt="Diving Dolphins" 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover',
+                      borderRadius: '12px',
+                      transition: 'all 0.3s ease'
+                    }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  {/* Fallback for Dolphin image */}
+                  <div style={{ 
+                    display: 'none', 
+                    width: '100%', 
+                    height: '100%', 
+                    backgroundColor: '#87ceeb',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '12px'
+                  }}>
+                    <div style={{ 
+                      width: '60%',
+                      height: '40%',
+                      backgroundColor: '#e5e7eb',
+                      borderRadius: '50% 50% 0 0',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#9ca3af',
+                      fontSize: '24px'
+                    }}>
+                      🐬
+                    </div>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div style={{ padding: '20px' }}>
+                  <h3 style={{ 
+                    fontSize: '18px',
+                    fontWeight: '600', 
+                    color: '#000000', 
+                    marginBottom: '12px',
+                    textTransform: 'uppercase',
+                    fontFamily: '"Montserrat", sans-serif'
+                  }}>
+                    DIVING DOLPHINS
+                  </h3>
+                  <p style={{ 
+                    fontSize: '14px',
+                    color: '#6b7280', 
+                    lineHeight: '1.5',
+                    fontFamily: '"Lato", sans-serif'
+                  }}>
+                    Endangered species of Irrawaddy dolphins can be spotted frolicking in Chilika Lake. Spot them happy in their habitat while you drift slowly in a boat.
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 2: Turtle Treasure */}
+              <div 
+                className="wildlife-card"
+                style={{ 
+                  flex: '0 0 400px',
+                  backgroundColor: '#ffffff',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                  flexShrink: 0,
+                  scrollSnapAlign: 'center',
+                  padding: '0 12px',
+                  boxSizing: 'border-box',
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                {/* Image */}
+                <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                  <img 
+                    src="/Turtle.png" 
+                    alt="Turtle Treasure" 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover',
+                      borderRadius: '12px',
+                      transition: 'all 0.3s ease'
+                    }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  {/* Fallback for Turtle image */}
+                  <div style={{ 
+                    display: 'none', 
+                    width: '100%', 
+                    height: '100%', 
+                    backgroundColor: '#f4a460',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '12px'
+                  }}>
+                    <div style={{ 
+                      width: '60%',
+                      height: '40%',
+                      backgroundColor: '#e5e7eb',
+                      borderRadius: '50% 50% 0 0',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#9ca3af',
+                      fontSize: '24px'
+                    }}>
+                      🐢
+                    </div>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div style={{ padding: '20px' }}>
+                  <h3 style={{ 
+                    fontSize: '18px',
+                    fontWeight: '600', 
+                    color: '#000000', 
+                    marginBottom: '12px',
+                    textTransform: 'uppercase',
+                    fontFamily: '"Montserrat", sans-serif'
+                  }}>
+                    TURTLE TREASURE
+                  </h3>
+                  <p style={{ 
+                    fontSize: '14px',
+                    color: '#6b7280', 
+                    lineHeight: '1.5',
+                    fontFamily: '"Lato", sans-serif'
+                  }}>
+                    Experience the magic of Odisha's coastline witness the endangered Olive sea turtles nesting along the serene shores, a rare spectacle.
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 3: Tracking Fishing Cats */}
+              <div 
+                className="wildlife-card"
+                style={{ 
+                  flex: '0 0 400px',
+                  backgroundColor: '#ffffff',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                  flexShrink: 0,
+                  scrollSnapAlign: 'center',
+                  padding: '0 12px',
+                  boxSizing: 'border-box',
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                {/* Image */}
+                <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                  <img 
+                    src="/FishingCats.png" 
+                    alt="Tracking Fishing Cats" 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover',
+                      borderRadius: '12px',
+                      transition: 'all 0.3s ease'
+                    }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  {/* Fallback for Fishing Cats image */}
+                  <div style={{ 
+                    display: 'none', 
+                    width: '100%', 
+                    height: '100%', 
+                    backgroundColor: '#228b22',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '12px'
+                  }}>
+                    <div style={{ 
+                      width: '60%',
+                      height: '40%',
+                      backgroundColor: '#e5e7eb',
+                      borderRadius: '50% 0 0 50%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#9ca3af',
+                      fontSize: '24px'
+                    }}>
+                      🐱
+                    </div>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div style={{ padding: '20px' }}>
+                  <h3 style={{ 
+                    fontSize: '18px',
+                    fontWeight: '600', 
+                    color: '#000000', 
+                    marginBottom: '12px',
+                    textTransform: 'uppercase',
+                    fontFamily: '"Montserrat", sans-serif'
+                  }}>
+                    TRACKING FISHING CATS
+                  </h3>
+                  <p style={{ 
+                    fontSize: '14px',
+                    color: '#6b7280', 
+                    lineHeight: '1.5',
+                    fontFamily: '"Lato", sans-serif'
+                  }}>
+                    Join a boat safari through wetlands to spot elusive predators patrolling the banks or, with luck, hunting in action.
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 4: Bouncing Blackbucks */}
+              <div 
+                className="wildlife-card"
+                style={{ 
+                  flex: '0 0 400px',
+                  backgroundColor: '#ffffff',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                  flexShrink: 0,
+                  scrollSnapAlign: 'center',
+                  padding: '0 12px',
+                  boxSizing: 'border-box',
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                {/* Image */}
+                <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                  <img 
+                    src="/Blackbuck.png" 
+                    alt="Bouncing Blackbucks" 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover',
+                      borderRadius: '12px',
+                      transition: 'all 0.3s ease'
+                    }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  {/* Fallback for Blackbuck image */}
+                  <div style={{ 
+                    display: 'none', 
+                    width: '100%', 
+                    height: '100%', 
+                    backgroundColor: '#8b4513',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '12px'
+                  }}>
+                    <div style={{ 
+                      width: '60%',
+                      height: '40%',
+                      backgroundColor: '#e5e7eb',
+                      borderRadius: '50% 50% 0 0',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#9ca3af',
+                      fontSize: '24px'
+                    }}>
+                      🦌
+                    </div>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div style={{ padding: '20px' }}>
+                  <h3 style={{ 
+                    fontSize: '18px',
+                    fontWeight: '600', 
+                    color: '#000000', 
+                    marginBottom: '12px',
+                    textTransform: 'uppercase',
+                    fontFamily: '"Montserrat", sans-serif'
+                  }}>
+                    BOUNCING BLACKBUCKS
+                  </h3>
+                  <p style={{ 
+                    fontSize: '14px',
+                    color: '#6b7280', 
+                    lineHeight: '1.5',
+                    fontFamily: '"Lato", sans-serif'
+                  }}>
+                    Ride out in jeeps and spot these graceful and critically endangered creatures which have found refuge in the surrounding paddy fields.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Carousel Navigation Arrows */}
-            <div style={{ 
-              display: 'flex', 
-              justifyContent: 'center', 
-              gap: '16px',
-              marginTop: '24px'
+            {/* Navigation Buttons positioned below the carousel */}
+            <div style={{
+              position: 'relative',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: '24px',
+              gap: '32px'
             }}>
-              <button 
-                style={{ 
-                  width: '40px', 
-                  height: '40px', 
-                  borderRadius: '50%', 
-                  backgroundColor: '#f3f4f6', 
-                  border: '1px solid #d1d5db',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '18px',
-                  color: '#6b7280'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#e5e7eb';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#f3f4f6';
-                }}
+              {/* Prev Button */}
+              <button
                 onClick={() => {
                   const carousel = document.getElementById('wildlife-carousel');
                   if (carousel) {
-                    carousel.scrollBy({ left: -252, behavior: 'smooth' }); // Updated scroll distance (240px + 12px gap)
+                    const firstItem = carousel.querySelector('.wildlife-card') as HTMLElement;
+                    if (firstItem) {
+                      const itemWidth = firstItem.offsetWidth; // 👈 get card width with padding
+                      carousel.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+                    }
                   }
                 }}
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                  border: 'none',
+                  borderRadius: '50%',
+                  width: '48px',
+                  height: '48px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                  zIndex: 10
+                }}
               >
-                ‹
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M15 18L9 12L15 6" stroke="#374151" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </button>
-              <button 
-                style={{ 
-                  width: '40px', 
-                  height: '40px', 
-                  borderRadius: '50%', 
-                  backgroundColor: '#f3f4f6', 
-                  border: '1px solid #d1d5db',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '18px',
-                  color: '#6b7280'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#e5e7eb';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#f3f4f6';
-                }}
+
+              {/* Next Button */}
+              <button
                 onClick={() => {
                   const carousel = document.getElementById('wildlife-carousel');
                   if (carousel) {
-                    carousel.scrollBy({ left: 252, behavior: 'smooth' }); // Updated scroll distance (240px + 12px gap)
+                    const firstItem = carousel.querySelector('.wildlife-card') as HTMLElement;
+                    if (firstItem) {
+                      const itemWidth = firstItem.offsetWidth; // 👈 same here
+                      carousel.scrollBy({ left: itemWidth, behavior: 'smooth' });
+                    }
                   }
                 }}
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                  border: 'none',
+                  borderRadius: '50%',
+                  width: '48px',
+                  height: '48px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                  zIndex: 10
+                }}
               >
-                ›
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M9 18L15 12L9 6" stroke="#374151" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </button>
             </div>
           </div>
@@ -5576,568 +5926,261 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             maxWidth: '100%',
             overflow: 'hidden'
           }}>
-            {/* Carousel Cards */}
+            {/* Landscape Carousel Cards - State-based Carousel */}
             <div 
-              id="landscape-carousel"
+              className="landscape-carousel-container"
               style={{ 
                 display: 'flex', 
                 gap: '0px',
-                padding: '0 80px', // Space for arrows
+                justifyContent: 'center',
                 overflowX: 'auto',
                 scrollBehavior: 'smooth',
-                scrollbarWidth: 'none', // Hide scrollbar for Firefox
-                msOverflowStyle: 'none', // Hide scrollbar for IE/Edge
-                WebkitOverflowScrolling: 'touch', // Smooth scrolling on iOS
-                scrollSnapType: 'x mandatory' // Snap to cards
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+                WebkitOverflowScrolling: 'touch',
+                scrollSnapType: 'x mandatory',
+                padding: '0 20px'
               }}
             >
-              {/* Card 1: Landscape Image 1 */}
-              <div style={{ 
-                minWidth: '844px',
-                backgroundColor: '#ffffff',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'center',
-                marginRight: '-50px',
-                opacity: 0.8,
-                transform: 'scale(0.8)',
-                transition: 'all 0.3s ease-in-out'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.opacity = '1';
-                e.currentTarget.style.transform = 'scale(1)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.opacity = '0.8';
-                e.currentTarget.style.transform = 'scale(0.8)';
-              }}
-              >
-                {/* Image */}
-                <div style={{ position: 'relative', width: '100%', height: '462px' }}>
-                  <img 
-                    src="/img-1.png" 
-                    alt="Landscape View 1" 
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      const nextSibling = target.nextSibling as HTMLElement;
-                      if (nextSibling) {
-                        nextSibling.style.display = 'flex';
-                      }
-                    }}
-                  />
-                  {/* Fallback for landscape image 1 */}
-                  <div style={{ 
-                    display: 'none', 
-                    width: '100%', 
-                    height: '100%', 
-                    backgroundColor: '#22c55e',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}>
-                    <div style={{ 
-                      width: '100%',
-                      height: '100%',
-                      background: 'linear-gradient(to bottom, #22c55e, #16a34a)',
-                      position: 'relative'
-                    }}>
-                      {/* Grass blades */}
-                      <div style={{ 
-                        position: 'absolute',
-                        bottom: '0',
-                        left: '0',
-                        width: '100%',
-                        height: '30%',
-                        background: 'repeating-linear-gradient(90deg, transparent, transparent 2px, #15803d 2px, #15803d 4px)'
-                      }}></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {/* Landscape Carousel Cards - State-based Carousel */}
+              {(() => {
+                const landscapeCarouselCards = [
+                  {
+                    image: '/img-1.png',
+                    alt: 'Landscape View 1',
+                    fallbackBg: '#22c55e',
+                    fallbackGradient: 'linear-gradient(to bottom, #22c55e, #16a34a)',
+                    fallbackPattern: 'repeating-linear-gradient(90deg, transparent, transparent 2px, #15803d 2px, #15803d 4px)',
+                    patternHeight: '30%',
+                    patternType: 'grass'
+                  },
+                  {
+                    image: '/img-2.png',
+                    alt: 'Landscape View 2',
+                    fallbackBg: '#0ea5e9',
+                    fallbackGradient: 'linear-gradient(to bottom, #0ea5e9, #0284c7)',
+                    fallbackPattern: 'linear-gradient(to bottom, #0ea5e9, #0284c7)',
+                    patternHeight: '40%',
+                    patternType: 'water'
+                  },
+                  {
+                    image: '/img-3.png',
+                    alt: 'Landscape View 3',
+                    fallbackBg: '#1e293b',
+                    fallbackGradient: 'linear-gradient(to bottom, #1e293b, #0f172a)',
+                    fallbackPattern: 'radial-gradient(ellipse at center, #334155 0%, #1e293b 70%)',
+                    patternHeight: '50%',
+                    patternType: 'foliage'
+                  },
+                  {
+                    image: '/img-4.png',
+                    alt: 'Landscape View 4',
+                    fallbackBg: '#059669',
+                    fallbackGradient: 'linear-gradient(to bottom, #059669, #047857)',
+                    fallbackPattern: 'radial-gradient(ellipse at center, #10b981 0%, #059669 70%)',
+                    patternHeight: '60%',
+                    patternType: 'forest'
+                  },
+                  {
+                    image: '/img-5.png',
+                    alt: 'Landscape View 5',
+                    fallbackBg: '#7c3aed',
+                    fallbackGradient: 'linear-gradient(to bottom, #7c3aed, #6d28d9)',
+                    fallbackPattern: 'radial-gradient(ellipse at center, #8b5cf6 0%, #7c3aed 70%)',
+                    patternHeight: '50%',
+                    patternType: 'mountain'
+                  },
+                  {
+                    image: '/img-6.png',
+                    alt: 'Landscape View 6',
+                    fallbackBg: '#dc2626',
+                    fallbackGradient: 'linear-gradient(to bottom, #dc2626, #b91c1c)',
+                    fallbackPattern: 'radial-gradient(ellipse at center, #ef4444 0%, #dc2626 70%)',
+                    patternHeight: '40%',
+                    patternType: 'sunset'
+                  }
+                ];
 
-              {/* Card 2: Landscape Image 2 */}
-              <div style={{ 
-                minWidth: '844px',
-                backgroundColor: '#ffffff',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'center',
-                marginRight: '-50px',
-                opacity: 0.8,
-                transform: 'scale(0.8)',
-                transition: 'all 0.3s ease-in-out'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.opacity = '1';
-                e.currentTarget.style.transform = 'scale(1)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.opacity = '0.8';
-                e.currentTarget.style.transform = 'scale(0.8)';
-              }}
-              >
-                {/* Image */}
-                <div style={{ position: 'relative', width: '100%', height: '462px' }}>
-                  <img 
-                    src="/img-2.png" 
-                    alt="Landscape View 2" 
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      const nextSibling = target.nextSibling as HTMLElement;
-                      if (nextSibling) {
-                        nextSibling.style.display = 'flex';
-                      }
-                    }}
-                  />
-                  {/* Fallback for landscape image 2 */}
-                  <div style={{ 
-                    display: 'none', 
-                    width: '100%', 
-                    height: '100%', 
-                    backgroundColor: '#0ea5e9',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}>
-                    <div style={{ 
-                      width: '100%',
-                      height: '100%',
-                      background: 'linear-gradient(to bottom, #0ea5e9, #0284c7)',
-                      position: 'relative'
-                    }}>
-                      {/* Water */}
-                      <div style={{ 
-                        position: 'absolute',
-                        bottom: '0',
-                        left: '0',
-                        width: '100%',
-                        height: '40%',
-                        background: 'linear-gradient(to bottom, #0ea5e9, #0284c7)'
-                      }}></div>
-                      {/* Hills */}
-                      <div style={{ 
-                        position: 'absolute',
-                        bottom: '40%',
-                        left: '20%',
-                        width: '60%',
-                        height: '30%',
-                        backgroundColor: '#16a34a',
-                        borderRadius: '50% 50% 0 0'
-                      }}></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                // Create infinite loop by duplicating cards
+                const extendedLandscapeCards = [...landscapeCarouselCards, ...landscapeCarouselCards, ...landscapeCarouselCards];
+                const startIndex = landscapeCarouselCards.length + landscapeCarouselCurrentIndex;
+                const visibleLandscapeCards = extendedLandscapeCards.slice(startIndex, startIndex + 3);
 
-              {/* Card 3: Landscape Image 3 */}
-              <div style={{ 
-                minWidth: '844px',
-                backgroundColor: '#ffffff',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'center',
-                marginRight: '-50px',
-                opacity: 0.8,
-                transform: 'scale(0.8)',
-                transition: 'all 0.3s ease-in-out'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.opacity = '1';
-                e.currentTarget.style.transform = 'scale(1)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.opacity = '0.8';
-                e.currentTarget.style.transform = 'scale(0.8)';
-              }}
-              >
-                {/* Image */}
-                <div style={{ position: 'relative', width: '100%', height: '462px' }}>
-                  <img 
-                    src="/img-3.png" 
-                    alt="Landscape View 3" 
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      const nextSibling = target.nextSibling as HTMLElement;
-                      if (nextSibling) {
-                        nextSibling.style.display = 'flex';
-                      }
-                    }}
-                  />
-                  {/* Fallback for landscape image 3 */}
-                  <div style={{ 
-                    display: 'none', 
-                    width: '100%', 
-                    height: '100%', 
-                    backgroundColor: '#1e293b',
-                    position: 'relative',
+                return visibleLandscapeCards.map((card, index) => (
+                  <div key={`${card.alt}-${startIndex + index}`} style={{ 
+                    minWidth: '844px',
+                    backgroundColor: '#ffffff',
+                    borderRadius: '8px',
                     overflow: 'hidden',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}>
-                    <div style={{ 
-                      width: '100%',
-                      height: '100%',
-                      background: 'linear-gradient(to bottom, #1e293b, #0f172a)',
-                      position: 'relative'
-                    }}>
-                      {/* Dark foliage */}
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                    flexShrink: 0,
+                    scrollSnapAlign: 'center',
+                    marginRight: '-50px',
+                    opacity: 0.8,
+                    transform: 'scale(0.8)',
+                    transition: 'all 0.3s ease-in-out'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.opacity = '1';
+                    e.currentTarget.style.transform = 'scale(1)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.opacity = '0.8';
+                    e.currentTarget.style.transform = 'scale(0.8)';
+                  }}
+                  >
+                    {/* Image */}
+                    <div style={{ position: 'relative', width: '100%', height: '462px' }}>
+                      <img 
+                        src={card.image} 
+                        alt={card.alt} 
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const nextSibling = target.nextSibling as HTMLElement;
+                          if (nextSibling) {
+                            nextSibling.style.display = 'flex';
+                          }
+                        }}
+                      />
+                      {/* Fallback design if image fails to load */}
                       <div style={{ 
-                        position: 'absolute',
-                        bottom: '0',
-                        left: '0',
-                        width: '100%',
-                        height: '50%',
-                        background: 'radial-gradient(ellipse at center, #334155 0%, #1e293b 70%)'
-                      }}></div>
-                      {/* Animal silhouette */}
-                      <div style={{ 
-                        position: 'absolute',
-                        bottom: '20%',
-                        right: '20%',
-                        width: '80px',
-                        height: '40px',
-                        backgroundColor: '#475569',
-                        borderRadius: '40px 40px 0 0'
-                      }}></div>
+                        display: 'none', 
+                        width: '100%', 
+                        height: '100%', 
+                        backgroundColor: card.fallbackBg,
+                        position: 'relative',
+                        overflow: 'hidden',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}>
+                        <div style={{ 
+                          width: '100%',
+                          height: '100%',
+                          background: card.fallbackGradient,
+                          position: 'relative'
+                        }}>
+                          {/* Dynamic pattern based on card type */}
+                          <div style={{ 
+                            position: 'absolute',
+                            bottom: '0',
+                            left: '0',
+                            width: '100%',
+                            height: card.patternHeight,
+                            background: card.fallbackPattern
+                          }}></div>
+                          {/* Special elements for specific cards */}
+                          {card.patternType === 'water' && (
+                            <div style={{ 
+                              position: 'absolute',
+                              bottom: '40%',
+                              left: '20%',
+                              width: '60%',
+                              height: '30%',
+                              backgroundColor: '#16a34a',
+                              borderRadius: '50% 50% 0 0'
+                            }}></div>
+                          )}
+                          {card.patternType === 'foliage' && (
+                            <div style={{ 
+                              position: 'absolute',
+                              bottom: '20%',
+                              right: '20%',
+                              width: '80px',
+                              height: '40px',
+                              backgroundColor: '#475569',
+                              borderRadius: '40px 40px 0 0'
+                            }}></div>
+                          )}
+                          {card.patternType === 'sunset' && (
+                            <div style={{ 
+                              position: 'absolute',
+                              top: '20%',
+                              right: '20%',
+                              width: '60px',
+                              height: '60px',
+                              backgroundColor: '#fbbf24',
+                              borderRadius: '50%',
+                              boxShadow: '0 0 20px #fbbf24'
+                            }}></div>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-
-              {/* Card 4: Landscape Image 4 */}
-              <div style={{ 
-                minWidth: '844px',
-                backgroundColor: '#ffffff',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'center',
-                marginRight: '-50px',
-                opacity: 0.8,
-                transform: 'scale(0.8)',
-                transition: 'all 0.3s ease-in-out'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.opacity = '1';
-                e.currentTarget.style.transform = 'scale(1)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.opacity = '0.8';
-                e.currentTarget.style.transform = 'scale(0.8)';
-              }}
-              >
-                {/* Image */}
-                <div style={{ position: 'relative', width: '100%', height: '462px' }}>
-                  <img 
-                    src="/img-4.png" 
-                    alt="Landscape View 4" 
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      const nextSibling = target.nextSibling as HTMLElement;
-                      if (nextSibling) {
-                        nextSibling.style.display = 'flex';
-                      }
-                    }}
-                  />
-                  {/* Fallback for landscape image 4 */}
-                  <div style={{ 
-                    display: 'none', 
-                    width: '100%', 
-                    height: '100%', 
-                    backgroundColor: '#059669',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}>
-                    <div style={{ 
-                      width: '100%',
-                      height: '100%',
-                      background: 'linear-gradient(to bottom, #059669, #047857)',
-                      position: 'relative'
-                    }}>
-                      {/* Forest */}
-                      <div style={{ 
-                        position: 'absolute',
-                        bottom: '0',
-                        left: '0',
-                        width: '100%',
-                        height: '60%',
-                        background: 'radial-gradient(ellipse at center, #10b981 0%, #059669 70%)'
-                      }}></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 5: Landscape Image 5 */}
-              <div style={{ 
-                minWidth: '844px',
-                backgroundColor: '#ffffff',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'center',
-                marginRight: '-50px',
-                opacity: 0.8,
-                transform: 'scale(0.8)',
-                transition: 'all 0.3s ease-in-out'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.opacity = '1';
-                e.currentTarget.style.transform = 'scale(1)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.opacity = '0.8';
-                e.currentTarget.style.transform = 'scale(0.8)';
-              }}
-              >
-                {/* Image */}
-                <div style={{ position: 'relative', width: '100%', height: '462px' }}>
-                  <img 
-                    src="/img-5.png" 
-                    alt="Landscape View 5" 
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      const nextSibling = target.nextSibling as HTMLElement;
-                      if (nextSibling) {
-                        nextSibling.style.display = 'flex';
-                      }
-                    }}
-                  />
-                  {/* Fallback for landscape image 5 */}
-                  <div style={{ 
-                    display: 'none', 
-                    width: '100%', 
-                    height: '100%', 
-                    backgroundColor: '#7c3aed',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}>
-                    <div style={{ 
-                      width: '100%',
-                      height: '100%',
-                      background: 'linear-gradient(to bottom, #7c3aed, #6d28d9)',
-                      position: 'relative'
-                    }}>
-                      {/* Mountain peaks */}
-                      <div style={{ 
-                        position: 'absolute',
-                        bottom: '0',
-                        left: '0',
-                        width: '100%',
-                        height: '50%',
-                        background: 'radial-gradient(ellipse at center, #8b5cf6 0%, #7c3aed 70%)'
-                      }}></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 6: Landscape Image 6 */}
-              <div style={{ 
-                minWidth: '844px',
-                backgroundColor: '#ffffff',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'center',
-                marginRight: '-50px',
-                opacity: 0.8,
-                transform: 'scale(0.8)',
-                transition: 'all 0.3s ease-in-out'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.opacity = '1';
-                e.currentTarget.style.transform = 'scale(1)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.opacity = '0.8';
-                e.currentTarget.style.transform = 'scale(0.8)';
-              }}
-              >
-                {/* Image */}
-                <div style={{ position: 'relative', width: '100%', height: '462px' }}>
-                  <img 
-                    src="/img-6.png" 
-                    alt="Landscape View 6" 
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      const nextSibling = target.nextSibling as HTMLElement;
-                      if (nextSibling) {
-                        nextSibling.style.display = 'flex';
-                      }
-                    }}
-                  />
-                  {/* Fallback for landscape image 6 */}
-                  <div style={{ 
-                    display: 'none', 
-                    width: '100%', 
-                    height: '100%', 
-                    backgroundColor: '#dc2626',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}>
-                    <div style={{ 
-                      width: '100%',
-                      height: '100%',
-                      background: 'linear-gradient(to bottom, #dc2626, #b91c1c)',
-                      position: 'relative'
-                    }}>
-                      {/* Sunset */}
-                      <div style={{ 
-                        position: 'absolute',
-                        bottom: '0',
-                        left: '0',
-                        width: '100%',
-                        height: '40%',
-                        background: 'radial-gradient(ellipse at center, #ef4444 0%, #dc2626 70%)'
-                      }}></div>
-                      {/* Sun */}
-                      <div style={{ 
-                        position: 'absolute',
-                        top: '20%',
-                        right: '20%',
-                        width: '60px',
-                        height: '60px',
-                        backgroundColor: '#fbbf24',
-                        borderRadius: '50%',
-                        boxShadow: '0 0 20px #fbbf24'
-                      }}></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                ));
+              })()}
             </div>
 
-            {/* Carousel Navigation Arrows */}
+            {/* Simple Navigation */}
             <div style={{ 
               display: 'flex', 
               justifyContent: 'center', 
-              gap: '16px',
-              marginTop: '24px'
+              gap: '16px', 
+              marginTop: '32px' 
             }}>
               <button 
-                style={{ 
-                  width: '40px', 
-                  height: '40px', 
-                  borderRadius: '50%', 
-                  backgroundColor: '#f3f4f6', 
-                  border: '1px solid #d1d5db',
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  backgroundColor: 'white',
+                  border: '2px solid #d1d5db',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '18px',
-                  color: '#6b7280'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#e5e7eb';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#f3f4f6';
+                  justifyContent: 'center'
                 }}
                 onClick={() => {
-                  const carousel = document.getElementById('landscape-carousel');
-                  if (carousel) {
-                    carousel.scrollBy({ left: -894, behavior: 'smooth' });
-                  }
+                  setLandscapeCarouselCurrentIndex(prev => {
+                    const newIndex = prev - 1;
+                    // Handle infinite loop - when going below 0, wrap to the end
+                    return newIndex < 0 ? 5 : newIndex;
+                  });
                 }}
               >
-                ‹
+                <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
               </button>
               <button 
-                style={{ 
-                  width: '40px', 
-                  height: '40px', 
-                  borderRadius: '50%', 
-                  backgroundColor: '#f3f4f6', 
-                  border: '1px solid #d1d5db',
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  backgroundColor: 'white',
+                  border: '2px solid #d1d5db',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '18px',
-                  color: '#6b7280'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#e5e7eb';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#f3f4f6';
+                  justifyContent: 'center'
                 }}
                 onClick={() => {
-                  const carousel = document.getElementById('landscape-carousel');
-                  if (carousel) {
-                    carousel.scrollBy({ left: 894, behavior: 'smooth' });
-                  }
+                  setLandscapeCarouselCurrentIndex(prev => {
+                    const newIndex = prev + 1;
+                    // Handle infinite loop - when going above 5, wrap to 0
+                    return newIndex > 5 ? 0 : newIndex;
+                  });
                 }}
               >
-                ›
+                <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
               </button>
             </div>
           </div>
         </div>
 
         {/* Back to Experiences Button */}
-        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-          <button 
-            onClick={() => setCurrentPage('experiences')}
-            style={{
-              padding: '12px 24px',
-              backgroundColor: 'transparent',
-              color: '#000000',
-              border: '1px solid #000000',
-              borderRadius: '4px',
-              fontSize: '16px',
-              fontWeight: '500',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#000000';
-              e.currentTarget.style.color = '#ffffff';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'transparent';
-              e.currentTarget.style.color = '#000000';
-            }}
-          >
-            Back to Experiences
-          </button>
-        </div>
+        
       </div>
     </>
   );
 
   const [diningCurrentIndex, setDiningCurrentIndex] = useState(0);
+  const [diningExperiencesCurrentIndex, setDiningExperiencesCurrentIndex] = useState(0);
+  const [foodCarouselCurrentIndex, setFoodCarouselCurrentIndex] = useState(0);
 
   const renderDiningPage = () => {
     // Define dining cards data
@@ -6159,10 +6202,63 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       }
     ];
 
+    // Define dining experiences cards data
+    const diningExperiencesCards = [
+      {
+        title: 'Orchard Feast',
+        image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/OrchardFeast.png',
+        description: 'An outdoor celebration of flavour & food - feast in the palace gardens with an elegant tablescape. Candle lit starry nights or bright Sunday brunches; the orchard offers it all.'
+      },
+      {
+        title: 'Palace Garden High Tea',
+        image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/image-45.png',
+        description: 'Delight in high tea while gazing at lush greenery and serene palace fountains, an enchanting experience that transports you to the grandeur and timeless splendor of a magnificent bygone era.'
+      },
+      {
+        title: 'Breakfast on Island',
+        image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/image-46.png',
+        description: 'Set sail from the banks of Chilika Lake and cruise through calming waters. Enjoy breakfast aboard the boat, or step onto the island for a refreshing morning trail.'
+      },
+      {
+        title: 'Romantic Beach Getaway',
+        image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/pixelcut-export.png',
+        description: 'Allow the palace butlers to orchestrate a candlelit feast by the lake. Relish a sumptuous banquet of your preferred cuisine, while the gentle whispers of waves caress the shore.'
+      }
+    ];
+
     // Create infinite loop effect by duplicating cards
     const extendedCards = [...diningCards, ...diningCards, ...diningCards];
     const startIndex = diningCards.length + diningCurrentIndex;
     const visibleCards = extendedCards.slice(startIndex, startIndex + 3);
+
+    // Create infinite loop effect for dining experiences
+    const extendedExperiencesCards = [...diningExperiencesCards, ...diningExperiencesCards, ...diningExperiencesCards];
+    const experiencesStartIndex = diningExperiencesCards.length + diningExperiencesCurrentIndex;
+    const visibleExperiencesCards = extendedExperiencesCards.slice(experiencesStartIndex, experiencesStartIndex + 4);
+
+    // Define food carousel cards data
+    const foodCarouselCards = [
+      {
+        image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/image-3.png'
+      },
+      {
+        image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/12-2-768x462.png'
+      },
+      {
+        image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/7-1-768x462.png'
+      },
+      {
+        image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/10-1-768x462.png'
+      },
+      {
+        image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/9-1-768x462.png'
+      }
+    ];
+
+    // Create infinite loop effect for food carousel
+    const extendedFoodCarouselCards = [...foodCarouselCards, ...foodCarouselCards, ...foodCarouselCards];
+    const foodCarouselStartIndex = foodCarouselCards.length + foodCarouselCurrentIndex;
+    const visibleFoodCarouselCards = extendedFoodCarouselCards.slice(foodCarouselStartIndex, foodCarouselStartIndex + 5);
 
     return (
       <>
@@ -6406,16 +6502,16 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             {/* Left Arrow */}
             <button 
               onClick={() => {
-                const container = document.querySelector('.food-carousel-container') as HTMLElement;
-                if (container) {
-                  container.scrollBy({ left: -400, behavior: 'smooth' });
-                }
+                setFoodCarouselCurrentIndex(prev => {
+                  const newIndex = prev - 1;
+                  // Handle infinite loop - when going below 0, wrap to the end
+                  return newIndex < 0 ? 4 : newIndex;
+                });
               }}
               style={{
                 width: '40px',
                 height: '40px',
                 borderRadius: '50%',
-                backgroundColor: '',
                 border: '1px solid #2C3E50',
                 cursor: 'pointer',
                 display: 'flex',
@@ -6444,234 +6540,42 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 flex: 1
               }}
             >
-              {/* Food Image 1 */}
-              <div style={{ 
-                minWidth: '250px',
-                width: '700px',
-                height: '400px',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                flex: '0 0 auto'
-              }}>
-                <img 
-                  src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/image-3.png" 
-                  alt="Sushi Dish" 
+              {visibleFoodCarouselCards.map((card, index) => (
+                <div 
+                  key={`food-${foodCarouselStartIndex + index}`}
                   style={{ 
-                    width: '100%', 
-                    height: '100%', 
-                    objectFit: 'cover'
+                    minWidth: '700px', 
+                    height: '400px', 
+                    flex: '0 0 auto', 
+                    borderRadius: '8px', 
+                    overflow: 'hidden' 
                   }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const nextSibling = target.nextSibling as HTMLElement;
-                    if (nextSibling) {
-                      nextSibling.style.display = 'block';
-                    }
-                  }}
-                />
-                {/* Fallback design if image fails to load */}
-                <div style={{
-                  display: 'none',
-                  width: '100%',
-                  height: '100%',
-                  backgroundColor: '#f3f4f6',
-                  borderRadius: '8px',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#6b7280',
-                  fontSize: '14px'
-                }}>
-                  Sushi Dish
+                >
+                  <img 
+                    src={card.image} 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover' 
+                    }} 
+                  />
                 </div>
-              </div>
-
-              {/* Food Image 2 - Center (Larger) */}
-              <div style={{ 
-                minWidth: '350px',
-                width: '700px',
-                height: '400px',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                flex: '0 0 auto'
-              }}>
-                <img 
-                  src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/12-2-768x462.png" 
-                  alt="Roasted Chicken" 
-                  style={{ 
-                    width: '100%', 
-                    height: '100%', 
-                    objectFit: 'cover'
-                  }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const nextSibling = target.nextSibling as HTMLElement;
-                    if (nextSibling) {
-                      nextSibling.style.display = 'block';
-                    }
-                  }}
-                />
-                {/* Fallback design if image fails to load */}
-                <div style={{
-                  display: 'none',
-                  width: '100%',
-                  height: '100%',
-                  backgroundColor: '#f3f4f6',
-                  borderRadius: '8px',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#6b7280',
-                  fontSize: '14px'
-                }}>
-                  Roasted Chicken
-                </div>
-              </div>
-
-              {/* Food Image 3 */}
-              <div style={{ 
-                minWidth: '250px',
-                width: '700px',
-                height: '400px',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                flex: '0 0 auto'
-              }}>
-                <img 
-                  src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/7-1-768x462.png" 
-                  alt="Grilled Food" 
-                  style={{ 
-                    width: '100%', 
-                    height: '100%', 
-                    objectFit: 'cover'
-                  }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const nextSibling = target.nextSibling as HTMLElement;
-                    if (nextSibling) {
-                      nextSibling.style.display = 'block';
-                    }
-                  }}
-                />
-                {/* Fallback design if image fails to load */}
-                <div style={{
-                  display: 'none',
-                  width: '100%',
-                  height: '100%',
-                  backgroundColor: '#f3f4f6',
-                  borderRadius: '8px',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#6b7280',
-                  fontSize: '14px'
-                }}>
-                  Grilled Food
-                </div>
-              </div>
-
-              {/* Additional Food Images */}
-              <div style={{ 
-                minWidth: '250px',
-                width: '700px',
-                height: '400px',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                flex: '0 0 auto'
-              }}>
-                <img 
-                  src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/10-1-768x462.png" 
-                  alt="Culinary Delight" 
-                  style={{ 
-                    width: '100%', 
-                    height: '100%', 
-                    objectFit: 'cover'
-                  }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const nextSibling = target.nextSibling as HTMLElement;
-                    if (nextSibling) {
-                      nextSibling.style.display = 'block';
-                    }
-                  }}
-                />
-                {/* Fallback design if image fails to load */}
-                <div style={{
-                  display: 'none',
-                  width: '100%',
-                  height: '100%',
-                  backgroundColor: '#f3f4f6',
-                  borderRadius: '8px',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#6b7280',
-                  fontSize: '14px'
-                }}>
-                  Culinary Delight
-                </div>
-              </div>
-
-              <div style={{ 
-                minWidth: '250px',
-                width: '700px',
-                height: '400px',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                flex: '0 0 auto'
-              }}>
-                <img 
-                  src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/9-1-768x462.png" 
-                  alt="Gourmet Dish" 
-                  style={{ 
-                    width: '100%', 
-                    height: '100%', 
-                    objectFit: 'cover'
-                  }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const nextSibling = target.nextSibling as HTMLElement;
-                    if (nextSibling) {
-                      nextSibling.style.display = 'block';
-                    }
-                  }}
-                />
-                {/* Fallback design if image fails to load */}
-                <div style={{
-                  display: 'none',
-                  width: '100%',
-                  height: '100%',
-                  backgroundColor: '#f3f4f6',
-                  borderRadius: '8px',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#6b7280',
-                  fontSize: '14px'
-                }}>
-                  Gourmet Dish
-                </div>
-              </div>
+              ))}
             </div>
 
             {/* Right Arrow */}
             <button 
               onClick={() => {
-                const container = document.querySelector('.food-carousel-container') as HTMLElement;
-                if (container) {
-                  container.scrollBy({ left: 400, behavior: 'smooth' });
-                }
+                setFoodCarouselCurrentIndex(prev => {
+                  const newIndex = prev + 1;
+                  // Handle infinite loop - when going above 4, wrap to 0
+                  return newIndex > 4 ? 0 : newIndex;
+                });
               }}
               style={{
                 width: '40px',
                 height: '40px',
                 borderRadius: '50%',
-                backgroundColor: '',
                 border: '1px solid #2C3E50',
                 cursor: 'pointer',
                 display: 'flex',
@@ -6716,10 +6620,11 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             {/* Left Arrow */}
             <button 
               onClick={() => {
-                const container = document.querySelector('.dining-experiences-container') as HTMLElement;
-                if (container) {
-                  container.scrollBy({ left: -400, behavior: 'smooth' });
-                }
+                setDiningExperiencesCurrentIndex(prev => {
+                  const newIndex = prev - 1;
+                  // Handle infinite loop - when going below 0, wrap to the end
+                  return newIndex < 0 ? 3 : newIndex;
+                });
               }}
               style={{
                 width: '40px',
@@ -6753,218 +6658,70 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 flex: 1
               }}
             >
-              {/* Card 1: Orchard Feast */}
-              <div style={{ 
-                minWidth: '331px',
-                width: '331px',
-                backgroundColor: 'white',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                flex: '0 0 auto'
-              }}>
-                <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <img 
-                    src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/OrchardFeast.png" 
-                    alt="Orchard Feast" 
-                    style={{ 
-                      width: '100%', 
-                      height: '100%', 
-                      objectFit: 'cover'
-                    }}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      const nextSibling = target.nextSibling as HTMLElement;
-                      if (nextSibling) {
-                        nextSibling.style.display = 'block';
-                      }
-                    }}
-                  />
-                  {/* Fallback design if image fails to load */}
-                  <div style={{
-                    display: 'none',
-                    width: '100%',
-                    height: '100%',
-                    backgroundColor: '#f3f4f6',
+              {visibleExperiencesCards.map((card, index) => (
+                <div 
+                  key={`${card.title}-${experiencesStartIndex + index}`}
+                  style={{ 
+                    minWidth: '331px',
+                    width: '331px',
+                    backgroundColor: 'white',
                     borderRadius: '8px',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#6b7280',
-                    fontSize: '14px'
-                  }}>
-                    Orchard Feast
+                    overflow: 'hidden',
+                    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                    flex: '0 0 auto'
+                  }}
+                >
+                  <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img 
+                      src={card.image} 
+                      alt={card.title} 
+                      style={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover'
+                      }}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const nextSibling = target.nextSibling as HTMLElement;
+                        if (nextSibling) {
+                          nextSibling.style.display = 'block';
+                        }
+                      }}
+                    />
+                    {/* Fallback design if image fails to load */}
+                    <div style={{
+                      display: 'none',
+                      width: '100%',
+                      height: '100%',
+                      backgroundColor: '#f3f4f6',
+                      borderRadius: '8px',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#6b7280',
+                      fontSize: '14px'
+                    }}>
+                      {card.title}
+                    </div>
+                  </div>
+                  <div style={{ padding: '24px' }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: '500', color: '#000000',fontFamily:'Montserrat, sans-serif', marginBottom: '12px', lineHeight: '19.5px' }}>{card.title}</h3>
+                    <p style={{ color: '#3A3A3A', fontFamily:'Lato, sans-serif',lineHeight: '24px', fontSize: '14px', fontWeight: '500' }}>
+                      {card.description}
+                    </p>
                   </div>
                 </div>
-                <div style={{ padding: '24px' }}>
-                  <h3 style={{ fontSize: '16px', fontWeight: '500', color: '#000000',fontFamily:'Montserrat, sans-serif', marginBottom: '12px', lineHeight: '19.5px' }}>Orchard Feast</h3>
-                  <p style={{ color: '#3A3A3A', fontFamily:'Lato, sans-serif',lineHeight: '24px', fontSize: '14px', fontWeight: '500' }}>
-                    An outdoor celebration of flavour & food - feast in the palace gardens with an elegant tablescape. Candle lit starry nights or bright Sunday brunches; the orchard offers it all.
-                  </p>
-                </div>
-              </div>
-
-              {/* Card 2: Palace Garden High Tea */}
-              <div style={{ 
-                minWidth: '331px',
-                width: '331px',
-                backgroundColor: 'white',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                flex: '0 0 auto'
-              }}>
-                <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <img 
-                    src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/image-45.png" 
-                    alt="Palace Garden High Tea" 
-                    style={{ 
-                      width: '100%', 
-                      height: '100%', 
-                      objectFit: 'cover'
-                    }}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      const nextSibling = target.nextSibling as HTMLElement;
-                      if (nextSibling) {
-                        nextSibling.style.display = 'block';
-                      }
-                    }}
-                  />
-                  {/* Fallback design if image fails to load */}
-                  <div style={{
-                    display: 'none',
-                    width: '100%',
-                    height: '100%',
-                    backgroundColor: '#f3f4f6',
-                    borderRadius: '8px',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#6b7280',
-                    fontSize: '14px'
-                  }}>
-                    Palace Garden High Tea
-                  </div>
-                </div>
-                <div style={{ padding: '24px' }}>
-                  <h3 style={{ fontSize: '16px', fontWeight: '500', color: '#000000',fontFamily:'Montserrat, sans-serif', marginBottom: '12px', lineHeight: '19.5px' }}>Palace Garden High Tea</h3>
-                  <p style={{ color: '#3A3A3A', fontFamily:'Lato, sans-serif',lineHeight: '24px', fontSize: '14px', fontWeight: '500' }}>
-                    Delight in high tea while gazing at lush greenery and serene palace fountains, an enchanting experience that transports you to the grandeur and timeless splendor of a magnificent bygone era.
-                  </p>
-                </div>
-              </div>
-
-              {/* Card 3: Breakfast on Island */}
-              <div style={{ 
-                minWidth: '331px',
-                width: '331px',
-                backgroundColor: 'white',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                flex: '0 0 auto'
-              }}>
-                <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <img 
-                    src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/image-46.png" 
-                    alt="Breakfast on Island" 
-                    style={{ 
-                      width: '100%', 
-                      height: '100%', 
-                      objectFit: 'cover'
-                    }}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      const nextSibling = target.nextSibling as HTMLElement;
-                      if (nextSibling) {
-                        nextSibling.style.display = 'block';
-                      }
-                    }}
-                  />
-                  {/* Fallback design if image fails to load */}
-                  <div style={{
-                    display: 'none',
-                    width: '100%',
-                    height: '100%',
-                    backgroundColor: '#f3f4f6',
-                    borderRadius: '8px',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#6b7280',
-                    fontSize: '14px'
-                  }}>
-                    Breakfast on Island
-                  </div>
-                </div>
-                <div style={{ padding: '24px' }}>
-                  <h3 style={{ fontSize: '16px', fontWeight: '500', color: '#000000',fontFamily:'Montserrat, sans-serif', marginBottom: '12px', lineHeight: '19.5px' }}>Breakfast on Island</h3>
-                  <p style={{ color: '#3A3A3A', fontFamily:'Lato, sans-serif',lineHeight: '24px', fontSize: '14px', fontWeight: '500' }}>
-                    Set sail from the banks of Chilika Lake and cruise through calming waters. Enjoy breakfast aboard the boat, or step onto the island for a refreshing morning trail.
-                  </p>
-                </div>
-              </div>
-
-              {/* Card 4: Romantic Beach Getaway */}
-              <div style={{ 
-                minWidth: '331px',
-                width: '331px',
-                backgroundColor: 'white',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                flex: '0 0 auto'
-              }}>
-                <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <img 
-                    src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/pixelcut-export.png" 
-                    alt="Romantic Beach Getaway" 
-                    style={{ 
-                      width: '100%', 
-                      height: '100%', 
-                      objectFit: 'cover'
-                    }}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      const nextSibling = target.nextSibling as HTMLElement;
-                      if (nextSibling) {
-                        nextSibling.style.display = 'block';
-                      }
-                    }}
-                  />
-                  {/* Fallback design if image fails to load */}
-                  <div style={{
-                    display: 'none',
-                    width: '100%',
-                    height: '100%',
-                    backgroundColor: '#f3f4f6',
-                    borderRadius: '8px',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#6b7280',
-                    fontSize: '14px'
-                  }}>
-                    Romantic Beach Getaway
-                  </div>
-                </div>
-                <div style={{ padding: '24px' }}>
-                  <h3 style={{ fontSize: '16px', fontWeight: '500', color: '#000000',fontFamily:'Montserrat, sans-serif', marginBottom: '12px', lineHeight: '19.5px' }}>Romantic Beach Getaway</h3>
-                  <p style={{ color: '#3A3A3A', fontFamily:'Lato, sans-serif',lineHeight: '24px', fontSize: '14px', fontWeight: '500' }}>
-                    Allow the palace butlers to orchestrate a candlelit feast by the lake. Relish a sumptuous banquet of your preferred cuisine, while the gentle whispers of waves caress the shore.
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
 
             {/* Right Arrow */}
             <button 
               onClick={() => {
-                const container = document.querySelector('.dining-experiences-container') as HTMLElement;
-                if (container) {
-                  container.scrollBy({ left: 400, behavior: 'smooth' });
-                }
+                setDiningExperiencesCurrentIndex(prev => {
+                  const newIndex = prev + 1;
+                  // Handle infinite loop - when going above 3, wrap to 0
+                  return newIndex > 3 ? 0 : newIndex;
+                });
               }}
               style={{
                 width: '40px',
@@ -7098,18 +6855,23 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
         {/* Culinary Community Section */}
         <div style={{ 
-          marginTop: '128px',
-          backgroundColor: '#ebc9c4', // Light beige background as per first image
-          padding: '80px 0',
-          position: 'relative',
-          width: '100%',
+         marginTop: '128px',
+         backgroundColor: '#ebc9c4', // Light beige background
+         padding: '70px 0',
+         position: 'relative',
+         width: '100vw',       // ✅ force full screen width
+         left: '50%',
+         right: '50%',
+         marginLeft: '-50vw',  // ✅ remove body margin constraints
+         marginRight: '-50vw'
         }}>
           {/* Container */}
           <div style={{ 
-             maxWidth: '100%',
+            width: '100%',       // ✅ stretch full width
             margin: '0 auto', 
-            padding: '0 24px',
-            position: 'relative'
+            padding: '0 80px',   // ✅ you can increase/decrease side padding
+            position: 'relative',
+            boxSizing: 'border-box'
           }}>
             {/* Pink Content Block */}
             <div style={{ 
@@ -7173,8 +6935,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               {/* Right Image */}
               <div className='ml-12' style={{ flex: '1', display: 'flex', justifyContent: 'center' }}>
                 <div style={{ 
-                  width: '400px', 
-                  height: '300px',
+                  width: '600px', 
+                  height: '450px',
                   backgroundColor: '#f3f4f6',
                   borderRadius: '8px',
                   overflow: 'hidden',
@@ -7683,15 +7445,15 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 backgroundColor: 'white'
               }}>
                 <option value="">Select Enquiry Type</option>
-                <option value="reservation">Reservation</option>
+                <option value="stay">Stay</option>
                 <option value="dining">Dining</option>
                 <option value="wellness">Wellness</option>
-                <option value="events">Events</option>
-                <option value="corporate">Corporate</option>
-                <option value="media">Media</option>
-                <option value="partnership">Partnership</option>
-                <option value="feedback">Feedback</option>
-                <option value="general">General Inquiry</option>
+                <option value="buy-outs">Buy-Outs</option>
+                <option value="experiences">Experiences</option>
+                <option value="media and collaborations">Media and Collaborations</option>
+                <option value="celebrations and events trade">Celebrations and Events Trade</option>
+                <option value="other">Other</option>
+                
               </select>
             </div>
           </div>
@@ -7820,7 +7582,17 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       </div>
 
       {/* Tab Navigation */}
-      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px', borderBottom: '1px solid #e5e7eb' }}>
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        marginBottom: '32px', 
+        borderBottom: '1px solid #e5e7eb',
+        position: 'sticky',
+        top: isHeaderSticky ? 48 : 0,
+        zIndex: 1000,
+        backgroundColor: 'rgb(241,236,229)',
+        marginTop: isHeaderSticky ? '-1px' : '0'
+      }}>
         <div style={{ display: 'flex', gap: '0' }}>
           {['Overview', 'Rambha Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite', 'Ice Mill Suite', 'Printing Press Suite'].map((tab) => (
             <button
@@ -7968,12 +7740,12 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             transition: 'all 0.3s ease'
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = '#000000';
-            e.currentTarget.style.color = '#ffffff';
+            // e.currentTarget.style.backgroundColor = '#000000';
+            // e.currentTarget.style.color = '#ffffff';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'transparent';
-            e.currentTarget.style.color = '#000000';
+            // e.currentTarget.style.backgroundColor = 'transparent';
+            // e.currentTarget.style.color = '#000000';
           }}>
             Floor Plan
           </button>
@@ -8006,293 +7778,166 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             maxWidth: '100%',
             overflow: 'hidden'
           }}>
-            {/* Carousel Images */}
+            {/* Palace Suite Carousel Images - State-based Carousel */}
             <div 
-              id="palace-suite-carousel"
+              className="palace-suite-carousel-container"
               style={{ 
                 display: 'flex', 
                 gap: '16px',
-                padding: '0 60px', // Space for arrows
+                justifyContent: 'center',
                 overflowX: 'auto',
                 scrollBehavior: 'smooth',
-                scrollbarWidth: 'none', // Hide scrollbar for Firefox
-                msOverflowStyle: 'none', // Hide scrollbar for IE/Edge
-                WebkitOverflowScrolling: 'touch', // Smooth scrolling on iOS
-                scrollSnapType: 'x mandatory' // Snap to images
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+                WebkitOverflowScrolling: 'touch',
+                scrollSnapType: 'x mandatory',
+                padding: '0 20px'
               }}
             >
-              {/* Image 1 - image-70 */}
-              <div style={{ 
-                minWidth: '280px',
-                position: 'relative', 
-                borderRadius: '8px', 
-                overflow: 'hidden', 
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'start'
-              }}>
-                <img 
-                  src="/image-70.png" 
-                  alt="Palace Suite Bedroom" 
-                  style={{ width: '100%', height: '250px', objectFit: 'cover' }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const nextSibling = target.nextSibling as HTMLElement;
-                    if (nextSibling) {
-                      nextSibling.style.display = 'flex';
-                    }
-                  }}
-                />
-                {/* Fallback for image-70 */}
-                <div style={{ 
-                  display: 'none', 
-                  width: '100%', 
-                  height: '250px', 
-                  backgroundColor: '#f8f9fa',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <div style={{ 
-                    width: '60%',
-                    height: '40%',
-                    backgroundColor: '#e5e7eb',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#9ca3af',
-                    fontSize: '24px'
-                  }}>
-                    🛏️
-                  </div>
-                </div>
-              </div>
+              {/* Palace Suite Carousel Cards - State-based Carousel */}
+              {(() => {
+                const palaceSuiteCarouselCards = [
+                  {
+                    image: '/image-70.png',
+                    alt: 'Palace Suite Bedroom',
+                    fallback: '🛏️'
+                  },
+                  {
+                    image: '/image-71.png',
+                    alt: 'Palace Suite Bathroom',
+                    fallback: '🛁'
+                  },
+                  {
+                    image: '/image-73.png',
+                    alt: 'Palace Suite Bathroom Detail',
+                    fallback: '🧴'
+                  },
+                  {
+                    image: '/image-74.png',
+                    alt: 'Palace Suite Additional View',
+                    fallback: '🏰'
+                  }
+                ];
 
-              {/* Image 2 - image-71 */}
-              <div style={{ 
-                minWidth: '280px',
-                position: 'relative', 
-                borderRadius: '8px', 
-                overflow: 'hidden', 
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'start'
-              }}>
-                <img 
-                  src="/image-71.png" 
-                  alt="Palace Suite Bathroom" 
-                  style={{ width: '100%', height: '250px', objectFit: 'cover' }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const nextSibling = target.nextSibling as HTMLElement;
-                    if (nextSibling) {
-                      nextSibling.style.display = 'flex';
-                    }
-                  }}
-                />
-                {/* Fallback for image-71 */}
-                <div style={{ 
-                  display: 'none', 
-                  width: '100%', 
-                  height: '250px', 
-                  backgroundColor: '#f8f9fa',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <div style={{ 
-                    width: '60%',
-                    height: '40%',
-                    backgroundColor: '#e5e7eb',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#9ca3af',
-                    fontSize: '24px'
-                  }}>
-                    🛁
-                  </div>
-                </div>
-              </div>
+                // Create infinite loop by duplicating cards
+                const extendedPalaceSuiteCards = [...palaceSuiteCarouselCards, ...palaceSuiteCarouselCards, ...palaceSuiteCarouselCards];
+                const startIndex = palaceSuiteCarouselCards.length + palaceSuiteCarouselCurrentIndex;
+                const visiblePalaceSuiteCards = extendedPalaceSuiteCards.slice(startIndex, startIndex + 3);
 
-              {/* Image 3 - image-73 */}
-              <div style={{ 
-                minWidth: '280px',
-                position: 'relative', 
-                borderRadius: '8px', 
-                overflow: 'hidden', 
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'start'
-              }}>
-                <img 
-                  src="/image-73.png" 
-                  alt="Palace Suite Bathroom Detail" 
-                  style={{ width: '100%', height: '250px', objectFit: 'cover' }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const nextSibling = target.nextSibling as HTMLElement;
-                    if (nextSibling) {
-                      nextSibling.style.display = 'flex';
-                    }
-                  }}
-                />
-                {/* Fallback for image-73 */}
-                <div style={{ 
-                  display: 'none', 
-                  width: '100%', 
-                  height: '250px', 
-                  backgroundColor: '#f8f9fa',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <div style={{ 
-                    width: '60%',
-                    height: '40%',
-                    backgroundColor: '#e5e7eb',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#9ca3af',
-                    fontSize: '24px'
+                return visiblePalaceSuiteCards.map((card, index) => (
+                  <div key={`${card.alt}-${startIndex + index}`} style={{ 
+                    minWidth: '280px',
+                    position: 'relative', 
+                    borderRadius: '8px', 
+                    overflow: 'hidden', 
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                    flexShrink: 0,
+                    scrollSnapAlign: 'start'
                   }}>
-                    🧴
+                    <img 
+                      src={card.image} 
+                      alt={card.alt} 
+                      style={{ width: '100%', height: '250px', objectFit: 'cover' }}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const nextSibling = target.nextSibling as HTMLElement;
+                        if (nextSibling) {
+                          nextSibling.style.display = 'flex';
+                        }
+                      }}
+                    />
+                    {/* Fallback design if image fails to load */}
+                    <div style={{ 
+                      display: 'none', 
+                      width: '100%', 
+                      height: '250px', 
+                      backgroundColor: '#f8f9fa',
+                      position: 'relative',
+                      overflow: 'hidden',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}>
+                      <div style={{ 
+                        width: '60%',
+                        height: '40%',
+                        backgroundColor: '#e5e7eb',
+                        borderRadius: '8px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: '#9ca3af',
+                        fontSize: '24px'
+                      }}>
+                        {card.fallback}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-
-              {/* Image 4 - image-74 */}
-              <div style={{ 
-                minWidth: '280px',
-                position: 'relative', 
-                borderRadius: '8px', 
-                overflow: 'hidden', 
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'start'
-              }}>
-                <img 
-                  src="/image-74.png" 
-                  alt="Palace Suite Additional View" 
-                  style={{ width: '100%', height: '250px', objectFit: 'cover' }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const nextSibling = target.nextSibling as HTMLElement;
-                    if (nextSibling) {
-                      nextSibling.style.display = 'flex';
-                    }
-                  }}
-                />
-                {/* Fallback for image-74 */}
-                <div style={{ 
-                  display: 'none', 
-                  width: '100%', 
-                  height: '250px', 
-                  backgroundColor: '#f8f9fa',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <div style={{ 
-                    width: '60%',
-                    height: '40%',
-                    backgroundColor: '#e5e7eb',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#9ca3af',
-                    fontSize: '24px'
-                  }}>
-                    🏰
-                  </div>
-                </div>
-              </div>
+                ));
+              })()}
             </div>
 
-            {/* Carousel Navigation Arrows */}
+            {/* Simple Navigation */}
             <div style={{ 
               display: 'flex', 
               justifyContent: 'center', 
-              gap: '16px',
-              marginTop: '24px'
+              gap: '16px', 
+              marginTop: '32px' 
             }}>
               <button 
-                style={{ 
-                  width: '40px', 
-                  height: '40px', 
-                  borderRadius: '50%', 
-                  backgroundColor: '#f3f4f6', 
-                  border: '1px solid #d1d5db',
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  backgroundColor: 'white',
+                  border: '2px solid #d1d5db',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '18px',
-                  color: '#6b7280'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#e5e7eb';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#f3f4f6';
+                  justifyContent: 'center'
                 }}
                 onClick={() => {
-                  const carousel = document.getElementById('palace-suite-carousel');
-                  if (carousel) {
-                    carousel.scrollBy({ left: -296, behavior: 'smooth' }); // 280px + 16px gap
-                  }
+                  setPalaceSuiteCarouselCurrentIndex(prev => {
+                    const newIndex = prev - 1;
+                    // Handle infinite loop - when going below 0, wrap to the end
+                    return newIndex < 0 ? 3 : newIndex;
+                  });
                 }}
               >
-                ‹
+                <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
               </button>
               <button 
-                style={{ 
-                  width: '40px', 
-                  height: '40px', 
-                  borderRadius: '50%', 
-                  backgroundColor: '#f3f4f6', 
-                  border: '1px solid #d1d5db',
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  backgroundColor: 'white',
+                  border: '2px solid #d1d5db',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '18px',
-                  color: '#6b7280'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#e5e7eb';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#f3f4f6';
+                  justifyContent: 'center'
                 }}
                 onClick={() => {
-                  const carousel = document.getElementById('palace-suite-carousel');
-                  if (carousel) {
-                    carousel.scrollBy({ left: 296, behavior: 'smooth' }); // 280px + 16px gap
-                  }
+                  setPalaceSuiteCarouselCurrentIndex(prev => {
+                    const newIndex = prev + 1;
+                    // Handle infinite loop - when going above 3, wrap to 0
+                    return newIndex > 3 ? 0 : newIndex;
+                  });
                 }}
               >
-                ›
+                <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
               </button>
             </div>
           </div>
         </div>
 
-        {/* AMENITIES Section */}
-        <div style={{ marginBottom: '48px' }}>
+{/* AMENITIES Section */}
+<div style={{ marginBottom: '48px' }}>
           {/* Main Title */}
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
             <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>AMENITIES</h2>
@@ -8405,18 +8050,58 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
           {/* ROOM FEATURES Section */}
           <div>
-            <h3 style={{ 
-              fontSize: '24px', 
-              fontWeight: 'bold', 
-              color: '#000000', 
-              marginBottom: '24px',
-              fontFamily: '"Montserrat", sans-serif'
-            }}>
-              ROOM FEATURES
-            </h3>
+            
 
             {/* Expandable Categories */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+              {/* ROOM FEATURES Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onClick={() => setIsRoomFeaturesExpanded(!isRoomFeaturesExpanded)}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>ROOM FEATURES</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isRoomFeaturesExpanded ? '−' : '+'}
+                </span>
+              </div>
+              
+              {/* Room Features Content */}
+              {isRoomFeaturesExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    // color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Nespresso Coffee Machine</div>
+                    <div>Tea and Coffee Menu</div>
+                    <div>In Room Safe</div>
+                    <div>Generously Stocked Refrigerators</div>
+                    <div>Down Duvets and Pillows</div>
+                    <div>Pillow Menu</div>
+                    <div>Clothes Steamer</div>
+                  </div>
+                </div>
+              )}
+
               {/* BATH Category */}
               <div style={{ 
                 display: 'flex', 
@@ -8426,6 +8111,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 borderBottom: '1px solid #f3f4f6',
                 cursor: 'pointer'
               }}
+              onClick={() => setIsBathExpanded(!isBathExpanded)}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = '#f9fafb';
               }}
@@ -8433,8 +8119,34 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}>
                 <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>BATH</span>
-                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isBathExpanded ? '−' : '+'}
+                </span>
               </div>
+              
+              {/* Bath Content */}
+              {isBathExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    // color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Standalone Bathtub</div>
+                    <div>Dyson Hairdryer</div>
+                    <div>Indulgent Bathrobes</div>
+                    <div>Weighing Scale</div>
+                    <div>Premium Toiletries</div>
+                  </div>
+                </div>
+              )}
 
               {/* TECHNOLOGY Category */}
               <div style={{ 
@@ -8445,6 +8157,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 borderBottom: '1px solid #f3f4f6',
                 cursor: 'pointer'
               }}
+              onClick={() => setIsTechnologyExpanded(!isTechnologyExpanded)}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = '#f9fafb';
               }}
@@ -8452,8 +8165,33 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}>
                 <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>TECHNOLOGY</span>
-                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isTechnologyExpanded ? '−' : '+'}
+                </span>
               </div>
+              
+              {/* Technology Content */}
+              {isTechnologyExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Wifi</div>
+                    <div>65 Inch Smart TV</div>
+                    <div>Bang and Olufsen Speaker</div>
+                    <div>Cordless Telephone</div>
+                  </div>
+                </div>
+              )}
 
               {/* SERVICES Category */}
               <div style={{ 
@@ -8464,6 +8202,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 borderBottom: '1px solid #f3f4f6',
                 cursor: 'pointer'
               }}
+              onClick={() => setIsServicesExpanded(!isServicesExpanded)}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = '#f9fafb';
               }}
@@ -8471,31 +8210,39 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}>
                 <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>SERVICES</span>
-                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isServicesExpanded ? '−' : '+'}
+                </span>
               </div>
-
-              {/* Fourth Category (placeholder) */}
-              <div style={{ 
-                display: 'flex', 
-                justifyContent: 'space-between', 
-                alignItems: 'center',
-                padding: '16px 0',
-                borderBottom: '1px solid #f3f4f6',
-                cursor: 'pointer'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#f9fafb';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
-              }}>
-                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>AMENITIES</span>
-                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
-              </div>
+              
+              {/* Services Content */}
+              {isServicesExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Palace Butler Service</div>
+                    <div>24 Hour In-Room Dining</div>
+                    <div>Complimentary Laundry</div>
+                    <div>Concierge Services</div>
+                    <div>Twice Daily House-keeping Service</div>
+                    <div>Babysitter</div>
+                    <div>In-house Doctor on Call</div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
-
         {/* OTHER SUITES Section */}
         <div style={{ marginBottom: '48px' }}>
           {/* Main Title */}
@@ -8510,12 +8257,25 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             gap: '32px'
           }}>
             {/* GENERATOR SUITES */}
-            <div style={{ 
-              backgroundColor: '#ffffff',
-              borderRadius: '8px',
-              overflow: 'hidden',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
-            }}>
+            <div 
+              style={{ 
+                backgroundColor: '#ffffff',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                cursor: 'pointer',
+                transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
+              }}
+              onClick={() => setCurrentPage('generator-suite')}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+              }}
+            >
               {/* Image */}
               <div style={{ position: 'relative', width: '100%', height: '250px' }}>
                 <img 
@@ -8582,12 +8342,25 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             </div>
 
             {/* FAMILY PALACE SUITE */}
-            <div style={{ 
-              backgroundColor: '#ffffff',
-              borderRadius: '8px',
-              overflow: 'hidden',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
-            }}>
+            <div 
+              style={{ 
+                backgroundColor: '#ffffff',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                cursor: 'pointer',
+                transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
+              }}
+              onClick={() => setCurrentPage('palace-family-suite')}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+              }}
+            >
               {/* Image */}
               <div style={{ position: 'relative', width: '100%', height: '250px' }}>
                 <img 
@@ -8669,7 +8442,17 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       </div>
 
       {/* Tab Navigation */}
-      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px', borderBottom: '1px solid #e5e7eb' }}>
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        marginBottom: '32px', 
+        borderBottom: '1px solid #e5e7eb',
+        position: 'sticky',
+        top: isHeaderSticky ? 48 : 0,
+        zIndex: 1000,
+        backgroundColor: 'rgb(241,236,229)',
+        marginTop: isHeaderSticky ? '-1px' : '0'
+      }}>
         <div style={{ display: 'flex', gap: '0' }}>
           {['Overview', 'Rambha Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite', 'Ice Mill Suite', 'Printing Press Suite'].map((tab) => (
             <button
@@ -8721,7 +8504,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
           <div style={{ position: 'relative', width: '100%', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}>
             <div style={{ aspectRatio: '16/10', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <img 
-                src="/image-60.webp" 
+                src="https://hiddenindia.com/rambhapalace/wp-content/uploads/elementor/thumbs/Gallery4-qyb3q4a0jsod7m3jilhkhpbyobpmed6anrny6df3ao.webp" 
                 alt="Palace Family Suite" 
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 onError={(e) => {
@@ -8813,12 +8596,12 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             transition: 'all 0.3s ease'
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = '#000000';
-            e.currentTarget.style.color = '#ffffff';
+            // e.currentTarget.style.backgroundColor = '#000000';
+            // e.currentTarget.style.color = '#ffffff';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'transparent';
-            e.currentTarget.style.color = '#000000';
+            // e.currentTarget.style.backgroundColor = 'transparent';
+            // e.currentTarget.style.color = '#000000';
           }}>
             Floor Plan
           </button>
@@ -8851,243 +8634,167 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             maxWidth: '100%',
             overflow: 'hidden'
           }}>
-            {/* Carousel Images */}
+            {/* Palace Suite Carousel Images - State-based Carousel */}
             <div 
-              id="palace-family-suite-carousel"
+              className="palace-suite-carousel-container"
               style={{ 
                 display: 'flex', 
-                gap: '24px',
-                padding: '0 60px', // Space for arrows
+                gap: '16px',
+                justifyContent: 'center',
                 overflowX: 'auto',
                 scrollBehavior: 'smooth',
-                scrollbarWidth: 'none', // Hide scrollbar for Firefox
-                msOverflowStyle: 'none', // Hide scrollbar for IE/Edge
-                WebkitOverflowScrolling: 'touch', // Smooth scrolling on iOS
-                scrollSnapType: 'x mandatory' // Snap to images
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+                WebkitOverflowScrolling: 'touch',
+                scrollSnapType: 'x mandatory',
+                padding: '0 20px'
               }}
             >
-              {/* Left Image - Bedroom */}
-              <div style={{ 
-                minWidth: '320px',
-                position: 'relative', 
-                borderRadius: '8px', 
-                overflow: 'hidden', 
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'start'
-              }}>
-                <img 
-                  src="/image-70.png" 
-                  alt="Palace Family Suite Bedroom" 
-                  style={{ width: '100%', height: '300px', objectFit: 'cover' }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const nextSibling = target.nextSibling as HTMLElement;
-                    if (nextSibling) {
-                      nextSibling.style.display = 'flex';
-                    }
-                  }}
-                />
-                {/* Fallback for bedroom image */}
-                <div style={{ 
-                  display: 'none', 
-                  width: '100%', 
-                  height: '300px', 
-                  backgroundColor: '#f8f9fa',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <div style={{ 
-                    width: '60%',
-                    height: '40%',
-                    backgroundColor: '#e5e7eb',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#9ca3af',
-                    fontSize: '24px'
-                  }}>
-                    🛏️
-                  </div>
-                </div>
-              </div>
+              {/* Palace Suite Carousel Cards - State-based Carousel */}
+              {(() => {
+                const palaceSuiteCarouselCards = [
+                  {
+                    image: '/image-70.png',
+                    alt: 'Palace Suite Bedroom',
+                    fallback: '🛏️'
+                  },
+                  {
+                    image: '/image-71.png',
+                    alt: 'Palace Suite Bathroom',
+                    fallback: '🛁'
+                  },
+                  {
+                    image: '/image-73.png',
+                    alt: 'Palace Suite Bathroom Detail',
+                    fallback: '🧴'
+                  },
+                  {
+                    image: '/image-74.png',
+                    alt: 'Palace Suite Additional View',
+                    fallback: '🏰'
+                  }
+                ];
 
-              {/* Middle Image - Bathroom */}
-              <div style={{ 
-                minWidth: '320px',
-                position: 'relative', 
-                borderRadius: '8px', 
-                overflow: 'hidden', 
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'start'
-              }}>
-                <img 
-                  src="/image-71.png" 
-                  alt="Palace Family Suite Bathroom" 
-                  style={{ width: '100%', height: '300px', objectFit: 'cover' }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const nextSibling = target.nextSibling as HTMLElement;
-                    if (nextSibling) {
-                      nextSibling.style.display = 'flex';
-                    }
-                  }}
-                />
-                {/* Fallback for bathroom image */}
-                <div style={{ 
-                  display: 'none', 
-                  width: '100%', 
-                  height: '300px', 
-                  backgroundColor: '#f8f9fa',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <div style={{ 
-                    width: '60%',
-                    height: '40%',
-                    backgroundColor: '#e5e7eb',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#9ca3af',
-                    fontSize: '24px'
-                  }}>
-                    🛁
-                  </div>
-                </div>
-              </div>
+                // Create infinite loop by duplicating cards
+                const extendedPalaceSuiteCards = [...palaceSuiteCarouselCards, ...palaceSuiteCarouselCards, ...palaceSuiteCarouselCards];
+                const startIndex = palaceSuiteCarouselCards.length + palaceSuiteCarouselCurrentIndex;
+                const visiblePalaceSuiteCards = extendedPalaceSuiteCards.slice(startIndex, startIndex + 3);
 
-              {/* Right Image - Bathroom Detail */}
-              <div style={{ 
-                minWidth: '320px',
-                position: 'relative', 
-                borderRadius: '8px', 
-                overflow: 'hidden', 
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'start'
-              }}>
-                <img 
-                  src="/image-73.png" 
-                  alt="Palace Family Suite Bathroom Detail" 
-                  style={{ width: '100%', height: '300px', objectFit: 'cover' }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const nextSibling = target.nextSibling as HTMLElement;
-                    if (nextSibling) {
-                      nextSibling.style.display = 'flex';
-                    }
-                  }}
-                />
-                {/* Fallback for bathroom detail image */}
-                <div style={{ 
-                  display: 'none', 
-                  width: '100%', 
-                  height: '300px', 
-                  backgroundColor: '#f8f9fa',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <div style={{ 
-                    width: '60%',
-                    height: '40%',
-                    backgroundColor: '#e5e7eb',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#9ca3af',
-                    fontSize: '24px'
+                return visiblePalaceSuiteCards.map((card, index) => (
+                  <div key={`${card.alt}-${startIndex + index}`} style={{ 
+                    minWidth: '280px',
+                    position: 'relative', 
+                    borderRadius: '8px', 
+                    overflow: 'hidden', 
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                    flexShrink: 0,
+                    scrollSnapAlign: 'start'
                   }}>
-                    🧴
+                    <img 
+                      src={card.image} 
+                      alt={card.alt} 
+                      style={{ width: '100%', height: '250px', objectFit: 'cover' }}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const nextSibling = target.nextSibling as HTMLElement;
+                        if (nextSibling) {
+                          nextSibling.style.display = 'flex';
+                        }
+                      }}
+                    />
+                    {/* Fallback design if image fails to load */}
+                    <div style={{ 
+                      display: 'none', 
+                      width: '100%', 
+                      height: '250px', 
+                      backgroundColor: '#f8f9fa',
+                      position: 'relative',
+                      overflow: 'hidden',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}>
+                      <div style={{ 
+                        width: '60%',
+                        height: '40%',
+                        backgroundColor: '#e5e7eb',
+                        borderRadius: '8px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: '#9ca3af',
+                        fontSize: '24px'
+                      }}>
+                        {card.fallback}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
+                ));
+              })()}
             </div>
 
-            {/* Carousel Navigation Arrows */}
+            {/* Simple Navigation */}
             <div style={{ 
               display: 'flex', 
               justifyContent: 'center', 
-              gap: '16px',
-              marginTop: '24px'
+              gap: '16px', 
+              marginTop: '32px' 
             }}>
               <button 
-                style={{ 
-                  width: '40px', 
-                  height: '40px', 
-                  borderRadius: '50%', 
-                  backgroundColor: '#f3f4f6', 
-                  border: '1px solid #d1d5db',
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  backgroundColor: 'white',
+                  border: '2px solid #d1d5db',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '18px',
-                  color: '#6b7280'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#e5e7eb';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#f3f4f6';
+                  justifyContent: 'center'
                 }}
                 onClick={() => {
-                  const carousel = document.getElementById('palace-family-suite-carousel');
-                  if (carousel) {
-                    carousel.scrollBy({ left: -344, behavior: 'smooth' }); // 320px + 24px gap
-                  }
+                  setPalaceSuiteCarouselCurrentIndex(prev => {
+                    const newIndex = prev - 1;
+                    // Handle infinite loop - when going below 0, wrap to the end
+                    return newIndex < 0 ? 3 : newIndex;
+                  });
                 }}
               >
-                ‹
+                <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
               </button>
               <button 
-                style={{ 
-                  width: '40px', 
-                  height: '40px', 
-                  borderRadius: '50%', 
-                  backgroundColor: '#f3f4f6', 
-                  border: '1px solid #d1d5db',
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  backgroundColor: 'white',
+                  border: '2px solid #d1d5db',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '18px',
-                  color: '#6b7280'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#e5e7eb';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#f3f4f6';
+                  justifyContent: 'center'
                 }}
                 onClick={() => {
-                  const carousel = document.getElementById('palace-family-suite-carousel');
-                  if (carousel) {
-                    carousel.scrollBy({ left: 344, behavior: 'smooth' }); // 320px + 24px gap
-                  }
+                  setPalaceSuiteCarouselCurrentIndex(prev => {
+                    const newIndex = prev + 1;
+                    // Handle infinite loop - when going above 3, wrap to 0
+                    return newIndex > 3 ? 0 : newIndex;
+                  });
                 }}
               >
-                ›
+                <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
               </button>
             </div>
           </div>
         </div>
 
-        {/* AMENITIES Section */}
-        <div style={{ marginBottom: '48px' }}>
+        
+         {/* AMENITIES Section */}
+         <div style={{ marginBottom: '48px' }}>
           {/* Main Title */}
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
             <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>AMENITIES</h2>
@@ -9112,7 +8819,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               }}>
                 🛏️
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>1 Private Lounge & 2 Ante rooms</span>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>
+              1 Private Lounge & 2 Ante rooms</span>
             </div>
 
             {/* 2 EN SUITE BATHROOM */}
@@ -9157,7 +8865,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               }}>
                 🛏️
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>2 king beds</span>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>2 KING BEDS</span>
             </div>
 
             {/* 591 Sq. Ft. */}
@@ -9200,18 +8908,58 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
           {/* ROOM FEATURES Section */}
           <div>
-            <h3 style={{ 
-              fontSize: '24px', 
-              fontWeight: 'bold', 
-              color: '#000000', 
-              marginBottom: '24px',
-              fontFamily: '"Montserrat", sans-serif'
-            }}>
-              ROOM FEATURES
-            </h3>
+            
 
             {/* Expandable Categories */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+              {/* ROOM FEATURES Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onClick={() => setIsRoomFeaturesExpanded(!isRoomFeaturesExpanded)}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>ROOM FEATURES</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isRoomFeaturesExpanded ? '−' : '+'}
+                </span>
+              </div>
+              
+              {/* Room Features Content */}
+              {isRoomFeaturesExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    // color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Nespresso Coffee Machine</div>
+                    <div>Tea and Coffee Menu</div>
+                    <div>In Room Safe</div>
+                    <div>Generously Stocked Refrigerators</div>
+                    <div>Down Duvets and Pillows</div>
+                    <div>Pillow Menu</div>
+                    <div>Clothes Steamer</div>
+                  </div>
+                </div>
+              )}
+
               {/* BATH Category */}
               <div style={{ 
                 display: 'flex', 
@@ -9221,6 +8969,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 borderBottom: '1px solid #f3f4f6',
                 cursor: 'pointer'
               }}
+              onClick={() => setIsBathExpanded(!isBathExpanded)}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = '#f9fafb';
               }}
@@ -9228,8 +8977,34 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}>
                 <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>BATH</span>
-                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isBathExpanded ? '−' : '+'}
+                </span>
               </div>
+              
+              {/* Bath Content */}
+              {isBathExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    // color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Standalone Bathtub</div>
+                    <div>Dyson Hairdryer</div>
+                    <div>Indulgent Bathrobes</div>
+                    <div>Weighing Scale</div>
+                    <div>Premium Toiletries</div>
+                  </div>
+                </div>
+              )}
 
               {/* TECHNOLOGY Category */}
               <div style={{ 
@@ -9240,6 +9015,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 borderBottom: '1px solid #f3f4f6',
                 cursor: 'pointer'
               }}
+              onClick={() => setIsTechnologyExpanded(!isTechnologyExpanded)}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = '#f9fafb';
               }}
@@ -9247,8 +9023,33 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}>
                 <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>TECHNOLOGY</span>
-                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isTechnologyExpanded ? '−' : '+'}
+                </span>
               </div>
+              
+              {/* Technology Content */}
+              {isTechnologyExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Wifi</div>
+                    <div>65 Inch Smart TV</div>
+                    <div>Bang and Olufsen Speaker</div>
+                    <div>Cordless Telephone</div>
+                  </div>
+                </div>
+              )}
 
               {/* SERVICES Category */}
               <div style={{ 
@@ -9259,6 +9060,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 borderBottom: '1px solid #f3f4f6',
                 cursor: 'pointer'
               }}
+              onClick={() => setIsServicesExpanded(!isServicesExpanded)}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = '#f9fafb';
               }}
@@ -9266,30 +9068,224 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}>
                 <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>SERVICES</span>
-                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isServicesExpanded ? '−' : '+'}
+                </span>
               </div>
+              
+              {/* Services Content */}
+              {isServicesExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Palace Butler Service</div>
+                    <div>24 Hour In-Room Dining</div>
+                    <div>Complimentary Laundry</div>
+                    <div>Concierge Services</div>
+                    <div>Twice Daily House-keeping Service</div>
+                    <div>Babysitter</div>
+                    <div>In-house Doctor on Call</div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
 
-              {/* Fourth Category (placeholder) */}
-              <div style={{ 
-                display: 'flex', 
-                justifyContent: 'space-between', 
-                alignItems: 'center',
-                padding: '16px 0',
-                borderBottom: '1px solid #f3f4f6',
-                cursor: 'pointer'
+        <div style={{ marginBottom: '48px' }}>
+          {/* Main Title */}
+          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>OTHER SUITES</h2>
+          </div>
+
+          {/* Suites Grid */}
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(2, 1fr)', 
+            gap: '32px'
+          }}>
+            {/* GENERATOR SUITES */}
+            <div 
+              style={{ 
+                backgroundColor: '#ffffff',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                cursor: 'pointer',
+                transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
               }}
+              onClick={() => setCurrentPage('generator-suite')}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#f9fafb';
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.15)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
-              }}>
-                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>AMENITIES</span>
-                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+              }}
+            >
+              {/* Image */}
+              <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                <img 
+                  src="/image-75.png" 
+                  alt="Generator Suites" 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'flex';
+                    }
+                  }}
+                />
+                {/* Fallback for Generator Suites image */}
+                <div style={{ 
+                  display: 'none', 
+                  width: '100%', 
+                  height: '100%', 
+                  backgroundColor: '#f8f9fa',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <div style={{ 
+                    width: '60%',
+                    height: '40%',
+                    backgroundColor: '#e5e7eb',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#9ca3af',
+                    fontSize: '24px'
+                  }}>
+                    🏭
+                  </div>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div style={{ padding: '24px' }}>
+                <h3 style={{ 
+                  fontSize: '20px', 
+                  fontWeight: 'bold', 
+                  color: '#000000', 
+                  marginBottom: '16px',
+                  textTransform: 'uppercase',
+                  fontFamily: '"Montserrat", sans-serif'
+                }}>
+                  GENERATOR SUITES
+                </h3>
+                <p style={{ 
+                  fontSize: '16px', 
+                  color: '#6b7280', 
+                  lineHeight: '1.6',
+                  fontFamily: '"Lato", sans-serif'
+                }}>
+                  Once the heart of the royal palace's power generation, these suites have now been transformed into a luxurious retreat, offering orchard views and outdoor bathtubs.
+                </p>
+              </div>
+            </div>
+
+            {/* FAMILY PALACE SUITE */}
+            <div 
+              style={{ 
+                backgroundColor: '#ffffff',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                cursor: 'pointer',
+                transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
+              }}
+              onClick={() => setCurrentPage('ice-mill-suite')}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+              }}
+            >
+              {/* Image */}
+              <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                <img 
+                  src="/image-76.png" 
+                  alt="ICE MILL Suite" 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'flex';
+                    }
+                  }}
+                />
+                {/* Fallback for Family Palace Suite image */}
+                <div style={{ 
+                  display: 'none', 
+                  width: '100%', 
+                  height: '100%', 
+                  backgroundColor: '#f8f9fa',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <div style={{ 
+                    width: '60%',
+                    height: '40%',
+                    backgroundColor: '#e5e7eb',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#9ca3af',
+                    fontSize: '24px'
+                  }}>
+                    👨‍👩‍👧‍👦
+                  </div>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div style={{ padding: '24px' }}>
+                <h3 style={{ 
+                  fontSize: '20px', 
+                  fontWeight: 'bold', 
+                  color: '#000000', 
+                  marginBottom: '16px',
+                  textTransform: 'uppercase',
+                  fontFamily: '"Montserrat", sans-serif'
+                }}>
+                 ICE MILL SUITE
+                </h3>
+                <p style={{ 
+                  fontSize: '16px', 
+                  color: '#6b7280', 
+                  lineHeight: '1.6',
+                  fontFamily: '"Lato", sans-serif'
+                }}>
+                  The Ice Mill suites are beautifully adorned with traditional Orissa handloom art and paintings, creating a unique, cultural ambiance.
+                </p>
               </div>
             </div>
           </div>
         </div>
+
       </div>
     </>
   );
@@ -9302,7 +9298,17 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       </div>
 
       {/* Tab Navigation */}
-      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px', borderBottom: '1px solid #e5e7eb' }}>
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        marginBottom: '32px', 
+        borderBottom: '1px solid #e5e7eb',
+        position: 'sticky',
+        top: isHeaderSticky ? 48 : 0,
+        zIndex: 1000,
+        backgroundColor: 'rgb(241,236,229)',
+        marginTop: isHeaderSticky ? '-1px' : '0'
+      }}>
         <div style={{ display: 'flex', gap: '0' }}>
           {['Overview', 'Rambha Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite', 'Ice Mill Suite', 'Printing Press Suite'].map((tab) => (
             <button
@@ -9446,12 +9452,12 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             transition: 'all 0.3s ease'
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = '#000000';
-            e.currentTarget.style.color = '#ffffff';
+            // e.currentTarget.style.backgroundColor = '#000000';
+            // e.currentTarget.style.color = '#ffffff';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'transparent';
-            e.currentTarget.style.color = '#000000';
+            // e.currentTarget.style.backgroundColor = 'transparent';
+            // e.currentTarget.style.color = '#000000';
           }}>
             Floor Plan
           </button>
@@ -9484,241 +9490,163 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             maxWidth: '100%',
             overflow: 'hidden'
           }}>
-            {/* Carousel Images */}
+            {/* Palace Suite Carousel Images - State-based Carousel */}
             <div 
-              id="generator-suite-carousel"
+              className="palace-suite-carousel-container"
               style={{ 
                 display: 'flex', 
-                gap: '24px',
-                padding: '0 60px', // Space for arrows
+                gap: '16px',
+                justifyContent: 'center',
                 overflowX: 'auto',
                 scrollBehavior: 'smooth',
-                scrollbarWidth: 'none', // Hide scrollbar for Firefox
-                msOverflowStyle: 'none', // Hide scrollbar for IE/Edge
-                WebkitOverflowScrolling: 'touch', // Smooth scrolling on iOS
-                scrollSnapType: 'x mandatory' // Snap to images
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+                WebkitOverflowScrolling: 'touch',
+                scrollSnapType: 'x mandatory',
+                padding: '0 20px'
               }}
             >
-              {/* Left Image - Bedroom */}
-              <div style={{ 
-                minWidth: '320px',
-                position: 'relative', 
-                borderRadius: '8px', 
-                overflow: 'hidden', 
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'start'
-              }}>
-                <img 
-                  src="/image-70.png" 
-                  alt="Generator Suite Bedroom" 
-                  style={{ width: '100%', height: '300px', objectFit: 'cover' }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const nextSibling = target.nextSibling as HTMLElement;
-                    if (nextSibling) {
-                      nextSibling.style.display = 'flex';
-                    }
-                  }}
-                />
-                {/* Fallback for bedroom image */}
-                <div style={{ 
-                  display: 'none', 
-                  width: '100%', 
-                  height: '300px', 
-                  backgroundColor: '#f8f9fa',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <div style={{ 
-                    width: '60%',
-                    height: '40%',
-                    backgroundColor: '#e5e7eb',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#9ca3af',
-                    fontSize: '24px'
-                  }}>
-                    🛏️
-                  </div>
-                </div>
-              </div>
+              {/* Palace Suite Carousel Cards - State-based Carousel */}
+              {(() => {
+                const palaceSuiteCarouselCards = [
+                  {
+                    image: '/image-70.png',
+                    alt: 'Palace Suite Bedroom',
+                    fallback: '🛏️'
+                  },
+                  {
+                    image: '/image-71.png',
+                    alt: 'Palace Suite Bathroom',
+                    fallback: '🛁'
+                  },
+                  {
+                    image: '/image-73.png',
+                    alt: 'Palace Suite Bathroom Detail',
+                    fallback: '🧴'
+                  },
+                  {
+                    image: '/image-74.png',
+                    alt: 'Palace Suite Additional View',
+                    fallback: '🏰'
+                  }
+                ];
 
-              {/* Middle Image - Bathroom */}
-              <div style={{ 
-                minWidth: '320px',
-                position: 'relative', 
-                borderRadius: '8px', 
-                overflow: 'hidden', 
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'start'
-              }}>
-                <img 
-                  src="/image-71.png" 
-                  alt="Generator Suite Bathroom" 
-                  style={{ width: '100%', height: '300px', objectFit: 'cover' }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const nextSibling = target.nextSibling as HTMLElement;
-                    if (nextSibling) {
-                      nextSibling.style.display = 'flex';
-                    }
-                  }}
-                />
-                {/* Fallback for bathroom image */}
-                <div style={{ 
-                  display: 'none', 
-                  width: '100%', 
-                  height: '300px', 
-                  backgroundColor: '#f8f9fa',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <div style={{ 
-                    width: '60%',
-                    height: '40%',
-                    backgroundColor: '#e5e7eb',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#9ca3af',
-                    fontSize: '24px'
-                  }}>
-                    🛁
-                  </div>
-                </div>
-              </div>
+                // Create infinite loop by duplicating cards
+                const extendedPalaceSuiteCards = [...palaceSuiteCarouselCards, ...palaceSuiteCarouselCards, ...palaceSuiteCarouselCards];
+                const startIndex = palaceSuiteCarouselCards.length + palaceSuiteCarouselCurrentIndex;
+                const visiblePalaceSuiteCards = extendedPalaceSuiteCards.slice(startIndex, startIndex + 3);
 
-              {/* Right Image - Bathroom Detail */}
-              <div style={{ 
-                minWidth: '320px',
-                position: 'relative', 
-                borderRadius: '8px', 
-                overflow: 'hidden', 
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'start'
-              }}>
-                <img 
-                  src="/image-73.png" 
-                  alt="Generator Suite Bathroom Detail" 
-                  style={{ width: '100%', height: '300px', objectFit: 'cover' }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const nextSibling = target.nextSibling as HTMLElement;
-                    if (nextSibling) {
-                      nextSibling.style.display = 'flex';
-                    }
-                  }}
-                />
-                {/* Fallback for bathroom detail image */}
-                <div style={{ 
-                  display: 'none', 
-                  width: '100%', 
-                  height: '300px', 
-                  backgroundColor: '#f8f9fa',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <div style={{ 
-                    width: '60%',
-                    height: '40%',
-                    backgroundColor: '#e5e7eb',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#9ca3af',
-                    fontSize: '24px'
+                return visiblePalaceSuiteCards.map((card, index) => (
+                  <div key={`${card.alt}-${startIndex + index}`} style={{ 
+                    minWidth: '280px',
+                    position: 'relative', 
+                    borderRadius: '8px', 
+                    overflow: 'hidden', 
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                    flexShrink: 0,
+                    scrollSnapAlign: 'start'
                   }}>
-                    🧴
+                    <img 
+                      src={card.image} 
+                      alt={card.alt} 
+                      style={{ width: '100%', height: '250px', objectFit: 'cover' }}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const nextSibling = target.nextSibling as HTMLElement;
+                        if (nextSibling) {
+                          nextSibling.style.display = 'flex';
+                        }
+                      }}
+                    />
+                    {/* Fallback design if image fails to load */}
+                    <div style={{ 
+                      display: 'none', 
+                      width: '100%', 
+                      height: '250px', 
+                      backgroundColor: '#f8f9fa',
+                      position: 'relative',
+                      overflow: 'hidden',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}>
+                      <div style={{ 
+                        width: '60%',
+                        height: '40%',
+                        backgroundColor: '#e5e7eb',
+                        borderRadius: '8px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: '#9ca3af',
+                        fontSize: '24px'
+                      }}>
+                        {card.fallback}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
+                ));
+              })()}
             </div>
 
-            {/* Carousel Navigation Arrows */}
+            {/* Simple Navigation */}
             <div style={{ 
               display: 'flex', 
               justifyContent: 'center', 
-              gap: '16px',
-              marginTop: '24px'
+              gap: '16px', 
+              marginTop: '32px' 
             }}>
               <button 
-                style={{ 
-                  width: '40px', 
-                  height: '40px', 
-                  borderRadius: '50%', 
-                  backgroundColor: '#f3f4f6', 
-                  border: '1px solid #d1d5db',
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  backgroundColor: 'white',
+                  border: '2px solid #d1d5db',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '18px',
-                  color: '#6b7280'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#e5e7eb';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#f3f4f6';
+                  justifyContent: 'center'
                 }}
                 onClick={() => {
-                  const carousel = document.getElementById('generator-suite-carousel');
-                  if (carousel) {
-                    carousel.scrollBy({ left: -344, behavior: 'smooth' }); // 320px + 24px gap
-                  }
+                  setPalaceSuiteCarouselCurrentIndex(prev => {
+                    const newIndex = prev - 1;
+                    // Handle infinite loop - when going below 0, wrap to the end
+                    return newIndex < 0 ? 3 : newIndex;
+                  });
                 }}
               >
-                ‹
+                <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
               </button>
               <button 
-                style={{ 
-                  width: '40px', 
-                  height: '40px', 
-                  borderRadius: '50%', 
-                  backgroundColor: '#f3f4f6', 
-                  border: '1px solid #d1d5db',
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  backgroundColor: 'white',
+                  border: '2px solid #d1d5db',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '18px',
-                  color: '#6b7280'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#e5e7eb';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#f3f4f6';
+                  justifyContent: 'center'
                 }}
                 onClick={() => {
-                  const carousel = document.getElementById('generator-suite-carousel');
-                  if (carousel) {
-                    carousel.scrollBy({ left: 344, behavior: 'smooth' }); // 320px + 24px gap
-                  }
+                  setPalaceSuiteCarouselCurrentIndex(prev => {
+                    const newIndex = prev + 1;
+                    // Handle infinite loop - when going above 3, wrap to 0
+                    return newIndex > 3 ? 0 : newIndex;
+                  });
                 }}
               >
-                ›
+                <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
               </button>
             </div>
           </div>
         </div>
-
         {/* AMENITIES Section */}
         <div style={{ marginBottom: '48px' }}>
           {/* Main Title */}
@@ -9745,7 +9673,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               }}>
                 🛏️
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>1 King Bed</span>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>
+              1 King Bed</span>
             </div>
 
             {/* 2 EN SUITE BATHROOM */}
@@ -9790,7 +9719,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               }}>
                 🛏️
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>1 KING BED</span>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>550 Sq. Ft.</span>
             </div>
 
             {/* 591 Sq. Ft. */}
@@ -9805,8 +9734,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               }}>
                 ⬜
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>
-              550 Sq. Ft.</span>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>DESIGNED BY CHANNA DASWATTE</span>
             </div>
 
             {/* DESIGNED BY CHANNA DASWATTE */}
@@ -9819,9 +9747,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🏰
+                
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>DESIGNED BY CHANNA DASWATTE</span>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}></span>
             </div>
           </div>
 
@@ -9834,18 +9762,58 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
           {/* ROOM FEATURES Section */}
           <div>
-            <h3 style={{ 
-              fontSize: '24px', 
-              fontWeight: 'bold', 
-              color: '#000000', 
-              marginBottom: '24px',
-              fontFamily: '"Montserrat", sans-serif'
-            }}>
-              ROOM FEATURES
-            </h3>
+            
 
             {/* Expandable Categories */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+              {/* ROOM FEATURES Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onClick={() => setIsRoomFeaturesExpanded(!isRoomFeaturesExpanded)}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>ROOM FEATURES</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isRoomFeaturesExpanded ? '−' : '+'}
+                </span>
+              </div>
+              
+              {/* Room Features Content */}
+              {isRoomFeaturesExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    // color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Nespresso Coffee Machine</div>
+                    <div>Tea and Coffee Menu</div>
+                    <div>In Room Safe</div>
+                    <div>Generously Stocked Refrigerators</div>
+                    <div>Down Duvets and Pillows</div>
+                    <div>Pillow Menu</div>
+                    <div>Clothes Steamer</div>
+                  </div>
+                </div>
+              )}
+
               {/* BATH Category */}
               <div style={{ 
                 display: 'flex', 
@@ -9855,6 +9823,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 borderBottom: '1px solid #f3f4f6',
                 cursor: 'pointer'
               }}
+              onClick={() => setIsBathExpanded(!isBathExpanded)}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = '#f9fafb';
               }}
@@ -9862,8 +9831,34 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}>
                 <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>BATH</span>
-                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isBathExpanded ? '−' : '+'}
+                </span>
               </div>
+              
+              {/* Bath Content */}
+              {isBathExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    // color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Standalone Bathtub</div>
+                    <div>Dyson Hairdryer</div>
+                    <div>Indulgent Bathrobes</div>
+                    <div>Weighing Scale</div>
+                    <div>Premium Toiletries</div>
+                  </div>
+                </div>
+              )}
 
               {/* TECHNOLOGY Category */}
               <div style={{ 
@@ -9874,6 +9869,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 borderBottom: '1px solid #f3f4f6',
                 cursor: 'pointer'
               }}
+              onClick={() => setIsTechnologyExpanded(!isTechnologyExpanded)}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = '#f9fafb';
               }}
@@ -9881,8 +9877,33 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}>
                 <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>TECHNOLOGY</span>
-                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isTechnologyExpanded ? '−' : '+'}
+                </span>
               </div>
+              
+              {/* Technology Content */}
+              {isTechnologyExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Wifi</div>
+                    <div>65 Inch Smart TV</div>
+                    <div>Bang and Olufsen Speaker</div>
+                    <div>Cordless Telephone</div>
+                  </div>
+                </div>
+              )}
 
               {/* SERVICES Category */}
               <div style={{ 
@@ -9893,6 +9914,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 borderBottom: '1px solid #f3f4f6',
                 cursor: 'pointer'
               }}
+              onClick={() => setIsServicesExpanded(!isServicesExpanded)}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = '#f9fafb';
               }}
@@ -9900,30 +9922,223 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}>
                 <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>SERVICES</span>
-                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isServicesExpanded ? '−' : '+'}
+                </span>
               </div>
+              
+              {/* Services Content */}
+              {isServicesExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Palace Butler Service</div>
+                    <div>24 Hour In-Room Dining</div>
+                    <div>Complimentary Laundry</div>
+                    <div>Concierge Services</div>
+                    <div>Twice Daily House-keeping Service</div>
+                    <div>Babysitter</div>
+                    <div>In-house Doctor on Call</div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
 
-              {/* Fourth Category (placeholder) */}
-              <div style={{ 
-                display: 'flex', 
-                justifyContent: 'space-between', 
-                alignItems: 'center',
-                padding: '16px 0',
-                borderBottom: '1px solid #f3f4f6',
-                cursor: 'pointer'
+        <div style={{ marginBottom: '48px' }}>
+          {/* Main Title */}
+          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>OTHER SUITES</h2>
+          </div>
+
+          {/* Suites Grid */}
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(2, 1fr)', 
+            gap: '32px'
+          }}>
+            {/* GENERATOR SUITES */}
+            <div 
+              style={{ 
+                backgroundColor: '#ffffff',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                cursor: 'pointer',
+                transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
               }}
+              onClick={() => setCurrentPage('ice-mill-suite')}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#f9fafb';
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.15)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
-              }}>
-                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>AMENITIES</span>
-                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+              }}
+            >
+              {/* Image */}
+              <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                <img 
+                  src="/image-75.png" 
+                  alt="Generator Suites" 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'flex';
+                    }
+                  }}
+                />
+                {/* Fallback for Generator Suites image */}
+                <div style={{ 
+                  display: 'none', 
+                  width: '100%', 
+                  height: '100%', 
+                  backgroundColor: '#f8f9fa',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <div style={{ 
+                    width: '60%',
+                    height: '40%',
+                    backgroundColor: '#e5e7eb',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#9ca3af',
+                    fontSize: '24px'
+                  }}>
+                    🏭
+                  </div>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div style={{ padding: '24px' }}>
+                <h3 style={{ 
+                  fontSize: '20px', 
+                  fontWeight: 'bold', 
+                  color: '#000000', 
+                  marginBottom: '16px',
+                  textTransform: 'uppercase',
+                  fontFamily: '"Montserrat", sans-serif'
+                }}>
+                  ICE MILL SUITE
+                </h3>
+                <p style={{ 
+                  fontSize: '16px', 
+                  color: '#6b7280', 
+                  lineHeight: '1.6',
+                  fontFamily: '"Lato", sans-serif'
+                }}>
+                  The Ice Mill suites are beautifully adorned with traditional Orissa handloom art and paintings, creating a unique, cultural ambiance.                </p>
+              </div>
+            </div>
+
+            {/* FAMILY PALACE SUITE */}
+            <div 
+              style={{ 
+                backgroundColor: '#ffffff',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                cursor: 'pointer',
+                transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
+              }}
+              onClick={() => setCurrentPage('palace-family-suite')}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+              }}
+            >
+              {/* Image */}
+              <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                <img 
+                  src="/image-76.png" 
+                  alt="Family Palace Suite" 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'flex';
+                    }
+                  }}
+                />
+                {/* Fallback for Family Palace Suite image */}
+                <div style={{ 
+                  display: 'none', 
+                  width: '100%', 
+                  height: '100%', 
+                  backgroundColor: '#f8f9fa',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <div style={{ 
+                    width: '60%',
+                    height: '40%',
+                    backgroundColor: '#e5e7eb',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#9ca3af',
+                    fontSize: '24px'
+                  }}>
+                    👨‍👩‍👧‍👦
+                  </div>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div style={{ padding: '24px' }}>
+                <h3 style={{ 
+                  fontSize: '20px', 
+                  fontWeight: 'bold', 
+                  color: '#000000', 
+                  marginBottom: '16px',
+                  textTransform: 'uppercase',
+                  fontFamily: '"Montserrat", sans-serif'
+                }}>
+                  FAMILY PALACE SUITE
+                </h3>
+                <p style={{ 
+                  fontSize: '16px', 
+                  color: '#6b7280', 
+                  lineHeight: '1.6',
+                  fontFamily: '"Lato", sans-serif'
+                }}>
+                  A fusion of two palace suites, featuring a spacious lounge- an expansive, lush private retreat perfect for families and added privacy.
+                </p>
               </div>
             </div>
           </div>
         </div>
+
       </div>
     </>
   );
@@ -9937,7 +10152,17 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       </div>
 
       {/* Tab Navigation */}
-      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px', borderBottom: '1px solid #e5e7eb' }}>
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        marginBottom: '32px', 
+        borderBottom: '1px solid #e5e7eb',
+        position: 'sticky',
+        top: isHeaderSticky ? 48 : 0,
+        zIndex: 1000,
+        backgroundColor: 'rgb(241,236,229)',
+        marginTop: isHeaderSticky ? '-1px' : '0'
+      }}>
         <div style={{ display: 'flex', gap: '0' }}>
           {['Overview', 'Rambha Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite', 'Ice Mill Suite', 'Printing Press Suite'].map((tab) => (
             <button
@@ -10081,12 +10306,12 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             transition: 'all 0.3s ease'
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = '#000000';
-            e.currentTarget.style.color = '#ffffff';
+            // e.currentTarget.style.backgroundColor = '#000000';
+            // e.currentTarget.style.color = '#ffffff';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'transparent';
-            e.currentTarget.style.color = '#000000';
+            // e.currentTarget.style.backgroundColor = 'transparent';
+            // e.currentTarget.style.color = '#000000';
           }}>
             Floor Plan
           </button>
@@ -10119,286 +10344,159 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             maxWidth: '100%',
             overflow: 'hidden'
           }}>
-            {/* Carousel Images */}
+            {/* Palace Suite Carousel Images - State-based Carousel */}
             <div 
-              id="ice-mill-carousel"
+              className="palace-suite-carousel-container"
               style={{ 
                 display: 'flex', 
                 gap: '16px',
-                padding: '0 60px', // Space for arrows
+                justifyContent: 'center',
                 overflowX: 'auto',
                 scrollBehavior: 'smooth',
-                scrollbarWidth: 'none', // Hide scrollbar for Firefox
-                msOverflowStyle: 'none', // Hide scrollbar for IE/Edge
-                WebkitOverflowScrolling: 'touch', // Smooth scrolling on iOS
-                scrollSnapType: 'x mandatory' // Snap to images
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+                WebkitOverflowScrolling: 'touch',
+                scrollSnapType: 'x mandatory',
+                padding: '0 20px'
               }}
             >
-              {/* Image 1 - image-70 */}
-              <div style={{ 
-                minWidth: '280px',
-                position: 'relative', 
-                borderRadius: '8px', 
-                overflow: 'hidden', 
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'start'
-              }}>
-                <img 
-                  src="/image-70.png" 
-                  alt="Ice Mill Suite Bedroom" 
-                  style={{ width: '100%', height: '250px', objectFit: 'cover' }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const nextSibling = target.nextSibling as HTMLElement;
-                    if (nextSibling) {
-                      nextSibling.style.display = 'flex';
-                    }
-                  }}
-                />
-                {/* Fallback for image-70 */}
-                <div style={{ 
-                  display: 'none', 
-                  width: '100%', 
-                  height: '250px', 
-                  backgroundColor: '#f8f9fa',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <div style={{ 
-                    width: '60%',
-                    height: '40%',
-                    backgroundColor: '#e5e7eb',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#9ca3af',
-                    fontSize: '24px'
-                  }}>
-                    🛏️
-                  </div>
-                </div>
-              </div>
+              {/* Palace Suite Carousel Cards - State-based Carousel */}
+              {(() => {
+                const palaceSuiteCarouselCards = [
+                  {
+                    image: '/image-70.png',
+                    alt: 'Palace Suite Bedroom',
+                    fallback: '🛏️'
+                  },
+                  {
+                    image: '/image-71.png',
+                    alt: 'Palace Suite Bathroom',
+                    fallback: '🛁'
+                  },
+                  {
+                    image: '/image-73.png',
+                    alt: 'Palace Suite Bathroom Detail',
+                    fallback: '🧴'
+                  },
+                  {
+                    image: '/image-74.png',
+                    alt: 'Palace Suite Additional View',
+                    fallback: '🏰'
+                  }
+                ];
 
-              {/* Image 2 - image-71 */}
-              <div style={{ 
-                minWidth: '280px',
-                position: 'relative', 
-                borderRadius: '8px', 
-                overflow: 'hidden', 
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'start'
-              }}>
-                <img 
-                  src="/image-71.png" 
-                  alt="Ice Mill Suite Bathroom" 
-                  style={{ width: '100%', height: '250px', objectFit: 'cover' }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const nextSibling = target.nextSibling as HTMLElement;
-                    if (nextSibling) {
-                      nextSibling.style.display = 'flex';
-                    }
-                  }}
-                />
-                {/* Fallback for image-71 */}
-                <div style={{ 
-                  display: 'none', 
-                  width: '100%', 
-                  height: '250px', 
-                  backgroundColor: '#f8f9fa',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <div style={{ 
-                    width: '60%',
-                    height: '40%',
-                    backgroundColor: '#e5e7eb',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#9ca3af',
-                    fontSize: '24px'
-                  }}>
-                    🛁
-                  </div>
-                </div>
-              </div>
+                // Create infinite loop by duplicating cards
+                const extendedPalaceSuiteCards = [...palaceSuiteCarouselCards, ...palaceSuiteCarouselCards, ...palaceSuiteCarouselCards];
+                const startIndex = palaceSuiteCarouselCards.length + palaceSuiteCarouselCurrentIndex;
+                const visiblePalaceSuiteCards = extendedPalaceSuiteCards.slice(startIndex, startIndex + 3);
 
-              {/* Image 3 - image-73 */}
-              <div style={{ 
-                minWidth: '280px',
-                position: 'relative', 
-                borderRadius: '8px', 
-                overflow: 'hidden', 
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'start'
-              }}>
-                <img 
-                  src="/image-73.png" 
-                  alt="Ice Mill Suite Bathroom Detail" 
-                  style={{ width: '100%', height: '250px', objectFit: 'cover' }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const nextSibling = target.nextSibling as HTMLElement;
-                    if (nextSibling) {
-                      nextSibling.style.display = 'flex';
-                    }
-                  }}
-                />
-                {/* Fallback for image-73 */}
-                <div style={{ 
-                  display: 'none', 
-                  width: '100%', 
-                  height: '250px', 
-                  backgroundColor: '#f8f9fa',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <div style={{ 
-                    width: '60%',
-                    height: '40%',
-                    backgroundColor: '#e5e7eb',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#9ca3af',
-                    fontSize: '24px'
+                return visiblePalaceSuiteCards.map((card, index) => (
+                  <div key={`${card.alt}-${startIndex + index}`} style={{ 
+                    minWidth: '280px',
+                    position: 'relative', 
+                    borderRadius: '8px', 
+                    overflow: 'hidden', 
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                    flexShrink: 0,
+                    scrollSnapAlign: 'start'
                   }}>
-                    🧴
+                    <img 
+                      src={card.image} 
+                      alt={card.alt} 
+                      style={{ width: '100%', height: '250px', objectFit: 'cover' }}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const nextSibling = target.nextSibling as HTMLElement;
+                        if (nextSibling) {
+                          nextSibling.style.display = 'flex';
+                        }
+                      }}
+                    />
+                    {/* Fallback design if image fails to load */}
+                    <div style={{ 
+                      display: 'none', 
+                      width: '100%', 
+                      height: '250px', 
+                      backgroundColor: '#f8f9fa',
+                      position: 'relative',
+                      overflow: 'hidden',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}>
+                      <div style={{ 
+                        width: '60%',
+                        height: '40%',
+                        backgroundColor: '#e5e7eb',
+                        borderRadius: '8px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: '#9ca3af',
+                        fontSize: '24px'
+                      }}>
+                        {card.fallback}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-
-              {/* Image 4 - image-74 */}
-              <div style={{ 
-                minWidth: '280px',
-                position: 'relative', 
-                borderRadius: '8px', 
-                overflow: 'hidden', 
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                flexShrink: 0,
-                scrollSnapAlign: 'start'
-              }}>
-                <img 
-                  src="/image-74.png" 
-                  alt="Ice Mill Suite Additional View" 
-                  style={{ width: '100%', height: '250px', objectFit: 'cover' }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const nextSibling = target.nextSibling as HTMLElement;
-                    if (nextSibling) {
-                      nextSibling.style.display = 'flex';
-                    }
-                  }}
-                />
-                {/* Fallback for image-74 */}
-                <div style={{ 
-                  display: 'none', 
-                  width: '100%', 
-                  height: '250px', 
-                  backgroundColor: '#f8f9fa',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <div style={{ 
-                    width: '60%',
-                    height: '40%',
-                    backgroundColor: '#e5e7eb',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#9ca3af',
-                    fontSize: '24px'
-                  }}>
-                    🏰
-                  </div>
-                </div>
-              </div>
+                ));
+              })()}
             </div>
 
-            {/* Carousel Navigation Arrows */}
+            {/* Simple Navigation */}
             <div style={{ 
               display: 'flex', 
               justifyContent: 'center', 
-              gap: '16px',
-              marginTop: '24px'
+              gap: '16px', 
+              marginTop: '32px' 
             }}>
               <button 
-                style={{ 
-                  width: '40px', 
-                  height: '40px', 
-                  borderRadius: '50%', 
-                  backgroundColor: '#f3f4f6', 
-                  border: '1px solid #d1d5db',
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  backgroundColor: 'white',
+                  border: '2px solid #d1d5db',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '18px',
-                  color: '#6b7280'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#e5e7eb';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#f3f4f6';
+                  justifyContent: 'center'
                 }}
                 onClick={() => {
-                  const carousel = document.getElementById('ice-mill-carousel');
-                  if (carousel) {
-                    carousel.scrollBy({ left: -296, behavior: 'smooth' }); // 280px + 16px gap
-                  }
+                  setPalaceSuiteCarouselCurrentIndex(prev => {
+                    const newIndex = prev - 1;
+                    // Handle infinite loop - when going below 0, wrap to the end
+                    return newIndex < 0 ? 3 : newIndex;
+                  });
                 }}
               >
-                ‹
+                <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
               </button>
               <button 
-                style={{ 
-                  width: '40px', 
-                  height: '40px', 
-                  borderRadius: '50%', 
-                  backgroundColor: '#f3f4f6', 
-                  border: '1px solid #d1d5db',
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  backgroundColor: 'white',
+                  border: '2px solid #d1d5db',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '18px',
-                  color: '#6b7280'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#e5e7eb';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#f3f4f6';
+                  justifyContent: 'center'
                 }}
                 onClick={() => {
-                  const carousel = document.getElementById('ice-mill-carousel');
-                  if (carousel) {
-                    carousel.scrollBy({ left: 296, behavior: 'smooth' }); // 280px + 16px gap
-                  }
+                  setPalaceSuiteCarouselCurrentIndex(prev => {
+                    const newIndex = prev + 1;
+                    // Handle infinite loop - when going above 3, wrap to 0
+                    return newIndex > 3 ? 0 : newIndex;
+                  });
                 }}
               >
-                ›
+                <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
               </button>
             </div>
           </div>
@@ -10445,7 +10543,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               }}>
                 🛁
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>2 EN SUITE BATHROOM</span>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>En Suite Bathroom</span>
             </div>
 
             {/* PALACE GARDEN VIEW */}
@@ -10475,7 +10573,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               }}>
                 🛏️
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>1 KING BED</span>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>454 Sq. Ft.</span>
             </div>
 
             {/* 591 Sq. Ft. */}
@@ -10490,7 +10588,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               }}>
                 ⬜
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>454 Sq. Ft.</span>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>Designed by Channa Daswatte</span>
             </div>
 
             {/* DESIGNED BY CHANNA DASWATTE */}
@@ -10503,9 +10601,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🏰
+                
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>DESIGNED BY CHANNA DASWATTE</span>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}></span>
             </div>
           </div>
 
@@ -10518,18 +10616,58 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
           {/* ROOM FEATURES Section */}
           <div>
-            <h3 style={{ 
-              fontSize: '24px', 
-              fontWeight: 'bold', 
-              color: '#000000', 
-              marginBottom: '24px',
-              fontFamily: '"Montserrat", sans-serif'
-            }}>
-              ROOM FEATURES
-            </h3>
+            
 
             {/* Expandable Categories */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+              {/* ROOM FEATURES Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onClick={() => setIsRoomFeaturesExpanded(!isRoomFeaturesExpanded)}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>ROOM FEATURES</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isRoomFeaturesExpanded ? '−' : '+'}
+                </span>
+              </div>
+              
+              {/* Room Features Content */}
+              {isRoomFeaturesExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    // color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Nespresso Coffee Machine</div>
+                    <div>Tea and Coffee Menu</div>
+                    <div>In Room Safe</div>
+                    <div>Generously Stocked Refrigerators</div>
+                    <div>Down Duvets and Pillows</div>
+                    <div>Pillow Menu</div>
+                    <div>Clothes Steamer</div>
+                  </div>
+                </div>
+              )}
+
               {/* BATH Category */}
               <div style={{ 
                 display: 'flex', 
@@ -10539,6 +10677,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 borderBottom: '1px solid #f3f4f6',
                 cursor: 'pointer'
               }}
+              onClick={() => setIsBathExpanded(!isBathExpanded)}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = '#f9fafb';
               }}
@@ -10546,8 +10685,34 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}>
                 <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>BATH</span>
-                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isBathExpanded ? '−' : '+'}
+                </span>
               </div>
+              
+              {/* Bath Content */}
+              {isBathExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    // color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Standalone Bathtub</div>
+                    <div>Dyson Hairdryer</div>
+                    <div>Indulgent Bathrobes</div>
+                    <div>Weighing Scale</div>
+                    <div>Premium Toiletries</div>
+                  </div>
+                </div>
+              )}
 
               {/* TECHNOLOGY Category */}
               <div style={{ 
@@ -10558,6 +10723,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 borderBottom: '1px solid #f3f4f6',
                 cursor: 'pointer'
               }}
+              onClick={() => setIsTechnologyExpanded(!isTechnologyExpanded)}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = '#f9fafb';
               }}
@@ -10565,8 +10731,33 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}>
                 <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>TECHNOLOGY</span>
-                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isTechnologyExpanded ? '−' : '+'}
+                </span>
               </div>
+              
+              {/* Technology Content */}
+              {isTechnologyExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Wifi</div>
+                    <div>65 Inch Smart TV</div>
+                    <div>Bang and Olufsen Speaker</div>
+                    <div>Cordless Telephone</div>
+                  </div>
+                </div>
+              )}
 
               {/* SERVICES Category */}
               <div style={{ 
@@ -10577,6 +10768,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 borderBottom: '1px solid #f3f4f6',
                 cursor: 'pointer'
               }}
+              onClick={() => setIsServicesExpanded(!isServicesExpanded)}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = '#f9fafb';
               }}
@@ -10584,27 +10776,36 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}>
                 <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>SERVICES</span>
-                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isServicesExpanded ? '−' : '+'}
+                </span>
               </div>
-
-              {/* Fourth Category (placeholder) */}
-              <div style={{ 
-                display: 'flex', 
-                justifyContent: 'space-between', 
-                alignItems: 'center',
-                padding: '16px 0',
-                borderBottom: '1px solid #f3f4f6',
-                cursor: 'pointer'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#f9fafb';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
-              }}>
-                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>AMENITIES</span>
-                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
-              </div>
+              
+              {/* Services Content */}
+              {isServicesExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Palace Butler Service</div>
+                    <div>24 Hour In-Room Dining</div>
+                    <div>Complimentary Laundry</div>
+                    <div>Concierge Services</div>
+                    <div>Twice Daily House-keeping Service</div>
+                    <div>Babysitter</div>
+                    <div>In-house Doctor on Call</div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -10623,12 +10824,25 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             gap: '32px'
           }}>
             {/* GENERATOR SUITES */}
-            <div style={{ 
-              backgroundColor: '#ffffff',
-              borderRadius: '8px',
-              overflow: 'hidden',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
-            }}>
+            <div 
+              style={{ 
+                backgroundColor: '#ffffff',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                cursor: 'pointer',
+                transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
+              }}
+              onClick={() => setCurrentPage('generator-suite')}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+              }}
+            >
               {/* Image */}
               <div style={{ position: 'relative', width: '100%', height: '250px' }}>
                 <img 
@@ -10695,12 +10909,25 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             </div>
 
             {/* FAMILY PALACE SUITE */}
-            <div style={{ 
-              backgroundColor: '#ffffff',
-              borderRadius: '8px',
-              overflow: 'hidden',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
-            }}>
+            <div 
+              style={{ 
+                backgroundColor: '#ffffff',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                cursor: 'pointer',
+                transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
+              }}
+              onClick={() => setCurrentPage('palace-family-suite')}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+              }}
+            >
               {/* Image */}
               <div style={{ position: 'relative', width: '100%', height: '250px' }}>
                 <img 
@@ -10783,7 +11010,17 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       </div>
 
       {/* Tab Navigation */}
-      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '32px', borderBottom: '1px solid #e5e7eb' }}>
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        marginBottom: '32px', 
+        borderBottom: '1px solid #e5e7eb',
+        position: 'sticky',
+        top: isHeaderSticky ? 48 : 0,
+        zIndex: 1000,
+        backgroundColor: 'rgb(241,236,229)',
+        marginTop: isHeaderSticky ? '-1px' : '0'
+      }}>
         <div style={{ display: 'flex', gap: '0' }}>
           {['Overview', 'Rambha Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite', 'Ice Mill Suite', 'Printing Press Suite'].map((tab) => (
             <button
@@ -10932,12 +11169,12 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             transition: 'all 0.3s ease'
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = '#000000';
-            e.currentTarget.style.color = '#ffffff';
+            // e.currentTarget.style.backgroundColor = '#000000';
+            // e.currentTarget.style.color = '#ffffff';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'transparent';
-            e.currentTarget.style.color = '#000000';
+            // e.currentTarget.style.backgroundColor = 'transparent';
+            // e.currentTarget.style.color = '#000000';
           }}>
             Floor Plan
           </button>
@@ -10964,230 +11201,172 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
         {/* Image Carousel */}
         <div style={{ marginBottom: '48px' }}>
+          {/* Carousel Container */}
           <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(4, 1fr)', 
-            gap: '16px',
-            marginBottom: '24px'
+            position: 'relative',
+            maxWidth: '100%',
+            overflow: 'hidden'
           }}>
-            {/* Image 1 - image-70 */}
-            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
-              <img 
-                src="/image-70.png" 
-                alt="Printing Press Suite Bedroom" 
-                style={{ width: '100%', height: '250px', objectFit: 'cover' }}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const nextSibling = target.nextSibling as HTMLElement;
-                  if (nextSibling) {
-                    nextSibling.style.display = 'flex';
+            {/* Palace Suite Carousel Images - State-based Carousel */}
+            <div 
+              className="palace-suite-carousel-container"
+              style={{ 
+                display: 'flex', 
+                gap: '16px',
+                justifyContent: 'center',
+                overflowX: 'auto',
+                scrollBehavior: 'smooth',
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+                WebkitOverflowScrolling: 'touch',
+                scrollSnapType: 'x mandatory',
+                padding: '0 20px'
+              }}
+            >
+              {/* Palace Suite Carousel Cards - State-based Carousel */}
+              {(() => {
+                const palaceSuiteCarouselCards = [
+                  {
+                    image: '/image-70.png',
+                    alt: 'Palace Suite Bedroom',
+                    fallback: '🛏️'
+                  },
+                  {
+                    image: '/image-71.png',
+                    alt: 'Palace Suite Bathroom',
+                    fallback: '🛁'
+                  },
+                  {
+                    image: '/image-73.png',
+                    alt: 'Palace Suite Bathroom Detail',
+                    fallback: '🧴'
+                  },
+                  {
+                    image: '/image-74.png',
+                    alt: 'Palace Suite Additional View',
+                    fallback: '🏰'
                   }
-                }}
-              />
-              {/* Fallback for image-70 */}
-              <div style={{ 
-                display: 'none', 
-                width: '100%', 
-                height: '250px', 
-                backgroundColor: '#f8f9fa',
-                position: 'relative',
-                overflow: 'hidden',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}>
-                <div style={{ 
-                  width: '60%',
-                  height: '40%',
-                  backgroundColor: '#e5e7eb',
-                  borderRadius: '8px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#9ca3af',
-                  fontSize: '24px'
-                }}>
-                  🛏️
-                </div>
-              </div>
+                ];
+
+                // Create infinite loop by duplicating cards
+                const extendedPalaceSuiteCards = [...palaceSuiteCarouselCards, ...palaceSuiteCarouselCards, ...palaceSuiteCarouselCards];
+                const startIndex = palaceSuiteCarouselCards.length + palaceSuiteCarouselCurrentIndex;
+                const visiblePalaceSuiteCards = extendedPalaceSuiteCards.slice(startIndex, startIndex + 3);
+
+                return visiblePalaceSuiteCards.map((card, index) => (
+                  <div key={`${card.alt}-${startIndex + index}`} style={{ 
+                    minWidth: '280px',
+                    position: 'relative', 
+                    borderRadius: '8px', 
+                    overflow: 'hidden', 
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                    flexShrink: 0,
+                    scrollSnapAlign: 'start'
+                  }}>
+                    <img 
+                      src={card.image} 
+                      alt={card.alt} 
+                      style={{ width: '100%', height: '250px', objectFit: 'cover' }}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const nextSibling = target.nextSibling as HTMLElement;
+                        if (nextSibling) {
+                          nextSibling.style.display = 'flex';
+                        }
+                      }}
+                    />
+                    {/* Fallback design if image fails to load */}
+                    <div style={{ 
+                      display: 'none', 
+                      width: '100%', 
+                      height: '250px', 
+                      backgroundColor: '#f8f9fa',
+                      position: 'relative',
+                      overflow: 'hidden',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}>
+                      <div style={{ 
+                        width: '60%',
+                        height: '40%',
+                        backgroundColor: '#e5e7eb',
+                        borderRadius: '8px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: '#9ca3af',
+                        fontSize: '24px'
+                      }}>
+                        {card.fallback}
+                      </div>
+                    </div>
+                  </div>
+                ));
+              })()}
             </div>
 
-            {/* Image 2 - image-71 */}
-            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
-              <img 
-                src="/image-71.png" 
-                alt="Printing Press Suite Bathroom" 
-                style={{ width: '100%', height: '250px', objectFit: 'cover' }}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const nextSibling = target.nextSibling as HTMLElement;
-                  if (nextSibling) {
-                    nextSibling.style.display = 'flex';
-                  }
-                }}
-              />
-              {/* Fallback for image-71 */}
-              <div style={{ 
-                display: 'none', 
-                width: '100%', 
-                height: '250px', 
-                backgroundColor: '#f8f9fa',
-                position: 'relative',
-                overflow: 'hidden',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}>
-                <div style={{ 
-                  width: '60%',
-                  height: '40%',
-                  backgroundColor: '#e5e7eb',
-                  borderRadius: '8px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#9ca3af',
-                  fontSize: '24px'
-                }}>
-                  🛁
-                </div>
-              </div>
-            </div>
-
-            {/* Image 3 - image-73 */}
-            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
-              <img 
-                src="/image-73.png" 
-                alt="Printing Press Suite Bathroom Detail" 
-                style={{ width: '100%', height: '250px', objectFit: 'cover' }}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const nextSibling = target.nextSibling as HTMLElement;
-                  if (nextSibling) {
-                    nextSibling.style.display = 'flex';
-                  }
-                }}
-              />
-              {/* Fallback for image-73 */}
-              <div style={{ 
-                display: 'none', 
-                width: '100%', 
-                height: '250px', 
-                backgroundColor: '#f8f9fa',
-                position: 'relative',
-                overflow: 'hidden',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}>
-                <div style={{ 
-                  width: '60%',
-                  height: '40%',
-                  backgroundColor: '#e5e7eb',
-                  borderRadius: '8px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#9ca3af',
-                  fontSize: '24px'
-                }}>
-                  🧴
-                </div>
-              </div>
-            </div>
-
-            {/* Image 4 - image-74 */}
-            <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
-              <img 
-                src="/image-74.png" 
-                alt="Printing Press Suite Additional View" 
-                style={{ width: '100%', height: '250px', objectFit: 'cover' }}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const nextSibling = target.nextSibling as HTMLElement;
-                  if (nextSibling) {
-                    nextSibling.style.display = 'flex';
-                  }
-                }}
-              />
-              {/* Fallback for image-74 */}
-              <div style={{ 
-                display: 'none', 
-                width: '100%', 
-                height: '250px', 
-                backgroundColor: '#f8f9fa',
-                position: 'relative',
-                overflow: 'hidden',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}>
-                <div style={{ 
-                  width: '60%',
-                  height: '40%',
-                  backgroundColor: '#e5e7eb',
-                  borderRadius: '8px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#9ca3af',
-                  fontSize: '24px'
-                }}>
-                  🏰
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Carousel Navigation Arrows */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '16px' }}>
-            <button style={{ 
-              width: '40px', 
-              height: '40px', 
-              borderRadius: '50%', 
-              backgroundColor: '#f3f4f6', 
-              border: '1px solid #d1d5db',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '18px',
-              color: '#6b7280'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#e5e7eb';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#f3f4f6';
+            {/* Simple Navigation */}
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'center', 
+              gap: '16px', 
+              marginTop: '32px' 
             }}>
-              ‹
-            </button>
-            <button style={{ 
-              width: '40px', 
-              height: '40px', 
-              borderRadius: '50%', 
-              backgroundColor: '#f3f4f6', 
-              border: '1px solid #d1d5db',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '18px',
-              color: '#6b7280'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#e5e7eb';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#f3f4f6';
-            }}>
-              ›
-            </button>
+              <button 
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  backgroundColor: 'white',
+                  border: '2px solid #d1d5db',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+                onClick={() => {
+                  setPalaceSuiteCarouselCurrentIndex(prev => {
+                    const newIndex = prev - 1;
+                    // Handle infinite loop - when going below 0, wrap to the end
+                    return newIndex < 0 ? 3 : newIndex;
+                  });
+                }}
+              >
+                <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button 
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  backgroundColor: 'white',
+                  border: '2px solid #d1d5db',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+                onClick={() => {
+                  setPalaceSuiteCarouselCurrentIndex(prev => {
+                    const newIndex = prev + 1;
+                    // Handle infinite loop - when going above 3, wrap to 0
+                    return newIndex > 3 ? 0 : newIndex;
+                  });
+                }}
+              >
+                <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* AMENITIES Section */}
-        <div style={{ marginBottom: '48px' }}>
+{/* AMENITIES Section */}
+<div style={{ marginBottom: '48px' }}>
           {/* Main Title */}
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
             <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>AMENITIES</h2>
@@ -11212,7 +11391,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               }}>
                 🛏️
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>1 ANTE ROOM</span>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>King Bed</span>
             </div>
 
             {/* 2 EN SUITE BATHROOM */}
@@ -11227,7 +11406,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               }}>
                 🛁
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>2 EN SUITE BATHROOM</span>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>En Suite Bathroom</span>
             </div>
 
             {/* PALACE GARDEN VIEW */}
@@ -11242,7 +11421,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               }}>
                 🏔️
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>PALACE GARDEN VIEW</span>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>Orchard View</span>
             </div>
 
             {/* 1 KING BED */}
@@ -11257,7 +11436,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               }}>
                 🛏️
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>1 KING BED</span>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>443 Sq. Ft.</span>
             </div>
 
             {/* 591 Sq. Ft. */}
@@ -11272,7 +11451,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               }}>
                 ⬜
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>591 Sq. Ft.</span>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>Designed by Channa Daswatte</span>
             </div>
 
             {/* DESIGNED BY CHANNA DASWATTE */}
@@ -11285,9 +11464,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🏰
+                
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>DESIGNED BY CHANNA DASWATTE</span>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}></span>
             </div>
           </div>
 
@@ -11300,18 +11479,58 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
           {/* ROOM FEATURES Section */}
           <div>
-            <h3 style={{ 
-              fontSize: '24px', 
-              fontWeight: 'bold', 
-              color: '#000000', 
-              marginBottom: '24px',
-              fontFamily: '"Montserrat", sans-serif'
-            }}>
-              ROOM FEATURES
-            </h3>
+            
 
             {/* Expandable Categories */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+              {/* ROOM FEATURES Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onClick={() => setIsRoomFeaturesExpanded(!isRoomFeaturesExpanded)}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>ROOM FEATURES</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isRoomFeaturesExpanded ? '−' : '+'}
+                </span>
+              </div>
+              
+              {/* Room Features Content */}
+              {isRoomFeaturesExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    // color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Nespresso Coffee Machine</div>
+                    <div>Tea and Coffee Menu</div>
+                    <div>In Room Safe</div>
+                    <div>Generously Stocked Refrigerators</div>
+                    <div>Down Duvets and Pillows</div>
+                    <div>Pillow Menu</div>
+                    <div>Clothes Steamer</div>
+                  </div>
+                </div>
+              )}
+
               {/* BATH Category */}
               <div style={{ 
                 display: 'flex', 
@@ -11321,6 +11540,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 borderBottom: '1px solid #f3f4f6',
                 cursor: 'pointer'
               }}
+              onClick={() => setIsBathExpanded(!isBathExpanded)}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = '#f9fafb';
               }}
@@ -11328,8 +11548,34 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}>
                 <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>BATH</span>
-                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isBathExpanded ? '−' : '+'}
+                </span>
               </div>
+              
+              {/* Bath Content */}
+              {isBathExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    // color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Standalone Bathtub</div>
+                    <div>Dyson Hairdryer</div>
+                    <div>Indulgent Bathrobes</div>
+                    <div>Weighing Scale</div>
+                    <div>Premium Toiletries</div>
+                  </div>
+                </div>
+              )}
 
               {/* TECHNOLOGY Category */}
               <div style={{ 
@@ -11340,6 +11586,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 borderBottom: '1px solid #f3f4f6',
                 cursor: 'pointer'
               }}
+              onClick={() => setIsTechnologyExpanded(!isTechnologyExpanded)}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = '#f9fafb';
               }}
@@ -11347,8 +11594,33 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}>
                 <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>TECHNOLOGY</span>
-                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isTechnologyExpanded ? '−' : '+'}
+                </span>
               </div>
+              
+              {/* Technology Content */}
+              {isTechnologyExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Wifi</div>
+                    <div>65 Inch Smart TV</div>
+                    <div>Bang and Olufsen Speaker</div>
+                    <div>Cordless Telephone</div>
+                  </div>
+                </div>
+              )}
 
               {/* SERVICES Category */}
               <div style={{ 
@@ -11359,6 +11631,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 borderBottom: '1px solid #f3f4f6',
                 cursor: 'pointer'
               }}
+              onClick={() => setIsServicesExpanded(!isServicesExpanded)}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = '#f9fafb';
               }}
@@ -11366,31 +11639,39 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 e.currentTarget.style.backgroundColor = 'transparent';
               }}>
                 <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>SERVICES</span>
-                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isServicesExpanded ? '−' : '+'}
+                </span>
               </div>
-
-              {/* Fourth Category (placeholder) */}
-              <div style={{ 
-                display: 'flex', 
-                justifyContent: 'space-between', 
-                alignItems: 'center',
-                padding: '16px 0',
-                borderBottom: '1px solid #f3f4f6',
-                cursor: 'pointer'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#f9fafb';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent';
-              }}>
-                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>AMENITIES</span>
-                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>+</span>
-              </div>
+              
+              {/* Services Content */}
+              {isServicesExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Palace Butler Service</div>
+                    <div>24 Hour In-Room Dining</div>
+                    <div>Complimentary Laundry</div>
+                    <div>Concierge Services</div>
+                    <div>Twice Daily House-keeping Service</div>
+                    <div>Babysitter</div>
+                    <div>In-house Doctor on Call</div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
-
         {/* OTHER SUITES Section */}
         <div style={{ marginBottom: '48px' }}>
           {/* Main Title */}
@@ -11405,12 +11686,25 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             gap: '32px'
           }}>
             {/* GENERATOR SUITES */}
-            <div style={{ 
-              backgroundColor: '#ffffff',
-              borderRadius: '8px',
-              overflow: 'hidden',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
-            }}>
+            <div 
+              style={{ 
+                backgroundColor: '#ffffff',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                cursor: 'pointer',
+                transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
+              }}
+              onClick={() => setCurrentPage('generator-suite')}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+              }}
+            >
               {/* Image */}
               <div style={{ position: 'relative', width: '100%', height: '250px' }}>
                 <img 
@@ -11477,12 +11771,25 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             </div>
 
             {/* FAMILY PALACE SUITE */}
-            <div style={{ 
-              backgroundColor: '#ffffff',
-              borderRadius: '8px',
-              overflow: 'hidden',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
-            }}>
+            <div 
+              style={{ 
+                backgroundColor: '#ffffff',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                cursor: 'pointer',
+                transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
+              }}
+              onClick={() => setCurrentPage('palace-family-suite')}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+              }}
+            >
               {/* Image */}
               <div style={{ position: 'relative', width: '100%', height: '250px' }}>
                 <img 
@@ -11549,6 +11856,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             </div>
           </div>
         </div>
+
 
         {/* Back to Accommodation Button */}
        
@@ -11844,341 +12152,124 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
         <div style={{ 
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '0 60px'
+          padding: '0 20px'
         }}>
-          {/* Carousel Items */}
+          {/* Cards Container */}
           <div 
-            className="wellness-gallery-carousel-container"
+            className="wellness-gallery-cards-container"
             style={{ 
-              display: 'flex', 
+              display: 'flex',
               gap: '20px',
+              justifyContent: 'center',
               overflowX: 'auto',
               scrollBehavior: 'smooth',
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
-              padding: '20px 0'
+              WebkitOverflowScrolling: 'touch',
+              scrollSnapType: 'x mandatory',
+              padding: '0 20px'
             }}
           >
-            {/* Image 1 */}
-            <div style={{ 
-              minWidth: '500px',
-              height: '350px',
-              backgroundColor: '#f3f4f6',
-              borderRadius: '8px',
-              overflow: 'hidden',
-              flex: '0 0 auto'
-            }}>
-              <img 
-                src="./image-20.png" 
-                alt="Wellness Gallery 1" 
-                style={{ 
-                  width: '100%', 
-                  height: '100%', 
-                  objectFit: 'cover'
-                }}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const nextSibling = target.nextSibling as HTMLElement;
-                  if (nextSibling) {
-                    nextSibling.style.display = 'flex';
-                  }
-                }}
-              />
-              {/* Fallback design if image fails to load */}
-              <div style={{
-                display: 'none',
-                width: '100%',
-                height: '100%',
-                backgroundColor: '#f3f4f6',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#6b7280',
-                fontSize: '16px',
-                flexDirection: 'column',
-                gap: '8px'
-              }}>
-                <svg width="32" height="32" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span>Gallery 1</span>
-              </div>
-            </div>
+            {/* Wellness Gallery Cards - State-based Carousel */}
+            {(() => {
+              const wellnessGalleryCards = [
+                {
+                  image: './image-20.png',
+                  alt: 'Wellness Gallery 1',
+                  fallback: 'Gallery 1'
+                },
+                {
+                  image: './image-21.png',
+                  alt: 'Wellness Gallery 2',
+                  fallback: 'Gallery 2'
+                },
+                {
+                  image: './image-22.png',
+                  alt: 'Wellness Gallery 3',
+                  fallback: 'Gallery 3'
+                },
+                {
+                  image: './image-23.png',
+                  alt: 'Wellness Gallery 4',
+                  fallback: 'Gallery 4'
+                },
+                {
+                  image: './image-24.png',
+                  alt: 'Wellness Gallery 5',
+                  fallback: 'Gallery 5'
+                },
+                {
+                  image: './image-25.png',
+                  alt: 'Wellness Gallery 6',
+                  fallback: 'Gallery 6'
+                }
+              ];
 
-            {/* Image 2 */}
-            <div style={{ 
-              minWidth: '500px',
-              height: '350px',
-              backgroundColor: '#f3f4f6',
-              borderRadius: '8px',
-              overflow: 'hidden',
-              flex: '0 0 auto'
-            }}>
-              <img 
-                src="./image-21.png" 
-                alt="Wellness Gallery 2" 
-                style={{ 
-                  width: '100%', 
-                  height: '100%', 
-                  objectFit: 'cover'
-                }}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const nextSibling = target.nextSibling as HTMLElement;
-                  if (nextSibling) {
-                    nextSibling.style.display = 'flex';
-                  }
-                }}
-              />
-              {/* Fallback design if image fails to load */}
-              <div style={{
-                display: 'none',
-                width: '100%',
-                height: '100%',
-                backgroundColor: '#f3f4f6',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#6b7280',
-                fontSize: '16px',
-                flexDirection: 'column',
-                gap: '8px'
-              }}>
-                <svg width="32" height="32" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span>Gallery 2</span>
-              </div>
-            </div>
+              // Create infinite loop by duplicating cards
+              const extendedGalleryCards = [...wellnessGalleryCards, ...wellnessGalleryCards, ...wellnessGalleryCards];
+              const startIndex = wellnessGalleryCards.length + wellnessGalleryCurrentIndex;
+              const visibleGalleryCards = extendedGalleryCards.slice(startIndex, startIndex + 3);
 
-            {/* Image 3 */}
-            <div style={{ 
-              minWidth: '500px',
-              height: '350px',
-              backgroundColor: '#f3f4f6',
-              borderRadius: '8px',
-              overflow: 'hidden',
-              flex: '0 0 auto'
-            }}>
-              <img 
-                src="./image-22.png" 
-                alt="Wellness Gallery 3" 
-                style={{ 
-                  width: '100%', 
-                  height: '100%', 
-                  objectFit: 'cover'
-                }}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const nextSibling = target.nextSibling as HTMLElement;
-                  if (nextSibling) {
-                    nextSibling.style.display = 'flex';
-                  }
-                }}
-              />
-              {/* Fallback design if image fails to load */}
-              <div style={{
-                display: 'none',
-                width: '100%',
-                height: '100%',
-                backgroundColor: '#f3f4f6',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#6b7280',
-                fontSize: '16px',
-                flexDirection: 'column',
-                gap: '8px'
-              }}>
-                <svg width="32" height="32" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span>Gallery 3</span>
-              </div>
-            </div>
-
-            {/* Image 4 */}
-            <div style={{ 
-              minWidth: '500px',
-              height: '350px',
-              backgroundColor: '#f3f4f6',
-              borderRadius: '8px',
-              overflow: 'hidden',
-              flex: '0 0 auto'
-            }}>
-              <img 
-                src="./image-23.png" 
-                alt="Wellness Gallery 4" 
-                style={{ 
-                  width: '100%', 
-                  height: '100%', 
-                  objectFit: 'cover'
-                }}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const nextSibling = target.nextSibling as HTMLElement;
-                  if (nextSibling) {
-                    nextSibling.style.display = 'flex';
-                  }
-                }}
-              />
-              {/* Fallback design if image fails to load */}
-              <div style={{
-                display: 'none',
-                width: '100%',
-                height: '100%',
-                backgroundColor: '#f3f4f6',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#6b7280',
-                fontSize: '16px',
-                flexDirection: 'column',
-                gap: '8px'
-              }}>
-                <svg width="32" height="32" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span>Gallery 4</span>
-              </div>
-            </div>
-
-            {/* Image 5 */}
-            <div style={{ 
-              minWidth: '500px',
-              height: '350px',
-              backgroundColor: '#f3f4f6',
-              borderRadius: '8px',
-              overflow: 'hidden',
-              flex: '0 0 auto'
-            }}>
-              <img 
-                src="./image-24.png" 
-                alt="Wellness Gallery 5" 
-                style={{ 
-                  width: '100%', 
-                  height: '100%', 
-                  objectFit: 'cover'
-                }}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const nextSibling = target.nextSibling as HTMLElement;
-                  if (nextSibling) {
-                    nextSibling.style.display = 'flex';
-                  }
-                }}
-              />
-              {/* Fallback design if image fails to load */}
-              <div style={{
-                display: 'none',
-                width: '100%',
-                height: '100%',
-                backgroundColor: '#f3f4f6',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#6b7280',
-                fontSize: '16px',
-                flexDirection: 'column',
-                gap: '8px'
-              }}>
-                <svg width="32" height="32" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span>Gallery 5</span>
-              </div>
-            </div>
-
-            {/* Image 6 */}
-            <div style={{ 
-              minWidth: '500px',
-              height: '350px',
-              backgroundColor: '#f3f4f6',
-              borderRadius: '8px',
-              overflow: 'hidden',
-              flex: '0 0 auto'
-            }}>
-              <img 
-                src="./image-25.png" 
-                alt="Wellness Gallery 6" 
-                style={{ 
-                  width: '100%', 
-                  height: '100%', 
-                  objectFit: 'cover'
-                }}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const nextSibling = target.nextSibling as HTMLElement;
-                  if (nextSibling) {
-                    nextSibling.style.display = 'flex';
-                  }
-                }}
-              />
-              {/* Fallback design if image fails to load */}
-              <div style={{
-                display: 'none',
-                width: '100%',
-                height: '100%',
-                backgroundColor: '#f3f4f6',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#6b7280',
-                fontSize: '16px',
-                flexDirection: 'column',
-                gap: '8px'
-              }}>
-                <svg width="32" height="32" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span>Gallery 6</span>
-              </div>
-            </div>
+              return visibleGalleryCards.map((card, index) => (
+                <div key={`${card.alt}-${startIndex + index}`} style={{ 
+                  minWidth: '500px',
+                  height: '350px',
+                  backgroundColor: '#f3f4f6',
+                  borderRadius: '8px',
+                  overflow: 'hidden',
+                  flex: '0 0 auto',
+                  scrollSnapAlign: 'start'
+                }}>
+                  <img 
+                    src={card.image} 
+                    alt={card.alt} 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover'
+                    }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const nextSibling = target.nextSibling as HTMLElement;
+                      if (nextSibling) {
+                        nextSibling.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  {/* Fallback design if image fails to load */}
+                  <div style={{
+                    display: 'none',
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: '#f3f4f6',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#6b7280',
+                    fontSize: '16px',
+                    flexDirection: 'column',
+                    gap: '8px'
+                  }}>
+                    <svg width="32" height="32" fill="none" stroke="#6b7280" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span>{card.fallback}</span>
+                  </div>
+                </div>
+              ));
+            })()}
           </div>
 
-          {/* Navigation Arrows - Below Carousel */}
-          <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: '20px',
-            marginTop: '20px'
+          {/* Simple Navigation */}
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            gap: '16px', 
+            marginTop: '32px' 
           }}>
-                            {/* Left Arrow */}
-                <button
-                  onClick={() => {
-                    const container = document.querySelector('.wellness-gallery-carousel-container') as HTMLElement;
-                    if (container) {
-                      container.scrollBy({ left: -370, behavior: 'smooth' });
-                    }
-                  }}
-                  style={{
-                    width: '40px',
-                    height: '40px',
-                    borderRadius: '50%',
-                    backgroundColor: 'white',
-                    border: '2px solid #d1d5db',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}
-                >
-                  <svg width="16" height="16" fill="none" stroke="#4A5568" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-
-                                             {/* Right Arrow */}
-                       <button
-                         onClick={() => {
-                           const container = document.querySelector('.wellness-gallery-carousel-container') as HTMLElement;
-                           if (container) {
-                             container.scrollBy({ left: 370, behavior: 'smooth' });
-                           }
-                         }}
-                         style={{
-                          width: '40px',
+            <button 
+              style={{
+                width: '40px',
                 height: '40px',
                 borderRadius: '50%',
                 backgroundColor: 'white',
@@ -12187,12 +12278,43 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center'
-                         }}
-                       >
-                         <svg width="16" height="16" fill="none" stroke="#4A5568" viewBox="0 0 24 24">
-                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                         </svg>
-                       </button>
+              }}
+              onClick={() => {
+                setWellnessGalleryCurrentIndex(prev => {
+                  const newIndex = prev - 1;
+                  // Handle infinite loop - when going below 0, wrap to the end
+                  return newIndex < 0 ? 5 : newIndex;
+                });
+              }}
+            >
+              <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button 
+              style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                backgroundColor: 'white',
+                border: '2px solid #d1d5db',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              onClick={() => {
+                setWellnessGalleryCurrentIndex(prev => {
+                  const newIndex = prev + 1;
+                  // Handle infinite loop - when going above 5, wrap to 0
+                  return newIndex > 5 ? 0 : newIndex;
+                });
+              }}
+            >
+              <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
@@ -12530,120 +12652,96 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       </div>
 
       {/* MANTNAM Section */}
-      <div style={{ 
-        marginTop: '80px',
-        backgroundColor: '#ebc9c4',
-        padding: '80px 24px'
-      }}>
-        <div style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '64px'
-        }}>
-          {/* Left Content */}
-          <div style={{ flex: '1' }}>
-            <h3 style={{
-              fontSize: '12px',
-              fontWeight: '400',
-              color: '#F1ECE5',
-              marginBottom: '16px',
-              fontStyle: 'italic',
-              fontFamily: '"Montserrat", sans-serif',
-              textTransform: 'uppercase',
-              marginLeft: '24px'
-            }}>
-              Ancient wisdom and modern techniques
-            </h3>
-            <h2 style={{
-              fontSize: '20px',
-              fontFamily: '"Montserrat", sans-serif',
-              fontWeight: '600',
-              color: '#000000',
-              marginBottom: '24px',
-              marginLeft: '24px',
-              textTransform: 'uppercase'
-            }}>
-              MANTNAM
-            </h2>
-            <p style={{
-              fontFamily: '"Lato"',
-              fontSize: '14px',
-              fontWeight: '400',
-              textAlign: 'justify',
-              color: '#7A7A7A',
-              marginLeft: '24px',
-              lineHeight: '1.6',
-              width: '384px',
-              height: '168px'
-            }}>
-              Mantnam conceptualises wellness as a holistic endeavour. Its attainment requires an equilibrium of mind, body and soul through recalibration and training. Combining ancient techniques and modern equipment, it provides a space which can be used to accomplish various goals for guests-anti-aging, detoxing, muscle strengthening, flexibility, de-stressing, and beautifying your body from the inside out.
-            </p>
-          </div>
+            <div
+        style={{
+          marginTop: "80px",
+          backgroundColor: "#ebc9c4",
+          padding: "80px 24px",
+          width: "100vw",   // full viewport width
+          position: "relative",
+          left: "50%",
+          transform: "translateX(-50%)",
+        }}
+      >
+  <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      gap: "64px",
+      width: "100%",  // stretch
+      justifyContent: "space-between",
+    }}
+  >
+    {/* Left Content */}
+    <div style={{ flex: 1 , marginLeft: "200px"}} >
+      <h3
+        style={{
+          fontSize: "12px",
+          fontWeight: "400",
+          color: "#F1ECE5",
+          marginBottom: "16px",
+          fontStyle: "italic",
+          fontFamily: '"Montserrat", sans-serif',
+          textTransform: "uppercase",
+        }}
+      >
+        Ancient wisdom and modern techniques
+      </h3>
+      <h2
+        style={{
+          fontSize: "20px",
+          fontFamily: '"Montserrat", sans-serif',
+          fontWeight: "600",
+          color: "#000000",
+          marginBottom: "24px",
+          textTransform: "uppercase",
+        }}
+      >
+        MANTNAM
+      </h2>
+      <p
+        style={{
+          fontFamily: '"Lato"',
+          fontSize: "14px",
+          fontWeight: "400",
+          textAlign: "justify",
+          color: "#7A7A7A",
+          lineHeight: "1.6",
+          maxWidth: "600px", // optional: control text width
+        }}
+      >
+        Mantnam conceptualises wellness as a holistic endeavour. Its attainment
+        requires an equilibrium of mind, body and soul through recalibration
+        and training. Combining ancient techniques and modern equipment, it
+        provides a space which can be used to accomplish various goals for
+        guests-anti-aging, detoxing, muscle strengthening, flexibility,
+        de-stressing, and beautifying your body from the inside out.
+      </p>
+    </div>
 
-          {/* Right Card */}
-          <div style={{
-            flex: '1',
-            display: 'flex',
-            justifyContent: 'center'
-          }}>
-            <div style={{
-              width: '300px',
-              height: '300px',
-              // backgroundColor: '#f5f5f0',
-              // borderRadius: '12px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              // boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
-            }}>
-              <img
-                src="./image-30.png"
-                alt="Mantnam Logo"
-                style={{
-                  width: '720px',
-                  height: '260px',
-                  // maxWidth: '100%'
-                }}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const nextSibling = target.nextSibling as HTMLElement;
-                  if (nextSibling) {
-                    nextSibling.style.display = 'flex';
-                  }
-                }}
-              />
-              {/* Fallback design if image fails to load */}
-              <div style={{
-                display: 'none',
-                width: '200px',
-                height: '100px',
-                backgroundColor: '#f5f5f0',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#1e40af',
-                fontSize: '32px',
-                fontWeight: 'bold',
-                fontStyle: 'italic',
-                flexDirection: 'column',
-                gap: '8px'
-              }}>
-                <span style={{ fontSize: '48px', fontWeight: 'bold', color: '#1e40af' }}>mantnam</span>
-                <div style={{ 
-                  width: '4px', 
-                  height: '4px', 
-                  backgroundColor: '#1e40af', 
-                  borderRadius: '50%',
-                  marginTop: '-20px',
-                  marginLeft: '60px'
-                }}></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    {/* Right Image */}
+    <div
+      style={{
+        flex: 1,
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <img
+        src="./image-30.png"
+        alt="Mantnam Logo"
+        style={{
+          width: "100%",     // responsive
+          maxWidth: "500px", // optional
+          height: "auto",
+          objectFit: "contain",
+        }}
+      />
+    </div>
+  </div>
+</div>
+
+
     </>
   );
 
@@ -12848,7 +12946,10 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               >
                 Rambha Palace
               </a>
-              <span style={{ color: '#9ca3af' }}>{'>'}</span>
+              <span style={{ 
+                color: '#9ca3af', 
+                fontWeight: currentPage === 'home' ? 'black' : 'normal' 
+              }}>{'>'}</span>
               <a 
                 href="#" 
                 onClick={(e) => { e.preventDefault(); setCurrentPage('accommodation'); }}
