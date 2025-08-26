@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import IconContainer from './components/IconContainer';
+import TempleCarousel from './components/TempleCarousal';
 
 
 
@@ -2178,14 +2179,14 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               backgroundColor: 'transparent',
               zIndex: 1
             }}
-            onMouseEnter={(e) => {
-              const target = e.currentTarget as HTMLElement;
-              target.style.transform = 'scale(1.02)';
-            }}
-            onMouseLeave={(e) => {
-              const target = e.currentTarget as HTMLElement;
-              target.style.transform = 'scale(1)';
-            }}
+            // onMouseEnter={(e) => {
+            //   const target = e.currentTarget as HTMLElement;
+            //   target.style.transform = 'scale(1.02)';
+            // }}
+            // onMouseLeave={(e) => {
+            //   const target = e.currentTarget as HTMLElement;
+            //   target.style.transform = 'scale(1)';
+            // }}
           >
             <img 
               src="./image-1.png"
@@ -2288,7 +2289,13 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
           </div>
 
           {/* Second Card - Family Palace Suite */}
-          <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+          <div 
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setCurrentPage('palace-family-suite');
+            }}
+            style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)', cursor: 'pointer' }}>
             <img 
               src="./image-2.png" 
               alt="Family Palace Suite" 
@@ -2362,27 +2369,20 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               </p>
             </div>
             
-            {/* Invisible Link Overlay */}
-            <a 
-              href="/rambhapalace/palace-family-suite/" 
-              style={{ 
-                background: 'transparent', 
-                border: 'none', 
-                position: 'absolute', 
-                height: '100%', 
-                width: '100%', 
-                zIndex: 9999, 
-                top: 0, 
-                left: 0 
-              }}
-            ></a>
+            {/* Click handled by container onClick */}
           </div>
         </div>
 
         {/* Four Additional Cards Section */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', marginBottom: '48px' }}>
           {/* Third Card - Generator Suite */}
-          <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+          <div 
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setCurrentPage('generator-suite');
+            }}
+            style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)', cursor: 'pointer' }}>
             <img 
               src="./image-3.png" 
               alt="Generator Suite" 
@@ -2456,24 +2456,17 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               </p>
             </div>
             
-            {/* Invisible Link Overlay */}
-            <a 
-              href="/rambhapalace/generator-suite/" 
-              style={{ 
-                background: 'transparent', 
-                border: 'none', 
-                position: 'absolute', 
-                height: '100%', 
-                width: '100%', 
-                zIndex: 9999, 
-                top: 0, 
-                left: 0 
-              }}
-            ></a>
+            {/* Click handled by container onClick */}
           </div>
 
           {/* Fourth Card - Ice Mill Suite */}
-          <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+          <div 
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setCurrentPage('ice-mill-suite');
+            }}
+            style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)', cursor: 'pointer' }}>
             <img 
               src="./image-4.png" 
               alt="Ice Mill Suite" 
@@ -2553,24 +2546,17 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               </p>
             </div>
             
-            {/* Invisible Link Overlay */}
-            <a 
-              href="/rambhapalace/rambhapalace/ice-mill-suite/" 
-              style={{ 
-                background: 'transparent', 
-                border: 'none', 
-                position: 'absolute', 
-                height: '100%', 
-                width: '100%', 
-                zIndex: 9999, 
-                top: 0, 
-                left: 0 
-              }}
-            ></a>
+            {/* Click handled by container onClick */}
           </div>
 
           {/* Fifth Card - Printing Press Suite */}
-          <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+          <div 
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setCurrentPage('printing-press-suite');
+            }}
+            style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)', cursor: 'pointer' }}>
             <img 
              src="./image-5.png" 
               alt="Printing Press Suite" 
@@ -2644,24 +2630,17 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               </p>
             </div>
             
-            {/* Invisible Link Overlay */}
-            <a 
-              href="/rambhapalace/printing-press-suite/" 
-              style={{ 
-                background: 'transparent', 
-                border: 'none', 
-                position: 'absolute', 
-                height: '100%', 
-                width: '100%', 
-                zIndex: 9999, 
-                top: 0, 
-                left: 0 
-              }}
-            ></a>
+            {/* Click handled by container onClick */}
           </div>
 
           {/* Sixth Card - Rambha Villa */}
-          <div style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+          <div 
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setCurrentPage('rambha-villa');
+            }}
+            style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)', cursor: 'pointer' }}>
             <img 
               src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/RambhaVilla-1-1-1024x683.png" 
               alt="Rambha Villa" 
@@ -2737,20 +2716,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               </p>
             </div>
             
-            {/* Invisible Link Overlay */}
-            <a 
-              href="/rambhapalace/rambhapalace/ice-mill-suite/" 
-              style={{ 
-                background: 'transparent', 
-                border: 'none', 
-                position: 'absolute', 
-                height: '100%', 
-                width: '100%', 
-                zIndex: 9999, 
-                top: 0, 
-                left: 0 
-              }}
-            ></a>
+            {/* Click handled by container onClick */}
           </div>
         </div>
       </div>
@@ -3568,159 +3534,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             </div>
 
             {/* Temple Carousel */}
-            <div style={{ marginBottom: '48px' }}>
-              <div style={{ 
-                position: 'relative',
-                maxWidth: '1200px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '20px'
-              }}>
-                {/* Left Arrow */}
-                <button 
-                  onClick={() => {
-                    setTempleCurrentIndex(prev => {
-                      const newIndex = prev - 1;
-                      return newIndex < 0 ? 1 : newIndex; // 4 items, show 3 → wrap 0..1
-                    });
-                  }}
-                  style={{
-                    width: '40px',
-                    height: '40px',
-                    borderRadius: '50%',
-                    backgroundColor: '',
-                    border: '1px solid #2C3E50',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    zIndex: 10,
-                    flexShrink: 0
-                  }}
-                >
-                  <svg width="16" height="16" fill="none" stroke="#2C3E50" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
+            
 
-                {/* Cards */}
-                <div 
-                  className="temple-cards-container"
-                style={{ 
-                  display: 'flex', 
-                    gap: '24px',
-                  overflowX: 'auto', 
-                    scrollBehavior: 'smooth',
-                    scrollbarWidth: 'none',
-                    msOverflowStyle: 'none',
-                    WebkitOverflowScrolling: 'touch',
-                  scrollSnapType: 'x mandatory',
-                    flex: 1
-                  }}
-                >
-                  {(() => {
-                    const templeCards = [
-                      {
-                        key: 'jagannath',
-                        image: '/jagannath.png',
-                        title: 'Jagannath Temple',
-                        description: 'A UNESCO heritage site constructed in 800 CE; the temple is a major pilgrimage site. Sculptures of Hindu deities are placed upon a bejewelled base- a visit here is nothing short of enlightenment.'
-                      },
-                      {
-                        key: 'konark',
-                        image: 'konark.png',
-                        title: 'Konark Sun Temple',
-                        description: 'Dedicated to the Hindu Sun God, Konark Temple was hewn from stone in the 13th century. The temple showcases a magnificent sun idol, seemingly suspended in a celestial embrace.'
-                      },
-                      {
-                        key: 'shanti',
-                        image: '/shanti.png',
-                        title: 'Shanti Stupa, Dhauligiri',
-                        description: "As you stand before the 'peace pagoda' site, the peaceful atmosphere envelops you, a poignant reminder of King Ashoka's commitment to peace after the Kalinga War."
-                      },
-                      {
-                        key: 'lingaraj',
-                        image: 'lingaraj.png',
-                        title: 'Lingaraj Temple',
-                        description: 'The largest temple in Bhubaneswar, dedicated to Lord Shiva, exemplifies the essence of Kalinga architecture. The festival of Shivaratri is celebrated here on a grand scale.'
-                      }
-                    ];
-
-                    const extended = [...templeCards, ...templeCards, ...templeCards];
-                    const startIndex = templeCards.length + templeCurrentIndex;
-                    const visible = extended.slice(startIndex, startIndex + 3);
-
-                    return visible.map((card, index) => (
-                      <div 
-                        key={`${card.key}-${startIndex + index}`}
-                      style={{ 
-                  backgroundColor: 'white', 
-                  borderRadius: '8px', 
-                  overflow: 'hidden', 
-                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                          minWidth: '350px',
-                          flex: 1,
-                  scrollSnapAlign: 'start'
-                        }}
-                      >
-                        <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <img 
-                            src={card.image}
-                            alt={card.title}
-                      style={{ 
-                        width: '100%', 
-                        height: '100%', 
-                        objectFit: 'cover'
-                      }}
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const nextSibling = target.nextSibling as HTMLElement;
-                        if (nextSibling) {
-                          nextSibling.style.display = 'flex';
-                        }
-                      }}
-                    />
-                      </div>
-                        <div style={{ padding: '24px' }}>
-                          <h3 style={{ fontSize: '21px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>{card.title}</h3>
-                    <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
-                            {card.description}
-                    </p>
-                  </div>
-                </div>
-                    ));
-                  })()}
-              </div>
-
-                {/* Right Arrow */}
-                <button 
-                  onClick={() => {
-                    setTempleCurrentIndex(prev => {
-                      const newIndex = prev + 1;
-                      return newIndex > 1 ? 0 : newIndex; // wrap
-                    });
-                  }}
-                  style={{
-                    width: '40px',
-                    height: '40px',
-                    borderRadius: '50%',
-                    backgroundColor: '',
-                    border: '1px solid #2C3E50',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    zIndex: 10,
-                    flexShrink: 0
-                  }}
-                >
-                  <svg width="16" height="16" fill="none" stroke="#2C3E50" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-            </div>
+       <TempleCarousel />
 
             {/* FEATURED EXPERIENCES Section */}
             <div style={{ marginBottom: '48px' }}>
