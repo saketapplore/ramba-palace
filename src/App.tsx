@@ -13911,7 +13911,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 }}>
                   {/* Facebook */}
                   <a 
-                    href="https://www.facebook.com/hiddenindiaexperiences/" 
+                    href="https://www.facebook.com/share/1753mtttzW/?mibextid=wwXIfr" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     style={{ 
@@ -13930,7 +13930,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
                   {/* Instagram */}
                   <a 
-                    href="https://www.instagram.com/_hiddenindia_/" 
+                    href="https://www.instagram.com/rambhapalace?igsh=MWpkeTRncGhlbXNpNw%3D%3D&utm_source=qr" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     style={{ 
@@ -13972,7 +13972,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
                   {/* LinkedIn */}
                   <a 
-                    href="https://www.linkedin.com/company/hidden-india" 
+                    href="https://www.linkedin.com/company/rambha-palace/" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     style={{ 

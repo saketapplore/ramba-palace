@@ -6,14 +6,14 @@ import { FaLinkedin } from "react-icons/fa";
 const linkitems = [
     {
       icon: FaInstagram,
-      path: "https://www.instagram.com/_hiddenindia_/",
+      path: "https://www.instagram.com/rambhapalace?igsh=MWpkeTRncGhlbXNpNw%3D%3D&utm_source=qr",
     },
     {
       icon:FaFacebook,
-      path:"https://www.facebook.com/rambhapalace?mibextid=LQQJ4d"
+      path:"https://www.facebook.com/share/1753mtttzW/?mibextid=wwXIfr"
     },{
       icon:FaLinkedin,
-      path:"https://www.linkedin.com/authwall?trk=bf&trkInfo=AQGXzUt9DlSJRAAAAZjwfz_A8O4FX7PZEkrPklt4-Zbc0LjNskMSPC5fAmR4DlDb1cCnPvF6H1Qieml_rht0G_r6GRljJkKpwARU1dWPqX6gUFuTB2dSgZuFL7NVDHPWn0DPmdk=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Fhidden-india"
+      path:"https://www.linkedin.com/company/rambha-palace/"
     }
   ]
 
