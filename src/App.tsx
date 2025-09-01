@@ -22,6 +22,7 @@ function App() {
   const [isBathExpanded, setIsBathExpanded] = useState(false);
   const [isTechnologyExpanded, setIsTechnologyExpanded] = useState(false);
   const [isServicesExpanded, setIsServicesExpanded] = useState(false);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   // Client-side routing: Update browser URL when currentPage changes
   useEffect(() => {
@@ -41,6 +42,13 @@ function App() {
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
+
+  // Handle form submission
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsFormSubmitted(true);
+    // Success message will stay visible until page refresh
+  };
 
   // Debug currentPage changes
   useEffect(() => {
@@ -7085,7 +7093,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
         margin: '0 auto',
         padding: '48px'
       }}>
-        <form style={{ display: 'grid', gap: '24px' }}>
+        <form onSubmit={handleFormSubmit} style={{ display: 'grid', gap: '24px' }}>
           {/* First Row - Title and Name */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
             {/* Title */}
@@ -7325,6 +7333,19 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               Submit
             </button>
           </div>
+
+          {/* Success Message */}
+          {isFormSubmitted && (
+            <div style={{ 
+              textAlign: 'left', 
+              marginTop: '16px',
+              color: '#334155',
+              fontSize: '16px',
+              fontWeight: '500'
+            }}>
+              ✓ Your submission was successful.
+            </div>
+          )}
         </form>
       </div>
 
