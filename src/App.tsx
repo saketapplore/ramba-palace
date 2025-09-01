@@ -2,6 +2,16 @@ import React, { useState, useEffect } from 'react';
 import IconContainer from './components/IconContainer';
 import TempleCarousel from './components/TempleCarousal';
 
+// import gene1 from '../public/assets/gene1.jpeg'
+// import gene2 from '../public/assets/gene2.jpeg'
+// import gene3 from '../public/assets/gene3.jpeg'
+// import gene4 from '../public/assets/gene4.jpeg'
+// import gene5 from '../public/assets/gene5.jpeg'
+// import gene6 from '../public/assets/gene6.jpeg'
+// import gene7 from '../public/assets/gene7.jpeg'
+// import gene8 from '../public/assets/gene8.jpeg'
+// import gene9 from '../public/assets/gene9.jpeg'
+// import gene10 from '../public/assets/gene10.jpeg'
 
 
 function App() {
@@ -126,8 +136,8 @@ function App() {
   useEffect(() => {
     if (currentPage === 'overview') {
       setActiveTab('overview');
-    } else if (currentPage === 'rambha-villa') {
-      setActiveTab('rambha-villa');
+    } else if (currentPage === 'presidential-villa') {
+      setActiveTab('presidential-villa');
     }
   }, [currentPage]);
 
@@ -164,21 +174,21 @@ function App() {
       </div>
 
       {/* Rambha Palace Emblem and Content */}
-      <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+      <div style={{ textAlign: 'center', marginBottom: '32px' }}>
         {/* Rambha Palace Logo */}
         <div style={{ marginBottom: '32px' }}>
           <div style={{ display: 'inline-block', position: 'relative' }}>
             <img 
               loading="lazy" 
               decoding="async" 
-              width="864" 
-              height="846" 
-              src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/RambhaPalaceLogo-1.svg" 
+              width="986" 
+              height="986" 
+              src="/assets/logoramba.png" 
               className="attachment-large size-large wp-image-79" 
               alt="Rambha Palace Logo"
               style={{ 
-                width: '174px', 
-                height: '170.39px', 
+                width: '300px', 
+  height: '280px',  
                 maxWidth: '100%',
                 display: 'block',
                 margin: '10px 0px 0px',
@@ -492,77 +502,7 @@ function App() {
             }}
           >
             {/* Ice Mill Suites */}
-            <div
-              className="accommodation-card"
-              style={{
-                flex: '0 0 400px',
-                transition: 'all 0.3s ease',
-                scrollSnapAlign: 'center',
-                padding: '0 12px',
-                boxSizing: 'border-box'
-              }}
-            >
-              <div style={{
-                backgroundColor: 'white',
-                borderRadius: '12px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                height: '100%'
-              }}>
-                <img
-                  src="/image-51.png"
-                  alt="Ice Mill Suites"
-                  style={{
-                    width: '100%',
-                    height: '250px',
-                    objectFit: 'cover',
-                    display: 'block'
-                  }}
-                />
-                <div style={{ padding: '24px' }}>
-                  <h3 style={{
-                    fontSize: '16px',
-                    fontWeight: '500',
-                    color: '#000',
-                    textTransform: 'uppercase',
-                    margin: '0 0 16px 0',
-                    textAlign: 'center',
-                    fontFamily: '"Montserrat", sans-serif'
-                  }}>
-                    ICE MILL SUITES
-                  </h3>
-                  <p style={{
-                    fontSize: '14px',
-                    color: '#3A3A3A',
-                    
-                    lineHeight: '1.5',
-                    margin: '0 0 24px 0',
-                    textAlign: 'left',
-                    fontFamily: '"Lato", sans-serif'
-                  }}>
-                    Once used to store ice blocks for preserving the palace's fresh catches, these suites have been reimagined into a lavish retreat with an outdoor seating verandah.
-                  </p>
-                  <button 
-                    onClick={() => setCurrentPage('ice-mill-suite')}
-                    style={{
-                      backgroundColor: '#000',
-                      color: 'white',
-                      border: 'none',
-                      padding: '12px 32px',
-                      borderRadius: '6px',
-                      fontSize: '14px',
-                      fontWeight: '600',
-                      textTransform: 'uppercase',
-                      cursor: 'pointer',
-                      width: '100%',
-                      fontFamily: '"Montserrat", sans-serif'
-                    }}
-                  >
-                    VIEW
-                  </button>
-                </div>
-              </div>
-            </div>
+           
 
             {/* Palace Suite */}
             <div
@@ -894,7 +834,7 @@ function App() {
                     textAlign: 'center',
                     fontFamily: '"Montserrat", sans-serif'
                   }}>
-                    RAMBHA VILLA
+                    PRESIDENTIAL VILLA
                   </h3>
                   <p style={{
                      fontSize: '14px',
@@ -908,7 +848,7 @@ function App() {
                     A luxurious, standalone two-bedroom presidential suite featuring a spacious private garden, swimming pool, butler service and pantry with a comfortable lounge area.
                   </p>
                   <button
-                    onClick={() => setCurrentPage('rambha-villa')}
+                    onClick={() => setCurrentPage('presidential-villa')}
                     style={{
                       backgroundColor: '#000',
                       color: 'white',
@@ -931,77 +871,7 @@ function App() {
 
             {/* 🔄 Duplicate set 1 for infinite loop effect */}
             {/* Ice Mill Suites */}
-            <div
-              className="accommodation-card"
-              style={{
-                flex: '0 0 400px',
-                transition: 'all 0.3s ease',
-                scrollSnapAlign: 'center',
-                padding: '0 12px',
-                boxSizing: 'border-box'
-              }}
-            >
-              <div style={{
-                backgroundColor: 'white',
-                borderRadius: '12px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                height: '100%'
-              }}>
-                <img
-                  src="/image-51.png"
-                  alt="Ice Mill Suites"
-                  style={{
-                    width: '100%',
-                    height: '250px',
-                    objectFit: 'cover',
-                    display: 'block'
-                  }}
-                />
-                <div style={{ padding: '24px' }}>
-                  <h3 style={{
-                    fontSize: '16px',
-                    fontWeight: '500',
-                    color: '#000',
-                    textTransform: 'uppercase',
-                    margin: '0 0 16px 0',
-                    textAlign: 'center',
-                    fontFamily: '"Montserrat", sans-serif'
-                  }}>
-                    ICE MILL SUITES
-                  </h3>
-                  <p style={{
-                    fontSize: '14px',
-                    color: '#3A3A3A',
-                    
-                    lineHeight: '1.5',
-                    margin: '0 0 24px 0',
-                    textAlign: 'left',
-                    fontFamily: '"Lato", sans-serif'
-                  }}>
-                    Once used to store ice blocks for preserving the palace's fresh catches, these suites have been reimagined into a lavish retreat with an outdoor seating verandah.
-                  </p>
-                  <button 
-                    onClick={() => setCurrentPage('ice-mill-suite')}
-                    style={{
-                      backgroundColor: '#000',
-                      color: 'white',
-                      border: 'none',
-                      padding: '12px 32px',
-                      borderRadius: '6px',
-                      fontSize: '14px',
-                      fontWeight: '600',
-                      textTransform: 'uppercase',
-                      cursor: 'pointer',
-                      width: '100%',
-                      fontFamily: '"Montserrat", sans-serif'
-                    }}
-                  >
-                    VIEW
-                  </button>
-                </div>
-              </div>
-            </div>
+          
 
             {/* Palace Suite */}
             <div
@@ -1333,7 +1203,7 @@ function App() {
                     textAlign: 'center',
                     fontFamily: '"Montserrat", sans-serif'
                   }}>
-                    RAMBHA VILLA
+                    PRESIDENTIAL VILLA
                   </h3>
                   <p style={{
                      fontSize: '14px',
@@ -1347,7 +1217,7 @@ function App() {
                     A luxurious, standalone two-bedroom presidential suite featuring a spacious private garden, swimming pool, butler service and pantry with a comfortable lounge area.
                   </p>
                   <button
-                    onClick={() => setCurrentPage('rambha-villa')}
+                    onClick={() => setCurrentPage('presidential-villa')}
                     style={{
                       backgroundColor: '#000',
                       color: 'white',
@@ -1936,7 +1806,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
     lineHeight: '1.8',
     marginBottom: '32px'
   }}>
-    Please contact our reservations team at <span style={{ fontWeight: '600' ,color: '#212121'}}>reservations@hiddenindia.com</span> or <span style={{ fontWeight: '600' ,color: '#000000'}}>+91 7800 208 002</span> to arrange your preferred transfer.
+    Please contact our reservations team at <span style={{ fontWeight: '600' ,color: '#212121'}}>reservations@rambhapalace.com</span> or <span style={{ fontWeight: '600' ,color: '#000000'}}>+91 7800 208 002</span> to arrange your preferred transfer.
   </p>
 
   <a 
@@ -2017,19 +1887,23 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
         marginTop: isHeaderSticky ? '-1px' : '0'
       }}>
         <div style={{ display: 'flex', gap: '32px' }}>
-          {['Overview', 'Rambha Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite', 'Ice Mill Suite', 'Printing Press Suite'].map((tab) => (
+          {['Overview', 'Presidential Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite',  'Printing Press Suite'].map((tab) => (
             <button
               key={tab}
               className="accommodation-tab-button"
               onClick={() => {
-                if (tab === 'Palace Suite') {
+                if (tab === 'Overview') {
+                  setCurrentPage('overview');
+                } else if (tab === 'Palace Suite') {
                   setCurrentPage('palace-suite');
                 } else if (tab === 'Palace Family Suite') {
                   setCurrentPage('palace-family-suite');
                 } else if (tab === 'Generator Suite') {
                   setCurrentPage('generator-suite');
-                } else {
-                  setActiveTab(tab.toLowerCase().replace(' ', '-'));
+                } else if (tab === 'Printing Press Suite') {
+                  setCurrentPage('printing-press-suite');
+                } else if (tab === 'Presidential Villa') {
+                  setCurrentPage('presidential-villa');
                 }
               }}
               style={{
@@ -2053,7 +1927,12 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               }}
             >
               {tab}
-              {activeTab === tab.toLowerCase().replace(' ', '-') && (
+              {((tab === 'Overview' && currentPage === 'overview') ||
+                (tab === 'Palace Suite' && currentPage === 'palace-suite') ||
+                (tab === 'Palace Family Suite' && currentPage === 'palace-family-suite') ||
+                (tab === 'Generator Suite' && currentPage === 'generator-suite') ||
+                (tab === 'Printing Press Suite' && currentPage === 'printing-press-suite') ||
+                (tab === 'Presidential Villa' && currentPage === 'presidential-villa')) && (
                 <span style={{ 
                   marginLeft: '4px', 
                   color: '#000000',
@@ -2467,95 +2346,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             {/* Click handled by container onClick */}
           </div>
 
-          {/* Fourth Card - Ice Mill Suite */}
-          <div 
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setCurrentPage('ice-mill-suite');
-            }}
-            style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)', cursor: 'pointer' }}>
-            <img 
-              src="./image-4.png" 
-              alt="Ice Mill Suite" 
-              style={{ width: '100%', height: '300px', objectFit: 'cover' }}
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.style.display = 'none';
-                const nextSibling = target.nextSibling as HTMLElement;
-                if (nextSibling) {
-                  nextSibling.style.display = 'flex';
-                }
-              }}
-            />
-            {/* Fallback design for fourth card */}
-            <div style={{ 
-              display: 'none', 
-              width: '100%', 
-              height: '300px', 
-              backgroundColor: '#40e0d0',
-              position: 'relative',
-              overflow: 'hidden'
-            }}>
-              {/* Two single beds */}
-              <div style={{ 
-                position: 'absolute', 
-                top: '50%', 
-                left: '30%', 
-                transform: 'translate(-50%, -50%)',
-                width: '25%',
-                height: '35%',
-                backgroundColor: '#ffffff',
-                border: '2px solid #d1d5db',
-                borderRadius: '8px',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
-              }}></div>
-              <div style={{ 
-                position: 'absolute', 
-                top: '50%', 
-                left: '70%', 
-                transform: 'translate(-50%, -50%)',
-                width: '25%',
-                height: '35%',
-                backgroundColor: '#ffffff',
-                border: '2px solid #d1d5db',
-                borderRadius: '8px',
-                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
-              }}></div>
-              
-              {/* Teal sofa */}
-              <div style={{ 
-                position: 'absolute', 
-                bottom: '20%', 
-                left: '10%',
-                width: '25%',
-                height: '15%',
-                backgroundColor: '#008080',
-                borderRadius: '8px 8px 0 0'
-              }}></div>
-              
-              {/* Window */}
-              <div style={{ 
-                position: 'absolute', 
-                top: '10%', 
-                left: '5%',
-                width: '20%',
-                height: '30%',
-                backgroundColor: '#87ceeb',
-                border: '2px solid #d1d5db'
-              }}></div>
-            </div>
-            
-            {/* Card Content */}
-            <div style={{ padding: '24px', backgroundColor: 'white' }}>
-              <h3 style={{ fontSize: '20px',fontWeight: '700', color: '#000000', stroke:'#000',marginBottom: '12px', fontFamily: '"Montserrat", sans-serif' }}>ICE MILL SUITES</h3>
-              <p style={{ color: '#3A3A3A', lineHeight: '1.6', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
-                Once used to store ice blocks for preserving the palace's fresh catches, these suites have been reimagined into a lavish retreat with an outdoor seating verandah.
-              </p>
-            </div>
-            
-            {/* Click handled by container onClick */}
-          </div>
+          
 
           {/* Fifth Card - Printing Press Suite */}
           <div 
@@ -2646,7 +2437,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              setCurrentPage('rambha-villa');
+              setCurrentPage('presidential-villa');
             }}
             style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)', cursor: 'pointer' }}>
             <img 
@@ -2718,7 +2509,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             
             {/* Card Content */}
             <div style={{ padding: '24px', backgroundColor: 'white' }}>
-              <h3 style={{ fontSize: '20px',fontWeight: '700', color: '#000000', stroke:'#000',marginBottom: '12px', fontFamily: '"Montserrat", sans-serif' }}>RAMBHA VILLA</h3>
+              <h3 style={{ fontSize: '20px',fontWeight: '700', color: '#000000', stroke:'#000',marginBottom: '12px', fontFamily: '"Montserrat", sans-serif' }}>PRESIDENTIAL VILLA</h3>
               <p style={{ color: '#3A3A3A', lineHeight: '1.6', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
                 A luxurious, standalone two-bedroom presidential suite featuring a spacious private garden, swimming pool, butler service and pantry with a comfortable lounge area.
               </p>
@@ -2727,6 +2518,897 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             {/* Click handled by container onClick */}
           </div>
         </div>
+      </div>
+    </>
+  );
+
+  const renderPresidentialVillaPage = () => (
+    <>
+      
+      
+      {/* Main Title */}
+      <div style={{
+        maxWidth: '1524px',
+  fontFamily:  '"Montserrat", sans-serif',
+  color: '#000000',
+  fontSize: '32px',
+  fontWeight: 200,
+  lineHeight: '39.01px',
+  textAlign: 'center'
+}}>
+  Presidential Villa
+</div>
+
+
+      {/* Tab Navigation */}
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        marginBottom: '32px', 
+        backgroundColor: 'rgb(241,236,229)',
+        padding: '16px 0',
+        position: 'sticky',
+        top: isHeaderSticky ? 48 : 0,
+        zIndex: 1000,
+        boxShadow: 'none',
+        marginTop: isHeaderSticky ? '-1px' : '0'
+      }}>
+        <div style={{ display: 'flex', gap: '32px' }}>
+          {['Overview', 'Presidential Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite',  'Printing Press Suite'].map((tab) => (
+            <button
+              key={tab}
+              className="accommodation-tab-button"
+              onClick={() => {
+                if (tab === 'Overview') {
+                  setCurrentPage('overview');
+                } else if (tab === 'Palace Suite') {
+                  setCurrentPage('palace-suite');
+                } else if (tab === 'Palace Family Suite') {
+                  setCurrentPage('palace-family-suite');
+                } else if (tab === 'Generator Suite') {
+                  setCurrentPage('generator-suite');
+                } else if (tab === 'Printing Press Suite') {
+                  setCurrentPage('printing-press-suite');
+                } else if (tab === 'Presidential Villa') {
+                  setCurrentPage('presidential-villa');
+                }
+              }}
+              style={{
+                padding: '8px 0 !important',
+                border: 'none !important',
+                backgroundColor: 'transparent !important',
+                cursor: 'pointer !important',
+                fontSize: '14px !important',
+                fontFamily: 'sans-serif !important',
+                position: 'relative',
+                transition: 'none !important',
+                outline: 'none !important',
+                textDecoration: 'none !important',
+                boxShadow: 'none !important',
+                transform: 'none !important',
+                filter: 'none !important',
+                opacity: '1 !important',
+                WebkitAppearance: 'none',
+                MozAppearance: 'none',
+                appearance: 'none',
+              }}
+            >
+              {tab}
+              {((tab === 'Presidential Villa' && currentPage === 'presidential-villa') || 
+                (tab === 'Overview' && currentPage === 'overview') ||
+                (tab === 'Palace Suite' && currentPage === 'palace-suite') ||
+                (tab === 'Palace Family Suite' && currentPage === 'palace-family-suite') ||
+                (tab === 'Generator Suite' && currentPage === 'generator-suite') ||
+                (tab === 'Printing Press Suite' && currentPage === 'printing-press-suite')) && (
+                <span style={{ 
+                  marginLeft: '4px', 
+                  color: '#000000',
+                  fontWeight: '600'
+                }}> ›</span>
+              )}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Main Content Area */}
+      <div style={{ maxWidth: '1024px', margin: '0 auto' }}>
+        {/* Large Room Video */}
+        <div style={{ marginBottom: '48px' }}>
+          <div style={{ position: 'relative', width: '100%', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}>
+            <div style={{ aspectRatio: '16/10', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <video 
+                src="/assets/Presidentialsuite.mp4" 
+                autoPlay 
+                muted 
+                loop 
+                playsInline
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                onError={(e) => {
+                  // Fallback to a styled div if video fails to load
+                  const target = e.target as HTMLVideoElement;
+                  target.style.display = 'none';
+                  const nextSibling = target.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+              {/* Fallback room design if video doesn't load */}
+              <div style={{ 
+                display: 'none', 
+                width: '100%', 
+                height: '100%', 
+                backgroundColor: '#f8f9fa',
+                position: 'relative',
+                overflow: 'hidden'
+              }}>
+                {/* Four-poster bed */}
+                <div style={{ 
+                  position: 'absolute', 
+                  top: '50%', 
+                  left: '50%', 
+                  transform: 'translate(-50%, -50%)',
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#ffffff',
+                  border: '2px solid #d1d5db',
+                  borderRadius: '8px',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+                }}>
+                  {/* Bed posts */}
+                  <div style={{ position: 'absolute', top: '-20px', left: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                  <div style={{ position: 'absolute', top: '-20px', right: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                  <div style={{ position: 'absolute', bottom: '-20px', left: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                  <div style={{ position: 'absolute', bottom: '-20px', right: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                </div>
+                
+                {/* Green sofa */}
+                <div style={{ 
+                  position: 'absolute', 
+                  bottom: '20%', 
+                  left: '10%',
+                  width: '25%',
+                  height: '15%',
+                  backgroundColor: '#228b22',
+                  borderRadius: '8px 8px 0 0'
+                }}></div>
+                
+                {/* Window */}
+                <div style={{ 
+                  position: 'absolute', 
+                  top: '10%', 
+                  left: '5%',
+                  width: '20%',
+                  height: '30%',
+                  backgroundColor: '#87ceeb',
+                  border: '2px solid #d1d5db'
+                }}></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* STAY AT RAMBHA Section */}
+        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#000000', marginBottom: '24px', fontFamily: '"Montserrat", sans-serif' }}>PRESIDENTIAL VILLA</h2>
+          <div style={{ maxWidth: '800px', margin: '0 auto', color: '#3A3A3A', lineHeight: '1.8', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
+            <p>
+            A luxurious, standalone two-bedroom presidential suite featuring a spacious private garden, swimming pool, butler service and pantry with a comfortable lounge area.
+            </p>
+          </div>
+        </div>
+
+        {/* Buttons Section */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', marginBottom: '48px' }}>
+          <button style={{ 
+            padding: '16px 32px', 
+            backgroundColor: 'transparent', 
+            color: '#000000', 
+            border: '1px solid #000000', 
+            borderRadius: '4px',
+            fontSize: '16px',
+            fontWeight: '500',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            // e.currentTarget.style.backgroundColor = '#000000';
+            // e.currentTarget.style.color = '#ffffff';
+          }}
+          onMouseLeave={(e) => {
+            // e.currentTarget.style.backgroundColor = 'transparent';
+            // e.currentTarget.style.color = '#000000';
+          }}>
+            Floor Plan
+          </button>
+          <button style={{ 
+            padding: '16px 32px', 
+            backgroundColor: '#000000', 
+            color: '#ffffff', 
+            border: '1px solid #000000', 
+            borderRadius: '4px',
+            fontSize: '16px',
+            fontWeight: '500',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#333333';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = '#000000';
+          }}>
+            Check Rates
+          </button>
+        </div>
+
+        {/* Image Carousel */}
+        <div style={{ marginBottom: '48px' }}>
+          {/* Carousel Container */}
+          <div style={{ 
+            position: 'relative',
+            maxWidth: '100%',
+            overflow: 'hidden'
+          }}>
+            {/* Palace Suite Carousel Images - State-based Carousel */}
+            <div 
+              className="palace-suite-carousel-container"
+              style={{ 
+                display: 'flex', 
+                gap: '16px',
+                justifyContent: 'center',
+                overflowX: 'auto',
+                scrollBehavior: 'smooth',
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+                WebkitOverflowScrolling: 'touch',
+                scrollSnapType: 'x mandatory',
+                padding: '0 20px'
+              }}
+            >
+              {/* Palace Suite Carousel Cards - State-based Carousel */}
+              {(() => {
+                const palaceSuiteCarouselCards = [
+                  {
+                    image: '/image-70.png',
+                    alt: 'Palace Suite Bedroom',
+                    fallback: '🛏️'
+                  },
+                  {
+                    image: '/assets/psuite1.jpg',
+                    alt: 'Palace Suite Bathroom',
+                    fallback: '🛁'
+                  },
+                  {
+                    image: '/assets/psuite2.jpg',
+                    alt: 'Palace Suite Bathroom',
+                    fallback: '🛁'
+                  },
+                  {
+                    image: '/image-73.png',
+                    alt: 'Palace Suite Bathroom Detail',
+                    fallback: '🧴'
+                  },
+                  {
+                    image: '/image-74.png',
+                    alt: 'Palace Suite Additional View',
+                    fallback: '🏰'
+                  }
+                ];
+
+                // Create infinite loop by duplicating cards
+                const extendedPalaceSuiteCards = [...palaceSuiteCarouselCards, ...palaceSuiteCarouselCards, ...palaceSuiteCarouselCards];
+                const startIndex = palaceSuiteCarouselCards.length + palaceSuiteCarouselCurrentIndex;
+                const visiblePalaceSuiteCards = extendedPalaceSuiteCards.slice(startIndex, startIndex + 3);
+
+                return visiblePalaceSuiteCards.map((card, index) => (
+                  <div key={`${card.alt}-${startIndex + index}`} style={{ 
+                    minWidth: '280px',
+                    position: 'relative', 
+                    borderRadius: '8px', 
+                    overflow: 'hidden', 
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                    flexShrink: 0,
+                    scrollSnapAlign: 'start'
+                  }}>
+                    <img 
+                      src={card.image} 
+                      alt={card.alt} 
+                      style={{ width: '100%', height: '250px', objectFit: 'cover' }}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const nextSibling = target.nextSibling as HTMLElement;
+                        if (nextSibling) {
+                          nextSibling.style.display = 'flex';
+                        }
+                      }}
+                    />
+                    {/* Fallback design if image fails to load */}
+                    <div style={{ 
+                      display: 'none', 
+                      width: '100%', 
+                      height: '250px', 
+                      backgroundColor: '#f8f9fa',
+                      position: 'relative',
+                      overflow: 'hidden',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}>
+                      <div style={{ 
+                        width: '60%',
+                        height: '40%',
+                        backgroundColor: '#e5e7eb',
+                        borderRadius: '8px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: '#9ca3af',
+                        fontSize: '24px'
+                      }}>
+                        {card.fallback}
+                      </div>
+                    </div>
+                  </div>
+                ));
+              })()}
+            </div>
+
+            {/* Simple Navigation */}
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'center', 
+              gap: '16px', 
+              marginTop: '32px' 
+            }}>
+              <button 
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  backgroundColor: 'white',
+                  border: '2px solid #d1d5db',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+                onClick={() => {
+                  setPalaceSuiteCarouselCurrentIndex(prev => {
+                    const newIndex = prev - 1;
+                    // Handle infinite loop - when going below 0, wrap to the end
+                    return newIndex < 0 ? 3 : newIndex;
+                  });
+                }}
+              >
+                <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button 
+                style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '50%',
+                  backgroundColor: 'white',
+                  border: '2px solid #d1d5db',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+                onClick={() => {
+                  setPalaceSuiteCarouselCurrentIndex(prev => {
+                    const newIndex = prev + 1;
+                    // Handle infinite loop - when going above 3, wrap to 0
+                    return newIndex > 3 ? 0 : newIndex;
+                  });
+                }}
+              >
+                <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+{/* AMENITIES Section */}
+<div style={{ marginBottom: '48px' }}>
+          {/* Main Title */}
+          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>AMENITIES</h2>
+          </div>
+
+          {/* Key Amenities Grid */}
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(3, 1fr)', 
+            gap: '24px',
+            marginBottom: '32px'
+          }}>
+            {/* 1 ANTE ROOM */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🛏️
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>1 ANTE ROOM</span>
+            </div>
+
+            {/* 2 EN SUITE BATHROOM */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🛁
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>2 EN SUITE BATHROOM</span>
+            </div>
+
+            {/* PALACE GARDEN VIEW */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🏔️
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>PALACE GARDEN VIEW</span>
+            </div>
+
+            {/* 1 KING BED */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🛏️
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>1 KING BED</span>
+            </div>
+
+            {/* 591 Sq. Ft. */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                ⬜
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>591 Sq. Ft.</span>
+            </div>
+
+            {/* DESIGNED BY CHANNA DASWATTE */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🏰
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>DESIGNED BY CHANNA DASWATTE</span>
+            </div>
+          </div>
+
+          {/* Divider Line */}
+          <div style={{ 
+            height: '1px', 
+            backgroundColor: '#e5e7eb', 
+            marginBottom: '24px' 
+          }}></div>
+
+          {/* ROOM FEATURES Section */}
+          <div>
+            
+
+            {/* Expandable Categories */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+              {/* ROOM FEATURES Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onClick={() => setIsRoomFeaturesExpanded(!isRoomFeaturesExpanded)}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>ROOM FEATURES</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isRoomFeaturesExpanded ? '−' : '+'}
+                </span>
+              </div>
+              
+              {/* Room Features Content */}
+              {isRoomFeaturesExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    // color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Nespresso Coffee Machine</div>
+                    <div>Tea and Coffee Menu</div>
+                    <div>In Room Safe</div>
+                    <div>Generously Stocked Refrigerators</div>
+                    <div>Down Duvets and Pillows</div>
+                    <div>Pillow Menu</div>
+                    <div>Clothes Steamer</div>
+                  </div>
+                </div>
+              )}
+
+              {/* BATH Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onClick={() => setIsBathExpanded(!isBathExpanded)}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>BATH</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isBathExpanded ? '−' : '+'}
+                </span>
+              </div>
+              
+              {/* Bath Content */}
+              {isBathExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    // color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Standalone Bathtub</div>
+                    <div>Dyson Hairdryer</div>
+                    <div>Indulgent Bathrobes</div>
+                    <div>Weighing Scale</div>
+                    <div>Premium Toiletries</div>
+                  </div>
+                </div>
+              )}
+
+              {/* TECHNOLOGY Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onClick={() => setIsTechnologyExpanded(!isTechnologyExpanded)}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>TECHNOLOGY</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isTechnologyExpanded ? '−' : '+'}
+                </span>
+              </div>
+              
+              {/* Technology Content */}
+              {isTechnologyExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Wifi</div>
+                    <div>65 Inch Smart TV</div>
+                    <div>Bang and Olufsen Speaker</div>
+                    <div>Cordless Telephone</div>
+                  </div>
+                </div>
+              )}
+
+              {/* SERVICES Category */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                padding: '16px 0',
+                borderBottom: '1px solid #f3f4f6',
+                cursor: 'pointer'
+              }}
+              onClick={() => setIsServicesExpanded(!isServicesExpanded)}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = '#f9fafb';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}>
+                <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>SERVICES</span>
+                <span style={{ fontSize: '18px', color: '#6b7280', fontWeight: 'bold' }}>
+                  {isServicesExpanded ? '−' : '+'}
+                </span>
+              </div>
+              
+              {/* Services Content */}
+              {isServicesExpanded && (
+                <div style={{ 
+                  padding: '16px 0',
+                  // borderBottom: '1px solid #f3f4f6',
+                  // backgroundColor: '#fafafa'
+                }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '8px',
+                    color: '#6b7280',
+                    fontSize: '14px',
+                    lineHeight: '1.5'
+                  }}>
+                    <div>Palace Butler Service</div>
+                    <div>24 Hour In-Room Dining</div>
+                    <div>Complimentary Laundry</div>
+                    <div>Concierge Services</div>
+                    <div>Twice Daily House-keeping Service</div>
+                    <div>Babysitter</div>
+                    <div>In-house Doctor on Call</div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+        {/* OTHER SUITES Section */}
+        <div style={{ marginBottom: '48px' }}>
+          {/* Main Title */}
+          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>OTHER SUITES</h2>
+          </div>
+
+          {/* Suites Grid */}
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(2, 1fr)', 
+            gap: '32px'
+          }}>
+            {/* GENERATOR SUITES */}
+            <div 
+              style={{ 
+                backgroundColor: '#ffffff',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                cursor: 'pointer',
+                transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
+              }}
+              onClick={() => setCurrentPage('generator-suite')}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+              }}
+            >
+              {/* Image */}
+              <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                <img 
+                  src="/image-75.png" 
+                  alt="Generator Suites" 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'flex';
+                    }
+                  }}
+                />
+                {/* Fallback for Generator Suites image */}
+                <div style={{ 
+                  display: 'none', 
+                  width: '100%', 
+                  height: '100%', 
+                  backgroundColor: '#f8f9fa',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <div style={{ 
+                    width: '60%',
+                    height: '40%',
+                    backgroundColor: '#e5e7eb',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#9ca3af',
+                    fontSize: '24px'
+                  }}>
+                    🏭
+                  </div>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div style={{ padding: '24px' }}>
+                <h3 style={{ 
+                  fontSize: '20px', 
+                  fontWeight: 'bold', 
+                  color: '#000000', 
+                  marginBottom: '16px',
+                  textTransform: 'uppercase',
+                  fontFamily: '"Montserrat", sans-serif'
+                }}>
+                  GENERATOR SUITES
+                </h3>
+                <p style={{ 
+                  fontSize: '16px', 
+                  color: '#6b7280', 
+                  lineHeight: '1.6',
+                  fontFamily: '"Lato", sans-serif'
+                }}>
+                  Once the heart of the royal palace's power generation, these suites have now been transformed into a luxurious retreat, offering orchard views and outdoor bathtubs.
+                </p>
+              </div>
+            </div>
+
+            {/* FAMILY PALACE SUITE */}
+            <div 
+              style={{ 
+                backgroundColor: '#ffffff',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                cursor: 'pointer',
+                transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
+              }}
+              onClick={() => setCurrentPage('palace-family-suite')}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+              }}
+            >
+              {/* Image */}
+              <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                <img 
+                  src="/image-76.png" 
+                  alt="Family Palace Suite" 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const nextSibling = target.nextSibling as HTMLElement;
+                    if (nextSibling) {
+                      nextSibling.style.display = 'flex';
+                    }
+                  }}
+                />
+                {/* Fallback for Family Palace Suite image */}
+                <div style={{ 
+                  display: 'none', 
+                  width: '100%', 
+                  height: '100%', 
+                  backgroundColor: '#f8f9fa',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <div style={{ 
+                    width: '60%',
+                    height: '40%',
+                    backgroundColor: '#e5e7eb',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#9ca3af',
+                    fontSize: '24px'
+                  }}>
+                    👨‍👩‍👧‍👦
+                  </div>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div style={{ padding: '24px' }}>
+                <h3 style={{ 
+                  fontSize: '20px', 
+                  fontWeight: 'bold', 
+                  color: '#000000', 
+                  marginBottom: '16px',
+                  textTransform: 'uppercase',
+                  fontFamily: '"Montserrat", sans-serif'
+                }}>
+                  FAMILY PALACE SUITE
+                </h3>
+                <p style={{ 
+                  fontSize: '16px', 
+                  color: '#6b7280', 
+                  lineHeight: '1.6',
+                  fontFamily: '"Lato", sans-serif'
+                }}>
+                  A fusion of two palace suites, featuring a spacious lounge- an expansive, lush private retreat perfect for families and added privacy.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+   
+   
+        {/* Two Cards Section */}
+        
       </div>
     </>
   );
@@ -2815,7 +3497,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       </div>
 
       {/* Main Content Area */}
-      <div style={{ maxWidth: '1024px', margin: '0 auto' }}>
+      <div style={{ maxWidth: '1324px', margin: '0 auto' }}>
         {experiencesTab === 'overview' && (
           <>
             {/* OVERVIEW Section */}
@@ -2833,9 +3515,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '32px', textAlign: 'center', textTransform: 'uppercase' }}>WILDLIFE</h2>
               
               {/* Three Cards */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '32px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '32px' }}>
                 {/* Card 1: Diving Dolphins */}
-                <div style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+                <div style={{ backgroundColor: 'white', height: '400px',borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
                   <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <img 
                       src="./image-7.png" 
@@ -2895,7 +3577,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 </div>
 
                 {/* Card 2: Tracking Fishing Cat */}
-                <div style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+                <div style={{ backgroundColor: 'white',  height: '400px', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
                   <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <img 
                       src="./image-8.png" 
@@ -2957,7 +3639,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                   </div>
                   <div style={{ padding: '24px' }}>
                     <h3 style={{ fontSize: '18px', color: '#000000', marginBottom: '12px', textTransform: 'uppercase' }}>TRACKING FISHING CAT</h3>
-                    <p style={{ color: '#3A3A3A', font : '14px Lato, sans-serif' ,lineHeight: '1.6', fontSize: '12px' }}>
+                    <p style={{ color: '#3A3A3A', font : '14px Lato, sans-serif' ,lineHeight: '1.4', fontSize: '12px' }}>
                       Embark on a boat safari in the wetlands to track elusive apex predators as they roam the banks on lookout for a hunt, or if you're lucky, even catch them on the prowl.
                     </p>
                   </div>
@@ -3039,6 +3721,83 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                     </p>
                   </div>
                 </div>
+
+                <div style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+                  <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img 
+                      src="./assets/blackbuck.jpg" 
+                      alt="Flamingos in Chilika Lake" 
+                      style={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover'
+                      }}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const nextSibling = target.nextSibling as HTMLElement;
+                        if (nextSibling) {
+                          nextSibling.style.display = 'flex';
+                        }
+                      }}
+                    />
+                    {/* Fallback design if image fails to load */}
+                    <div style={{ 
+                      display: 'none', 
+                      width: '100%', 
+                      height: '100%', 
+                      backgroundColor: '#87ceeb',
+                      position: 'relative',
+                      overflow: 'hidden'
+                    }}>
+                      {/* Flamingos */}
+                      <div style={{ 
+                        position: 'absolute', 
+                        top: '30%', 
+                        left: '20%',
+                        width: '8px',
+                        height: '40%',
+                        backgroundColor: '#ff69b4',
+                        borderRadius: '4px'
+                      }}></div>
+                      <div style={{ 
+                        position: 'absolute', 
+                        top: '25%', 
+                        left: '20%',
+                        width: '20px',
+                        height: '15px',
+                        backgroundColor: '#ff69b4',
+                        borderRadius: '50%'
+                      }}></div>
+                      
+                      <div style={{ 
+                        position: 'absolute', 
+                        top: '35%', 
+                        right: '30%',
+                        width: '8px',
+                        height: '35%',
+                        backgroundColor: '#ff69b4',
+                        borderRadius: '4px'
+                      }}></div>
+                      <div style={{ 
+                        position: 'absolute', 
+                        top: '30%', 
+                        right: '30%',
+                        width: '20px',
+                        height: '15px',
+                        backgroundColor: '#ff69b4',
+                        borderRadius: '50%'
+                      }}></div>
+                    </div>
+                  </div>
+                  <div style={{ padding: '24px' }}>
+                    <h3 style={{ fontSize: '18px', color: '#000000', marginBottom: '12px', textTransform: 'uppercase' }}>Spotting blackbucks</h3>
+                    <p style={{ color: '#3A3A3A', font : '14px Lato, sans-serif' ,lineHeight: '1.6', fontSize: '12px' }}>
+                      Set sail on Chilika Lake and get a chance to spot nature's fabulous divas, with their striking pink feathers and long, spindly legs.
+                    </p>
+                  </div>
+                </div>
+
               </div>
             </div>
 
@@ -5646,100 +6405,105 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
           </div>
 
           {/* Chilika Lake Cruise */}
-          <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-            {/* Image */}
-            <div style={{ marginBottom: '24px' }}>
-              <img 
-                src="/chilika.png" 
-                alt="Chilika Lake Cruise" 
-                style={{ 
-                  width: '100%', 
-                  height: 'auto', 
-                  maxWidth: '100%',
-                  borderRadius: '8px',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
-                }}
+          <div style={{ marginBottom: '48px' }}>
+          <div style={{ position: 'relative', width: '100%', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}>
+            <div style={{ aspectRatio: '16/10', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <video 
+                src="/assets/Rambha15.mp4" 
+                autoPlay 
+                muted 
+                loop 
+                playsInline
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 onError={(e) => {
-                  const target = e.target as HTMLImageElement;
+                  // Fallback to a styled div if video fails to load
+                  const target = e.target as HTMLVideoElement;
                   target.style.display = 'none';
                   const nextSibling = target.nextSibling as HTMLElement;
                   if (nextSibling) {
-                    nextSibling.style.display = 'block';
+                    nextSibling.style.display = 'flex';
                   }
                 }}
               />
-              {/* Fallback for Chilika image */}
+              {/* Fallback room design if video doesn't load */}
               <div style={{ 
                 display: 'none', 
                 width: '100%', 
-                height: '400px',
-                backgroundColor: '#f4a460',
-                borderRadius: '8px',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#6b7280',
-                fontSize: '18px',
+                height: '100%', 
+                backgroundColor: '#f8f9fa',
                 position: 'relative',
                 overflow: 'hidden'
               }}>
-                {/* Sunset gradient */}
+                {/* Four-poster bed */}
                 <div style={{ 
-                  position: 'absolute',
-                  top: '0',
-                  left: '0',
-                  width: '100%',
-                  height: '100%',
-                  background: 'linear-gradient(to bottom, #ff7f50, #ff6347, #ff4500)'
+                  position: 'absolute', 
+                  top: '50%', 
+                  left: '50%', 
+                  transform: 'translate(-50%, -50%)',
+                  width: '60%',
+                  height: '40%',
+                  backgroundColor: '#ffffff',
+                  border: '2px solid #d1d5db',
+                  borderRadius: '8px',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+                }}>
+                  {/* Bed posts */}
+                  <div style={{ position: 'absolute', top: '-20px', left: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                  <div style={{ position: 'absolute', top: '-20px', right: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                  <div style={{ position: 'absolute', bottom: '-20px', left: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                  <div style={{ position: 'absolute', bottom: '-20px', right: '10px', width: '8px', height: '20px', backgroundColor: '#8b4513' }}></div>
+                </div>
+                
+                {/* Green sofa */}
+                <div style={{ 
+                  position: 'absolute', 
+                  bottom: '20%', 
+                  left: '10%',
+                  width: '25%',
+                  height: '15%',
+                  backgroundColor: '#228b22',
+                  borderRadius: '8px 8px 0 0'
                 }}></div>
-                {/* Boat silhouette */}
+                
+                {/* Window */}
                 <div style={{ 
-                  position: 'absolute',
-                  bottom: '30%',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  width: '120px',
-                  height: '60px',
-                  backgroundColor: '#2d1810',
-                  borderRadius: '60px 60px 0 0'
-                }}></div>
-                {/* Sun */}
-                <div style={{ 
-                  position: 'absolute',
-                  top: '20%',
-                  right: '20%',
-                  width: '60px',
-                  height: '60px',
-                  backgroundColor: '#ffd700',
-                  borderRadius: '50%',
-                  boxShadow: '0 0 20px #ffd700'
+                  position: 'absolute', 
+                  top: '10%', 
+                  left: '5%',
+                  width: '20%',
+                  height: '30%',
+                  backgroundColor: '#87ceeb',
+                  border: '2px solid #d1d5db'
                 }}></div>
               </div>
             </div>
-
-            {/* Content */}
-            <div style={{ textAlign: 'center' }}>
-              <h3 style={{ 
-                fontSize: '20px', 
-                fontWeight: 'bold', 
-                color: '#374151', 
-                marginBottom: '16px',
-                textTransform: 'uppercase',
-                fontFamily: '"Montserrat", sans-serif'
-              }}>
-                CHILIKA LAKE CRUISE
-              </h3>
-              <p style={{ 
-                fontSize: '16px', 
-                color: '#6b7280', 
-                lineHeight: '1.8',
-                fontFamily: '"Lato", sans-serif',
-                maxWidth: '700px',
-                margin: '0 auto'
-              }}>
-                Asia's largest brackish water lagoon – travellers can visit the Chilika Lake for an introspective breakfast at sunrise, or an immersive and educative experience with wildlife. With over 150 species of birds, fishing cats prowling the coast and Irrawaddy dolphins bobbing in the shallow waters, the lake has plenty more to offer than mesmerising sunsets in the horizon.
-              </p>
-            </div>
+            
+            
           </div>
+          <div style={{ textAlign: 'center', marginTop: '48px' }}>
+  <h3 style={{ 
+    fontSize: '20px', 
+    fontWeight: 'bold', 
+    color: '#374151', 
+    marginBottom: '16px',
+    textTransform: 'uppercase',
+    fontFamily: '"Montserrat", sans-serif'
+  }}>
+    BIRD WATCHING AT CHILIKA LAKE
+  </h3>
+  <p style={{ 
+    fontSize: '16px', 
+    color: '#6b7280', 
+    lineHeight: '1.8',
+    fontFamily: '"Lato", sans-serif',
+    maxWidth: '700px',
+    margin: '0 auto'
+  }}>
+    Asia's largest brackish water lagoon – travellers can visit the Chilika Lake for an introspective breakfast at sunrise, or an immersive and educative experience with wildlife. With over 150 species of birds, fishing cats prowling the coast and Irrawaddy dolphins bobbing in the shallow waters, the lake has plenty more to offer than mesmerising sunsets in the horizon.
+  </p>
+</div>
+
+        </div>
         </div>
 
         {/* Landscape Images Carousel */}
@@ -6022,6 +6786,16 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       {
         title: 'THE BAR',
         image: './image-18.png',
+        description: 'An art deco inspired chic bar perfect for midnight conversations, or a morning mimosa. Sommeliers guide guests through exclusive wine tastings and bartenders craft exclusive cocktails to suit your flavour palette.'
+      },
+      {
+        title: 'GARDEN SPREAD',
+        image: '/assets/garden1.jpg',
+        description: 'An art deco inspired chic bar perfect for midnight conversations, or a morning mimosa. Sommeliers guide guests through exclusive wine tastings and bartenders craft exclusive cocktails to suit your flavour palette.'
+      },
+      {
+        title: 'MANGO ORCHARD',
+        image: '/assets/mango2.jpg',
         description: 'An art deco inspired chic bar perfect for midnight conversations, or a morning mimosa. Sommeliers guide guests through exclusive wine tastings and bartenders craft exclusive cocktails to suit your flavour palette.'
       }
     ];
@@ -7043,7 +7817,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
           marginBottom: '24px',
           textTransform: 'uppercase'
         }}>
-          Hidden India Central Reservations
+          Rambha Palace Central Reservations
         </h2>
         <p style={{ 
           color: '#6b7280', 
@@ -7068,8 +7842,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             fontSize: '16px'
           }}>
             <span style={{ fontWeight: 'bold' }}>Email:</span>
-            <a href="mailto:reservations@hiddenindia.com" style={{ color: '#d97706', textDecoration: 'none' }}>
-              reservations@hiddenindia.com
+            <a href="mailto:reservations@rambhapalace.com" style={{ color: '#d97706', textDecoration: 'none' }}>
+            reservations@rambhapalace.com
             </a>
           </div>
           <div style={{ 
@@ -7079,10 +7853,15 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             color: '#374151',
             fontSize: '16px'
           }}>
-            <span style={{ fontWeight: 'bold' }}>Tel:</span>
+            <span style={{ fontWeight: 'bold' } } >Tel:</span>
+            <div className='flex flex-col'>
             <a href="tel:+917800208002" style={{ color: '#d97706', textDecoration: 'none' }}>
               +91 7800 208 002
             </a>
+            <a href="tel:+917800208002" style={{ color: '#d97706', textDecoration: 'none' }}>
+              +91 9124 557 844
+            </a>
+            </div>
           </div>
         </div>
       </div>
@@ -7371,17 +8150,21 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               // fontWeight: '600',
               marginBottom: '8px'
             }}>
-              Hidden India Rambha Palace
+              Rambha Palace Central Reservations
             </div>
-            <div style={{ 
+            <a
+              href="mailto:reservations@rambhapalace.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            style={{ 
               color: '#7A7A7A',
               fontSize: '14px',
               fontFamily: '"Lato", sans-serif',
               // fontWeight: '400',
               lineHeight: '1.6'
             }}>
-              rambhapalace@hiddenindia.com
-            </div>
+              reservations@rambhapalace.com
+            </a>
           </div>
 
           {/* Middle Column - Address */}
@@ -7394,14 +8177,18 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             }}>
               Tehsil, PS, Rambha, Khallikot, Odisha, India, 761030.
             </div>
-            <div style={{ 
+            <a
+            href="https://maps.app.goo.gl/SkTYhSF9e2BDNjCo7" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ 
               color: '#7A7A7A',
               fontSize: '14px',
               fontWeight: '400',
               cursor: 'pointer'
             }}>
               Get Directions
-            </div>
+            </a>
           </div>
 
           <IconContainer/>
@@ -7431,16 +8218,16 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
         marginTop: isHeaderSticky ? '-1px' : '0'
       }}>
         <div style={{ display: 'flex', gap: '0' }}>
-          {['Overview', 'Rambha Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite', 'Ice Mill Suite', 'Printing Press Suite'].map((tab) => (
+          {['Overview', 'Presidential Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite',  'Printing Press Suite'].map((tab) => (
             <button
               key={tab}
               onClick={() => {
                 if (tab === 'Overview') {
                   setCurrentPage('accommodation');
                   setActiveTab('overview');
-                } else if (tab === 'Rambha Villa') {
-                  setCurrentPage('accommodation');
-                  setActiveTab('rambha-villa');
+                } else if (tab === 'Presidential Villa') {
+                  setCurrentPage('presidential-villa');
+                  setActiveTab('presidential-villa');
                 } else if (tab === 'Palace Suite') {
                   setPalaceSuiteTab('palace-suite');
                 } else if (tab === 'Palace Family Suite') {
@@ -7640,7 +8427,12 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                     fallback: '🛏️'
                   },
                   {
-                    image: '/image-71.png',
+                    image: '/assets/psuite1.jpg',
+                    alt: 'Palace Suite Bathroom',
+                    fallback: '🛁'
+                  },
+                  {
+                    image: '/assets/psuite2.jpg',
                     alt: 'Palace Suite Bathroom',
                     fallback: '🛁'
                   },
@@ -8291,16 +9083,16 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
         marginTop: isHeaderSticky ? '-1px' : '0'
       }}>
         <div style={{ display: 'flex', gap: '0' }}>
-          {['Overview', 'Rambha Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite', 'Ice Mill Suite', 'Printing Press Suite'].map((tab) => (
+          {['Overview', 'Presidential Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite', 'Printing Press Suite'].map((tab) => (
             <button
               key={tab}
               onClick={() => {
                 if (tab === 'Overview') {
                   setCurrentPage('accommodation');
                   setActiveTab('overview');
-                } else if (tab === 'Rambha Villa') {
-                  setCurrentPage('accommodation');
-                  setActiveTab('rambha-villa');
+                } else if (tab === 'Presidential Villa') {
+                  setCurrentPage('presidential-villa');
+                  setActiveTab('presidential-villa');
                 } else if (tab === 'Palace Suite') {
                   setCurrentPage('palace-suite');
                   setPalaceSuiteTab('palace-suite');
@@ -9046,7 +9838,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 cursor: 'pointer',
                 transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
               }}
-              onClick={() => setCurrentPage('ice-mill-suite')}
+              onClick={() => setCurrentPage('palace-suite')}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-4px)';
                 e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.15)';
@@ -9108,7 +9900,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                   textTransform: 'uppercase',
                   fontFamily: '"Montserrat", sans-serif'
                 }}>
-                 ICE MILL SUITE
+                 PALACE SUITE
                 </h3>
                 <p style={{ 
                   fontSize: '16px', 
@@ -9116,7 +9908,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                   lineHeight: '1.6',
                   fontFamily: '"Lato", sans-serif'
                 }}>
-                  The Ice Mill suites are beautifully adorned with traditional Orissa handloom art and paintings, creating a unique, cultural ambiance.
+                  The Palace suites are beautifully adorned with traditional Orissa handloom art and paintings, creating a unique, cultural ambiance.
                 </p>
               </div>
             </div>
@@ -9147,16 +9939,16 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
         marginTop: isHeaderSticky ? '-1px' : '0'
       }}>
         <div style={{ display: 'flex', gap: '0' }}>
-          {['Overview', 'Rambha Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite', 'Ice Mill Suite', 'Printing Press Suite'].map((tab) => (
+          {['Overview', 'Presidential Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite',  'Printing Press Suite'].map((tab) => (
             <button
               key={tab}
               onClick={() => {
                 if (tab === 'Overview') {
                   setCurrentPage('accommodation');
                   setActiveTab('overview');
-                } else if (tab === 'Rambha Villa') {
-                  setCurrentPage('accommodation');
-                  setActiveTab('rambha-villa');
+                } else if (tab === 'Presidential Villa') {
+                  setCurrentPage('presidential-villa');
+                  setActiveTab('presidential-villa');
                 } else if (tab === 'Palace Suite') {
                   setCurrentPage('palace-suite');
                   setPalaceSuiteTab('palace-suite');
@@ -9347,31 +10139,60 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               {(() => {
                 const palaceSuiteCarouselCards = [
                   {
-                    image: '/image-70.png',
+                    image: '/assets/gene1.jpeg',
                     alt: 'Palace Suite Bedroom',
                     fallback: '🛏️'
                   },
                   {
-                    image: '/image-71.png',
+                    image: '/assets/gene2.jpeg',
                     alt: 'Palace Suite Bathroom',
                     fallback: '🛁'
                   },
                   {
-                    image: '/image-73.png',
+                    image: '/assets/gene3.jpeg',
                     alt: 'Palace Suite Bathroom Detail',
                     fallback: '🧴'
                   },
                   {
-                    image: '/image-74.png',
+                    image: '/assets/gene4.jpeg',
                     alt: 'Palace Suite Additional View',
                     fallback: '🏰'
-                  }
+                  },
+                  {
+                    image: '/assets/gene5.jpg',
+                    alt: 'Palace Suite Bedroom',
+                    fallback: '🛏️'
+                  },
+                  {
+                    image: '/assets/gene6.jpg',
+                    alt: 'Palace Suite Bathroom',
+                    fallback: '🛁'
+                  },
+                  {
+                    image: '/assets/gene7.jpeg',
+                    alt: 'Palace Suite Bathroom Detail',
+                    fallback: '🧴'
+                  },
+                  {
+                    image: '/assets/gene8.jpeg',
+                    alt: 'Palace Suite Additional View',
+                    fallback: '🏰'
+                  },
+                  {
+                    image: '/assets/gene9.jpg',
+                    alt: 'Palace Suite Bathroom Detail',
+                    fallback: '🧴'
+                  },
+                  {
+                    image: '/assets/gene10.jpg',
+                    alt: 'Palace Suite Additional View',
+                    fallback: '🏰'
+                  },
                 ];
 
-                // Create infinite loop by duplicating cards
-                const extendedPalaceSuiteCards = [...palaceSuiteCarouselCards, ...palaceSuiteCarouselCards, ...palaceSuiteCarouselCards];
-                const startIndex = palaceSuiteCarouselCards.length + palaceSuiteCarouselCurrentIndex;
-                const visiblePalaceSuiteCards = extendedPalaceSuiteCards.slice(startIndex, startIndex + 3);
+                // Show all 10 images with proper navigation
+                const startIndex = palaceSuiteCarouselCurrentIndex;
+                const visiblePalaceSuiteCards = palaceSuiteCarouselCards.slice(startIndex, startIndex + 3);
 
                 return visiblePalaceSuiteCards.map((card, index) => (
                   <div key={`${card.alt}-${startIndex + index}`} style={{ 
@@ -9426,61 +10247,67 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               })()}
             </div>
 
-            {/* Simple Navigation */}
+            {/* Enhanced Navigation with Indicators */}
             <div style={{ 
               display: 'flex', 
-              justifyContent: 'center', 
+              flexDirection: 'column',
+              alignItems: 'center', 
               gap: '16px', 
               marginTop: '32px' 
             }}>
-              <button 
-                style={{
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '50%',
-                  backgroundColor: 'white',
-                  border: '2px solid #d1d5db',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-                onClick={() => {
-                  setPalaceSuiteCarouselCurrentIndex(prev => {
-                    const newIndex = prev - 1;
-                    // Handle infinite loop - when going below 0, wrap to the end
-                    return newIndex < 0 ? 3 : newIndex;
-                  });
-                }}
-              >
-                <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-              <button 
-                style={{
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '50%',
-                  backgroundColor: 'white',
-                  border: '2px solid #d1d5db',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-                onClick={() => {
-                  setPalaceSuiteCarouselCurrentIndex(prev => {
-                    const newIndex = prev + 1;
-                    // Handle infinite loop - when going above 3, wrap to 0
-                    return newIndex > 3 ? 0 : newIndex;
-                  });
-                }}
-              >
-                <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
+              {/* Navigation Buttons */}
+              <div style={{ display: 'flex', gap: '16px' }}>
+                <button 
+                  style={{
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '50%',
+                    backgroundColor: 'white',
+                    border: '2px solid #d1d5db',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                  onClick={() => {
+                    setPalaceSuiteCarouselCurrentIndex(prev => {
+                      const newIndex = prev - 1;
+                      // Handle infinite loop - when going below 0, wrap to the end
+                      return newIndex < 0 ? 7 : newIndex;
+                    });
+                  }}
+                >
+                  <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <button 
+                  style={{
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '50%',
+                    backgroundColor: 'white',
+                    border: '2px solid #d1d5db',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                  onClick={() => {
+                    setPalaceSuiteCarouselCurrentIndex(prev => {
+                      const newIndex = prev + 1;
+                      // Handle infinite loop - when going above 7, wrap to 0
+                      return newIndex > 7 ? 0 : newIndex;
+                    });
+                  }}
+                >
+                  <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+              
+              
             </div>
           </div>
         </div>
@@ -9815,7 +10642,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 cursor: 'pointer',
                 transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out'
               }}
-              onClick={() => setCurrentPage('ice-mill-suite')}
+              onClick={() => setCurrentPage('palace-suite')}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-4px)';
                 e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.15)';
@@ -9877,7 +10704,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                   textTransform: 'uppercase',
                   fontFamily: '"Montserrat", sans-serif'
                 }}>
-                  ICE MILL SUITE
+                  PALACE SUITE
                 </h3>
                 <p style={{ 
                   fontSize: '16px', 
@@ -9885,7 +10712,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                   lineHeight: '1.6',
                   fontFamily: '"Lato", sans-serif'
                 }}>
-                  The Ice Mill suites are beautifully adorned with traditional Orissa handloom art and paintings, creating a unique, cultural ambiance.                </p>
+                  The Palacesuites are beautifully adorned with traditional Orissa handloom art and paintings, creating a unique, cultural ambiance.                </p>
               </div>
             </div>
 
@@ -10009,8 +10836,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                   setCurrentPage('accommodation');
                   setActiveTab('overview');
                 } else if (tab === 'Rambha Villa') {
-                  setCurrentPage('accommodation');
-                  setActiveTab('rambha-villa');
+                  setCurrentPage('presidential-villa');
+                  setActiveTab('presidential-villa');
                 } else if (tab === 'Palace Suite') {
                   setCurrentPage('palace-suite');
                   setPalaceSuiteTab('palace-suite');
@@ -10859,16 +11686,16 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
         marginTop: isHeaderSticky ? '-1px' : '0'
       }}>
         <div style={{ display: 'flex', gap: '0' }}>
-          {['Overview', 'Rambha Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite', 'Ice Mill Suite', 'Printing Press Suite'].map((tab) => (
+          {['Overview', 'Presidential Villa', 'Palace Suite', 'Palace Family Suite', 'Generator Suite', 'Printing Press Suite'].map((tab) => (
             <button
               key={tab}
               onClick={() => {
                 if (tab === 'Overview') {
                   setCurrentPage('accommodation');
                   setActiveTab('overview');
-                } else if (tab === 'Rambha Villa') {
-                  setCurrentPage('accommodation');
-                  setActiveTab('rambha-villa');
+                } else if (tab === 'Presidential Villa') {
+                  setCurrentPage('presidential-villa');
+                  setActiveTab('presidential-villa');
                 } else if (tab === 'Palace Suite') {
                   setCurrentPage('palace-suite');
                   setPalaceSuiteTab('palace-suite');
@@ -11064,22 +11891,27 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               {(() => {
                 const palaceSuiteCarouselCards = [
                   {
-                    image: '/image-70.png',
+                    image: '/assets/pps1.jpeg',
                     alt: 'Palace Suite Bedroom',
                     fallback: '🛏️'
                   },
                   {
-                    image: '/image-71.png',
+                    image: '/assets/pps2.jpg',
                     alt: 'Palace Suite Bathroom',
                     fallback: '🛁'
                   },
                   {
-                    image: '/image-73.png',
+                    image: '/assets/pps3.jpeg',
                     alt: 'Palace Suite Bathroom Detail',
                     fallback: '🧴'
                   },
                   {
-                    image: '/image-74.png',
+                    image: '/assets/pps4.jpeg',
+                    alt: 'Palace Suite Additional View',
+                    fallback: '🏰'
+                  },
+                  {
+                    image: '/assets/pps5.jpg',
                     alt: 'Palace Suite Additional View',
                     fallback: '🏰'
                   }
@@ -11708,18 +12540,18 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
         <div style={{ 
           position: 'relative',
           width: '100%',
-          height: '600px',
+          height: '700px',
           borderRadius: '8px',
           overflow: 'hidden',
           boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
         }}>
           <img 
-            src="./image-19.png" 
+            src="./assets/well7.jpg" 
             alt="Wellness Meditation" 
             style={{ 
               width: '100%', 
               height: '100%', 
-              objectFit: 'cover'
+              objectFit: 'fill'
             }}
             onError={(e) => {
               const target = e.target as HTMLImageElement;
@@ -12010,35 +12842,81 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             {/* Wellness Gallery Cards - State-based Carousel */}
             {(() => {
               const wellnessGalleryCards = [
+                // {
+                //   image: './image-20.png',
+                //   alt: 'Wellness Gallery 1',
+                //   fallback: 'Gallery 1'
+                // },
+                // {
+                //   image: './image-21.png',
+                //   alt: 'Wellness Gallery 2',
+                //   fallback: 'Gallery 2'
+                // },
+                // {
+                //   image: './assets/well2.jpg',
+                //   alt: 'Wellness Gallery 3',
+                //   fallback: 'Gallery 3'
+                // },
+                // {
+                //   image: './image-23.png',
+                //   alt: 'Wellness Gallery 4',
+                //   fallback: 'Gallery 4'
+                // },
+                // {
+                //   image: './assets/well1.jpeg',
+                //   alt: 'Wellness Gallery 5',
+                //   fallback: 'Gallery 5'
+                // },
+                // {
+                //   image: './assets/well3.jpg',
+                //   alt: 'Wellness Gallery 5',
+                //   fallback: 'Gallery 5'
+                // },
+                // {
+                //   image: './assets/well4.jpg',
+                //   alt: 'Wellness Gallery 5',
+                //   fallback: 'Gallery 5'
+                // },
+                // {
+                //   image: './assets/well5.jpg',
+                //   alt: 'Wellness Gallery 5',
+                //   fallback: 'Gallery 5'
+                // },
+                // {
+                //   image: './assets/well6.jpg',
+                //   alt: 'Wellness Gallery 5',
+                //   fallback: 'Gallery 5'
+                // },
+                // {
+                //   image: './assets/well7.jpg',
+                //   alt: 'Wellness Gallery 5',
+                //   fallback: 'Gallery 5'
+                // },
+                
+                // {
+                //   image: './image-25.png',
+                //   alt: 'Wellness Gallery 6',
+                //   fallback: 'Gallery 6'
+                // },
                 {
-                  image: './image-20.png',
+                  image: '/assets/spa1.jpeg',
                   alt: 'Wellness Gallery 1',
                   fallback: 'Gallery 1'
                 },
                 {
-                  image: './image-21.png',
+                  image: '/assets/spa2.jpg',
                   alt: 'Wellness Gallery 2',
                   fallback: 'Gallery 2'
                 },
                 {
-                  image: './image-22.png',
+                  image: '/assets/spa3.jpg',
                   alt: 'Wellness Gallery 3',
                   fallback: 'Gallery 3'
                 },
                 {
-                  image: './image-23.png',
+                  image: '/assets/spa4.jpg',
                   alt: 'Wellness Gallery 4',
                   fallback: 'Gallery 4'
-                },
-                {
-                  image: './image-24.png',
-                  alt: 'Wellness Gallery 5',
-                  fallback: 'Gallery 5'
-                },
-                {
-                  image: './image-25.png',
-                  alt: 'Wellness Gallery 6',
-                  fallback: 'Gallery 6'
                 }
               ];
 
@@ -12664,16 +13542,16 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               borderRadius: '4px',
               transition: 'background-color 0.2s ease'
             }}>
-              <svg style={{ width: '24px', height: '24px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {/* <svg style={{ width: '24px', height: '24px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+              </svg> */}
               <span style={{ 
                 fontFamily: '"Lato", Sans-serif',
                 fontSize: '16px',
                 fontWeight: '500',
                 color: '#000000',
                 letterSpacing: '0.5px'
-              }}>Menu</span>
+              }}></span>
             </button>
             
             {/* Logo - Hidden India - Centered */}
@@ -12690,14 +13568,14 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 fetchPriority="high" 
                 width="1024" 
                 height="114" 
-                src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/hidden-india-logo.png" 
+                src="/assets/logoramba.png" 
                 className="attachment-large size-large wp-image-2367" 
                 alt="Hidden India Logo" 
-                srcSet="https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/hidden-india-logo-1024x114.png 1024w, https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/hidden-india-logo-300x33.png 300w, https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/hidden-india-logo-768x86.png 768w, https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/hidden-india-logo-1536x171.png 1536w, https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/hidden-india-logo-2048x228.png 2048w" 
+                srcSet="/assets/logoramba.png 2048w" 
                 sizes="(max-width: 1024px) 100vw, 1024px"
                 style={{ 
                   height: 'auto',
-                  maxWidth: '220px',
+                  maxWidth: '160px',
                   width: 'auto'
                 }}
               />
@@ -12901,7 +13779,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
         {currentPage === 'generator-suite' && renderGeneratorSuitePage()}
         {currentPage === 'ice-mill-suite' && renderIceMillSuitePage()}
         {currentPage === 'printing-press-suite' && renderPrintingPressSuitePage()}
-        {(currentPage === 'overview' || currentPage === 'rambha-villa') && renderAccommodationPage()}
+        {(currentPage === 'overview') && renderAccommodationPage()}
+        {currentPage === 'presidential-villa' && renderPresidentialVillaPage()}
       </main>
 
       {/* Footer */}
@@ -12928,7 +13807,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 marginBottom: '24px',
                 textTransform: 'uppercase'
               }}>
-                Hidden India Properties
+               Rambha Palace Properties
               </h2>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                 <li style={{ marginBottom: '12px' }}>
@@ -12975,6 +13854,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 </h2>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                   <li style={{ marginBottom: '12px' }}>
+                    <div className='flex flex-col'>
                     <a 
                       href="tel:917800208002" 
                       style={{ 
@@ -12985,17 +13865,29 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                     >
                       Tel: +91 7800 208 002
                     </a>
+                    <a 
+                      href="tel:917800208002" 
+                      style={{ 
+                        color: 'white', 
+                        fontSize: '14px',
+                        textDecoration: 'none'
+                      }}
+                      className='ml-6'
+                    >
+                       +91 9124557844
+                    </a>
+                    </div>
                   </li>
                   <li style={{ marginBottom: '12px' }}>
                     <a 
-                      href="mailto:reservations@hiddenindia.com" 
+                      href="mailto:reservations@rambhapalace.com" 
                       style={{ 
                         color: 'white', 
                         fontSize: '14px',
                         textDecoration: 'none'
                       }}
                     >
-                      Email: reservations@hiddenindia.com
+                      Email: reservations@rambhapalace.com
                     </a>
                   </li>
                 </ul>
@@ -13128,10 +14020,10 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               {/* Hidden India Logo */}
               <div style={{ marginBottom: '24px' }}>
                 <img 
-                  src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/HiddenIndia-WhiteLogo.svg" 
+                  src="/assets/logoramba.png" 
                   alt="Hidden India Logo"
                   style={{ 
-                    width: '318px', 
+                    width: '278px', 
                     height: 'auto',
                     maxWidth: '100%'
                   }}
@@ -13149,24 +14041,13 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                   textAlign:'left',
                   maxWidth:'696px'
                 }}>
-                  COPYRIGHT 2024,Hidden India EXPERIENCES PRIVATE LIMITED.
+                  COPYRIGHT 2024,Rambha Palace EXPERIENCES PRIVATE LIMITED.
                 </h2>
               </div>
               
               {/* Language Selector */}
               <div>
-                <h2 style={{ 
-                  fontSize: '16px', 
-                  fontWeight: 'bold', 
-                  color: '#FFFFFF',
-                  font:'16px Lato, sans-serif',
-                  margin: 0,
-                  marginTop: '64px',
-                  marginRight: '48px'
-
-                }}>
-                  English
-                </h2>
+                
               </div>
             </div>
           </div>
