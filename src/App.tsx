@@ -2744,175 +2744,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
         </div>
 
         {/* Image Carousel */}
-        <div style={{ marginBottom: '48px' }}>
-          {/* Carousel Container */}
-          <div style={{ 
-            position: 'relative',
-            maxWidth: '100%',
-            overflow: 'hidden'
-          }}>
-            {/* Palace Suite Carousel Images - State-based Carousel */}
-            <div 
-              className="palace-suite-carousel-container"
-              style={{ 
-                display: 'flex', 
-                gap: '16px',
-                justifyContent: 'center',
-                overflowX: 'auto',
-                scrollBehavior: 'smooth',
-                scrollbarWidth: 'none',
-                msOverflowStyle: 'none',
-                WebkitOverflowScrolling: 'touch',
-                scrollSnapType: 'x mandatory',
-                padding: '0 20px'
-              }}
-            >
-              {/* Palace Suite Carousel Cards - State-based Carousel */}
-              {(() => {
-                const palaceSuiteCarouselCards = [
-                  {
-                    image: '/image-70.png',
-                    alt: 'Palace Suite Bedroom',
-                    fallback: '🛏️'
-                  },
-                  {
-                    image: '/assets/psuite1.jpg',
-                    alt: 'Palace Suite Bathroom',
-                    fallback: '🛁'
-                  },
-                  {
-                    image: '/assets/psuite2.jpg',
-                    alt: 'Palace Suite Bathroom',
-                    fallback: '🛁'
-                  },
-                  {
-                    image: '/image-73.png',
-                    alt: 'Palace Suite Bathroom Detail',
-                    fallback: '🧴'
-                  },
-                  {
-                    image: '/image-74.png',
-                    alt: 'Palace Suite Additional View',
-                    fallback: '🏰'
-                  }
-                ];
-
-                // Create infinite loop by duplicating cards
-                const extendedPalaceSuiteCards = [...palaceSuiteCarouselCards, ...palaceSuiteCarouselCards, ...palaceSuiteCarouselCards];
-                const startIndex = palaceSuiteCarouselCards.length + palaceSuiteCarouselCurrentIndex;
-                const visiblePalaceSuiteCards = extendedPalaceSuiteCards.slice(startIndex, startIndex + 3);
-
-                return visiblePalaceSuiteCards.map((card, index) => (
-                  <div key={`${card.alt}-${startIndex + index}`} style={{ 
-                    minWidth: '280px',
-                    position: 'relative', 
-                    borderRadius: '8px', 
-                    overflow: 'hidden', 
-                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                    flexShrink: 0,
-                    scrollSnapAlign: 'start'
-                  }}>
-                    <img 
-                      src={card.image} 
-                      alt={card.alt} 
-                      style={{ width: '100%', height: '250px', objectFit: 'cover' }}
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const nextSibling = target.nextSibling as HTMLElement;
-                        if (nextSibling) {
-                          nextSibling.style.display = 'flex';
-                        }
-                      }}
-                    />
-                    {/* Fallback design if image fails to load */}
-                    <div style={{ 
-                      display: 'none', 
-                      width: '100%', 
-                      height: '250px', 
-                      backgroundColor: '#f8f9fa',
-                      position: 'relative',
-                      overflow: 'hidden',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}>
-                      <div style={{ 
-                        width: '60%',
-                        height: '40%',
-                        backgroundColor: '#e5e7eb',
-                        borderRadius: '8px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: '#9ca3af',
-                        fontSize: '24px'
-                      }}>
-                        {card.fallback}
-                      </div>
-                    </div>
-                  </div>
-                ));
-              })()}
-            </div>
-
-            {/* Simple Navigation */}
-            <div style={{ 
-              display: 'flex', 
-              justifyContent: 'center', 
-              gap: '16px', 
-              marginTop: '32px' 
-            }}>
-              <button 
-                style={{
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '50%',
-                  backgroundColor: 'white',
-                  border: '2px solid #d1d5db',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-                onClick={() => {
-                  setPalaceSuiteCarouselCurrentIndex(prev => {
-                    const newIndex = prev - 1;
-                    // Handle infinite loop - when going below 0, wrap to the end
-                    return newIndex < 0 ? 3 : newIndex;
-                  });
-                }}
-              >
-                <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-              <button 
-                style={{
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '50%',
-                  backgroundColor: 'white',
-                  border: '2px solid #d1d5db',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-                onClick={() => {
-                  setPalaceSuiteCarouselCurrentIndex(prev => {
-                    const newIndex = prev + 1;
-                    // Handle infinite loop - when going above 3, wrap to 0
-                    return newIndex > 3 ? 0 : newIndex;
-                  });
-                }}
-              >
-                <svg width="16" height="16" fill="none" stroke="#374151" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
+       
 
 {/* AMENITIES Section */}
 <div style={{ marginBottom: '48px' }}>
@@ -2940,7 +2772,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               }}>
                 🛏️
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>1 ANTE ROOM</span>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>2000 sq. ft.</span>
             </div>
 
             {/* 2 EN SUITE BATHROOM */}
@@ -2953,9 +2785,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🛁
+                🛏️
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>2 EN SUITE BATHROOM</span>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}> Two-bedroom standalone villa</span>
             </div>
 
             {/* PALACE GARDEN VIEW */}
@@ -2968,9 +2800,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🏔️
+                🏡
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>PALACE GARDEN VIEW</span>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>Private butler service and pantry</span>
             </div>
 
             {/* 1 KING BED */}
@@ -2983,9 +2815,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🛏️
+                🏊‍♀️
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>1 KING BED</span>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>Private swimming pool with jacuzzi</span>
             </div>
 
             {/* 591 Sq. Ft. */}
@@ -2998,9 +2830,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                ⬜
+                🛌
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>591 Sq. Ft.</span>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}> 1 four-poster King-size bed, 1 twin bedroom</span>
             </div>
 
             {/* DESIGNED BY CHANNA DASWATTE */}
@@ -3013,10 +2845,26 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🏰
+                
+                🔥
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>DESIGNED BY CHANNA DASWATTE</span>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>Large private garden with open fireplace</span>
             </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                fontSize: '16px'
+              }}>
+                🏡
+              </div>
+              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>Private lounge and dining room</span>
+            </div>
+
           </div>
 
           {/* Divider Line */}
@@ -3793,7 +3641,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                   <div style={{ padding: '24px' }}>
                     <h3 style={{ fontSize: '18px', color: '#000000', marginBottom: '12px', textTransform: 'uppercase' }}>Spotting blackbucks</h3>
                     <p style={{ color: '#3A3A3A', font : '14px Lato, sans-serif' ,lineHeight: '1.6', fontSize: '12px' }}>
-                      Set sail on Chilika Lake and get a chance to spot nature's fabulous divas, with their striking pink feathers and long, spindly legs.
+                    As dusk settles, wander into a nearby village where time moves gently. Over steaming cups of tea, watch blackbucks emerge across the paddy fields—graceful, elusive, and rare. A fleeting encounter with nature’s elegance, framed by the stillness of the evening.
                     </p>
                   </div>
                 </div>
@@ -6499,7 +6347,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
     maxWidth: '700px',
     margin: '0 auto'
   }}>
-    Asia's largest brackish water lagoon – travellers can visit the Chilika Lake for an introspective breakfast at sunrise, or an immersive and educative experience with wildlife. With over 150 species of birds, fishing cats prowling the coast and Irrawaddy dolphins bobbing in the shallow waters, the lake has plenty more to offer than mesmerising sunsets in the horizon.
+    Set out on a quiet boat ride across the shimmering waters of Chilika Lake. Watch for rare and exotic birds as they glide across the horizon. Pause at Breakfast Island , where more feathered wonders await, and enjoy a curated tea spread aboard—an unhurried morning in nature’s embrace.
   </p>
 </div>
 
@@ -6791,12 +6639,12 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       {
         title: 'GARDEN SPREAD',
         image: '/assets/garden1.jpg',
-        description: 'An art deco inspired chic bar perfect for midnight conversations, or a morning mimosa. Sommeliers guide guests through exclusive wine tastings and bartenders craft exclusive cocktails to suit your flavour palette.'
+        description: 'Bask in the gentle glow of the sun as you revisit the simple joys of childhood picnics. Choose your meal from a curated spread and settle by the fountains, letting the serene garden and soft sunlight frame an unhurried, timeless moment.'
       },
       {
         title: 'MANGO ORCHARD',
         image: '/assets/mango2.jpg',
-        description: 'An art deco inspired chic bar perfect for midnight conversations, or a morning mimosa. Sommeliers guide guests through exclusive wine tastings and bartenders craft exclusive cocktails to suit your flavour palette.'
+        description: 'Begin your day with morning tea among the mango trees, serenaded by the gentle chorus of birds. As evening falls, the orchard transforms under soft candlelight, offering an intimate setting for a romantic dinner—a favorite retreat for guests seeking quiet, natural beauty.'
       }
     ];
 
@@ -12546,7 +12394,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
           boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
         }}>
           <img 
-            src="./assets/well7.jpg" 
+            src="./assets/wellimage.png" 
             alt="Wellness Meditation" 
             style={{ 
               width: '100%', 
@@ -13460,6 +13308,165 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
     </>
   );
 
+  const renderComingSoonPage = () => (
+    <>
+      {/* Coming Soon Page */}
+      <div style={{
+        minHeight: '80vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        padding: '64px 16px',
+        backgroundColor: 'rgb(241,236,229)'
+      }}>
+        {/* Main Coming Soon Content */}
+        <div style={{
+          maxWidth: '600px',
+          margin: '0 auto'
+        }}>
+          {/* Palace Logo */}
+          <div style={{
+            marginBottom: '48px'
+          }}>
+            <img 
+              src="./assets/logo.png" 
+              alt="Rambha Palace Logo" 
+              style={{ 
+                maxWidth: '200px', 
+                height: 'auto',
+                marginBottom: '24px'
+              }}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+              }}
+            />
+            <h1 style={{
+              fontSize: '32px',
+              fontWeight: 'bold',
+              color: '#1f2937',
+              fontFamily: '"Playfair Display", serif',
+              marginBottom: '8px',
+              letterSpacing: '1px'
+            }}>
+              Rambha Palace
+            </h1>
+            <p style={{
+              fontSize: '16px',
+              color: '#6b7280',
+              fontFamily: '"Lato", sans-serif',
+              marginBottom: '0'
+            }}>
+              Chilika Lake, Odisha
+            </p>
+          </div>
+
+          {/* Coming Soon Message */}
+          <div style={{
+            marginBottom: '48px'
+          }}>
+            <h2 style={{
+              fontSize: '48px',
+              fontWeight: 'bold',
+              color: '#1f2937',
+              fontFamily: '"Playfair Display", serif',
+              marginBottom: '24px',
+              letterSpacing: '2px'
+            }}>
+              Reach Out for Bookings & Enquiries
+            </h2>
+            <p style={{
+              fontSize: '18px',
+              color: '#6b7280',
+              fontFamily: '"Lato", sans-serif',
+              lineHeight: '1.6',
+              marginBottom: '32px'
+            }}>
+             For booking purposes, contact us at the details below. Our team will be happy to assist you with reservations, event inquiries, or any special requirements to make your stay at Rambha palace memorable. 
+            </p>
+          
+          </div>
+
+          {/* Contact Information */}
+          <div style={{
+            // backgroundColor: 'white',
+            
+            
+            // boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+            marginBottom: '32px'
+          }}>
+          
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '12px',
+              alignItems: 'center'
+            }}>
+              <p style={{
+                fontSize: '16px',
+                color: '#6b7280',
+                fontFamily: '"Lato", sans-serif',
+                margin: '0'
+              }}>
+                📞 +91 9124 557 844
+              </p>
+              <p style={{
+                fontSize: '16px',
+                color: '#6b7280',
+                fontFamily: '"Lato", sans-serif',
+                margin: '0',
+                marginLeft: '24px'
+              }}>
+               +91 7800 208 002
+              </p>
+              <p style={{
+                fontSize: '16px',
+                color: '#6b7280',
+                fontFamily: '"Lato", sans-serif',
+                margin: '0'
+              }}>
+                ✉️ reservations@rambhapalace.com
+              </p>
+            </div>
+          </div>
+
+          {/* Back to Home Button */}
+          <button 
+            onClick={() => setCurrentPage('home')}
+            style={{
+              backgroundColor: '#1f2937',
+              color: 'white',
+              border: 'none',
+              padding: '16px 32px',
+              fontSize: '16px',
+              fontWeight: '500',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontFamily: '"Lato", sans-serif',
+              letterSpacing: '0.5px',
+              transition: 'all 0.3s ease',
+              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.backgroundColor = '#374151';
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.15)';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.backgroundColor = '#1f2937';
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+            }}
+          >
+            Back to Home
+          </button>
+        </div>
+      </div>
+    </>
+  );
+
   return (
     <div style={{ minHeight: '100vh', backgroundColor: 'rgb(241,236,229)' }}>
       {/* Browser Interface - REMOVED */}
@@ -13489,6 +13496,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
              currentPage === 'dining' ? 'localhost:3000/dining/' :
              currentPage === 'wellness' ? 'localhost:3000/wellness/' :
              currentPage === 'contact' ? 'localhost:3000/contact/' :
+             currentPage === 'coming-soon' ? 'localhost:3000/coming-soon/' :
              currentPage === 'palace-suite' ? 'localhost:3000/palace-suite/' :
              currentPage === 'palace-family-suite' ? 'localhost:3000/palace-family-suite/' :
              currentPage === 'generator-suite' ? 'localhost:3000/generator-suite/' :
@@ -13582,19 +13590,22 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             </div>
             
             {/* Book Now Button */}
-            <button style={{ 
-              border: '1px solid #000000', 
-              padding: '12px 24px', 
-              fontSize: '14px', 
-              fontWeight: '500',
-              backgroundColor: 'transparent',
-              color: '#000000',
-              cursor: 'pointer',
-              borderRadius: '4px',
-              transition: 'all 0.2s ease',
-              fontFamily: '"Lato", Sans-serif',
-              letterSpacing: '0.5px'
-            }}>
+            <button 
+              onClick={() => setCurrentPage('coming-soon')}
+              style={{ 
+                border: '1px solid #000000', 
+                padding: '12px 24px', 
+                fontSize: '14px', 
+                fontWeight: '500',
+                backgroundColor: 'transparent',
+                color: '#000000',
+                cursor: 'pointer',
+                borderRadius: '4px',
+                transition: 'all 0.2s ease',
+                fontFamily: '"Lato", Sans-serif',
+                letterSpacing: '0.5px'
+              }}
+            >
               Book Now
             </button>
           </div>
@@ -13781,6 +13792,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
         {currentPage === 'printing-press-suite' && renderPrintingPressSuitePage()}
         {(currentPage === 'overview') && renderAccommodationPage()}
         {currentPage === 'presidential-villa' && renderPresidentialVillaPage()}
+        {currentPage === 'coming-soon' && renderComingSoonPage()}
       </main>
 
       {/* Footer */}
@@ -13950,7 +13962,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                   </a>
 
                   {/* Pinterest */}
-                  <a 
+                  {/* <a 
                     href="https://in.pinterest.com/HiddenIndiaexperiences/_saved/" 
                     target="_blank" 
                     rel="noopener noreferrer"
@@ -13968,7 +13980,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                     <svg width="20" height="20" viewBox="0 0 24 25" fill="none">
                       <path d="M22.3912 6.47651C21.3181 4.63807 19.8625 3.18246 18.024 2.1094C16.1855 1.03639 14.1778 0.5 12.0005 0.5C9.82331 0.5 7.81544 1.03639 5.977 2.1094C4.13829 3.18229 2.68268 4.63791 1.60967 6.47651C0.536393 8.31522 0 10.3229 0 12.5001C0 14.9273 0.661393 17.1308 1.98434 19.1095C3.30724 21.0892 5.04164 22.5526 7.18754 23.5005C7.14584 22.386 7.21359 21.4641 7.39053 20.735L8.93754 14.2032C8.67703 13.6927 8.54683 13.0578 8.54683 12.297C8.54683 11.4118 8.77061 10.6722 9.21862 10.0782C9.66663 9.48444 10.2134 9.18759 10.8593 9.18759C11.38 9.18759 11.781 9.35944 12.0624 9.70313C12.3438 10.047 12.484 10.4792 12.484 11.0002C12.484 11.3229 12.4239 11.7163 12.304 12.1798C12.1843 12.6434 12.0282 13.1799 11.8355 13.7893C11.6428 14.3986 11.5046 14.8859 11.4214 15.2501C11.2756 15.8854 11.3953 16.4297 11.7808 16.8831C12.1662 17.3362 12.6768 17.563 13.3123 17.563C14.4268 17.563 15.3408 16.9433 16.0545 15.7038C16.7681 14.4639 17.1247 12.9587 17.1247 11.1879C17.1247 9.8231 16.6846 8.71364 15.8041 7.85971C14.9238 7.00546 13.6973 6.57814 12.1243 6.57814C10.3641 6.57814 8.9395 7.14332 7.85096 8.27352C6.76235 9.40388 6.21808 10.7556 6.21808 12.3284C6.21808 13.266 6.48373 14.0526 7.01493 14.6879C7.19197 14.8961 7.24933 15.1201 7.18677 15.3599C7.16592 15.4224 7.12433 15.5786 7.06177 15.8284C6.99949 16.0783 6.95762 16.2401 6.93694 16.3128C6.85369 16.6462 6.65563 16.7503 6.34313 16.6252C5.54114 16.2922 4.93163 15.7139 4.51509 14.8909C4.09839 14.068 3.88999 13.1147 3.88999 12.0316C3.88999 11.3337 4.00202 10.6358 4.22602 9.93792C4.4498 9.2398 4.79892 8.56544 5.27275 7.91433C5.74687 7.26307 6.31457 6.68749 6.97607 6.18771C7.6373 5.68776 8.44208 5.28677 9.39003 4.98467C10.338 4.68256 11.3587 4.53151 12.4526 4.53151C13.932 4.53151 15.2599 4.85961 16.4368 5.51586C17.6141 6.17216 18.5124 7.021 19.1323 8.06276C19.7522 9.10457 20.062 10.2192 20.062 11.4067C20.062 12.9692 19.7912 14.3754 19.2497 15.6255C18.7081 16.8755 17.9424 17.8572 16.9526 18.5706C15.9629 19.2844 14.838 19.6412 13.5772 19.6412C12.942 19.6412 12.3482 19.4926 11.7959 19.1959C11.244 18.8989 10.8636 18.5476 10.6554 18.1412C10.1866 19.9847 9.9053 21.0839 9.81149 21.438C9.6136 22.1773 9.2074 23.0316 8.59269 24.0003C9.70735 24.3337 10.8427 24.5 11.999 24.5C14.1761 24.5 16.1841 23.9636 18.0225 22.8904C19.8611 21.8176 21.3167 20.362 22.3895 18.5236C23.4625 16.6848 23.9989 14.6769 23.9989 12.4999C23.9995 10.3229 23.4638 8.31495 22.3912 6.47651Z" fill="white"/>
                     </svg>
-                  </a>
+                  </a> */}
 
                   {/* LinkedIn */}
                   <a 
@@ -13992,7 +14004,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                   </a>
 
                   {/* YouTube */}
-                  <a 
+                  {/* <a 
                     href="https://www.youtube.com/@hiddenindiaexperiences" 
                     target="_blank" 
                     rel="noopener noreferrer"
@@ -14010,7 +14022,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                     <svg width="24" height="20" viewBox="0 0 32 25" fill="none">
                       <path d="M31.3015 4.25C31.124 3.5119 30.7803 2.86905 30.2703 2.32143C29.7602 1.77381 29.1615 1.40476 28.474 1.21428C27.4317 0.92857 25.0367 0.726189 21.289 0.607141C19.4262 0.535713 17.6632 0.499998 16 0.499998L13.3056 0.535713C11.2211 0.559523 9.40263 0.619047 7.85031 0.714285C5.69924 0.833332 4.2578 0.999998 3.52599 1.21428C2.83853 1.40476 2.23978 1.77381 1.72973 2.32143C1.21968 2.86905 0.875953 3.5119 0.698545 4.25C0.232848 6.98809 0 9.73809 0 12.5C0 15.2619 0.232848 18.0119 0.698545 20.75C0.875953 21.4881 1.21968 22.131 1.72973 22.6786C2.23978 23.2262 2.83853 23.5952 3.52599 23.7857C4.2578 24 5.69924 24.1667 7.85031 24.2857C9.40263 24.381 11.2211 24.4405 13.3056 24.4643L16 24.5L18.6944 24.4643C20.7789 24.4405 22.5974 24.381 24.1497 24.2857C26.3008 24.1667 27.7422 24 28.474 23.7857C29.1615 23.5952 29.7602 23.2262 30.2703 22.6786C30.7803 22.131 31.124 21.4881 31.3015 20.75C31.7672 18.0119 32 15.2619 32 12.5C32 9.73809 31.7672 6.98809 31.3015 4.25ZM12.8067 17.6429V7.35714L21.0894 12.5L12.8067 17.6429Z" fill="white"/>
                     </svg>
-                  </a>
+                  </a> */}
                 </div>
               </div>
             </div>
