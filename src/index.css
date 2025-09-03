@@ -96,3 +96,1015 @@ button.accommodation-tab-button {
 .food-carousel-container img:hover {
   transform: scale(1.05);
 }
+
+/* Mobile responsive styles for homepage */
+@media (max-width: 768px) {
+  .homepage-video-container {
+    padding: 0 16px;
+  }
+  
+  .homepage-video-container .video-wrapper {
+    border-radius: 4px;
+  }
+  
+  .homepage-logo-container {
+    padding: 0 16px;
+  }
+  
+  .homepage-logo {
+    width: 200px !important;
+    height: 186px !important;
+  }
+  
+  .homepage-fallback-logo {
+    width: 116px !important;
+    height: 113.6px !important;
+  }
+  
+  .homepage-description {
+    padding: 0 16px;
+  }
+  
+  .homepage-description p {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    padding: 0 8px;
+  }
+  
+  .homepage-description p:last-child {
+    margin-top: 20px !important;
+  }
+  
+  .homepage-carousel-container {
+    margin-top: 48px !important;
+    margin-bottom: 48px !important;
+    padding: 0 8px;
+  }
+  
+  .homepage-carousel-wrapper {
+    border-radius: 8px;
+  }
+  
+  .homepage-carousel-item {
+    flex: 0 0 280px !important;
+    padding: 0 8px !important;
+  }
+  
+  .homepage-carousel-image {
+    width: 100% !important;
+    height: 200px !important;
+    border-radius: 8px !important;
+  }
+  
+  .homepage-carousel-fallback {
+    width: 100% !important;
+    height: 200px !important;
+    font-size: 14px !important;
+    border-radius: 8px !important;
+  }
+  
+  .homepage-carousel-nav {
+    margin-top: 16px !important;
+    gap: 24px !important;
+  }
+  
+  .homepage-carousel-btn {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  .homepage-accommodation-header {
+    margin-top: 48px !important;
+    padding: 0 8px;
+  }
+  
+  .homepage-accommodation-header p {
+    font-size: 14px !important;
+  }
+  
+  .homepage-accommodation-header h2 {
+    font-size: 20px !important;
+    margin-bottom: 24px !important;
+  }
+  
+  .homepage-accommodation-carousel {
+    margin-top: 48px !important;
+    margin-bottom: 48px !important;
+    padding: 0 8px;
+  }
+  
+  .homepage-accommodation-card {
+    flex: 0 0 300px !important;
+    padding: 0 8px !important;
+  }
+  
+  .homepage-accommodation-card img {
+    height: 200px !important;
+  }
+  
+  .homepage-accommodation-card-content {
+    padding: 20px !important;
+  }
+  
+  .homepage-accommodation-card h3 {
+    font-size: 14px !important;
+    margin: 0 0 12px 0 !important;
+  }
+  
+  .homepage-accommodation-card p {
+    font-size: 13px !important;
+    margin: 0 0 20px 0 !important;
+  }
+  
+  .homepage-accommodation-card button {
+    padding: 10px 24px !important;
+    font-size: 13px !important;
+  }
+  
+  .homepage-location-section {
+    margin-top: 48px !important;
+    padding: 48px 0 !important;
+  }
+  
+  .homepage-location-container {
+    padding: 0 12px !important;
+  }
+  
+  .homepage-location-header {
+    margin-bottom: 32px !important;
+  }
+  
+  .homepage-location-header p {
+    font-size: 13px !important;
+  }
+  
+  .homepage-location-header h2 {
+    font-size: 20px !important;
+    margin-bottom: 24px !important;
+  }
+  
+  .homepage-location-content {
+    margin-bottom: 32px !important;
+  }
+  
+  .homepage-location-content p {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+  }
+  
+  .homepage-location-content p:last-child {
+    margin-bottom: 24px !important;
+  }
+  
+  .homepage-location-link {
+    font-size: 14px !important;
+  }
+  
+  .homepage-map-container {
+    max-width: 100% !important;
+  }
+  
+  .homepage-map-wrapper {
+    border-radius: 8px;
+  }
+  
+  .homepage-map {
+    height: 400px !important;
+    border-radius: 6px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .homepage-logo {
+    width: 150px !important;
+    height: 140px !important;
+  }
+  
+  .homepage-fallback-logo {
+    width: 87px !important;
+    height: 85.2px !important;
+  }
+  
+  .homepage-description p {
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+  }
+  
+  .homepage-description p:last-child {
+    margin-top: 16px !important;
+  }
+  
+  .homepage-carousel-container {
+    margin-top: 48px !important;
+    margin-bottom: 48px !important;
+    padding: 0 8px;
+  }
+  
+  .homepage-carousel-wrapper {
+    border-radius: 8px;
+  }
+  
+  .homepage-carousel-item {
+    flex: 0 0 240px !important;
+    padding: 0 6px !important;
+  }
+  
+  .homepage-carousel-image {
+    height: 160px !important;
+    border-radius: 6px !important;
+  }
+  
+  .homepage-carousel-fallback {
+    height: 160px !important;
+    font-size: 12px !important;
+    border-radius: 6px !important;
+  }
+  
+  .homepage-carousel-nav {
+    margin-top: 12px !important;
+    gap: 20px !important;
+  }
+  
+  .homepage-carousel-btn {
+    width: 36px !important;
+    height: 36px !important;
+  }
+  
+  .homepage-accommodation-header p {
+    font-size: 13px !important;
+  }
+  
+  .homepage-accommodation-header h2 {
+    font-size: 18px !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .homepage-accommodation-card {
+    flex: 0 0 260px !important;
+    padding: 0 6px !important;
+  }
+  
+  .homepage-accommodation-card img {
+    height: 180px !important;
+  }
+  
+  .homepage-accommodation-card-content {
+    padding: 16px !important;
+  }
+  
+  .homepage-accommodation-card h3 {
+    font-size: 13px !important;
+    margin: 0 0 10px 0 !important;
+  }
+  
+  .homepage-accommodation-card p {
+    font-size: 12px !important;
+    margin: 0 0 16px 0 !important;
+  }
+  
+  .homepage-accommodation-card button {
+    padding: 8px 20px !important;
+    font-size: 12px !important;
+  }
+  
+  .homepage-location-section {
+    margin-top: 32px !important;
+    padding: 32px 0 !important;
+  }
+  
+  .homepage-location-container {
+    padding: 0 8px !important;
+  }
+  
+  .homepage-location-header {
+    margin-bottom: 24px !important;
+  }
+  
+  .homepage-location-header p {
+    font-size: 12px !important;
+  }
+  
+  .homepage-location-header h2 {
+    font-size: 18px !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .homepage-location-content {
+    margin-bottom: 24px !important;
+  }
+  
+  .homepage-location-content p {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+  
+  .homepage-location-content p:last-child {
+    margin-bottom: 20px !important;
+  }
+  
+  .homepage-location-link {
+    font-size: 13px !important;
+  }
+  
+  .homepage-map-wrapper {
+    border-radius: 6px;
+  }
+  
+  .homepage-map {
+    height: 300px !important;
+    border-radius: 4px !important;
+  }
+}
+
+/* Mobile responsive styles for Experiences page */
+@media (max-width: 768px) {
+  .experiences-page-title {
+    font-size: 24px !important;
+    margin-bottom: 12px !important;
+  }
+  
+  .experiences-sub-nav {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    padding: 12px 16px !important;
+  }
+  
+  .experiences-sub-nav button {
+    padding: 8px 16px !important;
+    font-size: 13px !important;
+  }
+  
+  .experiences-content {
+    padding: 0 16px !important;
+  }
+  
+  .experiences-section-title {
+    font-size: 20px !important;
+    margin-bottom: 24px !important;
+  }
+  
+  .experiences-overview-text {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    padding: 0 8px !important;
+  }
+  
+  .experiences-wildlife-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  
+  .experiences-wildlife-card {
+    height: auto !important;
+  }
+  
+  .experiences-wildlife-card img {
+    height: 180px !important;
+  }
+  
+  .experiences-wildlife-card-content {
+    padding: 20px !important;
+  }
+  
+  .experiences-wildlife-card h3 {
+    font-size: 16px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .experiences-wildlife-card p {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+  
+  .experiences-spiritual-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  
+  .experiences-spiritual-card {
+    height: auto !important;
+  }
+  
+  .experiences-spiritual-card img {
+    height: 180px !important;
+  }
+  
+  .experiences-spiritual-card-content {
+    padding: 20px !important;
+  }
+  
+  .experiences-spiritual-card h3 {
+    font-size: 16px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .experiences-spiritual-card p {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+  
+  .experiences-cultural-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  
+  .experiences-cultural-card {
+    height: auto !important;
+  }
+  
+  .experiences-cultural-card img {
+    height: 180px !important;
+  }
+  
+  .experiences-cultural-card-content {
+    padding: 20px !important;
+  }
+  
+  .experiences-cultural-card h3 {
+    font-size: 16px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .experiences-cultural-card p {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .experiences-page-title {
+    font-size: 20px !important;
+  }
+  
+  .experiences-sub-nav {
+    padding: 8px 12px !important;
+  }
+  
+  .experiences-sub-nav button {
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+  }
+  
+  .experiences-content {
+    padding: 0 12px !important;
+  }
+  
+  .experiences-section-title {
+    font-size: 18px !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .experiences-overview-text {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+  
+  .experiences-wildlife-grid {
+    gap: 20px !important;
+  }
+  
+  .experiences-wildlife-card img {
+    height: 160px !important;
+  }
+  
+  .experiences-wildlife-card-content {
+    padding: 16px !important;
+  }
+  
+  .experiences-wildlife-card h3 {
+    font-size: 14px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .experiences-wildlife-card p {
+    font-size: 12px !important;
+  }
+  
+  .experiences-spiritual-grid {
+    gap: 20px !important;
+  }
+  
+  .experiences-spiritual-card img {
+    height: 160px !important;
+  }
+  
+  .experiences-spiritual-card-content {
+    padding: 16px !important;
+  }
+  
+  .experiences-spiritual-card h3 {
+    font-size: 14px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .experiences-spiritual-card p {
+    font-size: 12px !important;
+  }
+  
+  .experiences-cultural-grid {
+    gap: 20px !important;
+  }
+  
+  .experiences-cultural-card img {
+    height: 160px !important;
+  }
+  
+  .experiences-cultural-card-content {
+    padding: 16px !important;
+  }
+  
+  .experiences-cultural-card h3 {
+    font-size: 14px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .experiences-cultural-card p {
+    font-size: 12px !important;
+  }
+}
+
+/* Mobile responsive styles for Dining page */
+@media (max-width: 768px) {
+  .dining-page-container {
+    padding: 0 16px !important;
+  }
+  
+  .dining-hero-image {
+    width: 100% !important;
+    height: auto !important;
+    margin-bottom: 32px !important;
+  }
+  
+  .dining-hero-fallback {
+    height: 300px !important;
+    font-size: 16px !important;
+  }
+  
+  .dining-title {
+    font-size: 20px !important;
+    margin-left: 0 !important;
+    text-align: center !important;
+    margin-bottom: 12px !important;
+  }
+  
+  .dining-description {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    padding: 0 8px !important;
+  }
+  
+  .dining-establishments {
+    margin-top: 48px !important;
+  }
+  
+  .dining-cards-container {
+    flex-direction: column !important;
+    gap: 16px !important;
+    max-width: 100% !important;
+  }
+  
+  .dining-nav-button {
+    width: 36px !important;
+    height: 36px !important;
+  }
+  
+  .dining-cards-scroll {
+    max-width: 100% !important;
+    padding: 0 8px !important;
+  }
+  
+  .dining-card {
+    min-width: 280px !important;
+    margin-right: 16px !important;
+  }
+  
+  .dining-card img {
+    height: 180px !important;
+  }
+  
+  .dining-card-content {
+    padding: 20px !important;
+  }
+  
+  .dining-card h3 {
+    font-size: 16px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .dining-card p {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+  
+  .dining-experiences {
+    margin-top: 48px !important;
+  }
+  
+  .dining-experiences-title {
+    font-size: 20px !important;
+    margin-bottom: 24px !important;
+  }
+  
+  .dining-experiences-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  
+  .dining-experience-card {
+    height: auto !important;
+  }
+  
+  .dining-experience-card img {
+    height: 200px !important;
+  }
+  
+  .dining-experience-card-content {
+    padding: 20px !important;
+  }
+  
+  .dining-experience-card h3 {
+    font-size: 16px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .dining-experience-card p {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+  
+  .food-carousel-section {
+    margin-top: 48px !important;
+  }
+  
+  .food-carousel-title {
+    font-size: 20px !important;
+    margin-bottom: 24px !important;
+  }
+  
+  .food-carousel-container {
+    padding: 0 8px !important;
+  }
+  
+  .food-carousel-item {
+    min-width: 200px !important;
+    margin-right: 12px !important;
+  }
+  
+  .food-carousel-item img {
+    height: 150px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .dining-page-container {
+    padding: 0 12px !important;
+  }
+  
+  .dining-hero-image {
+    margin-bottom: 24px !important;
+  }
+  
+  .dining-hero-fallback {
+    height: 250px !important;
+    font-size: 14px !important;
+  }
+  
+  .dining-title {
+    font-size: 18px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .dining-description {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+  
+  .dining-establishments {
+    margin-top: 32px !important;
+  }
+  
+  .dining-cards-container {
+    gap: 12px !important;
+  }
+  
+  .dining-nav-button {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  
+  .dining-cards-scroll {
+    padding: 0 4px !important;
+  }
+  
+  .dining-card {
+    min-width: 240px !important;
+    margin-right: 12px !important;
+  }
+  
+  .dining-card img {
+    height: 160px !important;
+  }
+  
+  .dining-card-content {
+    padding: 16px !important;
+  }
+  
+  .dining-card h3 {
+    font-size: 14px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .dining-card p {
+    font-size: 12px !important;
+  }
+  
+  .dining-experiences {
+    margin-top: 32px !important;
+  }
+  
+  .dining-experiences-title {
+    font-size: 18px !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .dining-experiences-grid {
+    gap: 20px !important;
+  }
+  
+  .dining-experience-card img {
+    height: 180px !important;
+  }
+  
+  .dining-experience-card-content {
+    padding: 16px !important;
+  }
+  
+  .dining-experience-card h3 {
+    font-size: 14px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .dining-experience-card p {
+    font-size: 12px !important;
+  }
+  
+  .food-carousel-section {
+    margin-top: 32px !important;
+  }
+  
+  .food-carousel-title {
+    font-size: 18px !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .food-carousel-container {
+    padding: 0 4px !important;
+  }
+  
+  .food-carousel-item {
+    min-width: 180px !important;
+    margin-right: 8px !important;
+  }
+  
+  .food-carousel-item img {
+    height: 120px !important;
+  }
+}
+
+/* Mobile responsive styles for Wellness page */
+@media (max-width: 768px) {
+  .wellness-hero-image {
+    height: 400px !important;
+    margin-bottom: 32px !important;
+  }
+  
+  .wellness-hero-fallback {
+    height: 400px !important;
+  }
+  
+  .wellness-content {
+    padding: 0 16px !important;
+  }
+  
+  .wellness-title {
+    font-size: 20px !important;
+    margin-bottom: 24px !important;
+  }
+  
+  .wellness-description {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+  }
+  
+  .wellness-cards-section {
+    margin-top: 48px !important;
+  }
+  
+  .wellness-cards-container {
+    padding: 0 8px !important;
+    gap: 16px !important;
+  }
+  
+  .wellness-card {
+    width: 280px !important;
+  }
+  
+  .wellness-card img {
+    height: 160px !important;
+  }
+  
+  .wellness-card-content {
+    padding: 20px !important;
+  }
+  
+  .wellness-card h3 {
+    font-size: 16px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .wellness-card p {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+  
+  .wellness-gallery-section {
+    margin-top: 48px !important;
+  }
+  
+  .wellness-gallery-title {
+    font-size: 20px !important;
+    margin-bottom: 24px !important;
+  }
+  
+  .wellness-gallery-container {
+    padding: 0 8px !important;
+    gap: 12px !important;
+  }
+  
+  .wellness-gallery-item {
+    min-width: 200px !important;
+  }
+  
+  .wellness-gallery-item img {
+    height: 150px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .wellness-hero-image {
+    height: 300px !important;
+    margin-bottom: 24px !important;
+  }
+  
+  .wellness-hero-fallback {
+    height: 300px !important;
+  }
+  
+  .wellness-content {
+    padding: 0 12px !important;
+  }
+  
+  .wellness-title {
+    font-size: 18px !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .wellness-description {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+  
+  .wellness-cards-section {
+    margin-top: 32px !important;
+  }
+  
+  .wellness-cards-container {
+    padding: 0 4px !important;
+    gap: 12px !important;
+  }
+  
+  .wellness-card {
+    width: 240px !important;
+  }
+  
+  .wellness-card img {
+    height: 140px !important;
+  }
+  
+  .wellness-card-content {
+    padding: 16px !important;
+  }
+  
+  .wellness-card h3 {
+    font-size: 14px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .wellness-card p {
+    font-size: 12px !important;
+  }
+  
+  .wellness-gallery-section {
+    margin-top: 32px !important;
+  }
+  
+  .wellness-gallery-title {
+    font-size: 18px !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .wellness-gallery-container {
+    padding: 0 4px !important;
+    gap: 8px !important;
+  }
+  
+  .wellness-gallery-item {
+    min-width: 160px !important;
+  }
+  
+  .wellness-gallery-item img {
+    height: 120px !important;
+  }
+}
+
+/* Mobile responsive styles for Spotify/Audio section */
+@media (max-width: 768px) {
+  .spotify-section {
+    padding: 48px 0 !important;
+  }
+  
+  .spotify-container {
+    padding: 0 16px !important;
+  }
+  
+  .spotify-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+  
+  .spotify-text-content {
+    text-align: center !important;
+  }
+  
+  .spotify-subtitle {
+    font-size: 14px !important;
+    margin-bottom: 6px !important;
+  }
+  
+  .spotify-title {
+    font-size: 20px !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .spotify-description {
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+    margin-top: 24px !important;
+  }
+  
+  .spotify-player-container {
+    padding: 20px !important;
+  }
+  
+  .spotify-iframe {
+    height: 300px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .spotify-section {
+    padding: 32px 0 !important;
+  }
+  
+  .spotify-container {
+    padding: 0 12px !important;
+  }
+  
+  .spotify-grid {
+    gap: 24px !important;
+  }
+  
+  .spotify-subtitle {
+    font-size: 13px !important;
+    margin-bottom: 4px !important;
+  }
+  
+  .spotify-title {
+    font-size: 18px !important;
+    margin-bottom: 16px !important;
+  }
+  
+  .spotify-description {
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    margin-top: 20px !important;
+  }
+  
+  .spotify-player-container {
+    padding: 16px !important;
+  }
+  
+  .spotify-iframe {
+    height: 250px !important;
+  }
+}

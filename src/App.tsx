@@ -155,9 +155,14 @@ function App() {
   const renderHomePage = () => (
     <>
       {/* Large Video */}
-      <div style={{ marginBottom: '48px'}}>
+      <div className="homepage-video-container" style={{ marginBottom: '48px'}}>
         <div style={{ position: 'relative', width: '100%', maxWidth: '1024px', margin: '0 auto' }}>
-          <div style={{ aspectRatio: '16/9', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}>
+          <div className="video-wrapper" style={{ 
+            aspectRatio: '16/9', 
+            borderRadius: '8px', 
+            overflow: 'hidden', 
+            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
+          }}>
             <video 
               className="elementor-video" 
               src="/VID-20241019-WA0011.mp4" 
@@ -174,7 +179,7 @@ function App() {
       </div>
 
       {/* Rambha Palace Emblem and Content */}
-      <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+      <div className="homepage-logo-container" style={{ textAlign: 'center', marginBottom: '32px' }}>
         {/* Rambha Palace Logo */}
         <div style={{ marginBottom: '32px' }}>
           <div style={{ display: 'inline-block', position: 'relative' }}>
@@ -184,11 +189,11 @@ function App() {
               width="986" 
               height="986" 
               src="/assets/logoramba.png" 
-              className="attachment-large size-large wp-image-79" 
+              className="attachment-large size-large wp-image-79 homepage-logo" 
               alt="Rambha Palace Logo"
               style={{ 
                 width: '300px', 
-  height: '280px',  
+                height: '280px',  
                 maxWidth: '100%',
                 display: 'block',
                 margin: '10px 0px 0px',
@@ -204,7 +209,7 @@ function App() {
               }}
             />
             {/* Fallback logo if image fails to load */}
-            <div style={{ 
+            <div className="homepage-fallback-logo" style={{ 
               display: 'none', 
               width: '174px', 
               height: '170.39px', 
@@ -265,20 +270,36 @@ function App() {
       </div>
 
       {/* Description */}
-      <div style={{ maxWidth: '1024px', margin: '0 auto', color: '#374151', lineHeight: '1.6' }}>
-        <p style={{ fontSize: '16px', textAlign: 'center', color: '#3A3A3A', fontFamily: '"Lato", sans-serif'}}>
+      <div className="homepage-description" style={{ maxWidth: '1024px', margin: '0 auto', color: '#374151', lineHeight: '1.6' }}>
+        <p style={{ 
+          fontSize: '16px', 
+          textAlign: 'center', 
+          color: '#3A3A3A', 
+          fontFamily: '"Lato", sans-serif'
+        }}>
         A hidden gem on the east coast of India, Rambha Palace—the 200-year-old residence of the King of Khallikote—has undergone a meticulous six-year restoration to offer guests a glimpse into its regal past. Nestled on the banks of the Chilika Lake, the palace gates open to serene views of calm waters and lush wetlands. Stately courtyards and grand hallways lead to opulent suites, each adorned with echoes of royal heritage, while the lake breeze fills the palace gardens, bringing the vibrant birdlife into gentle focus.
         </p>
         
-        <p style={{ fontSize: '16px', textAlign: 'center', color: '#3A3A3A', fontFamily: '"Lato", sans-serif', marginTop: '24px'}}>
+        <p style={{ 
+          fontSize: '16px', 
+          textAlign: 'center', 
+          color: '#3A3A3A', 
+          fontFamily: '"Lato", sans-serif', 
+          marginTop: '24px'
+        }}>
         Designed as a peaceful retreat, Rambha sits in proximity to sacred temples, inviting guests to explore the spiritual heritage woven into the landscape. A wellness center in the palace seamlessly blends the elegance of a bygone era with an intimate experience of ancient healing practices, offering moments of quiet reflection in a setting that honors its past.
         </p>
       </div>
 
       {/* Image Carousel Section */}
-      <div style={{ maxWidth: '1400px', margin: '0 auto', marginTop: '64px', marginBottom: '64px' }}>
+      <div className="homepage-carousel-container" style={{ 
+        maxWidth: '1400px', 
+        margin: '0 auto', 
+        marginTop: '64px', 
+        marginBottom: '64px'
+      }}>
   {/* Carousel Container with overflow hidden */}
-  <div style={{
+  <div className="homepage-carousel-wrapper" style={{
     position: 'relative',
     width: '100%',
     overflow: 'hidden',
@@ -326,7 +347,7 @@ function App() {
       {[...Array(3)].flatMap(() => [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50]).map((i, idx) => (
         <div
           key={idx}
-          className="carousel-image"
+          className="carousel-image homepage-carousel-item"
           style={{
             flex: '0 0 400px',
             transition: 'all 0.3s ease',
@@ -338,6 +359,7 @@ function App() {
           <img
             src={`/image-${i}.png`}
             alt={`Rambha Palace View ${i}`}
+            className="homepage-carousel-image"
             style={{
               width: '800px',
               height: '450px',
@@ -355,7 +377,7 @@ function App() {
               }
             }}
           />
-          <div style={{
+          <div className="homepage-carousel-fallback" style={{
             display: 'none',
             width: '800px',
             height: '450px',
@@ -374,7 +396,7 @@ function App() {
   </div>
 
   {/* Navigation Buttons positioned below the carousel */}
-  <div style={{
+  <div className="homepage-carousel-nav" style={{
     position: 'relative',
     display: 'flex',
     justifyContent: 'center',
@@ -384,6 +406,7 @@ function App() {
   }}>
     {/* Prev Button */}
 <button
+  className="homepage-carousel-btn"
   onClick={() => {
     const carousel = document.getElementById('imageCarousel');
     if (carousel) {
@@ -415,6 +438,7 @@ function App() {
 
 {/* Next Button */}
 <button
+  className="homepage-carousel-btn"
   onClick={() => {
     const carousel = document.getElementById('imageCarousel');
     if (carousel) {
@@ -449,13 +473,35 @@ function App() {
 
 
       {/* Experience the Luxury - ACCOMMODATION Section */}
-      <div style={{ maxWidth: '1024px', margin: '0 auto', marginTop: '64px', textAlign: 'center' }}>
-        <p style={{ fontSize: '16px', color: '#3A3A3A', fontWeight: '400',marginBottom: '8px', fontFamily: '"Montserrat", sans-serif' }}>Experience the Luxury</p>
-        <h2 style={{ fontSize: '24px',  color: '#3A3A3A',fontWeight: '600', marginBottom: '32px', textTransform: 'uppercase' }}>ACCOMMODATION</h2>
+      <div className="homepage-accommodation-header" style={{ 
+        maxWidth: '1024px', 
+        margin: '0 auto', 
+        marginTop: '64px', 
+        textAlign: 'center'
+      }}>
+        <p style={{ 
+          fontSize: '16px', 
+          color: '#3A3A3A', 
+          fontWeight: '400',
+          marginBottom: '8px', 
+          fontFamily: '"Montserrat", sans-serif'
+        }}>Experience the Luxury</p>
+        <h2 style={{ 
+          fontSize: '24px',  
+          color: '#3A3A3A',
+          fontWeight: '600', 
+          marginBottom: '32px', 
+          textTransform: 'uppercase'
+        }}>ACCOMMODATION</h2>
       </div>
 
       {/* Accommodation Carousel Section */}
-      <div style={{ maxWidth: '1400px', margin: '0 auto', marginTop: '64px', marginBottom: '64px' }}>
+      <div className="homepage-accommodation-carousel" style={{ 
+        maxWidth: '1400px', 
+        margin: '0 auto', 
+        marginTop: '64px', 
+        marginBottom: '64px'
+      }}>
         <div style={{
           position: 'relative',
           width: '100%',
@@ -506,7 +552,7 @@ function App() {
 
             {/* Palace Suite */}
             <div
-              className="accommodation-card"
+              className="accommodation-card homepage-accommodation-card"
               style={{
                 flex: '0 0 400px',
                 transition: 'all 0.3s ease',
@@ -532,7 +578,9 @@ function App() {
                     display: 'block'
                   }}
                 />
-                <div style={{ padding: '24px' }}>
+                <div className="homepage-accommodation-card-content" style={{ 
+                  padding: '24px'
+                }}>
                   <h3 style={{
                       fontSize: '16px',
                       fontWeight: '500',
@@ -579,7 +627,7 @@ function App() {
 
             {/* Palace Family Suite */}
             <div
-              className="accommodation-card"
+              className="accommodation-card homepage-accommodation-card"
               style={{
                 flex: '0 0 400px',
                 transition: 'all 0.3s ease',
@@ -605,7 +653,9 @@ function App() {
                     display: 'block'
                   }}
                 />
-                <div style={{ padding: '24px' }}>
+                <div className="homepage-accommodation-card-content" style={{ 
+                  padding: '24px'
+                }}>
                   <h3 style={{
                       fontSize: '16px',
                       fontWeight: '500',
@@ -652,7 +702,7 @@ function App() {
 
             {/* Generator Suites */}
             <div
-              className="accommodation-card"
+              className="accommodation-card homepage-accommodation-card"
               style={{
                 flex: '0 0 400px',
                 transition: 'all 0.3s ease',
@@ -678,7 +728,9 @@ function App() {
                     display: 'block'
                   }}
                 />
-                <div style={{ padding: '24px' }}>
+                <div className="homepage-accommodation-card-content" style={{ 
+                  padding: '24px'
+                }}>
                   <h3 style={{
                        fontSize: '16px',
                        fontWeight: '500',
@@ -725,7 +777,7 @@ function App() {
 
             {/* Printing Press Suites */}
             <div
-              className="accommodation-card"
+              className="accommodation-card homepage-accommodation-card"
               style={{
                 flex: '0 0 400px',
                 transition: 'all 0.3s ease',
@@ -751,7 +803,9 @@ function App() {
                     display: 'block'
                   }}
                 />
-                <div style={{ padding: '24px' }}>
+                <div className="homepage-accommodation-card-content" style={{ 
+                  padding: '24px'
+                }}>
                   <h3 style={{
                       fontSize: '16px',
                       fontWeight: '500',
@@ -798,7 +852,7 @@ function App() {
 
             {/* Rambha Villa */}
             <div
-              className="accommodation-card"
+              className="accommodation-card homepage-accommodation-card"
               style={{
                 flex: '0 0 400px',
                 transition: 'all 0.3s ease',
@@ -824,7 +878,9 @@ function App() {
                     display: 'block'
                   }}
                 />
-                <div style={{ padding: '24px' }}>
+                <div className="homepage-accommodation-card-content" style={{ 
+                  padding: '24px'
+                }}>
                   <h3 style={{
                     fontSize: '16px',
                     fontWeight: '500',
@@ -875,7 +931,7 @@ function App() {
 
             {/* Palace Suite */}
             <div
-              className="accommodation-card"
+              className="accommodation-card homepage-accommodation-card"
               style={{
                 flex: '0 0 400px',
                 transition: 'all 0.3s ease',
@@ -901,7 +957,9 @@ function App() {
                     display: 'block'
                   }}
                 />
-                <div style={{ padding: '24px' }}>
+                <div className="homepage-accommodation-card-content" style={{ 
+                  padding: '24px'
+                }}>
                   <h3 style={{
                       fontSize: '16px',
                       fontWeight: '500',
@@ -948,7 +1006,7 @@ function App() {
 
             {/* Palace Family Suite */}
             <div
-              className="accommodation-card"
+              className="accommodation-card homepage-accommodation-card"
               style={{
                 flex: '0 0 400px',
                 transition: 'all 0.3s ease',
@@ -974,7 +1032,9 @@ function App() {
                     display: 'block'
                   }}
                 />
-                <div style={{ padding: '24px' }}>
+                <div className="homepage-accommodation-card-content" style={{ 
+                  padding: '24px'
+                }}>
                   <h3 style={{
                       fontSize: '16px',
                       fontWeight: '500',
@@ -1021,7 +1081,7 @@ function App() {
 
             {/* Generator Suites */}
             <div
-              className="accommodation-card"
+              className="accommodation-card homepage-accommodation-card"
               style={{
                 flex: '0 0 400px',
                 transition: 'all 0.3s ease',
@@ -1047,7 +1107,9 @@ function App() {
                     display: 'block'
                   }}
                 />
-                <div style={{ padding: '24px' }}>
+                <div className="homepage-accommodation-card-content" style={{ 
+                  padding: '24px'
+                }}>
                   <h3 style={{
                        fontSize: '16px',
                        fontWeight: '500',
@@ -1094,7 +1156,7 @@ function App() {
 
             {/* Printing Press Suites */}
             <div
-              className="accommodation-card"
+              className="accommodation-card homepage-accommodation-card"
               style={{
                 flex: '0 0 400px',
                 transition: 'all 0.3s ease',
@@ -1120,7 +1182,9 @@ function App() {
                     display: 'block'
                   }}
                 />
-                <div style={{ padding: '24px' }}>
+                <div className="homepage-accommodation-card-content" style={{ 
+                  padding: '24px'
+                }}>
                   <h3 style={{
                       fontSize: '16px',
                       fontWeight: '500',
@@ -1167,7 +1231,7 @@ function App() {
 
             {/* Rambha Villa */}
             <div
-              className="accommodation-card"
+              className="accommodation-card homepage-accommodation-card"
               style={{
                 flex: '0 0 400px',
                 transition: 'all 0.3s ease',
@@ -1193,7 +1257,9 @@ function App() {
                     display: 'block'
                   }}
                 />
-                <div style={{ padding: '24px' }}>
+                <div className="homepage-accommodation-card-content" style={{ 
+                  padding: '24px'
+                }}>
                   <h3 style={{
                     fontSize: '16px',
                     fontWeight: '500',
@@ -1674,7 +1740,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       </div>
 
       {/* Hidden India Playlist Section */}
-      <div style={{ 
+      <div className="spotify-section" style={{ 
          background: 'linear-gradient(to bottom, #f0d1cc 0%, #f7beb5 100%)', 
          marginTop: '64px', 
          padding: '64px 0',
@@ -1685,14 +1751,14 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
          marginLeft: '-50vw',       // ✅ Remove body margin gap
          marginRight: '-50vw'
       }}>
-        <div style={{   maxWidth: '1400px',       // ✅ optional: limit content width
+        <div className="spotify-container" style={{   maxWidth: '1400px',       // ✅ optional: limit content width
     margin: '0 auto',
     padding: '0 32px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', alignItems: 'center' }}>
+          <div className="spotify-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', alignItems: 'center' }}>
             {/* Left Section - Text Content */}
-            <div>
+            <div className="spotify-text-content">
               {/* Subtitle */}
-              <p style={{ 
+              <p className="spotify-subtitle" style={{ 
                 fontSize: '16px', 
                 color: '#6C6C6C', 
                 fontFamily: '"Montserrat", sans-serif',
@@ -1704,7 +1770,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               </p>
               
                               {/* Main Title */}
-              <h2 style={{ 
+              <h2 className="spotify-title" style={{ 
                 fontSize: '24px', 
                 fontWeight: '600', 
                 color: '#000000', 
@@ -1716,7 +1782,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               </h2>
               
               {/* Description */}
-              <p style={{ 
+              <p className="spotify-description" style={{ 
                 fontFamily: '"Lato", sans-serif',
                 fontSize: '14px',
                 fontWeight: '500',
@@ -1730,7 +1796,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             </div>
 
             {/* Right Section - Spotify Player */}
-            <div style={{ 
+            <div className="spotify-player-container" style={{ 
               backgroundColor: '#8b4513', 
               borderRadius: '12px', 
               padding: '24px',
@@ -1738,6 +1804,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               border: '1px solid #e5e7eb'
             }}>
               <iframe 
+                className="spotify-iframe"
                 style={{ 
                   borderRadius: '12px',
                   width: '100%',
@@ -1755,15 +1822,22 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       </div>
 
       {/* FINDING RAMBHA Section */}
-      <div style={{ 
+      <div className="homepage-location-section" style={{ 
         backgroundColor: 'rgb(241,236,229)', 
         marginTop: '64px', 
         padding: '64px 0',
         width: '100%'
       }}>
-        <div style={{ maxWidth: '1024px', margin: '0 auto', padding: '0 16px' }}>
+        <div className="homepage-location-container" style={{ 
+          maxWidth: '1024px', 
+          margin: '0 auto', 
+          padding: '0 16px'
+        }}>
           {/* Section Header */}
-          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <div className="homepage-location-header" style={{ 
+            textAlign: 'center', 
+            marginBottom: '48px'
+          }}>
             <p style={{ 
               fontSize: '14px', 
               color: '#3A3A3A',
@@ -1785,7 +1859,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
           </div>
 
           {/* Directions and Contact Info */}
-          <div style={{ 
+          <div className="homepage-location-content" style={{ 
   maxWidth: '1200px',  // enough width to keep both lines unwrapped
   margin: '0 auto', 
   textAlign: 'center', 
@@ -1794,10 +1868,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
   <p style={{ 
     fontSize: '16px', 
     color: '#7A7A7A', 
-    lineHeight: '1.8',
-    // marginBottom: '6px'
+    lineHeight: '1.8'
   }}>
-    From Bhubaneswar Airport, guests can embark two-and-a-half-hour drive Odisha’s lush landscapes arriving directly at the palace gates.
+    From Bhubaneswar Airport, guests can embark two-and-a-half-hour drive Odisha's lush landscapes arriving directly at the palace gates.
   </p>
   
   <p style={{ 
@@ -1813,6 +1886,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
     href="https://maps.app.goo.gl/SkTYhSF9e2BDNjCo7" 
     target="_blank" 
     rel="noopener noreferrer"
+    className="homepage-location-link"
     style={{ 
       color: '#3A3A3A', 
       textDecoration: 'underline',
@@ -1827,19 +1901,19 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
 
           {/* Map of India */}
-          <div style={{ 
+          <div className="homepage-map-container" style={{ 
             maxWidth: '900px', 
             margin: '0 auto', 
-            textAlign: 'center' 
+            textAlign: 'center'
           }}>
-            <div style={{ 
+            <div className="homepage-map-wrapper" style={{ 
               position: 'relative',
               backgroundColor: '#f3f4f6',
               borderRadius: '12px',
               boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
             }}>
               {/* Map Container */}
-              <div style={{ 
+              <div className="homepage-map" style={{ 
                 position: 'relative',
                 width: '100%',
                 height: '600px',
@@ -1861,7 +1935,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       
       
       {/* Main Title */}
-      <div style={{
+      <div className="experiences-page-title" style={{
         maxWidth: '1524px',
   fontFamily: 'Montserrat',
   fontSize: '32px',
@@ -1874,7 +1948,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
 
       {/* Tab Navigation */}
-      <div style={{ 
+      <div className="experiences-sub-nav" style={{ 
         display: 'flex', 
         justifyContent: 'center', 
         marginBottom: '32px', 
@@ -3265,11 +3339,11 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
     <>
       {/* Main Title */}
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-        <h1 style={{ fontSize: '32px', color: '#374151', marginBottom: '16px', fontFamily: '"Montserrat", sans-serif' }}>Experiences</h1>
+        <h1 className="experiences-page-title" style={{ fontSize: '32px', color: '#374151', marginBottom: '16px', fontFamily: '"Montserrat", sans-serif' }}>Experiences</h1>
       </div>
 
       {/* Sub-navigation */}
-      <div style={{ 
+      <div className="experiences-sub-nav" style={{ 
         display: 'flex', 
         justifyContent: 'center', 
         marginBottom: '32px', 
@@ -3345,13 +3419,13 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       </div>
 
       {/* Main Content Area */}
-      <div style={{ maxWidth: '1324px', margin: '0 auto' }}>
+      <div className="experiences-content" style={{ maxWidth: '1324px', margin: '0 auto' }}>
         {experiencesTab === 'overview' && (
           <>
             {/* OVERVIEW Section */}
             <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-              <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '24px', textTransform: 'uppercase' }}>OVERVIEW</h2>
-              <div style={{ maxWidth: '800px', margin: '0 auto', color: '#374151', lineHeight: '1.8', fontSize: '16px' }}>
+              <h2 className="experiences-section-title" style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '24px', textTransform: 'uppercase' }}>OVERVIEW</h2>
+              <div className="experiences-overview-text" style={{ maxWidth: '800px', margin: '0 auto', color: '#374151', lineHeight: '1.8', fontSize: '16px' }}>
                 <p>
                   Rambha Palace provides unscripted and authentic experiences that cater to travelers seeking memorable and meaningful activities beyond the ordinary. Time spent here fosters a mindful atmosphere, enriched by interactions with local communities, encounters with the region's flora and fauna, and visits to ancient temples. Guests receive an unfiltered glimpse of Odisha's natural beauty and unique charm.
                 </p>
@@ -3360,12 +3434,12 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
             {/* WILDLIFE Section */}
             <div style={{ marginBottom: '48px' }}>
-              <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '32px', textAlign: 'center', textTransform: 'uppercase' }}>WILDLIFE</h2>
+              <h2 className="experiences-section-title" style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '32px', textAlign: 'center', textTransform: 'uppercase' }}>WILDLIFE</h2>
               
               {/* Three Cards */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '32px' }}>
+              <div className="experiences-wildlife-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '32px' }}>
                 {/* Card 1: Diving Dolphins */}
-                <div style={{ backgroundColor: 'white', height: '400px',borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+                <div className="experiences-wildlife-card" style={{ backgroundColor: 'white', height: '400px',borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
                   <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <img 
                       src="./image-7.png" 
@@ -3416,7 +3490,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                       }}></div>
                     </div>
                   </div>
-                  <div style={{ padding: '24px' }}>
+                  <div className="experiences-wildlife-card-content" style={{ 
+                  padding: '24px'
+                }}>
                     <h3 style={{ fontSize: '18px', color: '#000000', marginBottom: '12px', textTransform: 'uppercase' }}>DIVING DOLPHINS</h3>
                     <p style={{ color: '#3A3A3A', font : '14px Lato, sans-serif' ,lineHeight: '1.6', fontSize: '12px' }}>
                       The endangered species of Irrawaddy dolphins can be spotted frolicking in Chilika Lake. Spot them happy in their habitat while you drift slowly in a private boat.
@@ -3425,7 +3501,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 </div>
 
                 {/* Card 2: Tracking Fishing Cat */}
-                <div style={{ backgroundColor: 'white',  height: '400px', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+                <div className="experiences-wildlife-card" style={{ backgroundColor: 'white',  height: '400px', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
                   <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <img 
                       src="./image-8.png" 
@@ -3485,7 +3561,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                       </div>
                     </div>
                   </div>
-                  <div style={{ padding: '24px' }}>
+                  <div className="experiences-wildlife-card-content" style={{ 
+                  padding: '24px'
+                }}>
                     <h3 style={{ fontSize: '18px', color: '#000000', marginBottom: '12px', textTransform: 'uppercase' }}>TRACKING FISHING CAT</h3>
                     <p style={{ color: '#3A3A3A', font : '14px Lato, sans-serif' ,lineHeight: '1.4', fontSize: '12px' }}>
                       Embark on a boat safari in the wetlands to track elusive apex predators as they roam the banks on lookout for a hunt, or if you're lucky, even catch them on the prowl.
@@ -3494,7 +3572,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 </div>
 
                 {/* Card 3: Finding Flamingos */}
-                <div style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+                <div className="experiences-wildlife-card" style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
                   <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <img 
                       src="./image-6.png" 
@@ -3562,7 +3640,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                       }}></div>
                     </div>
                   </div>
-                  <div style={{ padding: '24px' }}>
+                  <div className="homepage-accommodation-card-content" style={{ 
+                  padding: '24px'
+                }}>
                     <h3 style={{ fontSize: '18px', color: '#000000', marginBottom: '12px', textTransform: 'uppercase' }}>FINDING FLAMINGOS</h3>
                     <p style={{ color: '#3A3A3A', font : '14px Lato, sans-serif' ,lineHeight: '1.6', fontSize: '12px' }}>
                       Set sail on Chilika Lake and get a chance to spot nature's fabulous divas, with their striking pink feathers and long, spindly legs.
@@ -3638,7 +3718,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                       }}></div>
                     </div>
                   </div>
-                  <div style={{ padding: '24px' }}>
+                  <div className="experiences-wildlife-card-content" style={{ 
+                  padding: '24px'
+                }}>
                     <h3 style={{ fontSize: '18px', color: '#000000', marginBottom: '12px', textTransform: 'uppercase' }}>Spotting blackbucks</h3>
                     <p style={{ color: '#3A3A3A', font : '14px Lato, sans-serif' ,lineHeight: '1.6', fontSize: '12px' }}>
                     As dusk settles, wander into a nearby village where time moves gently. Over steaming cups of tea, watch blackbucks emerge across the paddy fields—graceful, elusive, and rare. A fleeting encounter with nature’s elegance, framed by the stillness of the evening.
@@ -3651,7 +3733,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
             {/* SPIRITUAL Section */}
             <div style={{ marginBottom: '48px' }}>
-              <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '32px', textAlign: 'center', textTransform: 'uppercase' }}>SPIRITUAL</h2>
+              <h2 className="experiences-section-title" style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '32px', textAlign: 'center', textTransform: 'uppercase' }}>SPIRITUAL</h2>
               
               {/* Main Image */}
               {/* Unified Card - Image and Content Together */}
@@ -3738,12 +3820,12 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
             {/* FEATURED EXPERIENCES Section */}
             <div style={{ marginBottom: '48px' }}>
-              <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '32px', textAlign: 'center', textTransform: 'uppercase' }}>CULTURAL</h2>
+              <h2 className="experiences-section-title" style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '32px', textAlign: 'center', textTransform: 'uppercase' }}>CULTURAL</h2>
               
               {/* First Row - Three Cards */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '24px', marginBottom: '32px' }}>
+              <div className="experiences-cultural-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '24px', marginBottom: '32px' }}>
                 {/* Card 1: Art Village */}
-                <div style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+                <div className="experiences-cultural-card" style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
                   <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <img 
                       src="./image-10.png" 
@@ -3801,7 +3883,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                       }}></div>
                     </div>
                   </div>
-                  <div style={{ padding: '20px' }}>
+                  <div className="experiences-cultural-card-content" style={{ padding: '20px' }}>
                     <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#374151', marginBottom: '8px', textTransform: 'uppercase' }}>ART VILLAGE: RAGHURAJPUR</h3>
                     <p style={{ color: '#6b7280', lineHeight: '1.5', fontSize: '13px' }}>
                     Navigate town lanes, visit artisans’ homes & studios and unravel the stories behind Pattachitra paintings, delve into Chadhiapalli mask making and its symbolism in Odisha.
@@ -3810,7 +3892,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 </div>
 
                 {/* Card 2: Udaygiri Caves */}
-                <div style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+                <div className="experiences-cultural-card" style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
                   <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <img 
                       src="./image-11.png" 
@@ -3899,7 +3981,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                       }}></div>
                     </div>
                   </div>
-                  <div style={{ padding: '20px' }}>
+                  <div className="experiences-cultural-card-content" style={{ padding: '20px' }}>
                     <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#374151', marginBottom: '8px', textTransform: 'uppercase' }}>METAL CRAFT</h3>
                     <p style={{ color: '#6b7280', lineHeight: '1.5', fontSize: '13px' }}>
                     Through the moulding of metal, artisans create sculptures of primarily aquatic creatures, effectively replicating their physical movement abilities. Skilful crafts at its finest.
@@ -3910,13 +3992,13 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
               {/* FEATURED EXPERIENCES Section */}
               <div style={{ textAlign: 'center', marginBottom: '32px', marginTop: '48px' }}>
-                <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '24px', textTransform: 'uppercase' }}>FEATURED EXPERIENCES</h2>
+                <h2 className="experiences-section-title" style={{ fontSize: '24px', fontWeight: 'bold', color: '#374151', marginBottom: '24px', textTransform: 'uppercase' }}>FEATURED EXPERIENCES</h2>
               </div>
               
               {/* Second Row - Two Larger Cards */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
+              <div className="experiences-cultural-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
                 {/* Card 4: Breakfast on Island */}
-                <div style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+                <div className="experiences-cultural-card" style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
                   <div style={{ height: '250px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <img 
                       src="./image-13.png" 
@@ -3965,7 +4047,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                       }}></div>
                     </div>
                   </div>
-                  <div style={{ padding: '24px' }}>
+                  <div className="experiences-cultural-card-content" style={{ 
+                  padding: '24px'
+                }}>
                     <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>BREAKFAST ON ISLAND</h3>
                     <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
                     Set sail from the banks of Chilika Lake and cruise through calming waters. Enjoy breakfast aboard the boat, or step onto the island for a refreshing morning trail. Awaken to sounds of a gentle breeze and the buzz of critters.
@@ -3974,7 +4058,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 </div>
 
                 {/* Card 5: Romantic Beach Getaway */}
-                <div style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
+                <div className="experiences-cultural-card" style={{ backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
                   <div style={{ height: '250px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <img 
                       src="./image-14.png" 
@@ -4024,7 +4108,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                       }}></div>
                     </div>
                   </div>
-                  <div style={{ padding: '24px' }}>
+                  <div className="experiences-cultural-card-content" style={{ 
+                  padding: '24px'
+                }}>
                     <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>ROMANTIC BEACH GETAWAY</h3>
                     <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
                     Allow the palace butlers to orchestrate a candlelit feast by the lake. Relish a sumptuous banquet of your preferred cuisine, while the gentle whispers of waves caress the shore.
@@ -4046,7 +4132,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
         {experiencesTab === 'spiritual' && (
           <>
             {/* Spiritual Image */}
-            <div style={{ marginBottom: '48px' }}>
+            <div className="experiences-spiritual-grid" style={{ marginBottom: '48px' }}>
               <div style={{ position: 'relative', width: '100%', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}>
                 <img 
                   src="/img-7.png" 
@@ -4452,7 +4538,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
         {experiencesTab === 'cultural' && (
           <>
             {/* Cultural Hero Image */}
-            <div style={{ marginBottom: '48px' }}>
+            <div className="experiences-cultural-grid" style={{ marginBottom: '48px' }}>
               <div style={{ position: 'relative', width: '100%', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}>
                 <img 
                   src="cultural.png" 
@@ -4687,7 +4773,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                       </div>
                     </div>
                   </div>
-                  <div style={{ padding: '24px' }}>
+                  <div className="homepage-accommodation-card-content" style={{ 
+                  padding: '24px'
+                }}>
                     <h3 style={{ 
                       fontSize: '18px', 
                       fontWeight: 'bold', 
@@ -4777,7 +4865,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                       }}></div>
                     </div>
                   </div>
-                  <div style={{ padding: '24px' }}>
+                  <div className="homepage-accommodation-card-content" style={{ 
+                  padding: '24px'
+                }}>
                     <h3 style={{ 
                       fontSize: '18px', 
                       fontWeight: 'bold', 
@@ -4879,7 +4969,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                       </div>
                     </div>
                   </div>
-                  <div style={{ padding: '24px' }}>
+                  <div className="homepage-accommodation-card-content" style={{ 
+                  padding: '24px'
+                }}>
                     <h3 style={{ 
                       fontSize: '18px', 
                       fontWeight: 'bold', 
@@ -5228,11 +5320,11 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
     <>
       {/* Main Title */}
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-        <h1 style={{ fontSize: '32px', color: '#374151', marginBottom: '16px', fontFamily: '"Montserrat", sans-serif' }}>Wildlife</h1>
+        <h1 className="experiences-page-title" style={{ fontSize: '32px', color: '#374151', marginBottom: '16px', fontFamily: '"Montserrat", sans-serif' }}>Wildlife</h1>
       </div>
 
       {/* Sub-navigation */}
-      <div style={{ 
+      <div className="experiences-sub-nav" style={{ 
         display: 'flex', 
         justifyContent: 'center', 
         marginBottom: '32px', 
@@ -5311,7 +5403,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       </div>
 
       {/* Main Content Area */}
-      <div style={{ maxWidth: '1024px', margin: '0 auto' }}>
+      <div className="experiences-content" style={{ maxWidth: '1024px', margin: '0 auto' }}>
         {/* Wildlife Image */}
         <div style={{ marginBottom: '48px' }}>
           <div style={{ position: 'relative', width: '100%', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}>
@@ -6709,12 +6801,13 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
     return (
       <>
         {/* Main Content Area */}
-        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+        <div className="dining-page-container" style={{ maxWidth: '1400px', margin: '0 auto' }}>
           {/* Dining Room Image */}
           <div style={{ marginBottom: '48px' }}>
             <img 
               src="./image-15.png" 
               alt="Luxurious Dining Room at Rambha Palace" 
+              className="dining-hero-image"
               style={{ 
                 width: '1024px', 
                 height: 'auto', 
@@ -6733,7 +6826,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               }}
             />
             {/* Fallback design if image fails to load */}
-            <div style={{
+            <div className="dining-hero-fallback" style={{
               display: 'none',
               width: '100%',
               height: '500px',
@@ -6753,7 +6846,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             maxWidth: '800px',
             margin: '0 auto'
           }}>
-            <h2 style={{ 
+            <h2 className="dining-title" style={{ 
               fontSize: '24px', 
               fontWeight: '600', 
               fontFamily: '"Montserrat", sans-serif',
@@ -6766,7 +6859,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             }}>
               CULINARY JOURNEY FROM WEST TO EAST
             </h2>
-            <p style={{ 
+            <p className="dining-description" style={{ 
              color: '#374151', 
             //  lineHeight: '1.6', 
              fontSize: '16px',
@@ -6780,9 +6873,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
           </div>
 
           {/* Dining Establishments Section */}
-          <div style={{ marginTop: '64px' }}>
+          <div className="dining-establishments" style={{ marginTop: '64px' }}>
             {/* Cards Container with Scroll */}
-            <div style={{ 
+            <div className="dining-cards-container" style={{ 
               position: 'relative',
               // maxWidth: '100%',
               maxWidth: '1200px',
@@ -6792,6 +6885,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             }}>
               {/* Left Arrow */}
               <button 
+                className="dining-nav-button"
                 onClick={() => {
                   setDiningCurrentIndex(prev => {
                     const newIndex = prev - 1;
@@ -6836,6 +6930,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                 {visibleCards.map((card, index) => (
                   <div 
                     key={`${card.title}-${startIndex + index}`}
+                    className="dining-card"
                     style={{ 
                       backgroundColor: 'white', 
                       borderRadius: '8px', 
@@ -6895,7 +6990,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                         }}></div>
                       </div>
                     </div>
-                    <div style={{ padding: '24px' }}>
+                    <div className="dining-card-content" style={{ 
+                  padding: '24px'
+                }}>
                       <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>{card.title}</h3>
                       <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
                         {card.description}
@@ -6907,6 +7004,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
 
               {/* Right Arrow */}
               <button 
+                className="dining-nav-button"
                 onClick={() => {
                   setDiningCurrentIndex(prev => {
                     const newIndex = prev + 1;
@@ -6936,9 +7034,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
           </div>
 
         {/* Food Carousel Section */}
-        <div style={{ marginTop: '256px' }}>
+        <div className="food-carousel-section" style={{ marginTop: '256px' }}>
           {/* Carousel Container */}
-          <div style={{ 
+          <div className="food-carousel-container" style={{ 
             position: 'relative',
             maxWidth: '100%',
             display: 'flex',
@@ -6989,6 +7087,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               {visibleFoodCarouselCards.map((card, index) => (
                 <div 
                   key={`food-${foodCarouselStartIndex + index}`}
+                  className="food-carousel-item"
                   style={{ 
                     minWidth: '700px', 
                     height: '400px', 
@@ -7039,10 +7138,10 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
         </div>
 
         {/* Dining Experiences Section */}
-        <div style={{ marginTop: '192px' }}>
+        <div className="dining-experiences" style={{ marginTop: '192px' }}>
           {/* Section Title */}
           <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-            <h2 style={{ 
+            <h2 className="dining-experiences-title" style={{ 
               fontSize: '24px', 
               fontWeight: '600', 
               color: '#000000', 
@@ -7056,7 +7155,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
           </div>
 
           {/* Dining Experiences Carousel */}
-          <div style={{ 
+          <div className="dining-experiences-grid" style={{ 
             position: 'relative',
             maxWidth: '100%',
             display: 'flex',
@@ -7107,6 +7206,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               {visibleExperiencesCards.map((card, index) => (
                 <div 
                   key={`${card.title}-${experiencesStartIndex + index}`}
+                  className="dining-experience-card"
                   style={{ 
                     minWidth: '331px',
                     width: '331px',
@@ -7150,7 +7250,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                       {card.title}
                     </div>
                   </div>
-                  <div style={{ padding: '24px' }}>
+                  <div className="dining-experience-card-content" style={{ 
+                  padding: '24px'
+                }}>
                     <h3 style={{ fontSize: '16px', fontWeight: '500', color: '#000000',fontFamily:'Montserrat, sans-serif', marginBottom: '12px', lineHeight: '19.5px' }}>{card.title}</h3>
                     <p style={{ color: '#3A3A3A', fontFamily:'Lato, sans-serif',lineHeight: '24px', fontSize: '14px', fontWeight: '500' }}>
                       {card.description}
@@ -12385,7 +12487,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
     <>
       {/* Main Wellness Image */}
       <div style={{ marginBottom: '64px' }}>
-        <div style={{ 
+        <div className="wellness-hero-image" style={{ 
           position: 'relative',
           width: '100%',
           height: '700px',
@@ -12411,7 +12513,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
             }}
           />
           {/* Fallback design if image fails to load */}
-          <div style={{ 
+          <div className="wellness-hero-fallback" style={{ 
             display: 'none', 
             width: '100%', 
             height: '100%', 
@@ -12467,8 +12569,8 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       </div>
 
       {/* Wellness Content */}
-      <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
-        <h1 style={{ 
+      <div className="wellness-content" style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
+        <h1 className="wellness-title" style={{ 
           fontFamily: '"Montserrat", sans-serif',
           fontSize: '24px', 
           fontWeight: '600', 
@@ -12480,7 +12582,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
           WELL BEYOND WELLNESS WITH MANTNAM
         </h1>
         
-        <p style={{ 
+        <p className="wellness-description" style={{ 
           // fontSize: '18px', 
           fontFamily: '14px"Lato", sans-serif',
           color: '#3A3A3A', 
@@ -12492,7 +12594,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       </div>
 
             {/* Simple Wellness Cards Section */}
-      <div style={{ marginTop: '80px' }}>
+      <div className="wellness-cards-section" style={{ marginTop: '80px' }}>
         <div style={{ 
           maxWidth: '1200px',
           margin: '0 auto',
@@ -12540,7 +12642,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               const visibleCards = extendedCards.slice(startIndex, startIndex + 3);
 
               return visibleCards.map((card, index) => (
-                <div key={`${card.title}-${startIndex + index}`} style={{ 
+                <div key={`${card.title}-${startIndex + index}`} className="wellness-card" style={{ 
                   width: '350px',
                   backgroundColor: 'white',
                   borderRadius: '8px',
@@ -12580,7 +12682,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
                       {card.title}
                     </div>
                   </div>
-                  <div style={{ padding: '20px', textAlign: 'center' }}>
+                  <div className="wellness-card-content" style={{ padding: '20px', textAlign: 'center' }}>
                     <h3 style={{ 
                       fontSize: '18px', 
                       fontWeight: 'bold', 
@@ -12664,9 +12766,9 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
       </div>
 
       {/* Wellness Gallery Carousel Section */}
-      <div style={{ marginTop: '80px' }}>
+      <div className="wellness-gallery-section" style={{ marginTop: '80px' }}>
         {/* Carousel Container */}
-        <div style={{ 
+        <div className="wellness-gallery-container" style={{ 
           maxWidth: '1200px',
           margin: '0 auto',
           padding: '0 20px'
@@ -12774,7 +12876,7 @@ Orchard-to-table ingredients are at heart of our inventive culinary offerings at
               const visibleGalleryCards = extendedGalleryCards.slice(startIndex, startIndex + 3);
 
               return visibleGalleryCards.map((card, index) => (
-                <div key={`${card.alt}-${startIndex + index}`} style={{ 
+                <div key={`${card.alt}-${startIndex + index}`} className="wellness-gallery-item" style={{ 
                   minWidth: '500px',
                   height: '350px',
                   backgroundColor: '#f3f4f6',
