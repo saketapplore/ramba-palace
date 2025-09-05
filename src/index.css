@@ -97,6 +97,71 @@ button.accommodation-tab-button {
   transform: scale(1.05);
 }
 
+/* Raghurajpur carousel styles */
+.raghurajpur-cards-container::-webkit-scrollbar {
+  display: none;
+}
+
+.raghurajpur-cards-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Mobile responsive styles for raghurajpur carousel */
+@media (max-width: 768px) {
+  .raghurajpur-carousel-section {
+    margin-bottom: 32px !important;
+    padding: 0 8px !important;
+  }
+  
+  .raghurajpur-cards-container {
+    padding: 0 16px !important;
+    gap: 12px !important;
+  }
+  
+  .raghurajpur-cards-container > div {
+    flex: 0 0 240px !important;
+    min-width: 240px !important;
+  }
+  
+  .raghurajpur-cards-container img {
+    height: 160px !important;
+  }
+  
+  .raghurajpur-cards-container > div > div {
+    height: 160px !important;
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .raghurajpur-carousel-section {
+    margin-bottom: 24px !important;
+    padding: 0 4px !important;
+  }
+  
+  .raghurajpur-cards-container {
+    padding: 0 12px !important;
+    gap: 8px !important;
+  }
+  
+  .raghurajpur-cards-container > div {
+    flex: 0 0 200px !important;
+    min-width: 200px !important;
+  }
+  
+  .raghurajpur-cards-container img {
+    height: 140px !important;
+  }
+  
+  .raghurajpur-cards-container > div > div {
+    height: 140px !important;
+    font-size: 11px !important;
+  }
+}
+
 /* Mobile responsive styles for homepage */
 @media (max-width: 768px) {
   .homepage-video-container {
@@ -1106,5 +1171,89 @@ button.accommodation-tab-button {
   
   .spotify-iframe {
     height: 250px !important;
+  }
+}
+
+/* Mobile responsive styles for Accommodation page grids */
+@media (max-width: 768px) {
+  .accommodation-two-cards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  
+  .accommodation-four-cards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  
+  .accommodation-card {
+    height: auto !important;
+  }
+  
+  .accommodation-card img {
+    height: 200px !important;
+  }
+  
+  .accommodation-card-content {
+    padding: 20px !important;
+  }
+  
+  .accommodation-card h3 {
+    font-size: 16px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .accommodation-card p {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+  
+  .contact-form-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  
+  .contact-form-row-3 {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .accommodation-two-cards-grid {
+    gap: 20px !important;
+  }
+  
+  .accommodation-four-cards-grid {
+    gap: 20px !important;
+  }
+  
+  .accommodation-card img {
+    height: 180px !important;
+  }
+  
+  .accommodation-card-content {
+    padding: 16px !important;
+  }
+  
+  .accommodation-card h3 {
+    font-size: 14px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .accommodation-card p {
+    font-size: 12px !important;
+  }
+  
+  .contact-form-grid {
+    gap: 12px !important;
+  }
+  
+  .footer-grid {
+    gap: 24px !important;
   }
 }
