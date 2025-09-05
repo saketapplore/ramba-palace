@@ -1008,6 +1008,7 @@ button.accommodation-tab-button {
   
   .wellness-gallery-item {
     min-width: 200px !important;
+    height: 150px !important;
   }
   
   .wellness-gallery-item img {
@@ -1085,11 +1086,21 @@ button.accommodation-tab-button {
   
   .wellness-gallery-item {
     min-width: 160px !important;
+    height: 120px !important;
   }
   
   .wellness-gallery-item img {
     height: 120px !important;
   }
+}
+
+/* Base styles for Wellness Gallery */
+.wellness-gallery-item {
+  height: 300px !important;
+}
+
+.wellness-gallery-item img {
+  height: 300px !important;
 }
 
 /* Mobile responsive styles for Spotify/Audio section */

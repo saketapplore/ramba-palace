@@ -2630,21 +2630,21 @@ function App() {
 
 
         {/* AMENITIES Section */}
-        <div style={{ marginBottom: '48px' }}>
+        <div className="amenities-section" style={{ marginBottom: '48px' }}>
           {/* Main Title */}
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
             <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>AMENITIES</h2>
           </div>
 
           {/* Key Amenities Grid */}
-          <div style={{
+          <div className="amenities-grid" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
             gap: '24px',
             marginBottom: '32px'
           }}>
             {/* 1 ANTE ROOM */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -2659,7 +2659,7 @@ function App() {
             </div>
 
             {/* 2 EN SUITE BATHROOM */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -2674,7 +2674,7 @@ function App() {
             </div>
 
             {/* PALACE GARDEN VIEW */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -2689,7 +2689,7 @@ function App() {
             </div>
 
             {/* 1 KING BED */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -2704,7 +2704,7 @@ function App() {
             </div>
 
             {/* 591 Sq. Ft. */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -2719,7 +2719,7 @@ function App() {
             </div>
 
             {/* DESIGNED BY CHANNA DASWATTE */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -2734,7 +2734,7 @@ function App() {
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>Large private garden with open fireplace</span>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -2953,20 +2953,21 @@ function App() {
           </div>
         </div>
         {/* OTHER SUITES Section */}
-        <div style={{ marginBottom: '48px' }}>
+        <div className="other-suites-section" style={{ marginBottom: '48px' }}>
           {/* Main Title */}
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
             <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>OTHER SUITES</h2>
           </div>
 
           {/* Suites Grid */}
-          <div style={{
+          <div className="suites-grid" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(2, 1fr)',
             gap: '32px'
           }}>
             {/* GENERATOR SUITES */}
             <div
+              className="suite-card"
               style={{
                 backgroundColor: '#ffffff',
                 borderRadius: '8px',
@@ -3052,6 +3053,7 @@ function App() {
 
             {/* FAMILY PALACE SUITE */}
             <div
+              className="suite-card"
               style={{
                 backgroundColor: '#ffffff',
                 borderRadius: '8px',
@@ -8519,21 +8521,21 @@ function App() {
         </div>
 
         {/* AMENITIES Section */}
-        <div style={{ marginBottom: '48px' }}>
+        <div className="amenities-section" style={{ marginBottom: '48px' }}>
           {/* Main Title */}
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
             <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>AMENITIES</h2>
           </div>
 
           {/* Key Amenities Grid */}
-          <div style={{
+          <div className="amenities-grid" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
             gap: '24px',
             marginBottom: '32px'
           }}>
             {/* 1 ANTE ROOM */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -8548,7 +8550,7 @@ function App() {
             </div>
 
             {/* 2 EN SUITE BATHROOM */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -8563,7 +8565,7 @@ function App() {
             </div>
 
             {/* PALACE GARDEN VIEW */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -8578,7 +8580,7 @@ function App() {
             </div>
 
             {/* 1 KING BED */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -8593,7 +8595,7 @@ function App() {
             </div>
 
             {/* 591 Sq. Ft. */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -8608,7 +8610,7 @@ function App() {
             </div>
 
             {/* DESIGNED BY CHANNA DASWATTE */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -8826,20 +8828,21 @@ function App() {
           </div>
         </div>
         {/* OTHER SUITES Section */}
-        <div style={{ marginBottom: '48px' }}>
+        <div className="other-suites-section" style={{ marginBottom: '48px' }}>
           {/* Main Title */}
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
             <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>OTHER SUITES</h2>
           </div>
 
           {/* Suites Grid */}
-          <div style={{
+          <div className="suites-grid" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(2, 1fr)',
             gap: '32px'
           }}>
             {/* GENERATOR SUITES */}
             <div
+              className="suite-card"
               style={{
                 backgroundColor: '#ffffff',
                 borderRadius: '8px',
@@ -8925,6 +8928,7 @@ function App() {
 
             {/* FAMILY PALACE SUITE */}
             <div
+              className="suite-card"
               style={{
                 backgroundColor: '#ffffff',
                 borderRadius: '8px',
@@ -9415,21 +9419,21 @@ function App() {
 
 
         {/* AMENITIES Section */}
-        <div style={{ marginBottom: '48px' }}>
+        <div className="amenities-section" style={{ marginBottom: '48px' }}>
           {/* Main Title */}
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
             <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>AMENITIES</h2>
           </div>
 
           {/* Key Amenities Grid */}
-          <div style={{
+          <div className="amenities-grid" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
             gap: '24px',
             marginBottom: '32px'
           }}>
             {/* 1 ANTE ROOM */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -9445,7 +9449,7 @@ function App() {
             </div>
 
             {/* 2 EN SUITE BATHROOM */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -9460,7 +9464,7 @@ function App() {
             </div>
 
             {/* PALACE GARDEN VIEW */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -9475,7 +9479,7 @@ function App() {
             </div>
 
             {/* 1 KING BED */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -9490,7 +9494,7 @@ function App() {
             </div>
 
             {/* 591 Sq. Ft. */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -9505,7 +9509,7 @@ function App() {
             </div>
 
             {/* DESIGNED BY CHANNA DASWATTE */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -9730,13 +9734,14 @@ function App() {
           </div>
 
           {/* Suites Grid */}
-          <div style={{
+          <div className="suites-grid" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(2, 1fr)',
             gap: '32px'
           }}>
             {/* GENERATOR SUITES */}
             <div
+              className="suite-card"
               style={{
                 backgroundColor: '#ffffff',
                 borderRadius: '8px',
@@ -9822,6 +9827,7 @@ function App() {
 
             {/* FAMILY PALACE SUITE */}
             <div
+              className="suite-card"
               style={{
                 backgroundColor: '#ffffff',
                 borderRadius: '8px',
@@ -10343,21 +10349,21 @@ function App() {
           </div>
         </div>
         {/* AMENITIES Section */}
-        <div style={{ marginBottom: '48px' }}>
+        <div className="amenities-section" style={{ marginBottom: '48px' }}>
           {/* Main Title */}
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
             <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>AMENITIES</h2>
           </div>
 
           {/* Key Amenities Grid */}
-          <div style={{
+          <div className="amenities-grid" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
             gap: '24px',
             marginBottom: '32px'
           }}>
             {/* 1 ANTE ROOM */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -10373,7 +10379,7 @@ function App() {
             </div>
 
             {/* 2 EN SUITE BATHROOM */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -10388,7 +10394,7 @@ function App() {
             </div>
 
             {/* PALACE GARDEN VIEW */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -10403,7 +10409,7 @@ function App() {
             </div>
 
             {/* 1 KING BED */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -10418,7 +10424,7 @@ function App() {
             </div>
 
             {/* 591 Sq. Ft. */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -10433,7 +10439,7 @@ function App() {
             </div>
 
             {/* DESIGNED BY CHANNA DASWATTE */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -10658,13 +10664,14 @@ function App() {
           </div>
 
           {/* Suites Grid */}
-          <div style={{
+          <div className="suites-grid" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(2, 1fr)',
             gap: '32px'
           }}>
             {/* GENERATOR SUITES */}
             <div
+              className="suite-card"
               style={{
                 backgroundColor: '#ffffff',
                 borderRadius: '8px',
@@ -10749,6 +10756,7 @@ function App() {
 
             {/* FAMILY PALACE SUITE */}
             <div
+              className="suite-card"
               style={{
                 backgroundColor: '#ffffff',
                 borderRadius: '8px',
@@ -11212,7 +11220,7 @@ function App() {
             marginBottom: '32px'
           }}>
             {/* 1 ANTE ROOM */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -11227,7 +11235,7 @@ function App() {
             </div>
 
             {/* 2 EN SUITE BATHROOM */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -11242,7 +11250,7 @@ function App() {
             </div>
 
             {/* PALACE GARDEN VIEW */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -11257,7 +11265,7 @@ function App() {
             </div>
 
             {/* 1 KING BED */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -11272,7 +11280,7 @@ function App() {
             </div>
 
             {/* 591 Sq. Ft. */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -11287,7 +11295,7 @@ function App() {
             </div>
 
             {/* DESIGNED BY CHANNA DASWATTE */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -11506,20 +11514,21 @@ function App() {
         </div>
 
         {/* OTHER SUITES Section */}
-        <div style={{ marginBottom: '48px' }}>
+        <div className="other-suites-section" style={{ marginBottom: '48px' }}>
           {/* Main Title */}
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
             <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>OTHER SUITES</h2>
           </div>
 
           {/* Suites Grid */}
-          <div style={{
+          <div className="suites-grid" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(2, 1fr)',
             gap: '32px'
           }}>
             {/* GENERATOR SUITES */}
             <div
+              className="suite-card"
               style={{
                 backgroundColor: '#ffffff',
                 borderRadius: '8px',
@@ -11605,6 +11614,7 @@ function App() {
 
             {/* FAMILY PALACE SUITE */}
             <div
+              className="suite-card"
               style={{
                 backgroundColor: '#ffffff',
                 borderRadius: '8px',
@@ -12104,21 +12114,21 @@ function App() {
         </div>
 
         {/* AMENITIES Section */}
-        <div style={{ marginBottom: '48px' }}>
+        <div className="amenities-section" style={{ marginBottom: '48px' }}>
           {/* Main Title */}
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
             <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>AMENITIES</h2>
           </div>
 
           {/* Key Amenities Grid */}
-          <div style={{
+          <div className="amenities-grid"  style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
             gap: '24px',
             marginBottom: '32px'
           }}>
             {/* 1 ANTE ROOM */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -12133,7 +12143,7 @@ function App() {
             </div>
 
             {/* 2 EN SUITE BATHROOM */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -12148,7 +12158,7 @@ function App() {
             </div>
 
             {/* PALACE GARDEN VIEW */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -12163,7 +12173,7 @@ function App() {
             </div>
 
             {/* 1 KING BED */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -12178,7 +12188,7 @@ function App() {
             </div>
 
             {/* 591 Sq. Ft. */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -12193,7 +12203,7 @@ function App() {
             </div>
 
             {/* DESIGNED BY CHANNA DASWATTE */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -12411,20 +12421,21 @@ function App() {
           </div>
         </div>
         {/* OTHER SUITES Section */}
-        <div style={{ marginBottom: '48px' }}>
+        <div className="other-suites-section" style={{ marginBottom: '48px' }}>
           {/* Main Title */}
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
             <h2 style={{ fontSize: '32px', fontWeight: 'bold', color: '#000000', fontFamily: '"Montserrat", sans-serif' }}>OTHER SUITES</h2>
           </div>
 
           {/* Suites Grid */}
-          <div style={{
+          <div className="suites-grid" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(2, 1fr)',
             gap: '32px'
           }}>
             {/* GENERATOR SUITES */}
             <div
+              className="suite-card"
               style={{
                 backgroundColor: '#ffffff',
                 borderRadius: '8px',
@@ -12510,6 +12521,7 @@ function App() {
 
             {/* FAMILY PALACE SUITE */}
             <div
+              className="suite-card"
               style={{
                 backgroundColor: '#ffffff',
                 borderRadius: '8px',
@@ -12737,92 +12749,102 @@ function App() {
           >
             {/* Wellness Cards - State-based Carousel */}
             {(() => {
-              const wellnessCards = [
-                {
-                  title: 'GYM',
-                  image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/Gymnasium.png',
-                  description: 'A state-of-the-art gym overlooking the pool—an inviting space where guests can work on strength and endurance in a modern space designed for movement. It\'s right around the corner from the Mantnam spa, where guests can reward themselves after a workout.'
-                },
-                {
-                  title: 'SPA',
-                  image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/WellnessGallery1.png',
-                  description: 'The spa at Rambha is the heart of holistic renewal, blending Ayurvedic treatments with restorative techniques in architecture inspired by ancient Indian design with a water body as a central element to cleanse, relax, and invigorate the senses.'
-                },
-                {
-                  title: 'YOGA AND MEDITATION',
-                  image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/YogaMeditation-e1730189981250.png',
-                  description: 'Guided private sessions of yoga & meditation strengthen neural pathways, promote mindfulness, enhancing cognitive function, reducing stress, and fostering a clearer, focused mind. Sprawling gardens and secluded palace spots offer ideal settings for these practices.'
-                }
-              ];
+  const wellnessCards = [
+    {
+      title: 'GYM',
+      image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/Gymnasium.png',
+      description: 'A state-of-the-art gym overlooking the pool—an inviting space where guests can work on strength and endurance in a modern space designed for movement. It\'s right around the corner from the Mantnam spa, where guests can reward themselves after a workout.'
+    },
+    {
+      title: 'SPA',
+      image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/WellnessGallery1.png',
+      description: 'The spa at Rambha is the heart of holistic renewal, blending Ayurvedic treatments with restorative techniques in architecture inspired by ancient Indian design with a water body as a central element to cleanse, relax, and invigorate the senses.'
+    },
+    {
+      title: 'YOGA AND MEDITATION',
+      image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/YogaMeditation-e1730189981250.png',
+      description: 'Guided private sessions of yoga & meditation strengthen neural pathways, promote mindfulness, enhancing cognitive function, reducing stress, and fostering a clearer, focused mind. Sprawling gardens and secluded palace spots offer ideal settings for these practices.'
+    }
+  ];
 
-              // Create infinite loop by duplicating cards
-              const extendedCards = [...wellnessCards, ...wellnessCards, ...wellnessCards];
-              const startIndex = wellnessCards.length + wellnessCurrentIndex;
-              const visibleCards = extendedCards.slice(startIndex, startIndex + 3);
+  // Create infinite loop by duplicating cards
+  const extendedCards = [...wellnessCards, ...wellnessCards, ...wellnessCards];
+  const startIndex = wellnessCards.length + wellnessCurrentIndex;
+  const visibleCards = extendedCards.slice(startIndex, startIndex + 3);
 
-              return visibleCards.map((card, index) => (
-                <div key={`${card.title}-${startIndex + index}`} className="wellness-card" style={{
-                  width: '350px',
-                  backgroundColor: 'white',
-                  borderRadius: '8px',
-                  overflow: 'hidden',
-                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                  flex: '0 0 auto',
-                  scrollSnapAlign: 'start'
-                }}>
-                  <div style={{ height: '200px', backgroundColor: '#f3f4f6', overflow: 'hidden' }}>
-                    <img
-                      src={card.image}
-                      alt={card.title}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover'
-                      }}
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const nextSibling = target.nextSibling as HTMLElement;
-                        if (nextSibling) {
-                          nextSibling.style.display = 'flex';
-                        }
-                      }}
-                    />
-                    <div style={{
-                      display: 'none',
-                      width: '100%',
-                      height: '100%',
-                      backgroundColor: '#f3f4f6',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: '#6b7280',
-                      fontSize: '16px'
-                    }}>
-                      {card.title}
-                    </div>
-                  </div>
-                  <div className="wellness-card-content" style={{ padding: '20px', textAlign: 'center' }}>
-                    <h3 style={{
-                      fontSize: '18px',
-                      fontWeight: 'bold',
-                      color: '#111827',
-                      marginBottom: '12px',
-                      textTransform: 'uppercase'
-                    }}>
-                      {card.title}
-                    </h3>
-                    <p style={{
-                      fontSize: '14px',
-                      color: '#374151',
-                      lineHeight: '1.6',
-                      textAlign: 'center'
-                    }}>
-                      {card.description}
-                    </p>
-                  </div>
-                </div>
-              ));
-            })()}
+  return visibleCards.map((card, index) => (
+  <div
+    key={`${card.title}-${startIndex + index}`}
+    className="wellness-card"
+    style={{
+      flex: '0 0 auto',
+      width: '90%',                 // mobile: take almost full width
+      maxWidth: '350px',            // desktop: cap width
+      backgroundColor: 'white',
+      borderRadius: '8px',
+      overflow: 'hidden',
+      boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+      scrollSnapAlign: 'center'
+    }}
+  >
+    {/* Image */}
+    <div style={{ width: '100%', backgroundColor: '#f3f4f6', overflow: 'hidden' }}>
+      <img
+        src={card.image}
+        alt={card.title}
+        style={{
+          width: '100%',
+          height: 'auto',           // responsive height (fixes cropping issue)
+          objectFit: 'cover',
+          display: 'block'
+        }}
+        onError={(e) => {
+          const target = e.target as HTMLImageElement;
+          target.style.display = 'none';
+          const nextSibling = target.nextSibling as HTMLElement;
+          if (nextSibling) {
+            nextSibling.style.display = 'flex';
+          }
+        }}
+      />
+      <div style={{
+        display: 'none',
+        width: '100%',
+        height: '200px',
+        backgroundColor: '#f3f4f6',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: '#6b7280',
+        fontSize: '16px'
+      }}>
+        {card.title}
+      </div>
+    </div>
+
+    {/* Content */}
+    <div style={{ padding: '16px', textAlign: 'center' }}>
+      <h3 style={{
+        fontSize: '18px',
+        fontWeight: 'bold',
+        color: '#111827',
+        marginBottom: '8px',
+        textTransform: 'uppercase'
+      }}>
+        {card.title}
+      </h3>
+      <p style={{
+        fontSize: '14px',
+        color: '#374151',
+        lineHeight: '1.6'
+      }}>
+        {card.description}
+      </p>
+    </div>
+  </div>
+));
+
+})()}
+
           </div>
 
           {/* Simple Navigation */}
@@ -12890,14 +12912,14 @@ function App() {
   <div className="wellness-gallery-container" style={{
     maxWidth: '1200px',
     margin: '0 auto',
-    padding: '0 20px'
+    padding: '0 clamp(10px, 4vw, 20px)' // responsive padding for mobile
   }}>
     {/* Cards Container */}
     <div
       className="wellness-gallery-cards-container"
       style={{
         display: 'flex',
-        gap: '20px',
+        gap: 'clamp(10px, 4vw, 20px)', // responsive gap for mobile
         justifyContent: 'center',
         overflowX: 'auto',
         scrollBehavior: 'smooth',
@@ -12905,7 +12927,7 @@ function App() {
         msOverflowStyle: 'none',
         WebkitOverflowScrolling: 'touch',
         scrollSnapType: 'x mandatory',
-        padding: '0 20px'
+        padding: '0 clamp(10px, 4vw, 20px)' // responsive padding for mobile
       }}
     >
       {/* Wellness Gallery Cards - State-based Carousel */}
@@ -12944,7 +12966,6 @@ function App() {
           className="wellness-gallery-item"
           style={{
             minWidth: 'clamp(240px, 80vw, 500px)', // responsive width
-            height: '300px',
             backgroundColor: '#f3f4f6',
             borderRadius: '8px',
             overflow: 'hidden',
@@ -13014,13 +13035,13 @@ function App() {
     <div style={{
       display: 'flex',
       justifyContent: 'center',
-      gap: '16px',
-      marginTop: '32px'
+      gap: 'clamp(12px, 3vw, 16px)', // responsive gap for mobile
+      marginTop: 'clamp(20px, 5vw, 32px)' // responsive margin for mobile
     }}>
       <button
         style={{
-          width: '40px',
-          height: '40px',
+          width: 'clamp(36px, 8vw, 40px)', // responsive button size
+          height: 'clamp(36px, 8vw, 40px)', // responsive button size
           borderRadius: '50%',
           backgroundColor: 'white',
           border: '2px solid #d1d5db',
@@ -13042,8 +13063,8 @@ function App() {
       </button>
       <button
         style={{
-          width: '40px',
-          height: '40px',
+          width: 'clamp(36px, 8vw, 40px)', // responsive button size
+          height: 'clamp(36px, 8vw, 40px)', // responsive button size
           borderRadius: '50%',
           backgroundColor: 'white',
           border: '2px solid #d1d5db',
@@ -13738,7 +13759,8 @@ function App() {
       {/* Website Header - Light Beige Background */}
       <header style={{ backgroundColor: 'rgb(241,236,229)', padding: '20px 0' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 40px' }}>
-          <div style={{
+          {/* Desktop Layout */}
+          <div className="desktop-header" style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
@@ -13756,7 +13778,8 @@ function App() {
               cursor: 'pointer',
               padding: '12px 16px',
               borderRadius: '4px',
-              transition: 'background-color 0.2s ease'
+              transition: 'background-color 0.2s ease',
+              zIndex: 10
             }}>
               {/* <svg style={{ width: '24px', height: '24px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -13778,7 +13801,8 @@ function App() {
               position: 'absolute',
               left: '50%',
               top: '50%',
-              transform: 'translate(-50%, -50%)'
+              transform: 'translate(-50%, -50%)',
+              zIndex: 5
             }}>
               <img
                 fetchPriority="high"
@@ -13811,7 +13835,62 @@ function App() {
                 borderRadius: '4px',
                 transition: 'all 0.2s ease',
                 fontFamily: '"Lato", Sans-serif',
-                letterSpacing: '0.5px'
+                letterSpacing: '0.5px',
+                zIndex: 10,
+                whiteSpace: 'nowrap'
+              }}
+            >
+              Book Now
+            </button>
+          </div>
+
+          {/* Mobile Layout */}
+          <div className="mobile-header" style={{
+            display: 'none',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '10px',
+            padding: '15px 0'
+          }}>
+            {/* Mobile Logo */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <img
+                fetchPriority="high"
+                width="1024"
+                height="114"
+                src="/assets/logoramba.png"
+                className="attachment-large size-large wp-image-2367"
+                alt="Hidden India Logo"
+                srcSet="/assets/logoramba.png 2048w"
+                sizes="(max-width: 1024px) 100vw, 1024px"
+                style={{
+                  height: 'auto',
+                  maxWidth: '140px',
+                  width: 'auto'
+                }}
+              />
+            </div>
+
+            {/* Mobile Book Now Button */}
+            <button
+              onClick={() => setCurrentPage('coming-soon')}
+              style={{
+                border: '1px solid #000000',
+                padding: '10px 20px',
+                fontSize: '14px',
+                fontWeight: '500',
+                backgroundColor: 'transparent',
+                color: '#000000',
+                cursor: 'pointer',
+                borderRadius: '4px',
+                transition: 'all 0.2s ease',
+                fontFamily: '"Lato", Sans-serif',
+                letterSpacing: '0.5px',
+                whiteSpace: 'nowrap'
               }}
             >
               Book Now
@@ -13819,6 +13898,33 @@ function App() {
           </div>
         </div>
       </header>
+
+      {/* Responsive Styles */}
+      <style>{`
+        @media (max-width: 768px) {
+          .desktop-header {
+            display: none !important;
+          }
+          
+          .mobile-header {
+            display: flex !important;
+          }
+          
+          header div[style*="maxWidth: '1280px'"] {
+            padding: 0 20px !important;
+          }
+        }
+        
+        @media (min-width: 769px) {
+          .desktop-header {
+            display: flex !important;
+          }
+          
+          .mobile-header {
+            display: none !important;
+          }
+        }
+      `}</style>
 
       {/* Navigation Bar - Light Pink Background */}
       {/* Navigation Bar - Light Pink Background */}
@@ -14241,6 +14347,111 @@ function App() {
           </div>
         </div>
       </footer>
+
+      {/* Responsive Styles for Amenities */}
+      <style>{`
+        @media (max-width: 768px) {
+          .amenities-section h2 {
+            font-size: 24px !important;
+            margin-bottom: 24px !important;
+          }
+          
+          .amenities-grid {
+            grid-template-columns: 1fr !important;
+            gap: 16px !important;
+            margin-bottom: 24px !important;
+          }
+          
+          .amenity-item {
+            padding: 8px 0 !important;
+          }
+          
+          .amenity-item span {
+            font-size: 14px !important;
+          }
+          
+          .amenity-item div {
+            width: 20px !important;
+            height: 20px !important;
+            font-size: 14px !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .amenities-section h2 {
+            font-size: 20px !important;
+          }
+          
+          .amenities-grid {
+            gap: 12px !important;
+          }
+          
+          .amenity-item span {
+            font-size: 13px !important;
+          }
+        }
+
+        /* OTHER SUITES Responsive Styles */
+        @media (max-width: 768px) {
+          .other-suites-section h2 {
+            font-size: 24px !important;
+            margin-bottom: 24px !important;
+          }
+          
+          .suites-grid {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+          }
+          
+          .suite-card {
+            margin-bottom: 0 !important;
+          }
+          
+          .suite-card h3 {
+            font-size: 18px !important;
+            margin-bottom: 12px !important;
+          }
+          
+          .suite-card p {
+            font-size: 14px !important;
+            line-height: 1.5 !important;
+          }
+          
+          .suite-card div[style*="padding: '24px'"] {
+            padding: 16px !important;
+          }
+          
+          .suite-card div[style*="height: '250px'"] {
+            height: 200px !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .other-suites-section h2 {
+            font-size: 20px !important;
+          }
+          
+          .suites-grid {
+            gap: 16px !important;
+          }
+          
+          .suite-card h3 {
+            font-size: 16px !important;
+          }
+          
+          .suite-card p {
+            font-size: 13px !important;
+          }
+          
+          .suite-card div[style*="padding: '24px'"] {
+            padding: 12px !important;
+          }
+          
+          .suite-card div[style*="height: '250px'"] {
+            height: 180px !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }
