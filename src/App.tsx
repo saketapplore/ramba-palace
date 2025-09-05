@@ -4280,25 +4280,39 @@ function App() {
 
                     const extended = [...landscapeCards, ...landscapeCards, ...landscapeCards];
                     const startIndex = landscapeCards.length + landscapeCarouselCurrentIndex;
-                    const visible = extended.slice(startIndex, startIndex + 2);
+                    // Show 1 card on mobile, 2 on desktop
+                    const isLandscapeMobile = window.innerWidth <= 768;
+                    const visible = isLandscapeMobile 
+                      ? [landscapeCards[landscapeCarouselCurrentIndex % landscapeCards.length]]
+                      : extended.slice(startIndex, startIndex + 2);
 
                     return visible.map((card, index) => (
-                      <div key={`${card.alt}-${startIndex + index}`} style={{
-                        minWidth: '560px',
+                      <div key={`${card.alt}-${startIndex + index}`} className="landscape-card" style={{
+                        minWidth: window.innerWidth <= 768 ? '100%' : '560px',
+                        maxWidth: window.innerWidth <= 768 ? '100%' : '560px',
+                        width: window.innerWidth <= 768 ? '100%' : '560px',
                         backgroundColor: 'white',
                         borderRadius: '8px',
                         overflow: 'hidden',
                         boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                        scrollSnapAlign: 'start'
+                        scrollSnapAlign: 'start',
+                        flex: '0 0 auto'
                       }}>
-                        <div style={{ height: '462px', backgroundColor: '#f3f4f6' }}>
+                        <div style={{ 
+                          backgroundColor: '#f3f4f6',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          overflow: 'hidden'
+                        }}>
                           <img
                             src={card.src}
                             alt={card.alt}
                             style={{
                               width: '100%',
-                              height: '100%',
-                              objectFit: 'cover'
+                              height: 'auto',
+                              maxHeight: window.innerWidth <= 768 ? '400px' : '600px',
+                              objectFit: 'contain'
                             }}
                             onError={(e) => {
                               const target = e.target as HTMLImageElement;
@@ -4342,6 +4356,41 @@ function App() {
                   </svg>
                 </button>
               </div>
+
+              {/* Mobile Indicator Dots */}
+              {window.innerWidth <= 768 && (
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  marginTop: '16px'
+                }}>
+                  {(() => {
+                    const landscapeCards = [
+                      { src: 'img-10.png', alt: 'Ancient Temple Architecture' },
+                      { src: 'img-11.png', alt: 'Temple Complex' },
+                      { src: 'img-12.png', alt: 'Ancient Ruins' },
+                      { src: 'img-13.png', alt: 'Temple Architecture' },
+                      { src: 'img-14.png', alt: 'Jagannath Temple' }
+                    ];
+                    return landscapeCards.map((_, index: number) => (
+                      <button
+                        key={index}
+                        onClick={() => setLandscapeCarouselCurrentIndex(index)}
+                        style={{
+                          width: '8px',
+                          height: '8px',
+                          borderRadius: '50%',
+                          border: 'none',
+                          backgroundColor: index === landscapeCarouselCurrentIndex ? '#2C3E50' : '#d1d5db',
+                          cursor: 'pointer',
+                          transition: 'background-color 0.3s ease'
+                        }}
+                      />
+                    ));
+                  })()}
+                </div>
+              )}
             </div>
           </>
         )}
@@ -13084,27 +13133,27 @@ function App() {
           >
             {/* Wellness Cards - State-based Carousel */}
             {(() => {
-  const wellnessCards = [
-    {
-      title: 'GYM',
-      image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/Gymnasium.png',
-      description: 'A state-of-the-art gym overlooking the pool—an inviting space where guests can work on strength and endurance in a modern space designed for movement. It\'s right around the corner from the Mantnam spa, where guests can reward themselves after a workout.'
-    },
-    {
-      title: 'SPA',
-      image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/WellnessGallery1.png',
-      description: 'The spa at Rambha is the heart of holistic renewal, blending Ayurvedic treatments with restorative techniques in architecture inspired by ancient Indian design with a water body as a central element to cleanse, relax, and invigorate the senses.'
-    },
-    {
-      title: 'YOGA AND MEDITATION',
-      image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/YogaMeditation-e1730189981250.png',
-      description: 'Guided private sessions of yoga & meditation strengthen neural pathways, promote mindfulness, enhancing cognitive function, reducing stress, and fostering a clearer, focused mind. Sprawling gardens and secluded palace spots offer ideal settings for these practices.'
-    }
-  ];
+              const wellnessCards = [
+                {
+                  title: 'GYM',
+                  image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/Gymnasium.png',
+                  description: 'A state-of-the-art gym overlooking the pool—an inviting space where guests can work on strength and endurance in a modern space designed for movement. It\'s right around the corner from the Mantnam spa, where guests can reward themselves after a workout.'
+                },
+                {
+                  title: 'SPA',
+                  image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/WellnessGallery1.png',
+                  description: 'The spa at Rambha is the heart of holistic renewal, blending Ayurvedic treatments with restorative techniques in architecture inspired by ancient Indian design with a water body as a central element to cleanse, relax, and invigorate the senses.'
+                },
+                {
+                  title: 'YOGA AND MEDITATION',
+                  image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/YogaMeditation-e1730189981250.png',
+                  description: 'Guided private sessions of yoga & meditation strengthen neural pathways, promote mindfulness, enhancing cognitive function, reducing stress, and fostering a clearer, focused mind. Sprawling gardens and secluded palace spots offer ideal settings for these practices.'
+                }
+              ];
 
-  // Create infinite loop by duplicating cards
-  const extendedCards = [...wellnessCards, ...wellnessCards, ...wellnessCards];
-  const startIndex = wellnessCards.length + wellnessCurrentIndex;
+              // Create infinite loop by duplicating cards
+              const extendedCards = [...wellnessCards, ...wellnessCards, ...wellnessCards];
+              const startIndex = wellnessCards.length + wellnessCurrentIndex;
   // Show 1 card on mobile, 3 on desktop
   const isWellnessMobile = window.innerWidth <= 768;
   const visibleCards = isWellnessMobile 
@@ -13121,67 +13170,67 @@ function App() {
             flex: '0 0 auto',
             width: window.innerWidth <= 768 ? '100%' : '90%',  // mobile: full width, desktop: 90%
             maxWidth: window.innerWidth <= 768 ? '100%' : '350px',  // mobile: full width, desktop: cap width
-            backgroundColor: 'white',
-            borderRadius: '8px',
-            overflow: 'hidden',
-            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                  backgroundColor: 'white',
+                  borderRadius: '8px',
+                  overflow: 'hidden',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
             scrollSnapAlign: 'center'
           }}
         >
           {/* Image */}
           <div style={{ width: '100%', backgroundColor: '#f3f4f6', overflow: 'hidden' }}>
-            <img
-              src={card.image}
-              alt={card.title}
-              style={{
-                width: '100%',
+                    <img
+                      src={card.image}
+                      alt={card.title}
+                      style={{
+                        width: '100%',
                 height: 'auto',           // responsive height (fixes cropping issue)
                 objectFit: 'cover',
                 display: 'block'
-              }}
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.style.display = 'none';
-                const nextSibling = target.nextSibling as HTMLElement;
-                if (nextSibling) {
-                  nextSibling.style.display = 'flex';
-                }
-              }}
-            />
-            <div style={{
-              display: 'none',
-              width: '100%',
+                      }}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const nextSibling = target.nextSibling as HTMLElement;
+                        if (nextSibling) {
+                          nextSibling.style.display = 'flex';
+                        }
+                      }}
+                    />
+                    <div style={{
+                      display: 'none',
+                      width: '100%',
               height: '200px',
-              backgroundColor: '#f3f4f6',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#6b7280',
-              fontSize: '16px'
-            }}>
-              {card.title}
-            </div>
-          </div>
+                      backgroundColor: '#f3f4f6',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#6b7280',
+                      fontSize: '16px'
+                    }}>
+                      {card.title}
+                    </div>
+                  </div>
 
           {/* Content */}
           <div style={{ padding: '16px', textAlign: 'center' }}>
-            <h3 style={{
-              fontSize: '18px',
-              fontWeight: 'bold',
-              color: '#111827',
+                    <h3 style={{
+                      fontSize: '18px',
+                      fontWeight: 'bold',
+                      color: '#111827',
               marginBottom: '8px',
-              textTransform: 'uppercase'
-            }}>
-              {card.title}
-            </h3>
-            <p style={{
-              fontSize: '14px',
-              color: '#374151',
+                      textTransform: 'uppercase'
+                    }}>
+                      {card.title}
+                    </h3>
+                    <p style={{
+                      fontSize: '14px',
+                      color: '#374151',
               lineHeight: '1.6'
-            }}>
-              {card.description}
-            </p>
-          </div>
-        </div>
+                    }}>
+                      {card.description}
+                    </p>
+                  </div>
+                </div>
       ))}
 
       {/* Mobile Indicator Dots */}
@@ -13213,7 +13262,7 @@ function App() {
     </>
   );
 
-})()}
+            })()}
 
           </div>
 
@@ -14863,6 +14912,41 @@ function App() {
             flex-shrink: 0 !important;
             margin: 0 !important;
             scroll-snap-align: start !important;
+          }
+        }
+
+        /* Landscape Carousel Mobile Styles */
+        @media (max-width: 768px) {
+          .landscape-cards-container {
+            padding: 0 !important;
+            gap: 0 !important;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+            justify-content: flex-start !important;
+            scroll-snap-type: x mandatory !important;
+            scroll-behavior: smooth !important;
+          }
+          .landscape-card {
+            min-width: 100% !important;
+            max-width: 100% !important;
+            width: 100% !important;
+            flex-shrink: 0 !important;
+            margin: 0 !important;
+            scroll-snap-align: start !important;
+          }
+          .landscape-card img {
+            height: auto !important;
+            max-height: 400px !important;
+            object-fit: contain !important;
+          }
+        }
+
+        /* Landscape Carousel Desktop Styles */
+        @media (min-width: 769px) {
+          .landscape-card img {
+            height: auto !important;
+            max-height: 600px !important;
+            object-fit: contain !important;
           }
         }
       `}</style>
