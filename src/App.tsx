@@ -349,10 +349,10 @@ function App() {
                 key={idx}
                 className="carousel-image homepage-carousel-item"
                 style={{
-                  flex: '0 0 400px',
+                  flex: '0 0 clamp(280px, 85vw, 400px)',
                   transition: 'all 0.3s ease',
                   scrollSnapAlign: 'center',
-                  padding: '0 12px',
+                  padding: '0 clamp(8px, 2vw, 12px)',
                   boxSizing: 'border-box'
                 }}
               >
@@ -593,7 +593,7 @@ function App() {
                     PALACE SUITE
                   </h3>
                   <p style={{
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     color: '#3A3A3A',
 
                     lineHeight: '1.5',
@@ -611,7 +611,7 @@ function App() {
                       border: 'none',
                       padding: '12px 32px',
                       borderRadius: '6px',
-                      fontSize: '14px',
+                      fontSize: 'clamp(12px, 2.5vw, 14px)',
                       fontWeight: '600',
                       textTransform: 'uppercase',
                       cursor: 'pointer',
@@ -668,7 +668,7 @@ function App() {
                     PALACE FAMILY SUITE
                   </h3>
                   <p style={{
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     color: '#3A3A3A',
 
                     lineHeight: '1.5',
@@ -686,7 +686,7 @@ function App() {
                       border: 'none',
                       padding: '12px 32px',
                       borderRadius: '6px',
-                      fontSize: '14px',
+                      fontSize: 'clamp(12px, 2.5vw, 14px)',
                       fontWeight: '600',
                       textTransform: 'uppercase',
                       cursor: 'pointer',
@@ -743,7 +743,7 @@ function App() {
                     GENERATOR SUITES
                   </h3>
                   <p style={{
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     color: '#3A3A3A',
 
                     lineHeight: '1.5',
@@ -761,7 +761,7 @@ function App() {
                       border: 'none',
                       padding: '12px 32px',
                       borderRadius: '6px',
-                      fontSize: '14px',
+                      fontSize: 'clamp(12px, 2.5vw, 14px)',
                       fontWeight: '600',
                       textTransform: 'uppercase',
                       cursor: 'pointer',
@@ -818,7 +818,7 @@ function App() {
                     PRINTING PRESS SUITES
                   </h3>
                   <p style={{
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     color: '#3A3A3A',
 
                     lineHeight: '1.5',
@@ -836,7 +836,7 @@ function App() {
                       border: 'none',
                       padding: '12px 32px',
                       borderRadius: '6px',
-                      fontSize: '14px',
+                      fontSize: 'clamp(12px, 2.5vw, 14px)',
                       fontWeight: '600',
                       textTransform: 'uppercase',
                       cursor: 'pointer',
@@ -893,7 +893,7 @@ function App() {
                     PRESIDENTIAL VILLA
                   </h3>
                   <p style={{
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     color: '#3A3A3A',
 
                     lineHeight: '1.5',
@@ -911,7 +911,7 @@ function App() {
                       border: 'none',
                       padding: '12px 32px',
                       borderRadius: '6px',
-                      fontSize: '14px',
+                      fontSize: 'clamp(12px, 2.5vw, 14px)',
                       fontWeight: '600',
                       textTransform: 'uppercase',
                       cursor: 'pointer',
@@ -972,7 +972,7 @@ function App() {
                     PALACE SUITE
                   </h3>
                   <p style={{
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     color: '#3A3A3A',
 
                     lineHeight: '1.5',
@@ -990,7 +990,7 @@ function App() {
                       border: 'none',
                       padding: '12px 32px',
                       borderRadius: '6px',
-                      fontSize: '14px',
+                      fontSize: 'clamp(12px, 2.5vw, 14px)',
                       fontWeight: '600',
                       textTransform: 'uppercase',
                       cursor: 'pointer',
@@ -1047,7 +1047,7 @@ function App() {
                     PALACE FAMILY SUITE
                   </h3>
                   <p style={{
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     color: '#3A3A3A',
 
                     lineHeight: '1.5',
@@ -1065,7 +1065,7 @@ function App() {
                       border: 'none',
                       padding: '12px 32px',
                       borderRadius: '6px',
-                      fontSize: '14px',
+                      fontSize: 'clamp(12px, 2.5vw, 14px)',
                       fontWeight: '600',
                       textTransform: 'uppercase',
                       cursor: 'pointer',
@@ -1122,7 +1122,7 @@ function App() {
                     GENERATOR SUITES
                   </h3>
                   <p style={{
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     color: '#3A3A3A',
 
                     lineHeight: '1.5',
@@ -1140,7 +1140,7 @@ function App() {
                       border: 'none',
                       padding: '12px 32px',
                       borderRadius: '6px',
-                      fontSize: '14px',
+                      fontSize: 'clamp(12px, 2.5vw, 14px)',
                       fontWeight: '600',
                       textTransform: 'uppercase',
                       cursor: 'pointer',
@@ -1197,7 +1197,7 @@ function App() {
                     PRINTING PRESS SUITES
                   </h3>
                   <p style={{
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     color: '#3A3A3A',
 
                     lineHeight: '1.5',
@@ -1215,7 +1215,7 @@ function App() {
                       border: 'none',
                       padding: '12px 32px',
                       borderRadius: '6px',
-                      fontSize: '14px',
+                      fontSize: 'clamp(12px, 2.5vw, 14px)',
                       fontWeight: '600',
                       textTransform: 'uppercase',
                       cursor: 'pointer',
@@ -1272,7 +1272,7 @@ function App() {
                     PRESIDENTIAL VILLA
                   </h3>
                   <p style={{
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     color: '#3A3A3A',
 
                     lineHeight: '1.5',
@@ -1290,7 +1290,7 @@ function App() {
                       border: 'none',
                       padding: '12px 32px',
                       borderRadius: '6px',
-                      fontSize: '14px',
+                      fontSize: 'clamp(12px, 2.5vw, 14px)',
                       fontWeight: '600',
                       textTransform: 'uppercase',
                       cursor: 'pointer',
@@ -2797,7 +2797,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     // color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Nespresso Coffee Machine</div>
@@ -2845,7 +2845,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     // color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Standalone Bathtub</div>
@@ -2891,7 +2891,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Wifi</div>
@@ -2936,7 +2936,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Palace Butler Service</div>
@@ -3591,7 +3591,7 @@ function App() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     color: '#6b7280',
-                    fontSize: '18px',
+                    fontSize: 'clamp(14px, 3.5vw, 18px)',
                     position: 'absolute',
                     top: 0,
                     left: 0
@@ -3743,7 +3743,7 @@ function App() {
                       }}></div>
                     </div>
                   </div>
-                  <div style={{ padding: '20px' }}>
+                  <div style={{ padding: 'clamp(12px, 4vw, 20px)' }}>
                     <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#374151', marginBottom: '8px', textTransform: 'uppercase' }}>UDAYGIRI CAVES</h3>
                     <p style={{ color: '#6b7280', lineHeight: '1.5', fontSize: '13px' }}>
                       Constructed in 2nd Century BC, Udaygiri caves feature intricate carvings depicting popular legends, historical events, and religious rituals.
@@ -4110,7 +4110,7 @@ function App() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     color: '#6b7280',
-                    fontSize: '18px',
+                    fontSize: 'clamp(14px, 3.5vw, 18px)',
                     position: 'relative',
                     overflow: 'hidden'
                   }}>
@@ -4588,10 +4588,10 @@ function App() {
                     padding: '24px'
                   }}>
                     <h3 style={{
-                      fontSize: '18px',
+                      fontSize: 'clamp(14px, 3.5vw, 18px)',
                       fontWeight: 'bold',
                       color: '#374151',
-                      marginBottom: '12px',
+                      marginBottom: 'clamp(8px, 2vw, 12px)',
                       textTransform: 'uppercase'
                     }}>
                       UDAYGIRI CAVES
@@ -4599,7 +4599,7 @@ function App() {
                     <p style={{
                       color: '#6b7280',
                       lineHeight: '1.6',
-                      fontSize: '14px',
+                      fontSize: 'clamp(12px, 2.5vw, 14px)',
                       margin: '0'
                     }}>
                       Constructed in 2nd Century BC, Udaygiri caves feature intricate carvings depicting popular legends, historical events, and religious rituals.
@@ -4680,10 +4680,10 @@ function App() {
                     padding: '24px'
                   }}>
                     <h3 style={{
-                      fontSize: '18px',
+                      fontSize: 'clamp(14px, 3.5vw, 18px)',
                       fontWeight: 'bold',
                       color: '#374151',
-                      marginBottom: '12px',
+                      marginBottom: 'clamp(8px, 2vw, 12px)',
                       textTransform: 'uppercase'
                     }}>
                       METAL CRAFT
@@ -4691,7 +4691,7 @@ function App() {
                     <p style={{
                       color: '#6b7280',
                       lineHeight: '1.6',
-                      fontSize: '14px',
+                      fontSize: 'clamp(12px, 2.5vw, 14px)',
                       margin: '0'
                     }}>
                       Artisans skillfully mold metal into stunning aquatic sculptures, capturing the essence of movement and showcasing exceptional craftsmanship at its finest.
@@ -4784,10 +4784,10 @@ function App() {
                     padding: '24px'
                   }}>
                     <h3 style={{
-                      fontSize: '18px',
+                      fontSize: 'clamp(14px, 3.5vw, 18px)',
                       fontWeight: 'bold',
                       color: '#374151',
-                      marginBottom: '12px',
+                      marginBottom: 'clamp(8px, 2vw, 12px)',
                       textTransform: 'uppercase'
                     }}>
                       IKAT WEAVING
@@ -4795,7 +4795,7 @@ function App() {
                     <p style={{
                       color: '#6b7280',
                       lineHeight: '1.6',
-                      fontSize: '14px',
+                      fontSize: 'clamp(12px, 2.5vw, 14px)',
                       margin: '0'
                     }}>
                       Admire the intricate art of Ikat weaving in motion, where the warp and weft threads are tye-dyed to reveal a intricate and colourful kaleidoscopic pattern.
@@ -4865,7 +4865,7 @@ function App() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     color: '#6b7280',
-                    fontSize: '18px',
+                    fontSize: 'clamp(14px, 3.5vw, 18px)',
                     position: 'relative',
                     overflow: 'hidden'
                   }}>
@@ -5342,8 +5342,8 @@ function App() {
               id="wildlife-carousel"
               style={{
                 display: 'flex',
-                gap: '24px',
-                padding: '0 24px',
+                gap: 'clamp(12px, 4vw, 24px)',
+                padding: '0 clamp(12px, 4vw, 24px)',
                 overflowX: 'auto',
                 scrollBehavior: 'smooth',
                 scrollbarWidth: 'none',
@@ -5382,20 +5382,20 @@ function App() {
               <div
                 className="wildlife-card"
                 style={{
-                  flex: '0 0 400px',
+                  flex: '0 0 clamp(280px, 85vw, 400px)',
                   backgroundColor: '#ffffff',
                   borderRadius: '12px',
                   overflow: 'hidden',
                   boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
                   flexShrink: 0,
                   scrollSnapAlign: 'center',
-                  padding: '0 12px',
+                  padding: '0 clamp(8px, 2vw, 12px)',
                   boxSizing: 'border-box',
                   transition: 'all 0.3s ease'
                 }}
               >
                 {/* Image */}
-                <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                <div style={{ position: 'relative', width: '100%', height: 'clamp(200px, 50vw, 250px)' }}>
                   <img
                     src="/Dolphin.png"
                     alt="Diving Dolphins"
@@ -5444,19 +5444,19 @@ function App() {
                 </div>
 
                 {/* Content */}
-                <div style={{ padding: '20px' }}>
+                <div style={{ padding: 'clamp(12px, 4vw, 20px)' }}>
                   <h3 style={{
-                    fontSize: '18px',
+                    fontSize: 'clamp(14px, 3.5vw, 18px)',
                     fontWeight: '600',
                     color: '#000000',
-                    marginBottom: '12px',
+                    marginBottom: 'clamp(8px, 2vw, 12px)',
                     textTransform: 'uppercase',
                     fontFamily: '"Montserrat", sans-serif'
                   }}>
                     DIVING DOLPHINS
                   </h3>
                   <p style={{
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     color: '#6b7280',
                     lineHeight: '1.5',
                     fontFamily: '"Lato", sans-serif'
@@ -5470,20 +5470,20 @@ function App() {
               <div
                 className="wildlife-card"
                 style={{
-                  flex: '0 0 400px',
+                  flex: '0 0 clamp(280px, 85vw, 400px)',
                   backgroundColor: '#ffffff',
                   borderRadius: '12px',
                   overflow: 'hidden',
                   boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
                   flexShrink: 0,
                   scrollSnapAlign: 'center',
-                  padding: '0 12px',
+                  padding: '0 clamp(8px, 2vw, 12px)',
                   boxSizing: 'border-box',
                   transition: 'all 0.3s ease'
                 }}
               >
                 {/* Image */}
-                <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                <div style={{ position: 'relative', width: '100%', height: 'clamp(200px, 50vw, 250px)' }}>
                   <img
                     src="/Turtle.png"
                     alt="Turtle Treasure"
@@ -5532,19 +5532,19 @@ function App() {
                 </div>
 
                 {/* Content */}
-                <div style={{ padding: '20px' }}>
+                <div style={{ padding: 'clamp(12px, 4vw, 20px)' }}>
                   <h3 style={{
-                    fontSize: '18px',
+                    fontSize: 'clamp(14px, 3.5vw, 18px)',
                     fontWeight: '600',
                     color: '#000000',
-                    marginBottom: '12px',
+                    marginBottom: 'clamp(8px, 2vw, 12px)',
                     textTransform: 'uppercase',
                     fontFamily: '"Montserrat", sans-serif'
                   }}>
                     TURTLE TREASURE
                   </h3>
                   <p style={{
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     color: '#6b7280',
                     lineHeight: '1.5',
                     fontFamily: '"Lato", sans-serif'
@@ -5558,20 +5558,20 @@ function App() {
               <div
                 className="wildlife-card"
                 style={{
-                  flex: '0 0 400px',
+                  flex: '0 0 clamp(280px, 85vw, 400px)',
                   backgroundColor: '#ffffff',
                   borderRadius: '12px',
                   overflow: 'hidden',
                   boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
                   flexShrink: 0,
                   scrollSnapAlign: 'center',
-                  padding: '0 12px',
+                  padding: '0 clamp(8px, 2vw, 12px)',
                   boxSizing: 'border-box',
                   transition: 'all 0.3s ease'
                 }}
               >
                 {/* Image */}
-                <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                <div style={{ position: 'relative', width: '100%', height: 'clamp(200px, 50vw, 250px)' }}>
                   <img
                     src="/FishingCats.png"
                     alt="Tracking Fishing Cats"
@@ -5620,19 +5620,19 @@ function App() {
                 </div>
 
                 {/* Content */}
-                <div style={{ padding: '20px' }}>
+                <div style={{ padding: 'clamp(12px, 4vw, 20px)' }}>
                   <h3 style={{
-                    fontSize: '18px',
+                    fontSize: 'clamp(14px, 3.5vw, 18px)',
                     fontWeight: '600',
                     color: '#000000',
-                    marginBottom: '12px',
+                    marginBottom: 'clamp(8px, 2vw, 12px)',
                     textTransform: 'uppercase',
                     fontFamily: '"Montserrat", sans-serif'
                   }}>
                     TRACKING FISHING CATS
                   </h3>
                   <p style={{
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     color: '#6b7280',
                     lineHeight: '1.5',
                     fontFamily: '"Lato", sans-serif'
@@ -5646,20 +5646,20 @@ function App() {
               <div
                 className="wildlife-card"
                 style={{
-                  flex: '0 0 400px',
+                  flex: '0 0 clamp(280px, 85vw, 400px)',
                   backgroundColor: '#ffffff',
                   borderRadius: '12px',
                   overflow: 'hidden',
                   boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
                   flexShrink: 0,
                   scrollSnapAlign: 'center',
-                  padding: '0 12px',
+                  padding: '0 clamp(8px, 2vw, 12px)',
                   boxSizing: 'border-box',
                   transition: 'all 0.3s ease'
                 }}
               >
                 {/* Image */}
-                <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                <div style={{ position: 'relative', width: '100%', height: 'clamp(200px, 50vw, 250px)' }}>
                   <img
                     src="/Blackbuck.png"
                     alt="Bouncing Blackbucks"
@@ -5708,19 +5708,19 @@ function App() {
                 </div>
 
                 {/* Content */}
-                <div style={{ padding: '20px' }}>
+                <div style={{ padding: 'clamp(12px, 4vw, 20px)' }}>
                   <h3 style={{
-                    fontSize: '18px',
+                    fontSize: 'clamp(14px, 3.5vw, 18px)',
                     fontWeight: '600',
                     color: '#000000',
-                    marginBottom: '12px',
+                    marginBottom: 'clamp(8px, 2vw, 12px)',
                     textTransform: 'uppercase',
                     fontFamily: '"Montserrat", sans-serif'
                   }}>
                     BOUNCING BLACKBUCKS
                   </h3>
                   <p style={{
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     color: '#6b7280',
                     lineHeight: '1.5',
                     fontFamily: '"Lato", sans-serif'
@@ -5735,20 +5735,20 @@ function App() {
               <div
                 className="wildlife-card"
                 style={{
-                  flex: '0 0 400px',
+                  flex: '0 0 clamp(280px, 85vw, 400px)',
                   backgroundColor: '#ffffff',
                   borderRadius: '12px',
                   overflow: 'hidden',
                   boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
                   flexShrink: 0,
                   scrollSnapAlign: 'center',
-                  padding: '0 12px',
+                  padding: '0 clamp(8px, 2vw, 12px)',
                   boxSizing: 'border-box',
                   transition: 'all 0.3s ease'
                 }}
               >
                 {/* Image */}
-                <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                <div style={{ position: 'relative', width: '100%', height: 'clamp(200px, 50vw, 250px)' }}>
                   <img
                     src="/Dolphin.png"
                     alt="Diving Dolphins"
@@ -5797,19 +5797,19 @@ function App() {
                 </div>
 
                 {/* Content */}
-                <div style={{ padding: '20px' }}>
+                <div style={{ padding: 'clamp(12px, 4vw, 20px)' }}>
                   <h3 style={{
-                    fontSize: '18px',
+                    fontSize: 'clamp(14px, 3.5vw, 18px)',
                     fontWeight: '600',
                     color: '#000000',
-                    marginBottom: '12px',
+                    marginBottom: 'clamp(8px, 2vw, 12px)',
                     textTransform: 'uppercase',
                     fontFamily: '"Montserrat", sans-serif'
                   }}>
                     DIVING DOLPHINS
                   </h3>
                   <p style={{
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     color: '#6b7280',
                     lineHeight: '1.5',
                     fontFamily: '"Lato", sans-serif'
@@ -5823,20 +5823,20 @@ function App() {
               <div
                 className="wildlife-card"
                 style={{
-                  flex: '0 0 400px',
+                  flex: '0 0 clamp(280px, 85vw, 400px)',
                   backgroundColor: '#ffffff',
                   borderRadius: '12px',
                   overflow: 'hidden',
                   boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
                   flexShrink: 0,
                   scrollSnapAlign: 'center',
-                  padding: '0 12px',
+                  padding: '0 clamp(8px, 2vw, 12px)',
                   boxSizing: 'border-box',
                   transition: 'all 0.3s ease'
                 }}
               >
                 {/* Image */}
-                <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                <div style={{ position: 'relative', width: '100%', height: 'clamp(200px, 50vw, 250px)' }}>
                   <img
                     src="/Turtle.png"
                     alt="Turtle Treasure"
@@ -5885,19 +5885,19 @@ function App() {
                 </div>
 
                 {/* Content */}
-                <div style={{ padding: '20px' }}>
+                <div style={{ padding: 'clamp(12px, 4vw, 20px)' }}>
                   <h3 style={{
-                    fontSize: '18px',
+                    fontSize: 'clamp(14px, 3.5vw, 18px)',
                     fontWeight: '600',
                     color: '#000000',
-                    marginBottom: '12px',
+                    marginBottom: 'clamp(8px, 2vw, 12px)',
                     textTransform: 'uppercase',
                     fontFamily: '"Montserrat", sans-serif'
                   }}>
                     TURTLE TREASURE
                   </h3>
                   <p style={{
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     color: '#6b7280',
                     lineHeight: '1.5',
                     fontFamily: '"Lato", sans-serif'
@@ -5911,20 +5911,20 @@ function App() {
               <div
                 className="wildlife-card"
                 style={{
-                  flex: '0 0 400px',
+                  flex: '0 0 clamp(280px, 85vw, 400px)',
                   backgroundColor: '#ffffff',
                   borderRadius: '12px',
                   overflow: 'hidden',
                   boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
                   flexShrink: 0,
                   scrollSnapAlign: 'center',
-                  padding: '0 12px',
+                  padding: '0 clamp(8px, 2vw, 12px)',
                   boxSizing: 'border-box',
                   transition: 'all 0.3s ease'
                 }}
               >
                 {/* Image */}
-                <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                <div style={{ position: 'relative', width: '100%', height: 'clamp(200px, 50vw, 250px)' }}>
                   <img
                     src="/FishingCats.png"
                     alt="Tracking Fishing Cats"
@@ -5973,19 +5973,19 @@ function App() {
                 </div>
 
                 {/* Content */}
-                <div style={{ padding: '20px' }}>
+                <div style={{ padding: 'clamp(12px, 4vw, 20px)' }}>
                   <h3 style={{
-                    fontSize: '18px',
+                    fontSize: 'clamp(14px, 3.5vw, 18px)',
                     fontWeight: '600',
                     color: '#000000',
-                    marginBottom: '12px',
+                    marginBottom: 'clamp(8px, 2vw, 12px)',
                     textTransform: 'uppercase',
                     fontFamily: '"Montserrat", sans-serif'
                   }}>
                     TRACKING FISHING CATS
                   </h3>
                   <p style={{
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     color: '#6b7280',
                     lineHeight: '1.5',
                     fontFamily: '"Lato", sans-serif'
@@ -5999,20 +5999,20 @@ function App() {
               <div
                 className="wildlife-card"
                 style={{
-                  flex: '0 0 400px',
+                  flex: '0 0 clamp(280px, 85vw, 400px)',
                   backgroundColor: '#ffffff',
                   borderRadius: '12px',
                   overflow: 'hidden',
                   boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
                   flexShrink: 0,
                   scrollSnapAlign: 'center',
-                  padding: '0 12px',
+                  padding: '0 clamp(8px, 2vw, 12px)',
                   boxSizing: 'border-box',
                   transition: 'all 0.3s ease'
                 }}
               >
                 {/* Image */}
-                <div style={{ position: 'relative', width: '100%', height: '250px' }}>
+                <div style={{ position: 'relative', width: '100%', height: 'clamp(200px, 50vw, 250px)' }}>
                   <img
                     src="/Blackbuck.png"
                     alt="Bouncing Blackbucks"
@@ -6061,19 +6061,19 @@ function App() {
                 </div>
 
                 {/* Content */}
-                <div style={{ padding: '20px' }}>
+                <div style={{ padding: 'clamp(12px, 4vw, 20px)' }}>
                   <h3 style={{
-                    fontSize: '18px',
+                    fontSize: 'clamp(14px, 3.5vw, 18px)',
                     fontWeight: '600',
                     color: '#000000',
-                    marginBottom: '12px',
+                    marginBottom: 'clamp(8px, 2vw, 12px)',
                     textTransform: 'uppercase',
                     fontFamily: '"Montserrat", sans-serif'
                   }}>
                     BOUNCING BLACKBUCKS
                   </h3>
                   <p style={{
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     color: '#6b7280',
                     lineHeight: '1.5',
                     fontFamily: '"Lato", sans-serif'
@@ -6109,8 +6109,8 @@ function App() {
                   backgroundColor: 'rgba(255, 255, 255, 0.9)',
                   border: 'none',
                   borderRadius: '50%',
-                  width: '48px',
-                  height: '48px',
+                  width: 'clamp(40px, 8vw, 48px)',
+                  height: 'clamp(40px, 8vw, 48px)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -6119,7 +6119,7 @@ function App() {
                   zIndex: 10
                 }}
               >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <svg width="clamp(20, 4vw, 24)" height="clamp(20, 4vw, 24)" viewBox="0 0 24 24" fill="none">
                   <path d="M15 18L9 12L15 6" stroke="#374151" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
@@ -6140,8 +6140,8 @@ function App() {
                   backgroundColor: 'rgba(255, 255, 255, 0.9)',
                   border: 'none',
                   borderRadius: '50%',
-                  width: '48px',
-                  height: '48px',
+                  width: 'clamp(40px, 8vw, 48px)',
+                  height: 'clamp(40px, 8vw, 48px)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -6150,7 +6150,7 @@ function App() {
                   zIndex: 10
                 }}
               >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <svg width="clamp(20, 4vw, 24)" height="clamp(20, 4vw, 24)" viewBox="0 0 24 24" fill="none">
                   <path d="M9 18L15 12L9 6" stroke="#374151" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
@@ -6596,14 +6596,20 @@ function App() {
     // Create infinite loop effect by duplicating cards
     const extendedCards = [...diningCards, ...diningCards, ...diningCards];
     const startIndex = diningCards.length + diningCurrentIndex;
-    // Show all cards on mobile, 3 on desktop
-    const cardsToShow = window.innerWidth <= 768 ? diningCards.length : 3;
-    const visibleCards = window.innerWidth <= 768 ? diningCards : extendedCards.slice(startIndex, startIndex + 3);
+    // Show 1 card on mobile, 3 on desktop
+    const isMobile = window.innerWidth <= 768;
+    const visibleCards = isMobile 
+      ? [diningCards[diningCurrentIndex % diningCards.length]]
+      : extendedCards.slice(startIndex, startIndex + 3);
 
     // Create infinite loop effect for dining experiences
     const extendedExperiencesCards = [...diningExperiencesCards, ...diningExperiencesCards, ...diningExperiencesCards];
     const experiencesStartIndex = diningExperiencesCards.length + diningExperiencesCurrentIndex;
-    const visibleExperiencesCards = extendedExperiencesCards.slice(experiencesStartIndex, experiencesStartIndex + 4);
+    // Show 1 card on mobile, 4 on desktop
+    const isExperiencesMobile = window.innerWidth <= 768;
+    const visibleExperiencesCards = isExperiencesMobile 
+      ? [diningExperiencesCards[diningExperiencesCurrentIndex % diningExperiencesCards.length]]
+      : extendedExperiencesCards.slice(experiencesStartIndex, experiencesStartIndex + 4);
 
     // Define food carousel cards data
     const foodCarouselCards = [
@@ -6627,7 +6633,11 @@ function App() {
     // Create infinite loop effect for food carousel
     const extendedFoodCarouselCards = [...foodCarouselCards, ...foodCarouselCards, ...foodCarouselCards];
     const foodCarouselStartIndex = foodCarouselCards.length + foodCarouselCurrentIndex;
-    const visibleFoodCarouselCards = extendedFoodCarouselCards.slice(foodCarouselStartIndex, foodCarouselStartIndex + 5);
+    // Show 1 card on mobile, 5 on desktop
+    const isFoodMobile = window.innerWidth <= 768;
+    const visibleFoodCarouselCards = isFoodMobile 
+      ? [foodCarouselCards[foodCarouselCurrentIndex % foodCarouselCards.length]]
+      : extendedFoodCarouselCards.slice(foodCarouselStartIndex, foodCarouselStartIndex + 5);
 
     return (
       <>
@@ -6736,11 +6746,11 @@ function App() {
       margin: "0 auto",
     }}
   >
-    {/* Left Arrow - hidden on mobile */}
+    {/* Left Arrow */}
     <button
-      className="dining-nav-button desktop-only"
+      className="dining-nav-button"
       onClick={() => {
-        setDiningCurrentIndex((prev) => (prev - 1 < 0 ? 2 : prev - 1));
+        setDiningCurrentIndex((prev) => (prev - 1 < 0 ? diningCards.length - 1 : prev - 1));
       }}
     >
       <svg
@@ -6846,11 +6856,11 @@ function App() {
       ))}
     </div>
 
-    {/* Right Arrow - hidden on mobile */}
+    {/* Right Arrow */}
     <button
-      className="dining-nav-button desktop-only"
+      className="dining-nav-button"
       onClick={() => {
-        setDiningCurrentIndex((prev) => (prev + 1 > 2 ? 0 : prev + 1));
+        setDiningCurrentIndex((prev) => (prev + 1 >= diningCards.length ? 0 : prev + 1));
       }}
     >
       <svg
@@ -6870,22 +6880,29 @@ function App() {
     </button>
   </div>
 
-  {/* Mobile Scroll Indicator */}
+  {/* Mobile Indicator Dots */}
   {window.innerWidth <= 768 && (
     <div style={{
-      textAlign: 'center',
-      marginTop: '16px',
-      color: '#6b7280',
-      fontSize: '14px',
       display: 'flex',
-      alignItems: 'center',
       justifyContent: 'center',
-      gap: '8px'
+      gap: '8px',
+      marginTop: '20px'
     }}>
-      
-      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        {/* <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /> */}
-      </svg>
+      {diningCards.map((_, index) => (
+        <button
+          key={index}
+          onClick={() => setDiningCurrentIndex(index)}
+          style={{
+            width: '12px',
+            height: '12px',
+            borderRadius: '50%',
+            border: 'none',
+            backgroundColor: index === diningCurrentIndex ? '#2C3E50' : '#d1d5db',
+            cursor: 'pointer',
+            transition: 'background-color 0.2s ease'
+          }}
+        />
+      ))}
     </div>
   )}
 
@@ -6912,26 +6929,101 @@ function App() {
 
       /* Mobile Styles */
       @media (max-width: 768px) {
-        .desktop-only {
-          display: none !important; /* Hide arrows */
+        .dining-establishments {
+          padding: 0 20px !important;
+        }
+        .dining-cards-wrapper {
+          padding: 0 !important;
+          gap: 0 !important;
+          position: relative !important;
+          max-width: 100% !important;
+        }
+        .dining-nav-button {
+          width: 40px !important;
+          height: 40px !important;
+          position: absolute !important;
+          top: 50% !important;
+          transform: translateY(-50%) !important;
+          z-index: 10 !important;
+          background: rgba(255, 255, 255, 0.95) !important;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+          border: 1px solid #2C3E50 !important;
+        }
+        .dining-nav-button:first-child {
+          left: 10px !important;
+        }
+        .dining-nav-button:last-child {
+          right: 10px !important;
+        }
+        .dining-cards {
+          padding: 0 20px !important;
+          gap: 0 !important;
+          overflow: visible !important;
+          justify-content: center !important;
         }
         .dining-card {
-          min-width: 280px !important;
-          max-width: 320px !important;
-          margin-right: 16px !important;
+          min-width: 100% !important;
+          max-width: 100% !important;
+          width: 100% !important;
+          flex-shrink: 0 !important;
+          margin: 0 !important;
         }
-        .dining-card:last-child {
-          margin-right: 0 !important;
+        .dining-card-content h3 {
+          font-size: 18px !important;
+          margin-bottom: 12px !important;
+        }
+        .dining-card-content p {
+          font-size: 14px !important;
+          line-height: 1.6 !important;
+        }
+      }
+      @media (max-width: 480px) {
+        .dining-establishments {
+          padding: 0 15px !important;
+        }
+        .dining-cards-wrapper {
+          padding: 0 !important;
+          gap: 0 !important;
+          position: relative !important;
+          max-width: 100% !important;
+        }
+        .dining-nav-button {
+          width: 35px !important;
+          height: 35px !important;
+          position: absolute !important;
+          top: 50% !important;
+          transform: translateY(-50%) !important;
+          z-index: 10 !important;
+          background: rgba(255, 255, 255, 0.95) !important;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+          border: 1px solid #2C3E50 !important;
+        }
+        .dining-nav-button:first-child {
+          left: 5px !important;
+        }
+        .dining-nav-button:last-child {
+          right: 5px !important;
+        }
+        .dining-cards {
+          padding: 0 15px !important;
+          gap: 0 !important;
+          overflow: visible !important;
+          justify-content: center !important;
+        }
+        .dining-card {
+          min-width: 100% !important;
+          max-width: 100% !important;
+          width: 100% !important;
+          flex-shrink: 0 !important;
+          margin: 0 !important;
         }
         .dining-card-content h3 {
           font-size: 16px !important;
+          margin-bottom: 10px !important;
         }
         .dining-card-content p {
           font-size: 13px !important;
-        }
-        .dining-cards {
-          padding-right: 16px !important;
-          scroll-padding-right: 16px !important;
+          line-height: 1.5 !important;
         }
       }
     `}
@@ -6955,11 +7047,12 @@ function App() {
             }}>
               {/* Left Arrow */}
               <button
+                className="food-nav-button"
                 onClick={() => {
                   setFoodCarouselCurrentIndex(prev => {
                     const newIndex = prev - 1;
                     // Handle infinite loop - when going below 0, wrap to the end
-                    return newIndex < 0 ? 4 : newIndex;
+                    return newIndex < 0 ? foodCarouselCards.length - 1 : newIndex;
                   });
                 }}
                 style={{
@@ -6968,11 +7061,12 @@ function App() {
                   borderRadius: '50%',
                   border: '1px solid #2C3E50',
                   cursor: 'pointer',
-                  display: window.innerWidth <= 768 ? 'none' : 'flex',
+                  display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   zIndex: 10,
-                  flexShrink: 0
+                  flexShrink: 0,
+                  backgroundColor: 'white'
                 }}
               >
                 <svg width="16" height="16" fill="none" stroke="#2C3E50" viewBox="0 0 24 24">
@@ -7022,11 +7116,12 @@ function App() {
 
               {/* Right Arrow */}
               <button
+                className="food-nav-button"
                 onClick={() => {
                   setFoodCarouselCurrentIndex(prev => {
                     const newIndex = prev + 1;
-                    // Handle infinite loop - when going above 4, wrap to 0
-                    return newIndex > 4 ? 0 : newIndex;
+                    // Handle infinite loop - when going above length, wrap to 0
+                    return newIndex >= foodCarouselCards.length ? 0 : newIndex;
                   });
                 }}
                 style={{
@@ -7035,11 +7130,12 @@ function App() {
                   borderRadius: '50%',
                   border: '1px solid #2C3E50',
                   cursor: 'pointer',
-                  display: window.innerWidth <= 768 ? 'none' : 'flex',
+                  display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   zIndex: 10,
-                  flexShrink: 0
+                  flexShrink: 0,
+                  backgroundColor: 'white'
                 }}
               >
                 <svg width="16" height="16" fill="none" stroke="#2C3E50" viewBox="0 0 24 24">
@@ -7047,7 +7143,212 @@ function App() {
                 </svg>
               </button>
             </div>
+
+            {/* Mobile Indicator Dots */}
+            {window.innerWidth <= 768 && (
+              <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                gap: '8px',
+                marginTop: '20px'
+              }}>
+                {foodCarouselCards.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setFoodCarouselCurrentIndex(index)}
+                    style={{
+                      width: '12px',
+                      height: '12px',
+                      borderRadius: '50%',
+                      border: 'none',
+                      backgroundColor: index === foodCarouselCurrentIndex ? '#2C3E50' : '#d1d5db',
+                      cursor: 'pointer',
+                      transition: 'background-color 0.2s ease'
+                    }}
+                  />
+                ))}
+              </div>
+            )}
           </div>
+
+          {/* Food Carousel Mobile Styles */}
+          <style>
+            {`
+              /* Food Carousel Mobile Styles */
+              @media (max-width: 768px) {
+                .food-carousel-section {
+                  padding: 0 20px !important;
+                }
+                .food-carousel-container {
+                  padding: 0 !important;
+                  gap: 0 !important;
+                  position: relative !important;
+                  max-width: 100% !important;
+                }
+                .food-nav-button {
+                  width: 40px !important;
+                  height: 40px !important;
+                  position: absolute !important;
+                  top: 50% !important;
+                  transform: translateY(-50%) !important;
+                  z-index: 10 !important;
+                  background: rgba(255, 255, 255, 0.95) !important;
+                  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+                  border: 1px solid #2C3E50 !important;
+                }
+                .food-nav-button:first-child {
+                  left: 10px !important;
+                }
+                .food-nav-button:last-child {
+                  right: 10px !important;
+                }
+                .food-carousel-container .food-carousel-container {
+                  padding: 0 20px !important;
+                  gap: 0 !important;
+                  overflow: visible !important;
+                  justify-content: center !important;
+                }
+                .food-carousel-item {
+                  min-width: 100% !important;
+                  max-width: 100% !important;
+                  width: 100% !important;
+                  flex-shrink: 0 !important;
+                  margin: 0 !important;
+                  height: 250px !important;
+                }
+              }
+              @media (max-width: 480px) {
+                .food-carousel-section {
+                  padding: 0 15px !important;
+                }
+                .food-carousel-container {
+                  padding: 0 !important;
+                  gap: 0 !important;
+                  position: relative !important;
+                  max-width: 100% !important;
+                }
+                .food-nav-button {
+                  width: 35px !important;
+                  height: 35px !important;
+                  position: absolute !important;
+                  top: 50% !important;
+                  transform: translateY(-50%) !important;
+                  z-index: 10 !important;
+                  background: rgba(255, 255, 255, 0.95) !important;
+                  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+                  border: 1px solid #2C3E50 !important;
+                }
+                .food-nav-button:first-child {
+                  left: 5px !important;
+                }
+                .food-nav-button:last-child {
+                  right: 5px !important;
+                }
+                .food-carousel-container .food-carousel-container {
+                  padding: 0 15px !important;
+                  gap: 0 !important;
+                  overflow: visible !important;
+                  justify-content: center !important;
+                }
+                .food-carousel-item {
+                  min-width: 100% !important;
+                  max-width: 100% !important;
+                  width: 100% !important;
+                  flex-shrink: 0 !important;
+                  margin: 0 !important;
+                  height: 200px !important;
+                }
+              }
+
+              /* Dining Experiences Mobile Styles */
+              @media (max-width: 768px) {
+                .dining-experiences {
+                  padding: 0 50px !important;
+                }
+                .dining-experiences-grid {
+                  padding: 0 !important;
+                  gap: 0 !important;
+                  overflow: visible !important;
+                  justify-content: center !important;
+                }
+                .dining-experiences-container {
+                  padding: 0 !important;
+                  gap: 0 !important;
+                  overflow-x: auto !important;
+                  overflow-y: hidden !important;
+                  justify-content: flex-start !important;
+                  scroll-snap-type: x mandatory !important;
+                  scroll-behavior: smooth !important;
+                }
+                .dining-experiences-nav-button {
+                  position: absolute !important;
+                  top: 20% !important;
+                  transform: translateY(-50%) !important;
+                  z-index: 30 !important;
+                  display: flex !important;
+                  background-color: white !important;
+                  box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+                }
+                .dining-experiences-nav-button:first-child {
+                  left: -20px !important;
+                }
+                .dining-experiences-nav-button:last-child {
+                  right: -20px !important;
+                }
+                .dining-experience-card {
+                  min-width: 100% !important;
+                  max-width: 100% !important;
+                  width: 100% !important;
+                  flex-shrink: 0 !important;
+                  margin: 0 !important;
+                  scroll-snap-align: start !important;
+                }
+              }
+              @media (max-width: 480px) {
+                .dining-experiences {
+                  padding: 0 45px !important;
+                }
+                .dining-experiences-grid {
+                  padding: 0 !important;
+                  gap: 0 !important;
+                  overflow: visible !important;
+                  justify-content: center !important;
+                }
+                .dining-experiences-container {
+                  padding: 0 !important;
+                  gap: 0 !important;
+                  overflow-x: auto !important;
+                  overflow-y: hidden !important;
+                  justify-content: flex-start !important;
+                  scroll-snap-type: x mandatory !important;
+                  scroll-behavior: smooth !important;
+                }
+                .dining-experiences-nav-button {
+                  position: absolute !important;
+                  top: 20% !important;
+                  transform: translateY(-50%) !important;
+                  z-index: 30 !important;
+                  display: flex !important;
+                  background-color: white !important;
+                  box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
+                }
+                .dining-experiences-nav-button:first-child {
+                  left: -17px !important;
+                }
+                .dining-experiences-nav-button:last-child {
+                  right: -17px !important;
+                }
+                .dining-experience-card {
+                  min-width: 100% !important;
+                  max-width: 100% !important;
+                  width: 100% !important;
+                  flex-shrink: 0 !important;
+                  margin: 0 !important;
+                  scroll-snap-align: start !important;
+                }
+              }
+            `}
+          </style>
 
           {/* Dining Experiences Section */}
           <div className="dining-experiences" style={{ 
@@ -7084,25 +7385,27 @@ function App() {
             }}>
               {/* Left Arrow */}
               <button
+                className="dining-experiences-nav-button"
                 onClick={() => {
                   setDiningExperiencesCurrentIndex(prev => {
                     const newIndex = prev - 1;
                     // Handle infinite loop - when going below 0, wrap to the end
-                    return newIndex < 0 ? 3 : newIndex;
+                    return newIndex < 0 ? diningExperiencesCards.length - 1 : newIndex;
                   });
                 }}
                 style={{
                   width: window.innerWidth <= 768 ? '32px' : '40px',
                   height: window.innerWidth <= 768 ? '32px' : '40px',
                   borderRadius: '50%',
-                  backgroundColor: '',
+                  backgroundColor: 'white',
                   border: '1px solid #2C3E50',
                   cursor: 'pointer',
-                  display: window.innerWidth <= 768 ? 'none' : 'flex',
+                  display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  zIndex: 10,
-                  flexShrink: 0
+                  zIndex: 30,
+                  flexShrink: 0,
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
                 }}
               >
                 <svg width="16" height="16" fill="none" stroke="#2C3E50" viewBox="0 0 24 24">
@@ -7117,9 +7420,12 @@ function App() {
                   display: 'flex',
                   gap: window.innerWidth <= 768 ? '16px' : '24px',
                   overflowX: 'auto',
+                  overflowY: 'hidden',
                   scrollBehavior: 'smooth',
                   scrollbarWidth: 'none',
                   msOverflowStyle: 'none',
+                  WebkitOverflowScrolling: 'touch',
+                  scrollSnapType: window.innerWidth <= 768 ? 'x mandatory' : 'none',
                   flex: 1,
                   padding: window.innerWidth <= 768 ? '0 8px' : '0'
                 }}
@@ -7135,7 +7441,8 @@ function App() {
                       borderRadius: '8px',
                       overflow: 'hidden',
                       boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                      flex: '0 0 auto'
+                      flex: '0 0 auto',
+                      scrollSnapAlign: window.innerWidth <= 768 ? 'start' : 'none'
                     }}
                   >
                     <div style={{ height: '200px', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -7179,7 +7486,7 @@ function App() {
                         fontWeight: '500', 
                         color: '#000000', 
                         fontFamily: 'Montserrat, sans-serif', 
-                        marginBottom: '12px', 
+                        marginBottom: 'clamp(8px, 2vw, 12px)', 
                         lineHeight: window.innerWidth <= 768 ? '17px' : '19.5px' 
                       }}>{card.title}</h3>
                       <p style={{ 
@@ -7198,25 +7505,27 @@ function App() {
 
               {/* Right Arrow */}
               <button
+                className="dining-experiences-nav-button"
                 onClick={() => {
                   setDiningExperiencesCurrentIndex(prev => {
                     const newIndex = prev + 1;
-                    // Handle infinite loop - when going above 3, wrap to 0
-                    return newIndex > 3 ? 0 : newIndex;
+                    // Handle infinite loop - when going above length, wrap to 0
+                    return newIndex >= diningExperiencesCards.length ? 0 : newIndex;
                   });
                 }}
                 style={{
                   width: window.innerWidth <= 768 ? '32px' : '40px',
                   height: window.innerWidth <= 768 ? '32px' : '40px',
                   borderRadius: '50%',
-                  backgroundColor: '',
+                  backgroundColor: 'white',
                   border: '1px solid #2C3E50',
                   cursor: 'pointer',
-                  display: window.innerWidth <= 768 ? 'none' : 'flex',
+                  display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  zIndex: 10,
-                  flexShrink: 0
+                  zIndex: 30,
+                  flexShrink: 0,
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
                 }}
               >
                 <svg width="16" height="16" fill="none" stroke="#2C3E50" viewBox="0 0 24 24">
@@ -7224,6 +7533,32 @@ function App() {
                 </svg>
               </button>
             </div>
+
+            {/* Mobile Indicator Dots */}
+            {window.innerWidth <= 768 && (
+              <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                gap: '8px',
+                marginTop: '16px'
+              }}>
+                {diningExperiencesCards.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setDiningExperiencesCurrentIndex(index)}
+                    style={{
+                      width: '8px',
+                      height: '8px',
+                      borderRadius: '50%',
+                      border: 'none',
+                      backgroundColor: index === diningExperiencesCurrentIndex ? '#2C3E50' : '#D1D5DB',
+                      cursor: 'pointer',
+                      transition: 'background-color 0.3s ease'
+                    }}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Featured Experiences Section */}
@@ -7478,7 +7813,7 @@ function App() {
                       alignItems: 'center',
                       justifyContent: 'center',
                       color: '#6b7280',
-                      fontSize: '18px',
+                      fontSize: 'clamp(14px, 3.5vw, 18px)',
                       flexDirection: 'column',
                       gap: '8px'
                     }}>
@@ -8672,7 +9007,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     // color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Nespresso Coffee Machine</div>
@@ -8720,7 +9055,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     // color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Standalone Bathtub</div>
@@ -8766,7 +9101,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Wifi</div>
@@ -8811,7 +9146,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Palace Butler Service</div>
@@ -9571,7 +9906,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     // color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Nespresso Coffee Machine</div>
@@ -9619,7 +9954,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     // color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Standalone Bathtub</div>
@@ -9665,7 +10000,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Wifi</div>
@@ -9710,7 +10045,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Palace Butler Service</div>
@@ -10501,7 +10836,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     // color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Nespresso Coffee Machine</div>
@@ -10549,7 +10884,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     // color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Standalone Bathtub</div>
@@ -10595,7 +10930,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Wifi</div>
@@ -10640,7 +10975,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Palace Butler Service</div>
@@ -11357,7 +11692,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     // color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Nespresso Coffee Machine</div>
@@ -11405,7 +11740,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     // color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Standalone Bathtub</div>
@@ -11451,7 +11786,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Wifi</div>
@@ -11496,7 +11831,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Palace Butler Service</div>
@@ -12265,7 +12600,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     // color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Nespresso Coffee Machine</div>
@@ -12313,7 +12648,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     // color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Standalone Bathtub</div>
@@ -12359,7 +12694,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Wifi</div>
@@ -12404,7 +12739,7 @@ function App() {
                     flexDirection: 'column',
                     gap: '8px',
                     color: '#6b7280',
-                    fontSize: '14px',
+                    fontSize: 'clamp(12px, 2.5vw, 14px)',
                     lineHeight: '1.5'
                   }}>
                     <div>Palace Butler Service</div>
@@ -12770,78 +13105,113 @@ function App() {
   // Create infinite loop by duplicating cards
   const extendedCards = [...wellnessCards, ...wellnessCards, ...wellnessCards];
   const startIndex = wellnessCards.length + wellnessCurrentIndex;
-  const visibleCards = extendedCards.slice(startIndex, startIndex + 3);
+  // Show 1 card on mobile, 3 on desktop
+  const isWellnessMobile = window.innerWidth <= 768;
+  const visibleCards = isWellnessMobile 
+    ? [wellnessCards[wellnessCurrentIndex % wellnessCards.length]]
+    : extendedCards.slice(startIndex, startIndex + 3);
 
-  return visibleCards.map((card, index) => (
-  <div
-    key={`${card.title}-${startIndex + index}`}
-    className="wellness-card"
-    style={{
-      flex: '0 0 auto',
-      width: '90%',                 // mobile: take almost full width
-      maxWidth: '350px',            // desktop: cap width
-      backgroundColor: 'white',
-      borderRadius: '8px',
-      overflow: 'hidden',
-      boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-      scrollSnapAlign: 'center'
-    }}
-  >
-    {/* Image */}
-    <div style={{ width: '100%', backgroundColor: '#f3f4f6', overflow: 'hidden' }}>
-      <img
-        src={card.image}
-        alt={card.title}
-        style={{
-          width: '100%',
-          height: 'auto',           // responsive height (fixes cropping issue)
-          objectFit: 'cover',
-          display: 'block'
-        }}
-        onError={(e) => {
-          const target = e.target as HTMLImageElement;
-          target.style.display = 'none';
-          const nextSibling = target.nextSibling as HTMLElement;
-          if (nextSibling) {
-            nextSibling.style.display = 'flex';
-          }
-        }}
-      />
-      <div style={{
-        display: 'none',
-        width: '100%',
-        height: '200px',
-        backgroundColor: '#f3f4f6',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: '#6b7280',
-        fontSize: '16px'
-      }}>
-        {card.title}
-      </div>
-    </div>
+  return (
+    <>
+      {visibleCards.map((card, index) => (
+        <div
+          key={`${card.title}-${startIndex + index}`}
+          className="wellness-card"
+          style={{
+            flex: '0 0 auto',
+            width: window.innerWidth <= 768 ? '100%' : '90%',  // mobile: full width, desktop: 90%
+            maxWidth: window.innerWidth <= 768 ? '100%' : '350px',  // mobile: full width, desktop: cap width
+            backgroundColor: 'white',
+            borderRadius: '8px',
+            overflow: 'hidden',
+            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+            scrollSnapAlign: 'center'
+          }}
+        >
+          {/* Image */}
+          <div style={{ width: '100%', backgroundColor: '#f3f4f6', overflow: 'hidden' }}>
+            <img
+              src={card.image}
+              alt={card.title}
+              style={{
+                width: '100%',
+                height: 'auto',           // responsive height (fixes cropping issue)
+                objectFit: 'cover',
+                display: 'block'
+              }}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                const nextSibling = target.nextSibling as HTMLElement;
+                if (nextSibling) {
+                  nextSibling.style.display = 'flex';
+                }
+              }}
+            />
+            <div style={{
+              display: 'none',
+              width: '100%',
+              height: '200px',
+              backgroundColor: '#f3f4f6',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#6b7280',
+              fontSize: '16px'
+            }}>
+              {card.title}
+            </div>
+          </div>
 
-    {/* Content */}
-    <div style={{ padding: '16px', textAlign: 'center' }}>
-      <h3 style={{
-        fontSize: '18px',
-        fontWeight: 'bold',
-        color: '#111827',
-        marginBottom: '8px',
-        textTransform: 'uppercase'
-      }}>
-        {card.title}
-      </h3>
-      <p style={{
-        fontSize: '14px',
-        color: '#374151',
-        lineHeight: '1.6'
-      }}>
-        {card.description}
-      </p>
-    </div>
-  </div>
-));
+          {/* Content */}
+          <div style={{ padding: '16px', textAlign: 'center' }}>
+            <h3 style={{
+              fontSize: '18px',
+              fontWeight: 'bold',
+              color: '#111827',
+              marginBottom: '8px',
+              textTransform: 'uppercase'
+            }}>
+              {card.title}
+            </h3>
+            <p style={{
+              fontSize: '14px',
+              color: '#374151',
+              lineHeight: '1.6'
+            }}>
+              {card.description}
+            </p>
+          </div>
+        </div>
+      ))}
+
+      {/* Mobile Indicator Dots */}
+      {window.innerWidth <= 768 && (
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '8px',
+          marginTop: '16px',
+          width: '100%'
+        }}>
+          {wellnessCards.map((_, index: number) => (
+            <button
+              key={index}
+              onClick={() => setWellnessCurrentIndex(index)}
+              style={{
+                width: '8px',
+                height: '8px',
+                borderRadius: '50%',
+                border: 'none',
+                backgroundColor: index === wellnessCurrentIndex ? '#374151' : '#d1d5db',
+                cursor: 'pointer',
+                transition: 'background-color 0.3s ease'
+              }}
+            />
+          ))}
+        </div>
+      )}
+    </>
+  );
 
 })()}
 
@@ -14153,7 +14523,7 @@ function App() {
                         href="tel:917800208002"
                         style={{
                           color: 'white',
-                          fontSize: '14px',
+                          fontSize: 'clamp(12px, 2.5vw, 14px)',
                           textDecoration: 'none'
                         }}
                       >
@@ -14163,7 +14533,7 @@ function App() {
                         href="tel:917800208002"
                         style={{
                           color: 'white',
-                          fontSize: '14px',
+                          fontSize: 'clamp(12px, 2.5vw, 14px)',
                           textDecoration: 'none'
                         }}
                         className='ml-6'
@@ -14177,7 +14547,7 @@ function App() {
                       href="mailto:reservations@rambhapalace.com"
                       style={{
                         color: 'white',
-                        fontSize: '14px',
+                        fontSize: 'clamp(12px, 2.5vw, 14px)',
                         textDecoration: 'none'
                       }}
                     >
@@ -14449,6 +14819,50 @@ function App() {
           
           .suite-card div[style*="height: '250px'"] {
             height: 180px !important;
+          }
+        }
+
+        /* WELLNESS CARDS Navigation Button Styles - Preserve Original */
+        .wellness-cards-section button {
+          width: 40px !important;
+          height: 40px !important;
+          border-radius: 50% !important;
+          background-color: white !important;
+          border: 2px solid #d1d5db !important;
+          cursor: pointer !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+        }
+        
+        .wellness-cards-section button svg {
+          width: 16px !important;
+          height: 16px !important;
+          fill: none !important;
+          stroke: #374151 !important;
+        }
+
+        /* Wellness Cards Mobile Styles */
+        @media (max-width: 768px) {
+          .wellness-cards-section {
+            padding: 0 20px !important;
+          }
+          .wellness-cards-container {
+            padding: 0 !important;
+            gap: 0 !important;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+            justify-content: flex-start !important;
+            scroll-snap-type: x mandatory !important;
+            scroll-behavior: smooth !important;
+          }
+          .wellness-card {
+            min-width: 100% !important;
+            max-width: 100% !important;
+            width: 100% !important;
+            flex-shrink: 0 !important;
+            margin: 0 !important;
+            scroll-snap-align: start !important;
           }
         }
       `}</style>

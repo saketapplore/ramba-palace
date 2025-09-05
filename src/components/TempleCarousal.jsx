@@ -59,28 +59,65 @@ export default function TempleCarousel() {
       {/* Mobile-specific styles */}
       <style>{`
         @media (max-width: 768px) {
+          .temple-carousel-main {
+            padding: 0 30px !important;
+            gap: 10px !important;
+          }
           .temple-cards-container {
             gap: 0 !important;
             overflow: visible !important;
             justify-content: center !important;
+            padding: 0 !important;
           }
           .temple-card {
             min-width: 100% !important;
             max-width: 100% !important;
             width: 100% !important;
             margin: 0 !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+          }
+          .temple-card .temple-image-container {
+            height: 250px !important;
+            position: relative !important;
+            overflow: hidden !important;
+          }
+          .temple-card .temple-image-container img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: contain !important;
+            object-position: center !important;
           }
           .temple-navigation {
-            width: 50px !important;
-            height: 50px !important;
+            width: 45px !important;
+            height: 45px !important;
             background-color: rgba(255, 255, 255, 0.9) !important;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+            z-index: 10 !important;
+            position: absolute !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+          }
+          .temple-navigation:first-child {
+            left: 15px !important;
+          }
+          .temple-navigation:last-child {
+            right: 15px !important;
           }
         }
         @media (max-width: 480px) {
+          .temple-carousel-main {
+            padding: 0 25px !important;
+            gap: 8px !important;
+          }
           .temple-card {
+            min-width: 100% !important;
+            max-width: 100% !important;
+            width: 100% !important;
             margin: 0 !important;
             min-height: auto !important;
+          }
+          .temple-card .temple-image-container {
+            height: 200px !important;
           }
           .temple-card h3 {
             font-size: 18px !important;
@@ -98,9 +135,23 @@ export default function TempleCarousel() {
             padding: 16px !important;
             flex: 1 !important;
           }
+          .temple-navigation {
+            width: 40px !important;
+            height: 40px !important;
+            position: absolute !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+          }
+          .temple-navigation:first-child {
+            left: 12px !important;
+          }
+          .temple-navigation:last-child {
+            right: 12px !important;
+          }
         }
       `}</style>
       <div
+        className="temple-carousel-main"
         style={{
           position: "relative",
           maxWidth: "1200px",
@@ -171,6 +222,7 @@ export default function TempleCarousel() {
               }}
             >
               <div
+                className="temple-image-container"
                 style={{
                   height: "200px",
                   backgroundColor: "#f3f4f6",
