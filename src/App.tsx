@@ -1412,7 +1412,7 @@ function App() {
           <div style={{ width: '100%' }}>
             <img
               decoding="async"
-              src="https://hiddenindia.com/rambhapalace/wp-content/uploads/elementor/thumbs/image4-qyb3qbsq2gynshsmaoql1nfnfeok3y05csvu0l3xww.png"
+              src="assets/eats.png"
               title="image4.png"
               alt="image4.png"
               loading="lazy"
@@ -6598,22 +6598,22 @@ function App() {
     const diningExperiencesCards = [
       {
         title: 'Orchard Feast',
-        image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/OrchardFeast.png',
+        image: 'assets/orchardfeast.png',
         description: 'An outdoor celebration of flavour & food - feast in the palace gardens with an elegant tablescape. Candle lit starry nights or bright Sunday brunches; the orchard offers it all.'
       },
       {
         title: 'Palace Garden High Tea',
-        image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/image-45.png',
+        image: 'assets/palacegarden.png',
         description: 'Delight in high tea while gazing at lush greenery and serene palace fountains, an enchanting experience that transports you to the grandeur and timeless splendor of a magnificent bygone era.'
       },
       {
         title: 'Breakfast on Island',
-        image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/image-46.png',
+        image: 'assets/breakfastisland.png',
         description: 'Set sail from the banks of Chilika Lake and cruise through calming waters. Enjoy breakfast aboard the boat, or step onto the island for a refreshing morning trail.'
       },
       {
         title: 'Romantic Beach Getaway',
-        image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/pixelcut-export.png',
+        image: 'assets/romanticbeach.png',
         description: 'Allow the palace butlers to orchestrate a candlelit feast by the lake. Relish a sumptuous banquet of your preferred cuisine, while the gentle whispers of waves caress the shore.'
       }
     ];
@@ -6639,19 +6639,19 @@ function App() {
     // Define food carousel cards data
     const foodCarouselCards = [
       {
-        image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/image-3.png'
+        image: 'assets/food1.png'
       },
       {
-        image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/12-2-768x462.png'
+        image: 'assets/food2.png'
       },
       {
-        image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/7-1-768x462.png'
+        image: 'assets/food3.png'
       },
       {
-        image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/10-1-768x462.png'
+        image: 'assets/food4.png'
       },
       {
-        image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/9-1-768x462.png'
+        image: 'assets/food5.png'
       }
     ];
 
@@ -7645,7 +7645,7 @@ function App() {
                     justifyContent: 'center' 
                   }}>
                     <img
-                      src="https://hiddenindia.com/rambhapalace/wp-content/uploads/elementor/thumbs/RoyalOdiaCuisine-1-qyb3qauvvmxdgvtzg6byh5o6u0t6w8wf0o8cjb5c34.png"
+                      src="assets/royalodia.png"
                       alt="Royal Odia Cuisine"
                       style={{
                         width: '100%',
@@ -7812,7 +7812,7 @@ function App() {
                     justifyContent: 'center'
                   }}>
                     <img
-                      src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/DiningConcept.png"
+                      src="assets/culinaryco.png"
                       alt="Culinary Community"
                       style={{
                         width: '100%',
@@ -7922,7 +7922,7 @@ function App() {
                   justifyContent: 'center'
                 }}>
                   <img
-                    src="https://hiddenindia.com/rambhapalace/wp-content/uploads/elementor/thumbs/Component-52-3-qyb3q49qn987hs17lhg2g6gydqmskiiq4aw37fwh8e.png"
+                    src="assets/chef1.png"
                     alt="Chef 1"
                     style={{
                       width: '100%',
@@ -7971,7 +7971,7 @@ function App() {
                   justifyContent: 'center'
                 }}>
                   <img
-                    src="https://hiddenindia.com/rambhapalace/wp-content/uploads/elementor/thumbs/Component-53-qxgwn1eairccagcym62wgd76ggrhewjz52r3dcuqgu-1-qyb3q65cjwdz3qeaxjmc7r34g0og7ebdpzu5zusxa6.png"
+                    src="assets/chef2.png"
                     alt="Chef 2"
                     style={{
                       width: '100%',
@@ -8020,7 +8020,7 @@ function App() {
                   justifyContent: 'center'
                 }}>
                   <img
-                    src="https://hiddenindia.com/rambhapalace/wp-content/uploads/elementor/thumbs/chef-qyb3qbsdowlp1e640m23mpnw0bwnhkxrqrr2vikk8u.png"
+                    src="assets/chef3.png"
                     alt="Chef 3"
                     style={{
                       width: '100%',
@@ -14356,7 +14356,7 @@ function App() {
           }}
         >
           <img
-            src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/TigerBlack-768x377.png"
+            src="assets/tigerlogos.png"
             alt="Rambha Palace Logo"
             style={{
               height: "35px",
