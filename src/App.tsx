@@ -13112,17 +13112,17 @@ function App() {
               const wellnessCards = [
                 {
                   title: 'GYM',
-                  image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/Gymnasium.png',
+                  image: 'assets/gym.jpg',
                   description: 'A state-of-the-art gym overlooking the pool—an inviting space where guests can work on strength and endurance in a modern space designed for movement. It\'s right around the corner from the Mantnam spa, where guests can reward themselves after a workout.'
                 },
                 {
                   title: 'SPA',
-                  image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/WellnessGallery1.png',
+                  image: 'assets/image.png',
                   description: 'The spa at Rambha is the heart of holistic renewal, blending Ayurvedic treatments with restorative techniques in architecture inspired by ancient Indian design with a water body as a central element to cleanse, relax, and invigorate the senses.'
                 },
                 {
                   title: 'YOGA AND MEDITATION',
-                  image: 'https://hiddenindia.com/rambhapalace/wp-content/uploads/2025/01/YogaMeditation-e1730189981250.png',
+                  image: 'assets/yogs1.png',
                   description: 'Guided private sessions of yoga & meditation strengthen neural pathways, promote mindfulness, enhancing cognitive function, reducing stress, and fostering a clearer, focused mind. Sprawling gardens and secluded palace spots offer ideal settings for these practices.'
                 }
               ];
