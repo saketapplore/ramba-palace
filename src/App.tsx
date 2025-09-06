@@ -1770,7 +1770,7 @@ function App() {
           <div style={{ position: 'relative', width: '100%', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}>
             <div style={{ aspectRatio: '16/10', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <img
-                src="https://hiddenindia.com/rambhapalace/wp-content/uploads/elementor/thumbs/Gallery5-qyb3q9x1osw359vclnxbwnwq8mxtojsoojkv216q9c.png"
+                src="/assets/accod.png"
                 alt="Luxury Hotel Room"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 onError={(e) => {
@@ -2265,7 +2265,7 @@ function App() {
             }}
             style={{ position: 'relative', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)', cursor: 'pointer' }}>
             <img
-              src="https://hiddenindia.com/rambhapalace/wp-content/uploads/2024/11/RambhaVilla-1-1-1024x683.png"
+              src="/assets/pdimage.png"
               alt="Rambha Villa"
               style={{ width: '100%', height: '300px', objectFit: 'cover' }}
               onError={(e) => {
@@ -9489,7 +9489,7 @@ function App() {
           <div style={{ position: 'relative', width: '100%', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}>
             <div style={{ aspectRatio: '16/10', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <img
-                src="https://hiddenindia.com/rambhapalace/wp-content/uploads/elementor/thumbs/Gallery4-qyb3q4a0jsod7m3jilhkhpbyobpmed6anrny6df3ao.webp"
+                src="/assets/fpsuite.png"
                 alt="Palace Family Suite"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 onError={(e) => {
