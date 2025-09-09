@@ -14341,7 +14341,7 @@ function App() {
           }}
         >
           <img
-            src="assets/tigerlogos.png"
+            src="assets/logoramba.png"
             alt="Rambha Palace Logo"
             style={{
               height: "35px",
