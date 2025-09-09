@@ -2071,7 +2071,7 @@ function App() {
 
             {/* Card Content */}
             <div style={{ padding: '24px', backgroundColor: 'white' }}>
-              <h3 style={{ fontSize: '20px', fontWeight: '700', color: '#000000', stroke: '#000', marginBottom: '12px', fontFamily: '"Montserrat", sans-serif' }}>FAMILY PALACE SUITE</h3>
+              <h3 style={{ fontSize: '20px', fontWeight: '700', color: '#000000', stroke: '#000', marginBottom: '12px', fontFamily: '"Montserrat", sans-serif' }}>FAMILY PALACE SUITES</h3>
               <p style={{ color: '#3A3A3A', lineHeight: '1.6', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
                 A fusion of two palace suites, featuring a spacious lounge—an expansive, lush private retreat perfect for families and added privacy.
               </p>
@@ -3085,7 +3085,7 @@ function App() {
                   textTransform: 'uppercase',
                   fontFamily: '"Montserrat", sans-serif'
                 }}>
-                  FAMILY PALACE SUITE
+                  FAMILY PALACE SUITES
                 </h3>
                 <p style={{
                   fontSize: '16px',
@@ -9344,7 +9344,7 @@ function App() {
                   textTransform: 'uppercase',
                   fontFamily: '"Montserrat", sans-serif'
                 }}>
-                  FAMILY PALACE SUITE
+                  FAMILY PALACE SUITES
                 </h3>
                 <p style={{
                   fontSize: '16px',
@@ -10243,7 +10243,7 @@ function App() {
                   textTransform: 'uppercase',
                   fontFamily: '"Montserrat", sans-serif'
                 }}>
-                  PALACE SUITE
+                  PALACE SUITES
                 </h3>
                 <p style={{
                   fontSize: '16px',
@@ -10371,7 +10371,7 @@ function App() {
           <div style={{ position: 'relative', width: '100%', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}>
             <div style={{ aspectRatio: '16/10', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <img
-                src="/assets/generatorsuitess.jpeg"
+                src="/assets/gp.jpeg"
                 alt="Generator Suite"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 onError={(e) => {
@@ -10540,11 +10540,11 @@ function App() {
                     alt: 'Palace Suite Additional View',
                     fallback: '🏰'
                   },
-                  {
-                    image: '/assets/gene5.jpg',
-                    alt: 'Palace Suite Bedroom',
-                    fallback: '🛏️'
-                  },
+                  // {
+                  //   image: '/assets/gene5.jpg',
+                  //   alt: 'Palace Suite Bedroom',
+                  //   fallback: '🛏️'
+                  // },
                   {
                     image: '/assets/gene6.jpg',
                     alt: 'Palace Suite Bathroom',
@@ -11087,7 +11087,7 @@ function App() {
                   textTransform: 'uppercase',
                   fontFamily: '"Montserrat", sans-serif'
                 }}>
-                  PALACE SUITE
+                  PALACE SUITES
                 </h3>
                 <p style={{
                   fontSize: '16px',
@@ -11172,7 +11172,7 @@ function App() {
                   textTransform: 'uppercase',
                   fontFamily: '"Montserrat", sans-serif'
                 }}>
-                  FAMILY PALACE SUITE
+                  FAMILY PALACE SUITES
                 </h3>
                 <p style={{
                   fontSize: '16px',
@@ -12030,7 +12030,7 @@ function App() {
                   textTransform: 'uppercase',
                   fontFamily: '"Montserrat", sans-serif'
                 }}>
-                  FAMILY PALACE SUITE
+                  FAMILY PALACE SUITES
                 </h3>
                 <p style={{
                   fontSize: '16px',
@@ -12937,7 +12937,7 @@ function App() {
                   textTransform: 'uppercase',
                   fontFamily: '"Montserrat", sans-serif'
                 }}>
-                  FAMILY PALACE SUITE
+                  FAMILY PALACE SUITES
                 </h3>
                 <p style={{
                   fontSize: '16px',
