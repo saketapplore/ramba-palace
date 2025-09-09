@@ -2581,7 +2581,8 @@ function App() {
             }}>
             Floor Plan
           </button>
-          <button style={{
+          <button
+          style={{
             padding: '16px 32px',
             backgroundColor: '#000000',
             color: '#ffffff',
@@ -2592,6 +2593,7 @@ function App() {
             cursor: 'pointer',
             transition: 'all 0.3s ease'
           }}
+            onClick={() => setCurrentPage('coming-soon')}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = '#333333';
             }}
@@ -8684,6 +8686,7 @@ function App() {
             cursor: 'pointer',
             transition: 'all 0.3s ease'
           }}
+            onClick={() => setCurrentPage('coming-soon')}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = '#333333';
             }}
@@ -9586,6 +9589,7 @@ function App() {
             cursor: 'pointer',
             transition: 'all 0.3s ease'
           }}
+            onClick={() => setCurrentPage('coming-soon')}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = '#333333';
             }}
@@ -10483,6 +10487,7 @@ function App() {
             cursor: 'pointer',
             transition: 'all 0.3s ease'
           }}
+            onClick={() => setCurrentPage('coming-soon')}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = '#333333';
             }}
@@ -11374,6 +11379,7 @@ function App() {
             cursor: 'pointer',
             transition: 'all 0.3s ease'
           }}
+            onClick={() => setCurrentPage('coming-soon')}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = '#333333';
             }}
@@ -12277,6 +12283,7 @@ function App() {
             cursor: 'pointer',
             transition: 'all 0.3s ease'
           }}
+            onClick={() => setCurrentPage('coming-soon')}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = '#333333';
             }}
