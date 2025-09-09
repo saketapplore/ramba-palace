@@ -590,7 +590,7 @@ function App() {
                     textAlign: 'center',
                     fontFamily: '"Montserrat", sans-serif'
                   }}>
-                    PALACE SUITE
+                    PALACE SUITES
                   </h3>
                   <p style={{
                     fontSize: 'clamp(12px, 2.5vw, 14px)',
@@ -665,7 +665,7 @@ function App() {
                     textAlign: 'center',
                     fontFamily: '"Montserrat", sans-serif'
                   }}>
-                    PALACE FAMILY SUITE
+                    PALACE FAMILY SUITES
                   </h3>
                   <p style={{
                     fontSize: 'clamp(12px, 2.5vw, 14px)',
@@ -969,7 +969,7 @@ function App() {
                     textAlign: 'center',
                     fontFamily: '"Montserrat", sans-serif'
                   }}>
-                    PALACE SUITE
+                    PALACE SUITES
                   </h3>
                   <p style={{
                     fontSize: 'clamp(12px, 2.5vw, 14px)',
@@ -1044,7 +1044,7 @@ function App() {
                     textAlign: 'center',
                     fontFamily: '"Montserrat", sans-serif'
                   }}>
-                    PALACE FAMILY SUITE
+                    PALACE FAMILY SUITES
                   </h3>
                   <p style={{
                     fontSize: 'clamp(12px, 2.5vw, 14px)',
@@ -1690,21 +1690,21 @@ function App() {
     {[
       "Overview",
       "Presidential Villa",
-      "Palace Suite",
-      "Palace Family Suite",
-      "Generator Suite",
-      "Printing Press Suite",
+      "Palace Suites",
+      "Palace Family Suites",
+      "Generator Suites",
+      "Printing Press Suites",
     ].map((tab) => (
       <button
         key={tab}
         className="accommodation-tab-button"
         onClick={() => {
           if (tab === "Overview") setCurrentPage("overview");
-          else if (tab === "Palace Suite") setCurrentPage("palace-suite");
-          else if (tab === "Palace Family Suite")
+          else if (tab === "Palace Suites") setCurrentPage("palace-suite");
+          else if (tab === "Palace Family Suites")
             setCurrentPage("palace-family-suite");
-          else if (tab === "Generator Suite") setCurrentPage("generator-suite");
-          else if (tab === "Printing Press Suite")
+          else if (tab === "Generator Suites") setCurrentPage("generator-suite");
+          else if (tab === "Printing Press Suites")
             setCurrentPage("printing-press-suite");
           else if (tab === "Presidential Villa")
             setCurrentPage("presidential-villa");
@@ -2396,21 +2396,21 @@ function App() {
     {[
       "Overview",
       "Presidential Villa",
-      "Palace Suite",
-      "Palace Family Suite",
-      "Generator Suite",
-      "Printing Press Suite",
+      "Palace Suites",
+      "Palace Family Suites",
+      "Generator Suites",
+      "Printing Press Suites",
     ].map((tab) => (
       <button
         key={tab}
         className="accommodation-tab-button"
         onClick={() => {
           if (tab === "Overview") setCurrentPage("overview");
-          else if (tab === "Palace Suite") setCurrentPage("palace-suite");
-          else if (tab === "Palace Family Suite")
+          else if (tab === "Palace Suites") setCurrentPage("palace-suite");
+          else if (tab === "Palace Family Suites")
             setCurrentPage("palace-family-suite");
-          else if (tab === "Generator Suite") setCurrentPage("generator-suite");
-          else if (tab === "Printing Press Suite")
+          else if (tab === "Generator Suites") setCurrentPage("generator-suite");
+          else if (tab === "Printing Press Suites")
             setCurrentPage("printing-press-suite");
           else if (tab === "Presidential Villa")
             setCurrentPage("presidential-villa");
@@ -2629,7 +2629,7 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🛏️
+                
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>2000 sq. ft.</span>
             </div>
@@ -2644,7 +2644,7 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🛏️
+                
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}> Two-bedroom standalone villa</span>
             </div>
@@ -2659,7 +2659,7 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🏡
+                
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>Private butler service and pantry</span>
             </div>
@@ -2674,7 +2674,7 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🏊‍♀️
+                
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>Private swimming pool with jacuzzi</span>
             </div>
@@ -2689,12 +2689,12 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🛌
+                
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}> 1 four-poster King-size bed, 1 twin bedroom</span>
             </div>
 
-            {/* DESIGNED BY CHANNA DASWATTE */}
+          
             <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
@@ -2704,22 +2704,7 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-
-                🔥
-              </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>Large private garden with open fireplace</span>
-            </div>
-
-            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <div style={{
-                width: '24px',
-                height: '24px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '16px'
-              }}>
-                🏡
+                
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>Private lounge and dining room</span>
             </div>
@@ -2779,7 +2764,7 @@ function App() {
                     <div>Nespresso Coffee Machine</div>
                     <div>Tea and Coffee Menu</div>
                     <div>In Room Safe</div>
-                    <div>Generously Stocked Refrigerators</div>
+                    <div>Stocked Refrigerators</div>
                     <div>Down Duvets and Pillows</div>
                     <div>Pillow Menu</div>
                     <div>Clothes Steamer</div>
@@ -3898,7 +3883,7 @@ function App() {
                   <div className="experiences-cultural-card-content" style={{
                     padding: '24px'
                   }}>
-                    <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>ROMANTIC BEACH GETAWAY</h3>
+                    <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#374151', marginBottom: '12px', textTransform: 'uppercase' }}>BEACH GETAWAY</h3>
                     <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '14px' }}>
                       Allow the palace butlers to orchestrate a candlelit feast by the lake. Relish a sumptuous banquet of your preferred cuisine, while the gentle whispers of waves caress the shore.
                     </p>
@@ -6569,7 +6554,7 @@ function App() {
     const diningCards = [
       {
         title: 'POOL CAFE',
-        image: './image-16.png',
+        image: './assets/poolimage.jpg',
         description: 'Enjoy a post-swim mocktail or light bite by the pool. With lounge chairs you sink into, tall column windows, and a wood-fired pizza oven, the pool café is ideal to delight in fresh food and drinks.'
       },
       {
@@ -6612,7 +6597,7 @@ function App() {
         description: 'Set sail from the banks of Chilika Lake and cruise through calming waters. Enjoy breakfast aboard the boat, or step onto the island for a refreshing morning trail.'
       },
       {
-        title: 'Romantic Beach Getaway',
+        title: 'Beach Getaway',
         image: 'assets/romanticbeach.png',
         description: 'Allow the palace butlers to orchestrate a candlelit feast by the lake. Relish a sumptuous banquet of your preferred cuisine, while the gentle whispers of waves caress the shore.'
       }
@@ -6678,7 +6663,7 @@ function App() {
             padding: '0 8px'
           }}>
             <img
-              src="./image-15.png"
+              src="/assets/diningimages.jpg"
               alt="Luxurious Dining Room at Rambha Palace"
               className="dining-hero-image"
               style={{
@@ -8478,7 +8463,7 @@ function App() {
 
       {/* Main Title */}
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-        <h1 style={{ fontSize: '32px', fontWeight: '200', fontFamily: '"Montserrat", sans-serif', color: '#000000', marginBottom: '16px' }}>Palace Suite</h1>
+        <h1 style={{ fontSize: '32px', fontWeight: '200', fontFamily: '"Montserrat", sans-serif', color: '#000000', marginBottom: '16px' }}>Palace Suites</h1>
       </div>
 
       {/* Tab Navigation */}
@@ -8511,10 +8496,10 @@ function App() {
     {[
       "Overview",
       "Presidential Villa",
-      "Palace Suite",
-      "Palace Family Suite",
-      "Generator Suite",
-      "Printing Press Suite",
+      "Palace Suites",
+      "Palace Family Suites",
+      "Generator Suites",
+      "Printing Press Suites",
     ].map((tab) => (
       <button
         key={tab}
@@ -8525,18 +8510,18 @@ function App() {
           } else if (tab === "Presidential Villa") {
             setCurrentPage("presidential-villa");
             setActiveTab("presidential-villa");
-          } else if (tab === "Palace Suite") {
+          } else if (tab === "Palace Suites") {
             setPalaceSuiteTab("palace-suite");
-          } else if (tab === "Palace Family Suite") {
+          } else if (tab === "Palace Family Suites") {
             setCurrentPage("palace-family-suite");
             setPalaceSuiteTab("palace-family-suite");
-          } else if (tab === "Generator Suite") {
+          } else if (tab === "Generator Suites") {
             setCurrentPage("generator-suite");
             setPalaceSuiteTab("generator-suite");
           } else if (tab === "Ice Mill Suite") {
             setCurrentPage("ice-mill-suite");
             setPalaceSuiteTab("ice-mill-suite");
-          } else if (tab === "Printing Press Suite") {
+          } else if (tab === "Printing Press Suites") {
             setCurrentPage("printing-press-suite");
             setPalaceSuiteTab("printing-press-suite");
           } else {
@@ -8651,7 +8636,7 @@ function App() {
 
         {/* PALACE SUITE Section */}
         <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-          <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#000000', marginBottom: '24px', fontFamily: '"Montserrat", sans-serif' }}>PALACE SUITE</h2>
+          <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#000000', marginBottom: '24px', fontFamily: '"Montserrat", sans-serif' }}>PALACE SUITES</h2>
           <div style={{ maxWidth: '800px', margin: '0 auto', color: '#3A3A3A', lineHeight: '1.8', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
             <p style={{ marginBottom: '16px' }}>
               The Palace Suites are individually designed within the original palace block, reflecting the regal charm of the era with authentic vintage Odia handicrafts. Each suite boasts a king-size four-poster bed with sumptuous crested linen, offering the perfect blend of luxury and comfort.
@@ -8741,16 +8726,16 @@ function App() {
                     alt: 'Palace Suite Bedroom',
                     fallback: '🛏️'
                   },
-                  {
-                    image: '/assets/psuite1.jpg',
-                    alt: 'Palace Suite Bathroom',
-                    fallback: '🛁'
-                  },
-                  {
-                    image: '/assets/psuite2.jpg',
-                    alt: 'Palace Suite Bathroom',
-                    fallback: '🛁'
-                  },
+                  // {
+                  //   image: '/assets/psuite1.jpg',
+                  //   alt: 'Palace Suite Bathroom',
+                  //   fallback: '🛁'
+                  // },
+                  // {
+                  //   image: '/assets/psuite2.jpg',
+                  //   alt: 'Palace Suite Bathroom',
+                  //   fallback: '🛁'
+                  // },
                   {
                     image: '/image-73.png',
                     alt: 'Palace Suite Bathroom Detail',
@@ -8904,7 +8889,7 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🛏️
+                
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>1 ANTE ROOM</span>
             </div>
@@ -8919,7 +8904,7 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🛁
+                
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>2 EN SUITE BATHROOM</span>
             </div>
@@ -8934,7 +8919,7 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🏔️
+                
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>PALACE GARDEN VIEW</span>
             </div>
@@ -8949,7 +8934,7 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🛏️
+                
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>1 KING BED</span>
             </div>
@@ -8964,13 +8949,13 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                ⬜
+                
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>591 Sq. Ft.</span>
             </div>
 
             {/* DESIGNED BY CHANNA DASWATTE */}
-            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            {/* <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -8982,7 +8967,7 @@ function App() {
                 🏰
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>DESIGNED BY CHANNA DASWATTE</span>
-            </div>
+            </div> */}
           </div>
 
           {/* Divider Line */}
@@ -9038,7 +9023,7 @@ function App() {
                     <div>Nespresso Coffee Machine</div>
                     <div>Tea and Coffee Menu</div>
                     <div>In Room Safe</div>
-                    <div>Generously Stocked Refrigerators</div>
+                    <div>Stocked Refrigerators</div>
                     <div>Down Duvets and Pillows</div>
                     <div>Pillow Menu</div>
                     <div>Clothes Steamer</div>
@@ -9384,7 +9369,7 @@ function App() {
     <>
       {/* Main Title */}
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-        <h1 style={{ fontSize: '32px', fontWeight: '200', fontFamily: '"Montserrat", sans-serif', color: '#000000', marginBottom: '16px' }}>Palace Family Suite</h1>
+        <h1 style={{ fontSize: '32px', fontWeight: '200', fontFamily: '"Montserrat", sans-serif', color: '#000000', marginBottom: '16px' }}>Palace Family Suites</h1>
       </div>
 
       {/* Tab Navigation */}
@@ -9417,10 +9402,10 @@ function App() {
     {[
       "Overview",
       "Presidential Villa",
-      "Palace Suite",
-      "Palace Family Suite",
-      "Generator Suite",
-      "Printing Press Suite",
+      "Palace Suites",
+      "Palace Family Suites",
+      "Generator Suites",
+      "Printing Press Suites",
     ].map((tab) => (
       <button
         key={tab}
@@ -9431,19 +9416,19 @@ function App() {
           } else if (tab === "Presidential Villa") {
             setCurrentPage("presidential-villa");
             setActiveTab("presidential-villa");
-          } else if (tab === "Palace Suite") {
+          } else if (tab === "Palace Suites") {
             setCurrentPage("palace-suite");
             setPalaceSuiteTab("palace-suite");
-          } else if (tab === "Palace Family Suite") {
+          } else if (tab === "Palace Family Suites") {
             setCurrentPage("palace-family-suite");
             setPalaceSuiteTab("palace-family-suite");
-          } else if (tab === "Generator Suite") {
+          } else if (tab === "Generator Suites") {
             setCurrentPage("generator-suite");
             setPalaceSuiteTab("generator-suite");
           } else if (tab === "Ice Mill Suite") {
             setCurrentPage("ice-mill-suite");
             setPalaceSuiteTab("ice-mill-suite");
-          } else if (tab === "Printing Press Suite") {
+          } else if (tab === "Printing Press Suites") {
             setCurrentPage("printing-press-suite");
             setPalaceSuiteTab("printing-press-suite");
           } else {
@@ -9489,7 +9474,7 @@ function App() {
           <div style={{ position: 'relative', width: '100%', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}>
             <div style={{ aspectRatio: '16/10', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <img
-                src="/assets/fpsuite.png"
+                src="/assets/palacefamily.jpg"
                 alt="Palace Family Suite"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 onError={(e) => {
@@ -9558,7 +9543,7 @@ function App() {
 
         {/* PALACE FAMILY SUITE Section */}
         <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-          <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#000000', marginBottom: '24px', fontFamily: '"Montserrat", sans-serif' }}>PALACE FAMILY SUITE</h2>
+          <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#000000', marginBottom: '24px', fontFamily: '"Montserrat", sans-serif' }}>PALACE FAMILY SUITES</h2>
           <div style={{ maxWidth: '800px', margin: '0 auto', color: '#3A3A3A', lineHeight: '1.8', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
             <p style={{ marginBottom: '16px' }}>
               The Family Suite is a fusion of two palace suites, providing an expansive, luxurious space that is perfect for families or larger groups. This suite features a spacious lounge and offers a lush, private retreat with ample room for relaxation. Whether you’re enjoying the elegant interiors or the serene outdoor views, this suite ensures the ultimate comfort for all guests. Ideal for families, this suite combines two palace suites into one expansive retreat.
@@ -9638,23 +9623,23 @@ function App() {
               {/* Palace Suite Carousel Cards - State-based Carousel */}
               {(() => {
                 const palaceSuiteCarouselCards = [
-                  {
-                    image: '/image-70.png',
-                    alt: 'Palace Suite Bedroom',
-                    fallback: '🛏️'
-                  },
+                  // {
+                  //   image: '/image-70.png',
+                  //   alt: 'Palace Suite Bedroom',
+                  //   fallback: '🛏️'
+                  // },
                   {
                     image: '/image-71.png',
                     alt: 'Palace Suite Bathroom',
                     fallback: '🛁'
                   },
                   {
-                    image: '/image-73.png',
+                    image: '/assets/psuite1.jpg',
                     alt: 'Palace Suite Bathroom Detail',
                     fallback: '🧴'
                   },
                   {
-                    image: '/image-74.png',
+                    image: '/assets/psuite2.jpg',
                     alt: 'Palace Suite Additional View',
                     fallback: '🏰'
                   }
@@ -9802,7 +9787,7 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🛏️
+                
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>
                 1 Private Lounge & 2 Ante rooms</span>
@@ -9818,7 +9803,7 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🛁
+                
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>2 EN SUITE BATHROOM</span>
             </div>
@@ -9833,7 +9818,7 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🏔️
+                
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>PALACE GARDEN VIEW</span>
             </div>
@@ -9848,7 +9833,7 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🛏️
+                
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>2 KING BEDS</span>
             </div>
@@ -9863,13 +9848,13 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                ⬜
+                
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>1428 Sq. Ft.</span>
             </div>
 
             {/* DESIGNED BY CHANNA DASWATTE */}
-            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            {/* <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -9881,7 +9866,7 @@ function App() {
                 🏰
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>DESIGNED BY CHANNA DASWATTE</span>
-            </div>
+            </div> */}
           </div>
 
           {/* Divider Line */}
@@ -9937,7 +9922,7 @@ function App() {
                     <div>Nespresso Coffee Machine</div>
                     <div>Tea and Coffee Menu</div>
                     <div>In Room Safe</div>
-                    <div>Generously Stocked Refrigerators</div>
+                    <div>Stocked Refrigerators</div>
                     <div>Down Duvets and Pillows</div>
                     <div>Pillow Menu</div>
                     <div>Clothes Steamer</div>
@@ -10281,7 +10266,7 @@ function App() {
     <>
       {/* Main Title */}
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-        <h1 style={{ fontSize: '32px', fontWeight: '200', fontFamily: '"Montserrat", sans-serif', color: '#000000', marginBottom: '16px' }}>Generator Suite</h1>
+        <h1 style={{ fontSize: '32px', fontWeight: '200', fontFamily: '"Montserrat", sans-serif', color: '#000000', marginBottom: '16px' }}>Generator Suites</h1>
       </div>
 
       {/* Tab Navigation */}
@@ -10314,10 +10299,10 @@ function App() {
     {[
       "Overview",
       "Presidential Villa",
-      "Palace Suite",
-      "Palace Family Suite",
-      "Generator Suite",
-      "Printing Press Suite",
+      "Palace Suites",
+      "Palace Family Suites",
+      "Generator Suites",
+      "Printing Press Suites",
     ].map((tab) => (
       <button
         key={tab}
@@ -10328,19 +10313,19 @@ function App() {
           } else if (tab === "Presidential Villa") {
             setCurrentPage("presidential-villa");
             setActiveTab("presidential-villa");
-          } else if (tab === "Palace Suite") {
+          } else if (tab === "Palace Suites") {
             setCurrentPage("palace-suite");
             setPalaceSuiteTab("palace-suite");
-          } else if (tab === "Palace Family Suite") {
+          } else if (tab === "Palace Family Suites") {
             setCurrentPage("palace-family-suite");
             setPalaceSuiteTab("palace-family-suite");
-          } else if (tab === "Generator Suite") {
+          } else if (tab === "Generator Suites") {
             setCurrentPage("generator-suite");
             setPalaceSuiteTab("generator-suite");
           } else if (tab === "Ice Mill Suite") {
             setCurrentPage("ice-mill-suite");
             setPalaceSuiteTab("ice-mill-suite");
-          } else if (tab === "Printing Press Suite") {
+          } else if (tab === "Printing Press Suites") {
             setCurrentPage("printing-press-suite");
             setPalaceSuiteTab("printing-press-suite");
           } else {
@@ -10386,7 +10371,7 @@ function App() {
           <div style={{ position: 'relative', width: '100%', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}>
             <div style={{ aspectRatio: '16/10', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <img
-                src="/image-77.png"
+                src="/assets/generatorsuitess.jpeg"
                 alt="Generator Suite"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 onError={(e) => {
@@ -10455,7 +10440,7 @@ function App() {
 
         {/* GENERATOR SUITE Section */}
         <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-          <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#000000', marginBottom: '24px', fontFamily: '"Montserrat", sans-serif' }}>GENERATOR SUITE</h2>
+          <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#000000', marginBottom: '24px', fontFamily: '"Montserrat", sans-serif' }}>GENERATOR SUITES</h2>
           <div style={{ maxWidth: '800px', margin: '0 auto', color: '#3A3A3A', lineHeight: '1.8', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
             <p style={{ marginBottom: '16px' }}>
               The Generator suites are uniquely designed, blending modern comfort with the charm of traditional Orissa handloom art and paintings. Once the heart of the royal palace’s power generation, these rooms have now been transformed into a luxurious retreat, offering orchard views and outdoor bathtubs. Each suite features a king-size bed dressed in sumptuous crested linen, accompanied by a comfortable sofa and a wooden coffee table. With dedicated palace butler service, guests can enjoy personalized attention throughout their stay. The luxurious marble bathroom is equipped with a bathtub, offering a serene retreat for relaxation.
@@ -10732,7 +10717,7 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🛏️
+                
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>
                 1 King Bed</span>
@@ -10748,7 +10733,7 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🛁
+                
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>En Suite Bathroom & Outdoor Bathtub</span>
             </div>
@@ -10763,7 +10748,7 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🏔️
+                
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>Orchard View</span>
             </div>
@@ -10778,7 +10763,7 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🛏️
+                
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>550 Sq. Ft.</span>
             </div>
@@ -10793,13 +10778,13 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                ⬜
+                
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>DESIGNED BY CHANNA DASWATTE</span>
+              {/* <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>DESIGNED BY CHANNA DASWATTE</span> */}
             </div>
 
             {/* DESIGNED BY CHANNA DASWATTE */}
-            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            {/* <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -10811,7 +10796,7 @@ function App() {
 
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}></span>
-            </div>
+            </div> */}
           </div>
 
           {/* Divider Line */}
@@ -10867,7 +10852,7 @@ function App() {
                     <div>Nespresso Coffee Machine</div>
                     <div>Tea and Coffee Menu</div>
                     <div>In Room Safe</div>
-                    <div>Generously Stocked Refrigerators</div>
+                    <div>Stocked Refrigerators</div>
                     <div>Down Duvets and Pillows</div>
                     <div>Pillow Menu</div>
                     <div>Clothes Steamer</div>
@@ -11651,7 +11636,7 @@ function App() {
               }}>
                 ⬜
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>Designed by Channa Daswatte</span>
+              {/* <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>Designed by Channa Daswatte</span> */}
             </div>
 
             {/* DESIGNED BY CHANNA DASWATTE */}
@@ -11723,7 +11708,7 @@ function App() {
                     <div>Nespresso Coffee Machine</div>
                     <div>Tea and Coffee Menu</div>
                     <div>In Room Safe</div>
-                    <div>Generously Stocked Refrigerators</div>
+                    <div>Stocked Refrigerators</div>
                     <div>Down Duvets and Pillows</div>
                     <div>Pillow Menu</div>
                     <div>Clothes Steamer</div>
@@ -12071,7 +12056,7 @@ function App() {
 
       {/* Main Title */}
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-        <h1 style={{ fontSize: '32px', fontWeight: '200', fontFamily: '"Montserrat", sans-serif', color: '#000000', marginBottom: '16px' }}>Printing Press Suite</h1>
+        <h1 style={{ fontSize: '32px', fontWeight: '200', fontFamily: '"Montserrat", sans-serif', color: '#000000', marginBottom: '16px' }}>Printing Press Suites</h1>
       </div>
 
       {/* Tab Navigation */}
@@ -12104,10 +12089,10 @@ function App() {
     {[
       "Overview",
       "Presidential Villa",
-      "Palace Suite",
-      "Palace Family Suite",
-      "Generator Suite",
-      "Printing Press Suite",
+      "Palace Suites",
+      "Palace Family Suites",
+      "Generator Suites",
+      "Printing Press Suites",
     ].map((tab) => (
       <button
         key={tab}
@@ -12118,19 +12103,19 @@ function App() {
           } else if (tab === "Presidential Villa") {
             setCurrentPage("presidential-villa");
             setActiveTab("presidential-villa");
-          } else if (tab === "Palace Suite") {
+          } else if (tab === "Palace Suites") {
             setCurrentPage("palace-suite");
             setPalaceSuiteTab("palace-suite");
-          } else if (tab === "Palace Family Suite") {
+          } else if (tab === "Palace Family Suites") {
             setCurrentPage("palace-family-suite");
             setPalaceSuiteTab("palace-family-suite");
-          } else if (tab === "Generator Suite") {
+          } else if (tab === "Generator Suites") {
             setCurrentPage("generator-suite");
             setPalaceSuiteTab("generator-suite");
           } else if (tab === "Ice Mill Suite") {
             setCurrentPage("ice-mill-suite");
             setPalaceSuiteTab("ice-mill-suite");
-          } else if (tab === "Printing Press Suite") {
+          } else if (tab === "Printing Press Suites") {
             setCurrentPage("printing-press-suite");
             setPalaceSuiteTab("printing-press-suite");
           } else {
@@ -12175,7 +12160,7 @@ function App() {
           <div style={{ position: 'relative', width: '100%', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}>
             <div style={{ aspectRatio: '16/10', backgroundColor: '#f3f4f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <img
-                src="/image-80.webp"
+                src="/assets/priiti.jpeg"
                 alt="Printing Press Suite"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 onError={(e) => {
@@ -12244,16 +12229,16 @@ function App() {
 
         {/* PRINTING PRESS SUITE Section */}
         <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-          <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#000000', marginBottom: '24px', fontFamily: '"Montserrat", sans-serif' }}>PRINTING PRESS SUITE</h2>
+          <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#000000', marginBottom: '24px', fontFamily: '"Montserrat", sans-serif' }}>PRINTING PRESS SUITES</h2>
           <div style={{ maxWidth: '800px', margin: '0 auto', color: '#3A3A3A', lineHeight: '1.8', fontSize: '16px', fontFamily: '"Lato", sans-serif' }}>
             <p style={{ marginBottom: '16px' }}>
-              The Printing Press Suites are individually designed within the original palace block, reflecting the regal charm of the era with authentic vintage Odia handicrafts. Each suite boasts a king-size four-poster bed with sumptuous crested linen, offering the perfect blend of luxury and comfort.
+            The Printing Press Suites occupy the estate’s former press block, where light-filled rooms recall a space once alive with words and craft.
             </p>
             <p style={{ marginBottom: '16px' }}>
-              The suites feature an ante room with picture windows that overlook the serene palace gardens, while the marble-clad bathrooms come with a spacious bathtub. Additionally, a dedicated palace butler service ensures that every guest's needs are met with the highest level of care.
+            Each suite features a king-size bed dressed in soft linen, with quiet details that let the character of the building speak. Wide windows frame views of the surrounding greenery, drawing the outside in and filling the rooms with air and stillness.
             </p>
             <p>
-              Experience the luxury and grandeur of the palace block, once home to the royal family in a bygone era.
+            Traces of the past remain in their walls, offering not just a place to rest, but a continuation of Rambha’s story.
             </p>
           </div>
         </div>
@@ -12497,7 +12482,7 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🛏️
+                
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>King Bed</span>
             </div>
@@ -12512,7 +12497,7 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🛁
+                
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>En Suite Bathroom</span>
             </div>
@@ -12527,7 +12512,7 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🏔️
+              
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>Orchard View</span>
             </div>
@@ -12542,7 +12527,7 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                🛏️
+                
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>443 Sq. Ft.</span>
             </div>
@@ -12557,13 +12542,13 @@ function App() {
                 justifyContent: 'center',
                 fontSize: '16px'
               }}>
-                ⬜
+                
               </div>
-              <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>Designed by Channa Daswatte</span>
+              {/* <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}>Designed by Channa Daswatte</span> */}
             </div>
 
             {/* DESIGNED BY CHANNA DASWATTE */}
-            <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            {/* <div className="amenity-item" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{
                 width: '24px',
                 height: '24px',
@@ -12575,7 +12560,7 @@ function App() {
 
               </div>
               <span style={{ fontSize: '16px', color: '#000000', fontWeight: '500' }}></span>
-            </div>
+            </div> */}
           </div>
 
           {/* Divider Line */}
@@ -12631,7 +12616,7 @@ function App() {
                     <div>Nespresso Coffee Machine</div>
                     <div>Tea and Coffee Menu</div>
                     <div>In Room Safe</div>
-                    <div>Generously Stocked Refrigerators</div>
+                    <div>Stocked Refrigerators</div>
                     <div>Down Duvets and Pillows</div>
                     <div>Pillow Menu</div>
                     <div>Clothes Steamer</div>
@@ -12987,7 +12972,7 @@ function App() {
           boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
         }}>
           <img
-            src="./assets/wellimage.png"
+            src="./assets/wellimage.jpeg"
             alt="Wellness Meditation"
             style={{
               width: '100%',
