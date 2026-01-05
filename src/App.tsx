@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import IconContainer from './components/IconContainer';
 import TempleCarousel from './components/TempleCarousal';
+import RefundPage from './pages/refund';
+import PolicyPage from './pages/policy';
 
 // import gene1 from '../public/assets/gene1.jpeg'
 // import gene2 from '../public/assets/gene2.jpeg'
@@ -8376,6 +8378,39 @@ function App() {
             </button>
           </div>
 
+          {/* Disclaimer */}
+          <div style={{
+            textAlign: 'center',
+            marginTop: '24px',
+            padding: '0 16px'
+          }}>
+            <p style={{
+              color: '#6b7280',
+              fontSize: '14px',
+              lineHeight: '1.6',
+              fontFamily: '"Lato", sans-serif',
+              maxWidth: '800px',
+              margin: '0 auto'
+            }}>
+              Submission of this contact form does not constitute a confirmed booking or reservation. All booking requests are subject to availability and confirmation by Rambha Palace. The information provided by you will be used solely for responding to your inquiry and related communication, in accordance with our{' '}
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setCurrentPage('policy');
+                }}
+                style={{
+                  color: '#6b7280',
+                  textDecoration: 'underline',
+                  cursor: 'pointer'
+                }}
+              >
+                Privacy Policy
+              </a>
+              . Rambha Palace shall not be liable for any loss arising from incomplete, incorrect, or delayed information submitted through this form.
+            </p>
+          </div>
+
           {/* Success Message */}
           {isFormSubmitted && (
             <div style={{
@@ -8458,6 +8493,14 @@ function App() {
         </div>
       </div>
     </>
+  );
+
+  const renderRefundPage = () => (
+    <RefundPage />
+  );
+
+  const renderPolicyPage = () => (
+    <PolicyPage />
   );
 
   const renderPalaceSuitePage = () => (
@@ -14454,6 +14497,8 @@ function App() {
         {currentPage === 'dining' && renderDiningPage()}
         {currentPage === 'wellness' && renderWellnessPage()}
         {currentPage === 'contact' && renderContactPage()}
+        {currentPage === 'refund' && renderRefundPage()}
+        {currentPage === 'policy' && renderPolicyPage()}
         {currentPage === 'palace-suite' && renderPalaceSuitePage()}
         {currentPage === 'palace-family-suite' && renderPalaceFamilySuitePage()}
         {currentPage === 'generator-suite' && renderGeneratorSuitePage()}
@@ -14530,6 +14575,40 @@ function App() {
                       }}
                     >
                       Email: reservations@rambhapalace.com
+                    </a>
+                  </li>
+                  <li style={{ marginBottom: '12px' }}>
+                    <a
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setCurrentPage('policy');
+                      }}
+                      style={{
+                        color: 'white',
+                        fontSize: 'clamp(14px, 2.5vw, 14px)',
+                        textDecoration: 'none',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      Privacy Policy
+                    </a>
+                  </li>
+                  <li style={{ marginBottom: '12px' }}>
+                    <a
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setCurrentPage('refund');
+                      }}
+                      style={{
+                        color: 'white',
+                        fontSize: 'clamp(14px, 2.5vw, 14px)',
+                        textDecoration: 'none',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      Refund & Cancellation Policy
                     </a>
                   </li>
                 </ul>
